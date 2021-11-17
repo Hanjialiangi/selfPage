@@ -1,0 +1,9 @@
+*.min*
+*.bundle*
+*.chunk*
+node_modules
+dist
+appAssets
+assets
+views
+temp

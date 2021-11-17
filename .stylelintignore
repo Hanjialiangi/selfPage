@@ -1,0 +1,11 @@
+*.min*
+*.bundle*
+node_modules
+dist
+assets
+appAssets
+views
+*.json
+temp
+*.jsx
+*.js

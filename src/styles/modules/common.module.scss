@@ -1,0 +1,155 @@
+.whiteBackground {
+  background: #fff;
+}
+
+.placeholderColor {
+  color: #a6a6a6;
+}
+
+.fixedBottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.goldColor {
+  color: #fbc758;
+}
+
+.preWrap {
+  white-space: pre-wrap;
+}
+
+.greyCard {
+  background: #f5f5f5;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.blueCard {
+  background: #4791db;
+  color: #fff;
+}
+
+.rightAlign {
+  text-align: right;
+}
+
+.markdown {
+  img {
+    width: 60%;
+  }
+}
+
+.grey {
+  color: #adadad;
+}
+
+.breakWord {
+  word-break: break-word;
+}
+
+.flexBasisAuto {
+  flex-basis: auto;
+}
+
+.flexRowReverse {
+  display: flex;
+  flex: row-reverse nowrap;
+}
+
+.highLight {
+  color: rgb(241, 85, 28);
+}
+
+.integrateShow {
+  color: #3d97f8;
+}
+
+.integrateProperty {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.87);
+  margin-right: 1rem;
+}
+
+.expertProperty {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1 0 auto;
+}
+
+.totalProperty {
+  display: flex;
+}
+
+.branchOrderProperty {
+  margin-left: 1rem;
+}
+
+.orderTitle {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.orderDescription {
+  padding-right: 10rem;
+}
+
+.scorePageShow {
+  width: 100%;
+  height: 10rem;
+  text-align: center;
+}
+
+.scoreType {
+  color: #3d97f8;
+  font-size: 2rem;
+  font-weight: bolder;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.lastLabel {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1 0 auto;
+}
+
+.nextLabel {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+}
+
+.orderText {
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  padding-right: 2rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filterIcon {
+  position: relative;
+  left: -1.5rem;
+  margin-top: 0.5rem;
+}
+
+.voiceButton{
+  margin-left: 1rem;
+  width:100%;
+  background-color:#fafafae5;
+  border: 1px solid;
+  -moz-border-radius: 15px;      /* Gecko browsers */
+  -webkit-border-radius: 15px;   /* Webkit browsers */
+  border-radius:15px;            /* W3C syntax */
+}
