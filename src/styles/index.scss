@@ -7,3 +7,56 @@ a {
   text-decoration: none;
   color: unset;
 }
+
+.MuiBox-root-1 {
+  position: fixed;
+  display: flex;
+  height:90px;
+  z-index: 9999;
+}
+.PrivateTabIndicator-colorSecondary-5 {
+  background-color: #1790FF !important;
+}
+.MuiTab-textColorInherit.Mui-selected span{
+  font-size: 16px;
+  color: #1790FF !important ;
+}
+.makeStyles-root-8 {
+  margin: 0 10px 0 10px;
+}
+.MuiCardContent-root {
+  padding: 0 !important;
+}
+.more .MuiButton-label {
+  margin-left: 10px;
+  color: gray!important;
+}
+.MuiButton-endIcon {
+  margin-left: 2px !important;
+}
+.MuiButton-label {
+  font-size: 14px;
+}
+.MuiCardActions-root {
+  padding: 0 !important;
+}
+.MuiCardContent-root {
+  padding: 0 !important;
+}
+.MuiButton-textPrimary {
+  margin-right: 10px !important;
+}
+.MuiBox-root-2 {
+  width:100%;
+  background-color:#fff;
+  z-index:9999;
+}
+.MuiButton-textPrimary {
+  color:#1790FF !important;
+}
+.MuiList-padding {
+  padding: 0 !important;
+}
+.MuiTabs-flexContainer {
+  justify-content: space-around;
+}
