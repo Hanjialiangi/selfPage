@@ -54,7 +54,7 @@ export default function SearchCard(): JSX.Element {
               <NameIcon />
             </ListItemIcon>
             <Input
-              id="name"
+              name="username"
               type="text"
               style={{ width: '100%' }}
               placeholder="请填写姓名"
@@ -65,7 +65,7 @@ export default function SearchCard(): JSX.Element {
               <PhoneIcon />
             </ListItemIcon>
             <Input
-              id="phone"
+              name="phone"
               type="number"
               style={{ width: '100%' }}
               placeholder="请填写您的手机号"
@@ -76,7 +76,7 @@ export default function SearchCard(): JSX.Element {
               <IdCarIcon />
             </ListItemIcon>
             <Input
-              id="cardnumber"
+              name="cardnumber"
               type="number"
               style={{ width: '100%' }}
               placeholder="请填写您的身份证号"
@@ -88,7 +88,12 @@ export default function SearchCard(): JSX.Element {
                 <ListItemIcon>
                   <ContactTypeIcon />
                 </ListItemIcon>
-                <Select native value={contanct} onChange={handleChangeContanct}>
+                <Select
+                  name="contact_type"
+                  native
+                  value={contanct}
+                  onChange={handleChangeContanct}
+                >
                   <option aria-label="None" value="">
                     接触类型
                   </option>
@@ -100,6 +105,7 @@ export default function SearchCard(): JSX.Element {
                   <IsolationTypeIcon />
                 </ListItemIcon>
                 <Select
+                  name="isolation_type"
                   native
                   value={isolation}
                   onChange={handleChangeIsolation}
@@ -116,7 +122,7 @@ export default function SearchCard(): JSX.Element {
                   <HotelIcon />
                 </ListItemIcon>
                 <Input
-                  id="home"
+                  name="place"
                   type="text"
                   style={{ width: '100%' }}
                   placeholder="请填写您的酒店/社区名称"

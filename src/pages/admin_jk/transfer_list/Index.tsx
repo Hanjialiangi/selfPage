@@ -31,15 +31,15 @@ export default function ResidentListPage(): JSX.Element {
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
-    e.preventDefault();
-    const name = e.target[0].value;
-    const phone = e.target[1].value;
-    const cardnumber = e.target[2].value;
-    const contact_type = e.target[3].value;
-    const isolation_type = e.target[4].value;
-    const place = e.target[5].value;
+    const formData = new FormData(e.target);
+    const username = formData.get('username');
+    const phone = formData.get('phone');
+    const cardnumber = formData.get('cardnumber');
+    const contact_type = formData.get('contact_type');
+    const isolation_type = formData.get('isolation_type');
+    const place = formData.get('place');
     const formvalue = {
-      name,
+      username,
       phone,
       cardnumber,
       contact_type,
