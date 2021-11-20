@@ -50,7 +50,7 @@ export default function CardEach(props: {
 
   const handleDetail = (id: number) => {
     console.log(id);
-    window.location.href = `/dist/resident/${id}`;
+    window.location.href = `/dist/detail/resident/${id}`;
   };
   return (
     <Card className={classes.root}>

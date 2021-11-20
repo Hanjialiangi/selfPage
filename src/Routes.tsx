@@ -35,12 +35,6 @@ const ArriveListPage = loadable(
 const TestListPage = loadable(() => import('@pages/admin_jk/test_list/Index'), {
   fallback: <Fallback />
 });
-const PeopleDetailPage = loadable(
-  () => import('@pages/admin_jk/people_detail/Index'),
-  {
-    fallback: <Fallback />
-  }
-);
 
 //transfer
 const TransferHomePage = loadable(() => import('@pages/transfer/Index'), {
@@ -57,6 +51,23 @@ const HotelDoctorHomePage = loadable(
 
 //community
 const CommunityHomePage = loadable(() => import('@pages/community/Index'), {
+  fallback: <Fallback />
+});
+
+//common
+const PeopleDetailPage = loadable(() => import('@pages/people_detail/Index'), {
+  fallback: <Fallback />
+});
+const UserUpdatePage = loadable(() => import('@pages/people_detail/update'), {
+  fallback: <Fallback />
+});
+const UserTransferPage = loadable(
+  () => import('@pages/people_detail/transfer'),
+  {
+    fallback: <Fallback />
+  }
+);
+const UserArrivePage = loadable(() => import('@pages/people_detail/arrive'), {
   fallback: <Fallback />
 });
 
@@ -80,6 +91,23 @@ const CommunityHomePage = loadable(() => import('@pages/community/Index'), {
 //   ];
 // }
 
+function getUserDetailRoutes(): JSX.Element[] {
+  return [
+    <Route path="/detail/resident/:id/baseinfo/edit" key="update">
+      <UserUpdatePage />
+    </Route>,
+    <Route path="/detail/transfer/:id/edit" key="transfer">
+      <UserTransferPage />
+    </Route>,
+    <Route path="/detail/arrive/:id/edit" key="arrive">
+      <UserArrivePage />
+    </Route>,
+    <Route path="/detail/resident/:id" key="detail">
+      <PeopleDetailPage />
+    </Route>
+  ];
+}
+
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
@@ -87,9 +115,7 @@ export default function Routes(): JSX.Element {
   if (userInfo.role === Role.ADMIN) {
     return (
       <Switch>
-        <Route path="/resident/:id">
-          <PeopleDetailPage />
-        </Route>
+        {getUserDetailRoutes()}
         <Route path="/admin_jk/test_list">
           <TestListPage />
         </Route>
@@ -115,9 +141,7 @@ export default function Routes(): JSX.Element {
   if (userInfo.role === Role.TRANSFER) {
     return (
       <Switch>
-        <Route path="/resident/:id">
-          <PeopleDetailPage />
-        </Route>
+        {getUserDetailRoutes()}
         <Route path="/transfer/transfer_list">
           <TransferListPage />
         </Route>
@@ -138,6 +162,7 @@ export default function Routes(): JSX.Element {
   if (userInfo.role === Role.HOTELDOCTOR) {
     return (
       <Switch>
+        {getUserDetailRoutes()}
         <Route path="/hotel_doctor/resident_list">
           <ResidentListPage />
         </Route>
@@ -146,9 +171,6 @@ export default function Routes(): JSX.Element {
         </Route>
         <Route path="/hotel_doctor/test_list">
           <TestListPage />
-        </Route>
-        <Route path="/resident/:id">
-          <PeopleDetailPage />
         </Route>
         <Route path="/hotel_doctor">
           <HotelDoctorHomePage />
@@ -163,6 +185,7 @@ export default function Routes(): JSX.Element {
   if (userInfo.role === Role.COMMUNITY) {
     return (
       <Switch>
+        {getUserDetailRoutes()}
         <Route path="/community/resident_list">
           <ResidentListPage />
         </Route>
@@ -171,9 +194,6 @@ export default function Routes(): JSX.Element {
         </Route>
         <Route path="/community/test_list">
           <TestListPage />
-        </Route>
-        <Route path="/resident/:id">
-          <PeopleDetailPage />
         </Route>
         <Route path="/community">
           <CommunityHomePage />

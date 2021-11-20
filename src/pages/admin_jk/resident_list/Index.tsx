@@ -38,8 +38,8 @@ const columns = [
 export default function ResidentListPage(): JSX.Element {
   const [data, setData] = useState(columns); //数据
   //搜索引擎
-  const handleSearch = async () => {
-    // const res = await searchResidentList({});
+  const handleSearch = async (formvalue = {}) => {
+    const res = await searchResidentList(formvalue);
     // setData(res.data);
   };
   //提交按钮
@@ -61,14 +61,13 @@ export default function ResidentListPage(): JSX.Element {
       place
     };
     // console.log(formvalue);
-    const res = await searchResidentList(formvalue);
-    setData(res.data);
+    handleSearch(formvalue);
   };
 
   //副作用
   useEffect(() => {
     handleSearch();
-  }, []);
+  });
 
   return (
     <Page title="被隔离人员名单">

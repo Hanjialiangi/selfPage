@@ -40,13 +40,11 @@ export default function NarBar(): JSX.Element {
 
   React.useEffect(() => {
     const initval = location.pathname.split('/')[2];
+    const judge = location.pathname.split('/')[1];
     let name = 0;
-    if (location.pathname.split('/')[1] === 'resident') {
+    if (judge === 'detail') {
       name = 100;
-    } else if (
-      location.pathname.split('/')[1] === 'admin_jk' ||
-      location.pathname.split('/')[1] === 'transfer'
-    ) {
+    } else if (judge === 'admin_jk' || judge === 'transfer') {
       if (initval === 'resident_list') {
         name = 0;
       } else if (initval === 'transfer_list') {

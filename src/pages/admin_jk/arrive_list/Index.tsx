@@ -31,9 +31,9 @@ export default function ResidentListPage(): JSX.Element {
 
   const [data, setData] = useState(columns); //数据
   //搜索引擎
-  const handleSearch = async () => {
-    // const res = await searchResidentList({});
-    // setData(res.data);
+  const handleSearch = async (formvalue = {}) => {
+    const res = await searchResidentList(formvalue);
+    setData(res.data);
   };
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,19 +42,24 @@ export default function ResidentListPage(): JSX.Element {
     const name = e.target[0].value;
     const phone = e.target[1].value;
     const cardnumber = e.target[2].value;
+    const contact_type = e.target[3].value;
+    const isolation_type = e.target[4].value;
+    const place = e.target[5].value;
     const formvalue = {
       name,
       phone,
-      cardnumber
+      cardnumber,
+      contact_type,
+      isolation_type,
+      place
     };
-    const res = await searchResidentList(formvalue);
-    setData(res.data);
+    handleSearch(formvalue);
   };
 
   //副作用
   useEffect(() => {
-    handleSearch();
-  }, []);
+    // handleSearch();
+  });
 
   return (
     <Page title="待接收人员名单">
