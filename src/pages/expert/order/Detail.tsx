@@ -1,107 +1,77 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import { Box, Paper, Button, Card } from '@material-ui/core';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
+import MobiledataOffSharpIcon from '@material-ui/icons/MobiledataOffSharp';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import HealthAndSafetyIcon from '@material-ui/icons/HealthAndSafety';
 import Page from '@components/layout/Page';
-import Rating from '@material-ui/lab/Rating';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import OrderDetailHeader from '@components/OrderDetail/Header';
 import OrderDetailContent from '@components/OrderDetail/Content';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import MessageList from '@components/OrderDetail/MessageList';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import OrderDetailChat from '@components/OrderDetail/Chat';
 import { OrderStatus, Role } from '@src/constants';
 import useOrderDetail from '@src/hooks/useOrderDetail';
 import commonStyle from '@styleModules/common.module.scss';
-import { dingConfirm, dingOpenLink } from '@src/dingtalkAPI';
 import { configDingtalk, getURL } from '@src/utils';
-import { dingUploadFile } from '@src/dingtalkAPI';
 import { getDingFilePermission } from '@src/api';
 import { Dingtalk } from '@src/constants';
 export default function ExpertOrderDetail(): JSX.Element {
   /* 从URL参数中读取工单ID */
   const { orderId }: { orderId: string } = useParams();
 
-  /* 是否显示抢单按钮 */
-  const [isSignButtonVisible, setIsSignButtonVisible] = useState(false);
+  /* 是否显示转运按钮 */
+  const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(true);
 
-  /* 是否显示设置预计时间 */
-  const [isSetScheduleDrawerVisible, setIsSetScheduleDrawerVisible] =
-    useState(false);
+  /* 是否显示接收并开始隔离 */
+  const [isArriveButtonVisible, setisArriveButtonVisible] = useState(true);
 
-  /* 是否显示申请关单按钮 */
-  const [isCloseButtonVisible, setIsCloseButtonVisible] = useState(false);
-
-  /* 是否显示移交工单按钮 */
-  const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
-
-  /* 是否显示移交给管理员工单按钮 */
-  const [isTransferToAdminButtonVisible, setIsTransferToAdminButtonVisible] =
-    useState(false);
-
-  /* 是否显示回复框 */
-  const [isFeedbackAvailable, setIsFeedbackAvailable] = useState(false);
   /* 钉盘空间 */
   const [dingFileSpaceId, setDingFileSpaceId] = useState('');
+
   /* 工单详情数据和方法 */
-  const {
-    order,
-    isLoading,
-    submitFeedback,
-    uploadFeedback,
-    signOrder,
-    setSchedule,
-    requestCloseOrder
-  } = useOrderDetail(orderId, Role.EXPERT);
+  const { order, isLoading } = useOrderDetail(orderId, Role.EXPERT);
 
-  /* 申请关闭工单 */
-  const handleCloseOrder = useCallback(async () => {
-    const confirm = await dingConfirm('确认关闭工单？', '提示', [
-      '取消',
-      '确认关闭'
-    ]);
-    if (confirm.buttonIndex === 0) {
-      return;
-    }
-
-    //Todo: 选择关单类型
-    //Todo: 填写关单理由
-
-    await requestCloseOrder();
-  }, [requestCloseOrder]);
-  /* 上传文件（钉盘） */
-  const handleUploadFiles = useCallback(async () => {
-    try {
-      const fileRes = await dingUploadFile(
-        dingFileSpaceId,
-        9,
-        Dingtalk.CORP_ID
-      );
-      const filesPath = fileRes.data;
-      filesPath.map(function (item) {
-        uploadFeedback(item.fileName, JSON.stringify(item));
-      });
-    } catch (error) {
-      console.log('fileError', error);
-    }
-  }, [dingFileSpaceId]);
-  /* 转单给管理员 */
-  const handleTransferOrderToAdmin = useCallback(async () => {
-    if (!order) {
-      return;
-    }
-    dingOpenLink(getURL(`expert/order/${order.id}/toAdmin`));
-  }, [order]);
-  /* 转单 */
+  /* 转运 */
   const handleTransferOrder = useCallback(async () => {
     if (!order) {
       return;
     }
-    dingOpenLink(getURL(`expert/order/${order.id}/toExpert`));
+    window.location.href = `/transfer/${order.id}/edit/toExpert`;
+    // dingOpenLink(getURL(`expert/order/${order.id}/toExpert`)); /transfer/:orderId/edit
+  }, [order]);
+
+  /* 修改信息 */
+  const handleFixOrder = useCallback(async () => {
+    if (!order) {
+      return;
+    }
+    window.location.href = `/resident/${order.id}/baseinfo/edit`;
+    // dingOpenLink(getURL(`expert/order/${order.id}/fixInfo`));
+  }, [order]);
+  /* 修改接收并开始隔离 */
+  const handleArrive = useCallback(async () => {
+    if (!order) {
+      return;
+    }
+    window.location.href = `/arrive/${order.id}/edit`;
+    // dingOpenLink(getURL(`expert/order/${order.id}/fixInfo`));
+  }, [order]);
+  /* 上报采样结果 */
+  const handleSamplingResult = useCallback(async () => {
+    if (!order) {
+      return;
+    }
+    window.location.href = `/samplingresult/${order.id}/edit`;
+    // dingOpenLink(getURL(`expert/order/${order.id}/fixInfo`));
+  }, [order]);
+
+  /* 上报健康状况 */
+  const handleHealth = useCallback(async () => {
+    if (!order) {
+      return;
+    }
+    window.location.href = `/health/${order.id}/edit`;
+    // dingOpenLink(getURL(`expert/order/${order.id}/fixInfo`));
   }, [order]);
   /* 加载页面数据 */
   async function getData(
@@ -131,33 +101,15 @@ export default function ExpertOrderDetail(): JSX.Element {
     }
     getData(setDingFileSpaceId);
     // configDingtalk(['biz.clipboardData.setData', 'biz.cspace.preview']);
-    setIsSetScheduleDrawerVisible(
-      order.scheduledAt != null &&
-        order.dispatch == 1 &&
-        order.status === OrderStatus.SIGNED
-    );
-    setIsSignButtonVisible(order.status === OrderStatus.AWAIT_SIGN);
-    if (order.status === OrderStatus.SIGNED && order.isHandler) {
-      setIsCloseButtonVisible(true);
-      order.transfer_times < 3
-        ? setIsTransferButtonVisible(true)
-        : setIsTransferToAdminButtonVisible(true);
-    } else {
-      setIsCloseButtonVisible(false);
-      setIsTransferButtonVisible(false);
-      setIsTransferToAdminButtonVisible(false);
-    }
-    setIsFeedbackAvailable(
-      order.status !== OrderStatus.AWAIT_SIGN &&
-        order.status !== OrderStatus.FINISHED &&
-        order.isHandler
-    );
+    //判断角色功能（转运、接收并开始隔离、上报并开始采样结果）
+    setIsTransferButtonVisible(true);
+    setisArriveButtonVisible(true);
   }, [order]);
 
   return (
     <Page
       title="工单详情"
-      paddingBottom={30}
+      paddingBottom={5}
       navigationRigth={
         isTransferButtonVisible
           ? { label: '转单', onClick: handleTransferOrder }
@@ -166,143 +118,133 @@ export default function ExpertOrderDetail(): JSX.Element {
     >
       {order && (
         <>
-          <OrderDetailHeader
-            title={order.title}
-            urgent={order.urgent}
-            submitterName={order.submitterName}
-            status={order.status}
-            scheduledAt={order.scheduledAt}
-            completedAt={order.completedAt}
-          />
-          <OrderDetailContent
-            category={order.category}
-            files={order.files}
-            serialNumber={order.serialNumber}
-          >
-            {order.content}
-          </OrderDetailContent>
-          {isSignButtonVisible && (
-            <Box margin={1.5}>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={signOrder}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
-              >
-                抢单
-              </Button>
+          <Paper elevation={0} square>
+            <Box padding={1.5}>
+              <Card>
+                <OrderDetailHeader
+                  title={order.title}
+                  urgent={order.urgent}
+                  submitterName={order.submitterName}
+                  status={order.status}
+                  scheduledAt={order.scheduledAt}
+                  completedAt={order.completedAt}
+                />
+                <OrderDetailContent
+                  fillDate={order.title}
+                  sourceAttribute={order.title}
+                  dataSource={order.title}
+                  personAttribute={order.title}
+                  relatedEvent={order.title}
+                  relatedCase={order.title}
+                  associatedContace={order.title}
+                  contactForm={order.title}
+                  lastContaceTime={order.title}
+                  name={order.title}
+                  IDCard={order.title}
+                  gender={order.title}
+                  age={order.title}
+                  phone={order.title}
+                  transferAddress={order.title}
+                  homeAddress={order.title}
+                  region={order.title}
+                  street={order.title}
+                  hotel={order.title}
+                  managementState={order.title}
+                  abnormalState={order.title}
+                  isolationDate={order.title}
+                  roomNumber={order.title}
+                  expectSamplingDate={order.title}
+                  actualSamplingDate={order.title}
+                  samplingResult={order.title}
+                  transferTime={order.title}
+                  Hospital={order.title}
+                  removeDate={order.title}
+                  homeManagementTime={order.title}
+                  secondSamplingResult={order.title}
+                  seventhSamplingResult={order.title}
+                  finishDate={order.title}
+                  outcome={order.title}
+                >
+                  {order.content}
+                </OrderDetailContent>
+              </Card>
             </Box>
-          )}
-          {isSetScheduleDrawerVisible && (
-            <Box margin={1.5}>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={setSchedule}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
-              >
-                设置预计完成时间
-              </Button>
-            </Box>
-          )}
+          </Paper>
           {isTransferButtonVisible && (
             <Box margin={1.5}>
               <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
+                onClick={handleFixOrder}
+                className={commonStyle.whiteBackground}
+                disabled={isLoading}
+                fullWidth
+              >
+                <FileCopyOutlinedIcon />
+                修改基本信息
+              </Button>
+            </Box>
+          )}
+          {isTransferButtonVisible && (
+            <Box
+              margin={1.5}
+              style={{ display: 'flex', justifyContent: 'space-around' }}
+            >
+              <Button
+                variant="outlined"
+                color="primary"
                 onClick={handleTransferOrder}
                 className={commonStyle.whiteBackground}
                 disabled={isLoading}
                 fullWidth
               >
-                转单
+                <TransferWithinAStationIcon />
+                转运
               </Button>
-            </Box>
-          )}
-          {isTransferToAdminButtonVisible && (
-            <Box margin={1.5}>
               <Button
                 variant="outlined"
-                color="secondary"
-                onClick={handleTransferOrderToAdmin}
+                color="primary"
+                onClick={handleArrive}
                 className={commonStyle.whiteBackground}
                 disabled={isLoading}
                 fullWidth
               >
-                转单次数已达3次，转到管理员
+                <MobiledataOffSharpIcon />
+                接收并开始隔离
               </Button>
             </Box>
           )}
-          {isCloseButtonVisible && (
-            <Box margin={1.5}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleCloseOrder}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
+          {/* 优先度低 */}
+          {isArriveButtonVisible && (
+            <>
+              <Box
+                margin={1.5}
+                style={{ display: 'flex', justifyContent: 'space-around' }}
               >
-                申请办结
-              </Button>
-            </Box>
-          )}
-          {order.status == OrderStatus.FINISHED && order.order_rate != 0 && (
-            <>
-              <Paper elevation={0} square>
-                <Box marginY={1.5} padding={1.5}>
-                  <InputLabel>用户评分</InputLabel>
-                  <FormHelperText>
-                    <Rating
-                      name="read-only"
-                      precision={0.5}
-                      value={order.order_rate}
-                      readOnly
-                      emptyIcon={<StarBorderIcon fontSize="inherit" />}
-                    />{' '}
-                  </FormHelperText>
-                </Box>
-              </Paper>
-            </>
-          )}
-          {order.status == OrderStatus.FINISHED && order.ask_evaluate && (
-            <>
-              <Paper elevation={0} square>
-                <Box marginY={1.5} padding={1.5}>
-                  <InputLabel>用户评价</InputLabel>
-                  <FormHelperText>{order.ask_evaluate}</FormHelperText>
-                </Box>
-              </Paper>
-            </>
-          )}
-          <MessageList
-            messages={order.messages}
-            isEmpty={order.messages.length === 0 && !isLoading}
-          />
-          {order.status !== OrderStatus.FINISHED && (
-            <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
-                <InputLabel>附件</InputLabel>
-                <FormControl fullWidth>
-                  <Button
-                    onClick={handleUploadFiles}
-                    startIcon={<CloudUploadIcon />}
-                    className={commonStyle.placeholderColor}
-                    disableElevation
-                    fullWidth
-                  >
-                    上传附件
-                  </Button>
-                </FormControl>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleSamplingResult}
+                  className={commonStyle.whiteBackground}
+                  disabled={isLoading}
+                  fullWidth
+                >
+                  <AssignmentIcon />
+                  上报采样结果
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleHealth}
+                  className={commonStyle.whiteBackground}
+                  disabled={isLoading}
+                  fullWidth
+                >
+                  <HealthAndSafetyIcon />
+                  上报健康状况
+                </Button>
               </Box>
-            </Paper>
-          )}
-          {isFeedbackAvailable && (
-            <OrderDetailChat isLoading={isLoading} onSubmit={submitFeedback} />
+            </>
           )}
         </>
       )}

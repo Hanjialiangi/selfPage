@@ -116,13 +116,13 @@ export default function AdminOrderDetail(): JSX.Element {
             scheduledAt={order.scheduledAt}
             completedAt={order.completedAt}
           />
-          <OrderDetailContent
+          {/* <OrderDetailContent
             category={order.category}
             files={order.files}
             serialNumber={order.serialNumber}
           >
             {order.content}
-          </OrderDetailContent>
+          </OrderDetailContent> */}
           {isTransferButtonVisible && (
             <Box margin={1.5}>
               <Button

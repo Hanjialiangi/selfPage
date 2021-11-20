@@ -90,6 +90,24 @@ const ExpertTransferOrderPage = loadable(
     fallback: <Fallback />
   }
 );
+const ExpertFixInfoOrderPage = loadable(
+  () => import('@pages/expert/order/FixInfo'),
+  {
+    fallback: <Fallback />
+  }
+);
+const ExpertArrivePage = loadable(() => import('@pages/expert/order/Arrive'), {
+  fallback: <Fallback />
+});
+const ExpertSamplingResultPage = loadable(
+  () => import('@pages/expert/order/SamplingResult'),
+  {
+    fallback: <Fallback />
+  }
+);
+const ExpertHealthPage = loadable(() => import('@pages/expert/order/Health'), {
+  fallback: <Fallback />
+});
 const ExpertOrderDetailPage = loadable(
   () => import('@pages/expert/order/Detail'),
   {
@@ -244,12 +262,24 @@ export default function Routes(): JSX.Element {
         <Route path="/expert/order/sign">
           <ExpertSignOrderPage />
         </Route>
-        <Route path="/expert/order/:orderId/:transfer">
+        <Route path="/transfer/:orderId/edit/toExpert">
           <ExpertTransferOrderPage />
         </Route>
-        <Route path="/expert/order/:orderId/:action">
-          <ExpertOrderDetailPage />
+        <Route path="/resident/:orderId/baseinfo/edit">
+          <ExpertFixInfoOrderPage />
         </Route>
+        <Route path="/arrive/:orderId/edit">
+          <ExpertArrivePage />
+        </Route>
+        <Route path="/samplingresult/:orderId/edit">
+          <ExpertSamplingResultPage />
+        </Route>
+        <Route path="/health/:orderId/edit">
+          <ExpertHealthPage />
+        </Route>
+        {/* <Route path="/expert/order/:orderId/:action">
+          <ExpertOrderDetailPage />
+        </Route> */}
         <Route path="/expert/order/:orderId">
           <ExpertOrderDetailPage />
         </Route>
