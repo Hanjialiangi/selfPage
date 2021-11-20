@@ -60,3 +60,9 @@ a {
 .MuiTabs-flexContainer {
   justify-content: space-around;
 }
+.MuiListItem-root {
+  padding-bottom: 0 !important;
+}
+.MuiTab-labelIcon .MuiTab-wrapper > *:first-child {
+  width: 20%;
+}

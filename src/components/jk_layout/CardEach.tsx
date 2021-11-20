@@ -18,15 +18,15 @@ const useStyles = makeStyles({
     marginRight: 10
   },
   redtext: {
-    color: 'red',
+    color: '#DC143C',
     textAlign: 'right'
   },
   greentext: {
-    color: 'green',
+    color: '#32CD32',
     textAlign: 'right'
   },
   orangetext: {
-    color: 'orange',
+    color: '#FF8C00',
     textAlign: 'right'
   },
   right: {

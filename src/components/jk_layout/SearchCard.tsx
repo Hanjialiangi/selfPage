@@ -24,7 +24,7 @@ import {
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    marginBottom: 10,
+    marginBottom: 0,
     borderRadius: 10
   }
 });

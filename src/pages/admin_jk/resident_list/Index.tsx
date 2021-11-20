@@ -34,14 +34,15 @@ const columns = [
     place: '无主之地'
   }
 ];
-
 export default function ResidentListPage(): JSX.Element {
   const [data, setData] = useState(columns); //数据
+
   //搜索引擎
   const handleSearch = async (formvalue = {}) => {
     const res = await searchResidentList(formvalue);
     // setData(res.data);
   };
+
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
