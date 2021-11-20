@@ -76,7 +76,7 @@ export default function ResidentListPage(): JSX.Element {
         <form
           noValidate
           autoComplete="off"
-          style={{ paddingBottom: '1rem' }}
+          style={{ paddingBottom: '10px' }}
           onSubmit={submit}
         >
           <SearchCard />
