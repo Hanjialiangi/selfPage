@@ -62,10 +62,6 @@ export default function ExpertTransferOrder(): JSX.Element {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: any) => {
-    setOption(e.traget.value);
-  };
-
   /* 加载页面数据 */
   async function getData(
     setCategoryOptions: React.Dispatch<React.SetStateAction<Category[]>>
