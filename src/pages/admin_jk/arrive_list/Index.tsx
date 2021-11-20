@@ -33,7 +33,7 @@ export default function ResidentListPage(): JSX.Element {
   //搜索引擎
   const handleSearch = async (formvalue = {}) => {
     const res = await searchResidentList(formvalue);
-    setData(res.data);
+    // setData(res.data);
   };
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
