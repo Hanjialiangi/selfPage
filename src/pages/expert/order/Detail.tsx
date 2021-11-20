@@ -1,7 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Paper, Button, Card } from '@material-ui/core';
+import {
+  Box,
+  Paper,
+  Button,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary
+} from '@material-ui/core';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 import MobiledataOffSharpIcon from '@material-ui/icons/MobiledataOffSharp';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -15,6 +23,7 @@ import commonStyle from '@styleModules/common.module.scss';
 import { configDingtalk, getURL } from '@src/utils';
 import { getDingFilePermission } from '@src/api';
 import { Dingtalk } from '@src/constants';
+import '@src/styles/modules/detail/detail.scss';
 export default function ExpertOrderDetail(): JSX.Element {
   /* 从URL参数中读取工单ID */
   const { orderId }: { orderId: string } = useParams();
@@ -120,103 +129,81 @@ export default function ExpertOrderDetail(): JSX.Element {
         <>
           <Paper elevation={0} square>
             <Box padding={1.5}>
-              <Card>
-                <OrderDetailHeader
-                  title={order.title}
-                  urgent={order.urgent}
-                  submitterName={order.submitterName}
-                  status={order.status}
-                  scheduledAt={order.scheduledAt}
-                  completedAt={order.completedAt}
-                />
-                <OrderDetailContent
-                  fillDate={order.title}
-                  sourceAttribute={order.title}
-                  dataSource={order.title}
-                  personAttribute={order.title}
-                  relatedEvent={order.title}
-                  relatedCase={order.title}
-                  associatedContace={order.title}
-                  contactForm={order.title}
-                  lastContaceTime={order.title}
-                  name={order.title}
-                  IDCard={order.title}
-                  gender={order.title}
-                  age={order.title}
-                  phone={order.title}
-                  transferAddress={order.title}
-                  homeAddress={order.title}
-                  region={order.title}
-                  street={order.title}
-                  hotel={order.title}
-                  managementState={order.title}
-                  abnormalState={order.title}
-                  isolationDate={order.title}
-                  roomNumber={order.title}
-                  expectSamplingDate={order.title}
-                  actualSamplingDate={order.title}
-                  samplingResult={order.title}
-                  transferTime={order.title}
-                  Hospital={order.title}
-                  removeDate={order.title}
-                  homeManagementTime={order.title}
-                  secondSamplingResult={order.title}
-                  seventhSamplingResult={order.title}
-                  finishDate={order.title}
-                  outcome={order.title}
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMore />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  {order.content}
-                </OrderDetailContent>
-              </Card>
+                  <OrderDetailHeader
+                    name={order.title}
+                    contactType={order.title}
+                    status={order.status}
+                    isolateType={order.title}
+                    isloatePlace={order.title}
+                    fillDate={order.title}
+                    sourceAttribute={order.title}
+                    dataSource={order.title}
+                    personAttribute={order.title}
+                    relatedEvent={order.title}
+                    relatedCase={order.title}
+                    associatedContace={order.title}
+                    contactForm={order.title}
+                    lastContaceTime={order.title}
+                    IDCard={order.title}
+                    gender={order.title}
+                    age={order.title}
+                    phone={order.title}
+                    transferAddress={order.title}
+                    homeAddress={order.title}
+                    region={order.title}
+                    street={order.title}
+                    relatedIDCard={order.title}
+                    relatedPhone={order.title}
+                    hotel={order.title}
+                  />
+                </AccordionSummary>
+                <AccordionDetails>
+                  <OrderDetailContent
+                    abnormalState={order.title}
+                    isolationDate={order.title}
+                    roomNumber={order.title}
+                    expectSamplingDate={order.title}
+                    actualSamplingDate={order.title}
+                    samplingResult={order.title}
+                    transferTime={order.title}
+                    Hospital={order.title}
+                    removeDate={order.title}
+                    homeManagementTime={order.title}
+                    secondSamplingResult={order.title}
+                    seventhSamplingResult={order.title}
+                    finishDate={order.title}
+                    outcome={order.title}
+                    isolateMethod={order.title}
+                  >
+                    {order.content}
+                  </OrderDetailContent>
+                </AccordionDetails>
+              </Accordion>
             </Box>
           </Paper>
-          {isTransferButtonVisible && (
-            <Box margin={1.5}>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleFixOrder}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
-              >
-                <FileCopyOutlinedIcon />
-                修改基本信息
-              </Button>
-            </Box>
-          )}
-          {isTransferButtonVisible && (
-            <Box
-              margin={1.5}
-              style={{ display: 'flex', justifyContent: 'space-around' }}
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleTransferOrder}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
-              >
-                <TransferWithinAStationIcon />
-                转运
-              </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleArrive}
-                className={commonStyle.whiteBackground}
-                disabled={isLoading}
-                fullWidth
-              >
-                <MobiledataOffSharpIcon />
-                接收并开始隔离
-              </Button>
-            </Box>
-          )}
-          {/* 优先度低 */}
-          {isArriveButtonVisible && (
-            <>
+          <Paper elevation={0}>
+            {isTransferButtonVisible && (
+              <Box margin={1.5} paddingTop={2}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleFixOrder}
+                  className={commonStyle.whiteBackground}
+                  disabled={isLoading}
+                  fullWidth
+                >
+                  <FileCopyOutlinedIcon />
+                  修改基本信息
+                </Button>
+              </Box>
+            )}
+            {isTransferButtonVisible && (
               <Box
                 margin={1.5}
                 style={{ display: 'flex', justifyContent: 'space-around' }}
@@ -224,28 +211,61 @@ export default function ExpertOrderDetail(): JSX.Element {
                 <Button
                   variant="outlined"
                   color="primary"
-                  onClick={handleSamplingResult}
+                  onClick={handleTransferOrder}
                   className={commonStyle.whiteBackground}
                   disabled={isLoading}
                   fullWidth
                 >
-                  <AssignmentIcon />
-                  上报采样结果
+                  <TransferWithinAStationIcon />
+                  转运
                 </Button>
                 <Button
                   variant="outlined"
                   color="primary"
-                  onClick={handleHealth}
+                  onClick={handleArrive}
                   className={commonStyle.whiteBackground}
                   disabled={isLoading}
                   fullWidth
                 >
-                  <HealthAndSafetyIcon />
-                  上报健康状况
+                  <MobiledataOffSharpIcon />
+                  接收并开始隔离
                 </Button>
               </Box>
-            </>
-          )}
+            )}
+            {/* 优先度低 */}
+            {isArriveButtonVisible && (
+              <>
+                <Box
+                  margin={1.5}
+                  paddingBottom={2}
+                  style={{ display: 'flex', justifyContent: 'space-around' }}
+                >
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleSamplingResult}
+                    className={commonStyle.whiteBackground}
+                    disabled={isLoading}
+                    fullWidth
+                  >
+                    <AssignmentIcon />
+                    上报采样结果
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleHealth}
+                    className={commonStyle.whiteBackground}
+                    disabled={isLoading}
+                    fullWidth
+                  >
+                    <HealthAndSafetyIcon />
+                    上报健康状况
+                  </Button>
+                </Box>
+              </>
+            )}
+          </Paper>
         </>
       )}
     </Page>

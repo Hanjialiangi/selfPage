@@ -9,27 +9,8 @@ import Collapse from '@material-ui/core/Collapse';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 type Props = {
-  children:string;
-  fillDate: string;
-  sourceAttribute: string;
-  dataSource: string;
-  personAttribute: string;
-  relatedEvent: string;
-  relatedCase: string;
-  associatedContace: string;
-  contactForm: string;
-  lastContaceTime: string;
-  name: string;
-  IDCard: string;
-  gender: string;
-  age: string;
-  phone: string;
-  transferAddress: string;
-  homeAddress: string;
-  region: string;
-  street: string;
-  hotel: string;
-  managementState: string;
+  children: string;
+  isolateMethod: string;
   abnormalState: string;
   isolationDate: string;
   roomNumber: string;
@@ -48,26 +29,6 @@ type Props = {
 
 export default function OrderDetailContent({
   children,
-  fillDate,
-  sourceAttribute,
-  dataSource,
-  personAttribute,
-  relatedEvent,
-  relatedCase,
-  associatedContace,
-  contactForm,
-  lastContaceTime,
-  name,
-  IDCard,
-  gender,
-  age,
-  phone,
-  transferAddress,
-  homeAddress,
-  region,
-  street,
-  hotel,
-  managementState,
   abnormalState,
   isolationDate,
   roomNumber,
@@ -81,7 +42,8 @@ export default function OrderDetailContent({
   secondSamplingResult,
   seventhSamplingResult,
   finishDate,
-  outcome
+  outcome,
+  isolateMethod
 }: Props): JSX.Element {
   // const handleCopySerialNumber = useCallback(async () => {
   //   try {
@@ -98,7 +60,7 @@ export default function OrderDetailContent({
     setChecked(prev => !prev);
   };
   return (
-    <Box marginBottom={1.5}>
+    <Box marginBottom={1}>
       {/* <Box sx={{ height: 300 }}>
         <FormControlLabel
           control={<Switch checked={checked} onChange={handleChange} />}
@@ -122,198 +84,20 @@ export default function OrderDetailContent({
         </Box>
       </Box> */}
       <Paper elevation={0} square>
-        <Box padding={1.5} marginTop={-3}>
-          <Box margin={2}>
+        <Box>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>填报日期：</span>
-                  {fillDate}
+                  <span style={{ color: 'gray' }}>隔离方式：</span>
+                  {isolateMethod}
                 </Typography>
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>来源属性：</span>
-                  {sourceAttribute}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>数据来源：</span>
-                  {dataSource}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>人员属性：</span>
-                  {personAttribute}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联事件：</span>
-                  {relatedEvent}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联病例：</span>
-                  {relatedCase}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联密接：</span>
-                  {associatedContace}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>接触方式：</span>
-                  {contactForm}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>最后接触时间：</span>
-                  {lastContaceTime}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>姓名：</span>
-                  {name}
-                </Typography>
-              </Grid>
-              <Grid xs={4}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>性别：</span>
-                  {gender}
-                </Typography>
-              </Grid>
-              <Grid xs={4}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>年龄：</span>
-                  {age}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>身份证号：</span>
-                  {IDCard}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>联系电话：</span>
-                  {phone}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>转运地址：</span>
-                  {transferAddress}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>家庭住址：</span>
-                  {homeAddress}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>所属区域：</span>
-                  {region}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>所属街道：</span>
-                  {street}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联病例：</span>
-                  {relatedCase}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联密接：</span>
-                  {associatedContace}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>预计隔离酒店：</span>
-                  {hotel}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>管理状态：</span>
-                  {managementState}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
                 <Typography variant="body2">
                   <span style={{ color: 'gray' }}>接收异常状态：</span>
                   {abnormalState}
@@ -321,9 +105,9 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
-              <Grid xs={6}>
+              <Grid xs={12}>
                 <Typography variant="body2">
                   <span style={{ color: 'gray' }}>纳入隔离日期：</span>
                   {isolationDate}
@@ -331,23 +115,17 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
-              <Grid xs={8}>
+              <Grid xs={12}>
                 <Typography variant="body2">
                   <span style={{ color: 'gray' }}>实际入驻酒店寄房间号：</span>
                   {roomNumber}
                 </Typography>
               </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>接收异常状态：</span>
-                  {abnormalState}
-                </Typography>
-              </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -357,7 +135,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -367,7 +145,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -377,7 +155,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -393,7 +171,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -403,7 +181,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={8}>
                 <Typography variant="body2">
@@ -413,7 +191,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -425,7 +203,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -435,7 +213,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -445,7 +223,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -455,7 +233,7 @@ export default function OrderDetailContent({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={2}>
+          <Box margin={1}>
             <Grid container spacing={2}>
               <Grid xs={8}>
                 <Typography variant="body2">
