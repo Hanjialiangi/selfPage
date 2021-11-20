@@ -71,6 +71,11 @@ const UserArrivePage = loadable(() => import('@pages/people_detail/arrive'), {
   fallback: <Fallback />
 });
 
+//404
+const ErrorPage = loadable(() => import('@pages/403/Error'), {
+  fallback: <Fallback />
+});
+
 // function getUserRoutes(): JSX.Element[] {
 //   return [
 //     <Route path="/user/order/create" key="userOrderCreate">
@@ -108,6 +113,20 @@ function getUserDetailRoutes(): JSX.Element[] {
   ];
 }
 
+function ErrorShow(): JSX.Element[] {
+  return [
+    <Route path="/error" key="error">
+      <ErrorPage />
+    </Route>,
+    <Route
+      path="*"
+      key="redirect"
+      exact
+      render={() => <Redirect to="/error"></Redirect>}
+    />
+  ];
+}
+
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
@@ -131,9 +150,10 @@ export default function Routes(): JSX.Element {
         <Route path="/admin_jk">
           <AdminHomePage />
         </Route>
-        <Route path="/">
-          <Redirect to="/admin_jk" />
+        <Route exact path="/">
+          <Redirect to="/admin_jk/resident_list" />
         </Route>
+        {ErrorShow()}
       </Switch>
     );
   }
@@ -151,9 +171,10 @@ export default function Routes(): JSX.Element {
         <Route path="/transfer">
           <TransferHomePage />
         </Route>
-        <Route path="/">
-          <Redirect to="/transfer" />
+        <Route exact path="/">
+          <Redirect to="/transfer/resident_list" />
         </Route>
+        {ErrorShow()}
       </Switch>
     );
   }
@@ -175,9 +196,10 @@ export default function Routes(): JSX.Element {
         <Route path="/hotel_doctor">
           <HotelDoctorHomePage />
         </Route>
-        <Route path="/">
-          <Redirect to="/hotel_doctor" />
+        <Route exact path="/">
+          <Redirect to="/hotel_doctor/resident_list" />
         </Route>
+        {ErrorShow()}
       </Switch>
     );
   }
@@ -198,9 +220,10 @@ export default function Routes(): JSX.Element {
         <Route path="/community">
           <CommunityHomePage />
         </Route>
-        <Route path="/">
-          <Redirect to="/community" />
+        <Route exact path="/">
+          <Redirect to="/community/resident_list" />
         </Route>
+        {ErrorShow()}
       </Switch>
     );
   }

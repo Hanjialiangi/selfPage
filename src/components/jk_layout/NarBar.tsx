@@ -42,7 +42,7 @@ export default function NarBar(): JSX.Element {
     const initval = location.pathname.split('/')[2];
     const judge = location.pathname.split('/')[1];
     let name = 0;
-    if (judge === 'detail') {
+    if (judge === 'detail' || judge === 'error') {
       name = 100;
     } else if (judge === 'admin_jk' || judge === 'transfer') {
       if (initval === 'resident_list') {
