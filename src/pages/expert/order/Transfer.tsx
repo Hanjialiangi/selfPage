@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { searchExpert } from '@src/api';
 import Page from '@components/layout/Page';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import Drawer from '@material-ui/core/Drawer';
+import { Box, Paper, Button, Input, Drawer } from '@material-ui/core';
 import TypeList from '@components/TypeList';
 import ExpertList from '@components/ExpertList';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -135,61 +131,73 @@ export default function ExpertTransferOrder(): JSX.Element {
   }, []);
 
   return (
-    <Page title="转单">
+    <Page title="转运">
       <Paper elevation={0} square>
-        {transfer == 'toExpert' ? (
-          <Box marginY={1.5} padding={1.5}>
-            <InputLabel>工单类别</InputLabel>
-            <FormControl fullWidth>
-              <Button
-                onClick={() => {
-                  setIsShowDrawer(true);
-                }}
-                className={category ? '' : commonStyle.placeholderColor}
-                disableElevation
-                fullWidth
-              >
-                {category ? category.fullPathName : '重新请选择工单类别'}
-              </Button>
-              <Drawer anchor="right" open={isShowDrawer} onClose={()=>{setIsShowDrawer(false)}}>
-                <TypeList
-                  category={category}
-                  setCategory={setCategory}
-                  isChildren={false}
-                  setIsShowDrawer={setIsShowDrawer}
-                  categoryOptions={categoryOptions}
-                ></TypeList>
-              </Drawer>
-            </FormControl>
-          </Box>
-        ) : null}
-        {transfer == 'toExpert' ? (
-          <Box marginY={1.5} padding={1.5}>
-            <InputLabel error={!!expertError} required>
-              选择专家
-            </InputLabel>
-            <FormControl fullWidth>
-              <Button
-                onClick={handleCheckExpert}
-                className={commonStyle.placeholderColor}
-                disableElevation
-                fullWidth
-              >
-                {selectExpert ? selectExpert.name : '请选择转单专家'}
-              </Button>
-              <Drawer anchor="right" open={isShowExpertList} onClose={()=>{setIsShowExpertList(false)}}>
-                <ExpertList
-                  setIsShowExpertList={setIsShowExpertList}
-                  setSelectExpert={setSelectExpert}
-                  expertList={expertList}
-                ></ExpertList>
-              </Drawer>
-            </FormControl>
-            <FormHelperText error>{expertError}</FormHelperText>
-          </Box>
-        ) : null}
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>转单意见</InputLabel>
+          <InputLabel>隔离方式</InputLabel>
+          <FormControl fullWidth>
+            <Button
+              onClick={() => {
+                setIsShowDrawer(true);
+              }}
+              className={category ? '' : commonStyle.placeholderColor}
+              disableElevation
+              fullWidth
+            >
+              {category ? category.fullPathName : '选择隔离方式'}
+            </Button>
+            <Drawer
+              anchor="right"
+              open={isShowDrawer}
+              onClose={() => {
+                setIsShowDrawer(false);
+              }}
+            >
+              <TypeList
+                category={category}
+                setCategory={setCategory}
+                isChildren={false}
+                setIsShowDrawer={setIsShowDrawer}
+                categoryOptions={categoryOptions}
+              ></TypeList>
+            </Drawer>
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel error={!!expertError} required>
+            选择隔离地区
+          </InputLabel>
+          <FormControl fullWidth>
+            <Button
+              onClick={handleCheckExpert}
+              className={commonStyle.placeholderColor}
+              disableElevation
+              fullWidth
+            >
+              {selectExpert ? selectExpert.name : '请选择隔离地区'}
+            </Button>
+            <Drawer
+              anchor="right"
+              open={isShowExpertList}
+              onClose={() => {
+                setIsShowExpertList(false);
+              }}
+            >
+              <ExpertList
+                setIsShowExpertList={setIsShowExpertList}
+                setSelectExpert={setSelectExpert}
+                expertList={expertList}
+              ></ExpertList>
+            </Drawer>
+          </FormControl>
+          <FormHelperText error>{expertError}</FormHelperText>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>转运备注</InputLabel>
           <FormControl fullWidth>
             <Input
               name="ask_evaluate"
@@ -197,7 +205,7 @@ export default function ExpertTransferOrder(): JSX.Element {
               onChange={e => {
                 setOption(e.target.value);
               }}
-              placeholder="请填写转单意见"
+              placeholder="请填写转运意见"
               minRows={7}
               maxRows={600}
               disableUnderline
@@ -205,19 +213,19 @@ export default function ExpertTransferOrder(): JSX.Element {
             />
           </FormControl>
         </Box>
-        <Box marginY={1.5} padding={1.5}>
-          <Button
-            onClick={handleReminder}
-            variant="contained"
-            color="primary"
-            disabled={isLoading}
-            disableElevation
-            fullWidth
-          >
-            确认转单
-          </Button>
-        </Box>
       </Paper>
+      <Box marginY={1.5} padding={1.5}>
+        <Button
+          onClick={handleReminder}
+          variant="contained"
+          color="primary"
+          disabled={isLoading}
+          disableElevation
+          fullWidth
+        >
+          确认转运
+        </Button>
+      </Box>
     </Page>
   );
 }

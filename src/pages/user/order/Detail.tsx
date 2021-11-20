@@ -130,13 +130,13 @@ export default function UserOrderDetail(): JSX.Element {
             scheduledAt={order.scheduledAt}
             completedAt={order.completedAt}
           />
-          <OrderDetailContent
+          {/* <OrderDetailContent
             category={order.category}
             files={order.files}
             serialNumber={order.serialNumber}
           >
             {order.content}
-          </OrderDetailContent>
+          </OrderDetailContent> */}
           {order.status == OrderStatus.SIGNED && order.reminder < 3 && (
             <Box margin={1.5}>
               <Button

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
@@ -70,31 +71,20 @@ const UserTransferPage = loadable(
 const UserArrivePage = loadable(() => import('@pages/people_detail/arrive'), {
   fallback: <Fallback />
 });
+const HealthPage = loadable(() => import('@pages/people_detail/Health'), {
+  fallback: <Fallback />
+});
+const SamplingResultPage = loadable(
+  () => import('@pages/people_detail/SamplingResult'),
+  {
+    fallback: <Fallback />
+  }
+);
 
-//404
+//403
 const ErrorPage = loadable(() => import('@pages/403/Error'), {
   fallback: <Fallback />
 });
-
-// function getUserRoutes(): JSX.Element[] {
-//   return [
-//     <Route path="/user/order/create" key="userOrderCreate">
-//       <UserCreateOrderPage />
-//     </Route>,
-//     <Route path="/user/order/:orderId" key="userOrderDetail">
-//       <UserOrderDetailPage />
-//     </Route>,
-//     <Route path="/user/close/order/:orderId" key="userOrderClose">
-//       <UserOrderClosePage />
-//     </Route>,
-//     <Route path="/user/order" key="userOrderIndex">
-//       <UserOrderIndexPage />
-//     </Route>,
-//     <Route path="/user" key="userIndex">
-//       <Redirect to="/user/order" />
-//     </Route>
-//   ];
-// }
 
 function getUserDetailRoutes(): JSX.Element[] {
   return [
@@ -107,11 +97,40 @@ function getUserDetailRoutes(): JSX.Element[] {
     <Route path="/detail/arrive/:id/edit" key="arrive">
       <UserArrivePage />
     </Route>,
+    <Route path="/detail/health/:id/edit" key="health">
+      <HealthPage />
+    </Route>,
+    <Route path="/detail/samplingresult/:id/edit" key="health">
+      <SamplingResultPage />
+    </Route>,
     <Route path="/detail/resident/:id" key="detail">
       <PeopleDetailPage />
     </Route>
   ];
 }
+
+// function UserDetailRoutes(): JSX.Element[] {
+//   return [
+//     <Route path="/transfer/:orderId/edit/toExpert">
+//       <ExpertTransferOrderPage />
+//     </Route>,
+//     <Route path="/resident/:orderId/baseinfo/edit">
+//       <ExpertFixInfoOrderPage />
+//     </Route>,
+//     <Route path="/arrive/:orderId/edit">
+//       <ExpertArrivePage />
+//     </Route>,
+//     <Route path="/samplingresult/:orderId/edit">
+//       <ExpertSamplingResultPage />
+//     </Route>,
+//     <Route path="/health/:orderId/edit">
+//       <ExpertHealthPage />
+//     </Route>,
+//     <Route path="/expert/order/:orderId">
+//       <ExpertOrderDetailPage />
+//     </Route>
+//   ];
+// }
 
 function ErrorShow(): JSX.Element[] {
   return [
