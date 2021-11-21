@@ -9,15 +9,15 @@ export default function ResidentListPage(): JSX.Element {
     {
       id: 1,
       name: '余小c',
-      contact_type: '密切接触',
-      isolation_type: '酒店',
+      contact_type: '密接',
+      isolation_type: '集中',
       place: '贝多芬酒店'
     },
     {
       id: 2,
       name: '钩',
-      contact_type: '密切接触',
-      isolation_type: '社区',
+      contact_type: '密接',
+      isolation_type: '居家',
       place: '锦绣天下'
     }
   ];

@@ -9,22 +9,22 @@ export default function ResidentListPage(): JSX.Element {
     {
       id: 1,
       name: '欧阳锋',
-      contact_type: '次密切接触',
-      isolation_type: '酒店',
+      contact_type: '次密接',
+      isolation_type: '集中',
       place: '维多利亚酒店'
     },
     {
       id: 2,
       name: '黄蓉',
-      contact_type: '密切接触',
-      isolation_type: '社区',
+      contact_type: '密接',
+      isolation_type: '居家',
       place: '天堂村'
     },
     {
       id: 3,
       name: '梅超风',
-      contact_type: '非密切接触',
-      isolation_type: '社区',
+      contact_type: '一般接触',
+      isolation_type: '居家',
       place: '锦宫丽城'
     }
   ];

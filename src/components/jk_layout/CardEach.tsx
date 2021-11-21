@@ -72,20 +72,17 @@ export default function CardEach(props: {
                 {props.detail.name}
               </span>
             </ListItemIcon>
-            {props.detail.contact_type === '密切接触' ? (
-              <ListItemText
-                className={classes.redtext}
-                primary={props.detail.contact_type}
-              />
-            ) : props.detail.contact_type === '次密切接触' ? (
+            {props.detail.contact_type === '密接' ? (
+              <ListItemText className={classes.redtext} primary={'密切接触'} />
+            ) : props.detail.contact_type === '次密接' ? (
               <ListItemText
                 className={classes.orangetext}
-                primary={props.detail.contact_type}
+                primary={'次密切接触'}
               />
             ) : (
               <ListItemText
                 className={classes.greentext}
-                primary={props.detail.contact_type}
+                primary={props.detail.contact_type + '人员'}
               />
             )}
           </ListItem>

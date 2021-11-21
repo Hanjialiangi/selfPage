@@ -49,7 +49,7 @@ export default function SearchCard(): JSX.Element {
     <Card className={classes.root}>
       <CardContent>
         <List>
-          <ListItem>
+          <ListItem className="style">
             <ListItemIcon>
               <NameIcon />
             </ListItemIcon>
@@ -57,10 +57,10 @@ export default function SearchCard(): JSX.Element {
               name="username"
               type="text"
               style={{ width: '100%' }}
-              placeholder="请填写姓名"
+              placeholder="搜索姓名"
             />
           </ListItem>
-          <ListItem>
+          <ListItem className="style">
             <ListItemIcon>
               <PhoneIcon />
             </ListItemIcon>
@@ -68,10 +68,10 @@ export default function SearchCard(): JSX.Element {
               name="phone"
               type="number"
               style={{ width: '100%' }}
-              placeholder="请填写您的手机号"
+              placeholder="搜索手机号"
             />
           </ListItem>
-          <ListItem>
+          <ListItem className="style">
             <ListItemIcon>
               <IdCarIcon />
             </ListItemIcon>
@@ -79,12 +79,12 @@ export default function SearchCard(): JSX.Element {
               name="cardnumber"
               type="number"
               style={{ width: '100%' }}
-              placeholder="请填写您的身份证号"
+              placeholder="搜索身份证号"
             />
           </ListItem>
           {show ? (
             <div>
-              <ListItem>
+              <ListItem className="style">
                 <ListItemIcon>
                   <ContactTypeIcon />
                 </ListItemIcon>
@@ -95,11 +95,12 @@ export default function SearchCard(): JSX.Element {
                   onChange={handleChangeContanct}
                 >
                   <option aria-label="None" value="">
-                    接触类型
+                    人员属性
                   </option>
-                  <option value="密切接触">密切接触</option>
-                  <option value="非密切接触">非密切接触</option>
-                  <option value="次密切接触">次密切接触</option>
+                  <option value="密接">密切接触</option>
+                  <option value="非密接">非密切接触</option>
+                  <option value="一般接触">一般接触人员</option>
+                  <option value="重点接触">重点接触人员</option>
                 </Select>
                 <ListItemIcon>
                   <IsolationTypeIcon />
@@ -117,7 +118,7 @@ export default function SearchCard(): JSX.Element {
                   <option value="社区">社区</option>
                 </Select>
               </ListItem>
-              <ListItem>
+              <ListItem className="style">
                 <ListItemIcon>
                   <HotelIcon />
                 </ListItemIcon>
@@ -125,7 +126,7 @@ export default function SearchCard(): JSX.Element {
                   name="place"
                   type="text"
                   style={{ width: '100%' }}
-                  placeholder="请填写您的酒店/社区名称"
+                  placeholder="搜索您的酒店/社区名称"
                 />
               </ListItem>
             </div>

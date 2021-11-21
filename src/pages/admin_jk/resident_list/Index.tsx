@@ -8,29 +8,29 @@ const columns = [
   {
     id: 1,
     name: '田伟琪',
-    contact_type: '密切接触',
-    isolation_type: '酒店',
+    contact_type: '密接',
+    isolation_type: '集中',
     place: '维也纳酒店'
   },
   {
     id: 2,
     name: '张三',
-    contact_type: '非密切接触',
-    isolation_type: '社区',
+    contact_type: '一般接触',
+    isolation_type: '居家',
     place: '锦绣家园'
   },
   {
     id: 3,
     name: '李四',
-    contact_type: '次密切接触',
-    isolation_type: '酒店',
+    contact_type: '次密接',
+    isolation_type: '集中',
     place: '锦绣天府'
   },
   {
     id: 4,
     name: '孔融',
-    contact_type: '次密切接触',
-    isolation_type: '酒店',
+    contact_type: '重点',
+    isolation_type: '集中',
     place: '无主之地'
   }
 ];
