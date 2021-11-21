@@ -23,7 +23,6 @@ import commonStyle from '@styleModules/common.module.scss';
 import { configDingtalk, getURL } from '@src/utils';
 import { getDingFilePermission } from '@src/api';
 import { Dingtalk } from '@src/constants';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import '@src/styles/modules/detail/detail.scss';
 export default function ExpertOrderDetail(): JSX.Element {
   /* 从URL参数中读取工单ID */
@@ -83,11 +82,6 @@ export default function ExpertOrderDetail(): JSX.Element {
     window.location.href = `/health/${order.id}/edit`;
     // dingOpenLink(getURL(`expert/order/${order.id}/fixInfo`));
   }, [order]);
-
-  //收缩按钮
-  const [showdownIcon, setshowdownIcon] = useState(true);
-  const [showUpIcon, setshowUpIcon] = useState(false);
-
   /* 加载页面数据 */
   async function getData(
     setDingFileSpaceId: React.Dispatch<React.SetStateAction<string>>
@@ -123,7 +117,7 @@ export default function ExpertOrderDetail(): JSX.Element {
 
   return (
     <Page
-      title="人员详情"
+      title="工单详情"
       paddingBottom={5}
       navigationRigth={
         isTransferButtonVisible
@@ -137,23 +131,10 @@ export default function ExpertOrderDetail(): JSX.Element {
             <Box padding={1.5}>
               <Accordion>
                 <AccordionSummary
-                  expandIcon={showdownIcon ? <ExpandMore /> : null}
+                  expandIcon={<ExpandMore />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
-                  onClick={() => {
-                    setshowdownIcon(showUpIcon);
-                    setshowUpIcon(showdownIcon);
-                  }}
                 >
-                  {showUpIcon ? (
-                    <KeyboardArrowUpIcon
-                      style={{
-                        position: 'absolute',
-                        marginTop: '510px',
-                        left: '47%'
-                      }}
-                    />
-                  ) : null}
                   <OrderDetailHeader
                     name={order.title}
                     contactType={order.title}
@@ -208,9 +189,23 @@ export default function ExpertOrderDetail(): JSX.Element {
           </Paper>
           <Paper elevation={0}>
             {isTransferButtonVisible && (
+              <Box margin={1.5} paddingTop={2}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleFixOrder}
+                  className={commonStyle.whiteBackground}
+                  disabled={isLoading}
+                  fullWidth
+                >
+                  <FileCopyOutlinedIcon />
+                  修改基本信息
+                </Button>
+              </Box>
+            )}
+            {isTransferButtonVisible && (
               <Box
                 margin={1.5}
-                paddingTop={1}
                 style={{ display: 'flex', justifyContent: 'space-around' }}
               >
                 <Button
@@ -219,7 +214,7 @@ export default function ExpertOrderDetail(): JSX.Element {
                   onClick={handleTransferOrder}
                   className={commonStyle.whiteBackground}
                   disabled={isLoading}
-                  style={{ width: '45%' }}
+                  fullWidth
                 >
                   <TransferWithinAStationIcon />
                   转运
@@ -230,17 +225,19 @@ export default function ExpertOrderDetail(): JSX.Element {
                   onClick={handleArrive}
                   className={commonStyle.whiteBackground}
                   disabled={isLoading}
-                  style={{ width: '45%' }}
+                  fullWidth
                 >
                   <MobiledataOffSharpIcon />
                   接收并开始隔离
                 </Button>
               </Box>
             )}
+            {/* 优先度低 */}
             {isArriveButtonVisible && (
               <>
                 <Box
                   margin={1.5}
+                  paddingBottom={2}
                   style={{ display: 'flex', justifyContent: 'space-around' }}
                 >
                   <Button
@@ -249,7 +246,7 @@ export default function ExpertOrderDetail(): JSX.Element {
                     onClick={handleSamplingResult}
                     className={commonStyle.whiteBackground}
                     disabled={isLoading}
-                    style={{ width: '45%' }}
+                    fullWidth
                   >
                     <AssignmentIcon />
                     上报采样结果
@@ -260,32 +257,13 @@ export default function ExpertOrderDetail(): JSX.Element {
                     onClick={handleHealth}
                     className={commonStyle.whiteBackground}
                     disabled={isLoading}
-                    style={{ width: '45%' }}
+                    fullWidth
                   >
                     <HealthAndSafetyIcon />
                     上报健康状况
                   </Button>
                 </Box>
               </>
-            )}
-            {isTransferButtonVisible && (
-              <Box
-                margin={1.5}
-                style={{ display: 'flex', justifyContent: 'space-around' }}
-                paddingBottom={1}
-              >
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={handleFixOrder}
-                  className={commonStyle.whiteBackground}
-                  disabled={isLoading}
-                  style={{ width: '95%' }}
-                >
-                  <FileCopyOutlinedIcon />
-                  修改基本信息
-                </Button>
-              </Box>
             )}
           </Paper>
         </>
