@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Card, Button, Grid, Input } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import {
+  Box,
+  Paper,
+  Button,
+  Input,
+  InputLabel,
+  FormControl
+} from '@material-ui/core';
 import Page from '@components/layout/Page';
 export default function FixInfo(): JSX.Element {
   const [detail, setdetail] = useState({
@@ -53,727 +59,554 @@ export default function FixInfo(): JSX.Element {
   });
   return (
     <Page title="修改信息">
+      {/* <Box padding={1.4}> */}
       <Paper elevation={0} square>
-        {/* <Box padding={1.4}> */}
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>填报日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    fullWidth
-                    name="fillDate"
-                    onChange={updateDetail}
-                    value={detail.fillDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>来源属性：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="sourceAttribute"
-                    defaultValue={detail.sourceAttribute}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>数据来源：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="dataSource"
-                    defaultValue={detail.dataSource}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>人员属性：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="personAttribute"
-                    defaultValue={detail.personAttribute}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>关联事件：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="relatedEvent"
-                    defaultValue={detail.relatedEvent}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>关联病例：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="relatedCase"
-                    defaultValue={detail.relatedCase}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>关联密接：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="associatedContace"
-                    defaultValue={detail.associatedContace}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>接触方式：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="contactForm"
-                    defaultValue={detail.contactForm}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>最后接触时间：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="lastContaceTime"
-                    defaultValue={detail.lastContaceTime}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>姓名：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="name"
-                    defaultValue={detail.name}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>性别：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="gender"
-                    defaultValue={detail.gender}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>年龄：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="age"
-                    defaultValue={detail.age}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>身份证号：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="IDCard"
-                    defaultValue={detail.IDCard}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>联系电话：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="phone"
-                    defaultValue={detail.phone}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>转运地址：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="transferAddress"
-                    defaultValue={detail.transferAddress}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>家庭住址：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="homeAddress"
-                    defaultValue={detail.homeAddress}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>所属区域：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="region"
-                    defaultValue={detail.region}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>所属街道：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="street"
-                    defaultValue={detail.street}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>预计隔离酒店：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="hotel"
-                    defaultValue={detail.hotel}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>管理状态：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="managementState"
-                    defaultValue={detail.managementState}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>接收异常状态：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="abnormalState"
-                    defaultValue={detail.abnormalState}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>纳入隔离日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="isolationDate"
-                    defaultValue={detail.isolationDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>实际入驻酒店寄房间号：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="roomNumber"
-                    defaultValue={detail.roomNumber}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>预计采样日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="expectSamplingDate"
-                    defaultValue={detail.expectSamplingDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>实际采样日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="actualSamplingDate"
-                    defaultValue={detail.actualSamplingDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>采样结果：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="samplingResult"
-                    defaultValue={detail.samplingResult}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>转院时间：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="transferTime"
-                    defaultValue={detail.transferTime}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>医院名称：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="Hospital"
-                    defaultValue={detail.Hospital}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>预计解除日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="removeDate"
-                    defaultValue={detail.removeDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>
-                    密接解除后纳入居家管理时间：
-                  </span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="homeManagementTime"
-                    defaultValue={detail.homeManagementTime}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>第二天采样结果：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="secondSamplingResult"
-                    defaultValue={detail.secondSamplingResult}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>第七天采样结果：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="seventhSamplingResult"
-                    defaultValue={detail.seventhSamplingResult}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>结束管理日期：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="finishDate"
-                    defaultValue={detail.finishDate}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        <Card>
-          <Box margin={2}>
-            <Grid container spacing={2}>
-              <Grid xs={4}>
-                <Typography variant="body1">
-                  <span style={{ color: 'gray' }}>转归：</span>
-                </Typography>
-              </Grid>
-              <Grid xs={8}>
-                <Typography variant="body1">
-                  <Input
-                    onChange={updateDetail}
-                    fullWidth
-                    name="outcome"
-                    defaultValue={detail.outcome}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Card>
-        {/* </Box> */}
-        <Card>
-        <Box margin={1.4}>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>来源属性：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="sourceAttribute"
+              onChange={updateDetail}
+              value={detail.sourceAttribute}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>数据来源：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="dataSource"
+              onChange={updateDetail}
+              value={detail.dataSource}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>人员属性：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="personAttribute"
+              onChange={updateDetail}
+              value={detail.personAttribute}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>关联事件：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="relatedEvent"
+              onChange={updateDetail}
+              value={detail.relatedEvent}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>关联病例：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="relatedCase"
+              onChange={updateDetail}
+              value={detail.relatedCase}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>关联密接：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="associatedContace"
+              onChange={updateDetail}
+              value={detail.associatedContace}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>接触方式：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="contactForm"
+              onChange={updateDetail}
+              value={detail.contactForm}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>最后接触时间：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="lastContaceTime"
+              onChange={updateDetail}
+              value={detail.lastContaceTime}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>姓名：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="name"
+              onChange={updateDetail}
+              value={detail.name}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>性别：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="gender"
+              onChange={updateDetail}
+              value={detail.gender}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>年龄：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="age"
+              onChange={updateDetail}
+              value={detail.age}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>身份证号：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="IDCard"
+              onChange={updateDetail}
+              value={detail.IDCard}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>填报日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="fillDate"
+              onChange={updateDetail}
+              value={detail.fillDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>联系电话：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="phone"
+              onChange={updateDetail}
+              value={detail.phone}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>转运地址：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="transferAddress"
+              onChange={updateDetail}
+              value={detail.transferAddress}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>家庭住址：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="homeAddress"
+              onChange={updateDetail}
+              value={detail.homeAddress}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>所属区域：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="region"
+              onChange={updateDetail}
+              value={detail.region}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>所属街道：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="street"
+              onChange={updateDetail}
+              value={detail.street}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>预计隔离酒店：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="hotel"
+              onChange={updateDetail}
+              value={detail.hotel}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>管理状态：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="managementState"
+              onChange={updateDetail}
+              value={detail.managementState}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>接收异常状态：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="abnormalState"
+              onChange={updateDetail}
+              value={detail.abnormalState}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>纳入隔离日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="isolationDate"
+              onChange={updateDetail}
+              value={detail.isolationDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>实际入驻酒店寄房间号：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="roomNumber"
+              onChange={updateDetail}
+              value={detail.roomNumber}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>预计采样日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="expectSamplingDate"
+              onChange={updateDetail}
+              value={detail.expectSamplingDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>实际采样日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="actualSamplingDate"
+              onChange={updateDetail}
+              value={detail.actualSamplingDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>采样结果：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="samplingResult"
+              onChange={updateDetail}
+              value={detail.samplingResult}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>转院时间：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="transferTime"
+              onChange={updateDetail}
+              value={detail.transferTime}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>医院名称：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="Hospital"
+              onChange={updateDetail}
+              value={detail.Hospital}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>预计解除日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="removeDate"
+              onChange={updateDetail}
+              value={detail.removeDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>密接解除后纳入居家管理时间：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="homeManagementTime"
+              onChange={updateDetail}
+              value={detail.homeManagementTime}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>第二天采样结果：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="secondSamplingResult"
+              onChange={updateDetail}
+              value={detail.secondSamplingResult}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>第七天采样结果：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="seventhSamplingResult"
+              onChange={updateDetail}
+              value={detail.seventhSamplingResult}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>结束管理日期：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="finishDate"
+              onChange={updateDetail}
+              value={detail.finishDate}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box marginY={1.5} padding={1.5}>
+          <InputLabel>转归：</InputLabel>
+          <FormControl fullWidth>
+            <Input
+              name="outcome"
+              onChange={updateDetail}
+              value={detail.outcome}
+              minRows={2}
+              maxRows={600}
+              disableUnderline
+              multiline
+            />
+          </FormControl>
+        </Box>
+      </Paper>
+      {/* </Box> */}
+      <Paper elevation={0} square>
+        <Box margin={1.5} paddingTop={1.5}>
           <Button
             variant="outlined"
             color="primary"
@@ -785,7 +618,6 @@ export default function FixInfo(): JSX.Element {
             确认并修改
           </Button>
         </Box>
-        </Card>
       </Paper>
     </Page>
   );

@@ -64,7 +64,7 @@ export default function OrderDetailHeader({
       <Paper elevation={0} square>
         {/* <AccountCircleIcon /> */}
         <Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={8}>
                 <Typography variant="h6">{name}的基本信息</Typography>
@@ -80,7 +80,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={8}>
                 <Typography variant="body2">
@@ -111,7 +111,7 @@ export default function OrderDetailHeader({
               </Grid> */}
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -121,7 +121,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={5}>
                 <Typography variant="body2">
@@ -137,7 +137,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -153,7 +153,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -169,7 +169,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -179,7 +179,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -189,7 +189,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -205,7 +205,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -215,7 +215,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -225,7 +225,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -235,7 +235,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -245,7 +245,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -255,7 +255,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={6}>
                 <Typography variant="body2">
@@ -271,7 +271,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -281,7 +281,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">
@@ -291,7 +291,7 @@ export default function OrderDetailHeader({
               </Grid>
             </Grid>
           </Box>
-          <Box margin={1}>
+          <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={12}>
                 <Typography variant="body2">

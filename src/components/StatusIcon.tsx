@@ -2,7 +2,6 @@ import React from 'react';
 import Chip from '@material-ui/core/Chip';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import processing from 'assets/images/icons/';
 import Close from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import { ExchangeStatus, OrderStatus } from '@src/constants';

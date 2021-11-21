@@ -122,14 +122,14 @@ export default function UserOrderDetail(): JSX.Element {
     <Page title="工单详情" paddingBottom={30}>
       {order && (
         <>
-          <OrderDetailHeader
+          {/* <OrderDetailHeader
             title={order.title}
             urgent={order.urgent}
             submitterName={order.submitterName}
             status={order.status}
             scheduledAt={order.scheduledAt}
             completedAt={order.completedAt}
-          />
+          /> */}
           {/* <OrderDetailContent
             category={order.category}
             files={order.files}
