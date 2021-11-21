@@ -32,6 +32,7 @@ import { ENV_ENUM } from 'dingtalk-jsapi/lib/sdk';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '@src/theme';
+import NarBar from '@components/jk_layout/NarBar';
 
 const store = createStore(rootReducer);
 
@@ -143,6 +144,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter basename={PUBLIC_PATH}>
+          <NarBar />
           <Routes />
         </BrowserRouter>
       </ThemeProvider>

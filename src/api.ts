@@ -528,7 +528,7 @@ type Ticket = {
  */
 export function searchTickets(
   condition: TicketQuery
-): APIResponse<[Array<Ticket>,number]> {
+): APIResponse<[Array<Ticket>, number]> {
   const data = JSON.stringify(condition);
   return request('/api/tickets/search', data, { method: 'POST' });
 }
@@ -811,4 +811,18 @@ export function getOrderTags(condition: {
 }): APIResponse<any> {
   const data = JSON.stringify(condition);
   return request('/api/tickets/tags/get', data, { method: 'POST' });
+}
+
+//jk
+
+/**
+ * 提交搜索条件
+ */
+export function searchResidentList(condition: {
+  name?: string;
+  phone?: number;
+  cardnumber?: number;
+}): APIResponse<any> {
+  const data = JSON.stringify(condition);
+  return request('/api/search/resident_list', data, { method: 'POST' });
 }

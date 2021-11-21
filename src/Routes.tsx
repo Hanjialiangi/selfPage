@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
@@ -10,177 +11,138 @@ const IndexPage = loadable(() => import('@pages/Index'), {
   fallback: <Fallback />
 });
 
-/* Admin */
-const AdminKanbanPage = loadable(() => import('@pages/admin/Kanban'), {
+//jk
+const AdminHomePage = loadable(() => import('@pages/admin_jk/Index'), {
   fallback: <Fallback />
 });
-const AdminDispatchOrderPage = loadable(
-  () => import('@pages/admin/order/Dispatch'),
+const ResidentListPage = loadable(
+  () => import('@pages/admin_jk/resident_list/Index'),
   {
     fallback: <Fallback />
   }
 );
-const AdminTimeoutOrderPage = loadable(
-  () => import('@pages/admin/order/Timeout'),
+const TransferListPage = loadable(
+  () => import('@pages/admin_jk/transfer_list/Index'),
   {
     fallback: <Fallback />
   }
 );
-const AdminTransferOrderPage = loadable(
-  () => import('@pages/admin/order/Transfer'),
+const ArriveListPage = loadable(
+  () => import('@pages/admin_jk/arrive_list/Index'),
   {
     fallback: <Fallback />
   }
 );
-const AdminUrgentOrderPage = loadable(
-  () => import('@pages/admin/order/Urgent'),
-  {
-    fallback: <Fallback />
-  }
-);
-const AdminOrderDetailPage = loadable(
-  () => import('@pages/admin/order/Detail'),
-  {
-    fallback: <Fallback />
-  }
-);
-const AdminRewardsIndexPage = loadable(
-  () => import('@pages/admin/rewards/index'),
-  {
-    fallback: <Fallback />
-  }
-);
-const AdminRewardsDetail = loadable(
-  () => import('@pages/admin/rewards/AdminExchangeDetail'),
-  {
-    fallback: <Fallback />
-  }
-);
-const AdminRewardsAgreePage = loadable(
-  () => import('@pages/admin/rewards/Agree'),
-  {
-    fallback: <Fallback />
-  }
-);
-const AdminExchangeListPage = loadable(
-  () => import('@pages/admin/rewards/ExchangeList'),
-  {
-    fallback: <Fallback />
-  }
-);
-/* Expert */
-const ExpertCenterPage = loadable(() => import('@pages/expert/expertCenter'), {
+const TestListPage = loadable(() => import('@pages/admin_jk/test_list/Index'), {
   fallback: <Fallback />
 });
-const ExpertKanbanPage = loadable(() => import('@pages/expert/Kanban'), {
+
+//transfer
+const TransferHomePage = loadable(() => import('@pages/transfer/Index'), {
   fallback: <Fallback />
 });
-const ExpertOrderIndexPage = loadable(
-  () => import('@pages/expert/order/Index'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertSignOrderPage = loadable(() => import('@pages/expert/order/Sign'), {
-  fallback: <Fallback />
-});
-const ExpertTransferOrderPage = loadable(
-  () => import('@pages/expert/order/Transfer'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertFixInfoOrderPage = loadable(
-  () => import('@pages/expert/order/FixInfo'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertArrivePage = loadable(() => import('@pages/expert/order/Arrive'), {
-  fallback: <Fallback />
-});
-const ExpertSamplingResultPage = loadable(
-  () => import('@pages/expert/order/SamplingResult'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertHealthPage = loadable(() => import('@pages/expert/order/Health'), {
-  fallback: <Fallback />
-});
-const ExpertOrderDetailPage = loadable(
-  () => import('@pages/expert/order/Detail'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertScoreIndexPage = loadable(
-  () => import('@pages/expert/score/Index'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertScoreDetailPage = loadable(
-  () => import('@pages/expert/score/Detail'),
-  {
-    fallback: <Fallback />
-  }
-);
-const ExpertUsedScorePage = loadable(() => import('@pages/expert/score/Used'), {
-  fallback: <Fallback />
-});
-const ExpertApplyDetailPage = loadable(
-  () => import('@components/uersAndExportRewards/ApplyDetail'),
+
+//hotel_doctor
+const HotelDoctorHomePage = loadable(
+  () => import('@pages/hotel_doctor/Index'),
   {
     fallback: <Fallback />
   }
 );
 
-const ExpertSettingPage = loadable(() => import('@pages/expert/Setting'), {
-  fallback: <Fallback />
-});
-const RewardsIndexPage = loadable(() => import('@pages/expert/rewards/index'), {
+//community
+const CommunityHomePage = loadable(() => import('@pages/community/Index'), {
   fallback: <Fallback />
 });
 
-const ApplyRewardsPage = loadable(
-  () => import('@components/uersAndExportRewards/ApplyReward'),
+//common
+const PeopleDetailPage = loadable(() => import('@pages/people_detail/Index'), {
+  fallback: <Fallback />
+});
+const UserUpdatePage = loadable(() => import('@pages/people_detail/update'), {
+  fallback: <Fallback />
+});
+const UserTransferPage = loadable(
+  () => import('@pages/people_detail/transfer'),
+  {
+    fallback: <Fallback />
+  }
+);
+const UserArrivePage = loadable(() => import('@pages/people_detail/arrive'), {
+  fallback: <Fallback />
+});
+const HealthPage = loadable(() => import('@pages/people_detail/Health'), {
+  fallback: <Fallback />
+});
+const SamplingResultPage = loadable(
+  () => import('@pages/people_detail/SamplingResult'),
   {
     fallback: <Fallback />
   }
 );
 
-/* User */
-const UserOrderIndexPage = loadable(() => import('@pages/user/order/Index'), {
-  fallback: <Fallback />
-});
-const UserCreateOrderPage = loadable(() => import('@pages/user/order/Create'), {
-  fallback: <Fallback />
-});
-const UserOrderDetailPage = loadable(() => import('@pages/user/order/Detail'), {
-  fallback: <Fallback />
-});
-const UserOrderClosePage = loadable(() => import('@pages/user/order/Close'), {
+//403
+const ErrorPage = loadable(() => import('@pages/403/Error'), {
   fallback: <Fallback />
 });
 
-function getUserRoutes(): JSX.Element[] {
+function getUserDetailRoutes(): JSX.Element[] {
   return [
-    <Route path="/user/order/create" key="userOrderCreate">
-      <UserCreateOrderPage />
+    <Route path="/detail/resident/:id/baseinfo/edit" key="update">
+      <UserUpdatePage />
     </Route>,
-    <Route path="/user/order/:orderId" key="userOrderDetail">
-      <UserOrderDetailPage />
+    <Route path="/detail/transfer/:id/edit" key="transfer">
+      <UserTransferPage />
     </Route>,
-    <Route path="/user/close/order/:orderId" key="userOrderClose">
-      <UserOrderClosePage />
+    <Route path="/detail/arrive/:id/edit" key="arrive">
+      <UserArrivePage />
     </Route>,
-    <Route path="/user/order" key="userOrderIndex">
-      <UserOrderIndexPage />
+    <Route path="/detail/health/:id/edit" key="health">
+      <HealthPage />
     </Route>,
-    <Route path="/user" key="userIndex">
-      <Redirect to="/user/order" />
+    <Route path="/detail/samplingresult/:id/edit" key="health">
+      <SamplingResultPage />
+    </Route>,
+    <Route path="/detail/resident/:id" key="detail">
+      <PeopleDetailPage />
     </Route>
+  ];
+}
+
+// function UserDetailRoutes(): JSX.Element[] {
+//   return [
+//     <Route path="/transfer/:orderId/edit/toExpert">
+//       <ExpertTransferOrderPage />
+//     </Route>,
+//     <Route path="/resident/:orderId/baseinfo/edit">
+//       <ExpertFixInfoOrderPage />
+//     </Route>,
+//     <Route path="/arrive/:orderId/edit">
+//       <ExpertArrivePage />
+//     </Route>,
+//     <Route path="/samplingresult/:orderId/edit">
+//       <ExpertSamplingResultPage />
+//     </Route>,
+//     <Route path="/health/:orderId/edit">
+//       <ExpertHealthPage />
+//     </Route>,
+//     <Route path="/expert/order/:orderId">
+//       <ExpertOrderDetailPage />
+//     </Route>
+//   ];
+// }
+
+function ErrorShow(): JSX.Element[] {
+  return [
+    <Route path="/error" key="error">
+      <ErrorPage />
+    </Route>,
+    <Route
+      path="*"
+      key="redirect"
+      exact
+      render={() => <Redirect to="/error"></Redirect>}
+    />
   ];
 }
 
@@ -191,148 +153,96 @@ export default function Routes(): JSX.Element {
   if (userInfo.role === Role.ADMIN) {
     return (
       <Switch>
-        <Route path="/expert/expertCenter">
-          <ExpertCenterPage />
+        {getUserDetailRoutes()}
+        <Route path="/admin_jk/test_list">
+          <TestListPage />
         </Route>
-        <Route path="/amdin/exchange/list">
-          <AdminExchangeListPage />
+        <Route path="/admin_jk/arrive_list">
+          <ArriveListPage />
         </Route>
-        <Route path="/admin/kanban">
-          <AdminKanbanPage />
+        <Route path="/admin_jk/resident_list">
+          <ResidentListPage />
         </Route>
-        <Route path="/admin/order/:orderId/:transfer">
-          <AdminTransferOrderPage />
+        <Route path="/admin_jk/transfer_list">
+          <TransferListPage />
         </Route>
-        <Route path="/admin/order/dispatch">
-          <AdminDispatchOrderPage />
+        <Route path="/admin_jk">
+          <AdminHomePage />
         </Route>
-        <Route path="/admin/order/timeout">
-          <AdminTimeoutOrderPage />
+        <Route exact path="/">
+          <Redirect to="/admin_jk/resident_list" />
         </Route>
-        <Route path="/admin/order/urgent">
-          <AdminUrgentOrderPage />
-        </Route>
-        <Route path="/admin/order/:orderId/:action">
-          <AdminOrderDetailPage />
-        </Route>
-        <Route path="/admin/order/:orderId">
-          <AdminOrderDetailPage />
-        </Route>
-        <Route path="/admin/rewards">
-          <AdminRewardsIndexPage />
-        </Route>
-        <Route path="/admin/prize/detail/:applyId">
-          <AdminRewardsDetail />
-        </Route>
-        <Route path="/admin/prize/agree/:applyId">
-          <AdminRewardsAgreePage />
-        </Route>
-        <Route path="/admin/order">
-          <Redirect to="/admin/order/dispatch" />
-        </Route>
-        <Route path="/admin">
-          <Redirect to="/admin/order/dispatch" />
-        </Route>
-        {getUserRoutes()}
-        <Route path="/order">
-          <Redirect to="/admin/order/dispatch" />
-        </Route>
-        <Route path="/setting">
-          <Redirect to="/admin/setting/expert" />
-        </Route>
-        <Route path="/">
-          <Redirect to="/admin/kanban" />
-        </Route>
+        {ErrorShow()}
       </Switch>
     );
   }
 
-  if (userInfo.role === Role.EXPERT) {
+  if (userInfo.role === Role.TRANSFER) {
     return (
       <Switch>
-        <Route path="/expert/expertCenter">
-          <ExpertCenterPage />
+        {getUserDetailRoutes()}
+        <Route path="/transfer/transfer_list">
+          <TransferListPage />
         </Route>
-        <Route path="/expert/apply/detail/:applyId">
-          <ExpertApplyDetailPage />
+        <Route path="/transfer/resident_list">
+          <ResidentListPage />
         </Route>
-        <Route path="/expert/kanban">
-          <ExpertKanbanPage />
+        <Route path="/transfer">
+          <TransferHomePage />
         </Route>
-        <Route path="/expert/order/sign">
-          <ExpertSignOrderPage />
+        <Route exact path="/">
+          <Redirect to="/transfer/resident_list" />
         </Route>
-        <Route path="/transfer/:orderId/edit/toExpert">
-          <ExpertTransferOrderPage />
-        </Route>
-        <Route path="/resident/:orderId/baseinfo/edit">
-          <ExpertFixInfoOrderPage />
-        </Route>
-        <Route path="/arrive/:orderId/edit">
-          <ExpertArrivePage />
-        </Route>
-        <Route path="/samplingresult/:orderId/edit">
-          <ExpertSamplingResultPage />
-        </Route>
-        <Route path="/health/:orderId/edit">
-          <ExpertHealthPage />
-        </Route>
-        {/* <Route path="/expert/order/:orderId/:action">
-          <ExpertOrderDetailPage />
-        </Route> */}
-        <Route path="/expert/order/:orderId">
-          <ExpertOrderDetailPage />
-        </Route>
-        <Route path="/expert/order">
-          <ExpertOrderIndexPage />
-        </Route>
-        <Route path="/expert/score/detail">
-          <ExpertScoreDetailPage />
-        </Route>
-        <Route path="/expert/score/used">
-          <ExpertUsedScorePage />
-        </Route>
-        <Route path="/expert/score">
-          <ExpertScoreIndexPage />
-        </Route>
-        <Route path="/expert/setting">
-          <ExpertSettingPage />
-        </Route>
-        <Route path="/expert/rewardsindex">
-          <RewardsIndexPage />
-        </Route>
-        <Route path="/expert/apply/prize/:prizeId">
-          <ApplyRewardsPage />
-        </Route>
-        <Route path="/expert">
-          <Redirect to="/expert/kanban" />
-        </Route>
-        {getUserRoutes()}
-        <Route path="/order">
-          <Redirect to="/expert/kanban" />
-        </Route>
-        <Route path="/">
-          <Redirect to="/expert/kanban" />
-        </Route>
+        {ErrorShow()}
       </Switch>
     );
   }
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role === Role.USER) {
+  if (userInfo.role === Role.HOTELDOCTOR) {
     return (
       <Switch>
-        {getUserRoutes()}
-        <Route path="/expert/rewardsindex">
-          <RewardsIndexPage />
+        {getUserDetailRoutes()}
+        <Route path="/hotel_doctor/resident_list">
+          <ResidentListPage />
         </Route>
+        <Route path="/hotel_doctor/arrive_list">
+          <ArriveListPage />
+        </Route>
+        <Route path="/hotel_doctor/test_list">
+          <TestListPage />
+        </Route>
+        <Route path="/hotel_doctor">
+          <HotelDoctorHomePage />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/hotel_doctor/resident_list" />
+        </Route>
+        {ErrorShow()}
+      </Switch>
+    );
+  }
 
-        <Route path="/order">
-          <Redirect to="/user/order" />
+  if (userInfo.role === Role.COMMUNITY) {
+    return (
+      <Switch>
+        {getUserDetailRoutes()}
+        <Route path="/community/resident_list">
+          <ResidentListPage />
         </Route>
-        <Route path="/">
-          <Redirect to="/user/order" />
+        <Route path="/community/arrive_list">
+          <ArriveListPage />
         </Route>
+        <Route path="/community/test_list">
+          <TestListPage />
+        </Route>
+        <Route path="/community">
+          <CommunityHomePage />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/community/resident_list" />
+        </Route>
+        {ErrorShow()}
       </Switch>
     );
   }

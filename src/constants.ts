@@ -27,18 +27,18 @@ export const Dingtalk = {
 
 export enum Role {
   UNKNOWN,
-  SUPER_USER,
   ADMIN,
-  EXPERT,
-  USER
+  TRANSFER,
+  HOTELDOCTOR,
+  COMMUNITY
 }
 
 export const RoleName = {
   [Role.UNKNOWN]: '',
-  [Role.SUPER_USER]: '系统管理员',
-  [Role.ADMIN]: '工单管理员',
-  [Role.EXPERT]: '专家',
-  [Role.USER]: '用户'
+  [Role.ADMIN]: '疾控中心',
+  [Role.TRANSFER]: '转运组',
+  [Role.HOTELDOCTOR]: '酒店医疗组',
+  [Role.COMMUNITY]: '社区'
 };
 
 export enum OrderStatus {
