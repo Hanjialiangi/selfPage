@@ -4,7 +4,6 @@ import { MILLISECONDS, OrderStatus } from '@src/constants';
 import StatusIcon from '@components/StatusIcon';
 import { formatDateTime } from '@src/utils';
 // import AccountCircleIcon from '@material-ui/icons';
-
 type Props = {
   name: string;
   contactType: string;
