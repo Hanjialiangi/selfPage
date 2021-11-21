@@ -115,7 +115,7 @@ export function auth(
   //return request('/api/login', data, { method: 'POST' });
   const res: any = {
     code: 200,
-    data: { user_name: '张三', id: 3, role: 2, level: 2, avatar: '' },
+    data: { user_name: '张三', id: 3, role: 1, level: 2, avatar: '' },
     message: 'ok'
   };
   return res;
