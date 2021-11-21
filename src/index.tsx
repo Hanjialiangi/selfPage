@@ -116,12 +116,12 @@ const App = () => {
 
       //Todo: 钉钉外登录
       if (getPlatform() === ENV_ENUM.notInDingTalk) {
-        return;
+        //return;
       }
 
       //钉钉内登录
-      const dingCode = await dingGetCode(Dingtalk.CORP_ID);
-      const authRes = await auth(dingCode.code, Dingtalk.AGENT_ID);
+      //const dingCode = await dingGetCode(Dingtalk.CORP_ID);
+      const authRes = await auth('dingCode.code', Dingtalk.AGENT_ID);
       if (authRes.code !== 200) {
         return;
       }
