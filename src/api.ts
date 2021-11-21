@@ -111,7 +111,14 @@ export function auth(
   avatar: string;
 }> {
   const data = JSON.stringify({ code, agentId, debug });
-  return request('/api/login', data, { method: 'POST' });
+  console.log(data);
+  //return request('/api/login', data, { method: 'POST' });
+  const res: any = {
+    code: 200,
+    data: { user_name: '张三', id: 3, role: 2, level: 2, avatar: '' },
+    message: 'ok'
+  };
+  return res;
 }
 
 /**
