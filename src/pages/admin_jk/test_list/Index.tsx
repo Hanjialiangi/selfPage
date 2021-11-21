@@ -9,7 +9,7 @@ export default function ResidentListPage(): JSX.Element {
     {
       id: 1,
       name: '王五',
-      contact_type: '一般接触',
+      contact_type: '一般接触者',
       isolation_type: '居家',
       place: '锦江花园'
     },

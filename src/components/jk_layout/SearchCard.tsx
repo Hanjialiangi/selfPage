@@ -79,7 +79,7 @@ export default function SearchCard(): JSX.Element {
               name="cardnumber"
               type="number"
               style={{ width: '100%' }}
-              placeholder="搜索身份证号"
+              placeholder="搜索完整身份证号"
             />
           </ListItem>
           {show ? (

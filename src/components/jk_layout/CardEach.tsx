@@ -50,10 +50,10 @@ export default function CardEach(props: {
 }): JSX.Element {
   const classes = useStyles();
 
-  const handleDetail = (id: number) => {
-    console.log(id);
-    window.location.href = `/dist/detail/resident/${id}`;
-  };
+  // const handleDetail = (id: number) => {
+  //   console.log(id);
+  //   window.location.href = `/dist/detail/resident/${id}`;
+  // };
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -73,16 +73,19 @@ export default function CardEach(props: {
               </span>
             </ListItemIcon>
             {props.detail.contact_type === '密接' ? (
-              <ListItemText className={classes.redtext} primary={'密切接触'} />
+              <ListItemText
+                className={classes.redtext}
+                primary={props.detail.contact_type}
+              />
             ) : props.detail.contact_type === '次密接' ? (
               <ListItemText
                 className={classes.orangetext}
-                primary={'次密切接触'}
+                primary={props.detail.contact_type}
               />
             ) : (
               <ListItemText
                 className={classes.greentext}
-                primary={props.detail.contact_type + '人员'}
+                primary={props.detail.contact_type}
               />
             )}
           </ListItem>
@@ -98,12 +101,7 @@ export default function CardEach(props: {
         </List>
       </CardContent>
       <CardActions className={classes.float}>
-        <Button
-          size="small"
-          color="primary"
-          endIcon={<DetailIcon />}
-          onClick={() => handleDetail(props.detail.id)}
-        >
+        <Button size="small" color="primary" endIcon={<DetailIcon />}>
           查看详情
         </Button>
       </CardActions>
