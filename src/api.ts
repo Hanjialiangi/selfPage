@@ -1,4 +1,4 @@
-import { ContentType, CookieKey, Role } from '@src/constants';
+import { ContentType, CookieKey } from '@src/constants';
 import { getCookie } from '@src/utils';
 import qs from 'query-string';
 

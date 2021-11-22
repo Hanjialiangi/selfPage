@@ -1,4 +1,3 @@
-import { Role } from '@src/constants';
 import { AnyAction } from 'redux';
 import { Actions } from '@src/redux/actions';
 
