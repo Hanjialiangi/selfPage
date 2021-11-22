@@ -5,17 +5,13 @@ import { Actions } from '@src/redux/actions';
 export interface UserState {
   id: number;
   name: string;
-  avatar: string;
-  role: Role;
-  roleName: string;
+  role: string;
 }
 
 const initialState: UserState = {
   id: 0,
   name: '',
-  avatar: '',
-  role: Role.UNKNOWN,
-  roleName: ''
+  role: ''
 };
 
 export default function (

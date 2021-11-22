@@ -54,7 +54,7 @@ export default function SearchCard(): JSX.Element {
               <NameIcon />
             </ListItemIcon>
             <Input
-              name="username"
+              name="name"
               type="text"
               style={{ width: '100%' }}
               placeholder="搜索姓名"
@@ -65,7 +65,7 @@ export default function SearchCard(): JSX.Element {
               <PhoneIcon />
             </ListItemIcon>
             <Input
-              name="phone"
+              name="contact"
               type="number"
               style={{ width: '100%' }}
               placeholder="搜索手机号"
@@ -76,8 +76,8 @@ export default function SearchCard(): JSX.Element {
               <IdCarIcon />
             </ListItemIcon>
             <Input
-              name="cardnumber"
-              type="number"
+              name="id_card"
+              type="text"
               style={{ width: '100%' }}
               placeholder="搜索完整身份证号"
             />
@@ -89,7 +89,7 @@ export default function SearchCard(): JSX.Element {
                   <ContactTypeIcon />
                 </ListItemIcon>
                 <Select
-                  name="contact_type"
+                  name="resident_property"
                   native
                   value={contanct}
                   onChange={handleChangeContanct}
@@ -106,7 +106,7 @@ export default function SearchCard(): JSX.Element {
                   <IsolationTypeIcon />
                 </ListItemIcon>
                 <Select
-                  name="isolation_type"
+                  name="quarantine_type"
                   native
                   value={isolation}
                   onChange={handleChangeIsolation}

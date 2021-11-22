@@ -58,7 +58,6 @@ export default function PeopleDetailPage(): JSX.Element {
   }, [param.id]);
   return (
     <Page title="人员详情">
-      人员基本信息
       <Paper elevation={0} square>
         <Box padding={1.5}>
           <Accordion>

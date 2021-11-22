@@ -41,11 +41,12 @@ const useStyles = makeStyles({
 });
 export default function CardEach(props: {
   detail: {
-    id: number;
+    open_id: string;
     name: string;
-    contact_type: string;
-    isolation_type: string;
-    place: string;
+    resident_property: string;
+    quarantine_type: string;
+    quarantine_hotel: string;
+    sub_district: string;
   };
 }): JSX.Element {
   const classes = useStyles();
@@ -72,31 +73,40 @@ export default function CardEach(props: {
                 {props.detail.name}
               </span>
             </ListItemIcon>
-            {props.detail.contact_type === '密接' ? (
+            {props.detail.resident_property === '密接' ? (
               <ListItemText
                 className={classes.redtext}
-                primary={props.detail.contact_type}
+                primary={props.detail.resident_property}
               />
-            ) : props.detail.contact_type === '次密接' ? (
+            ) : props.detail.resident_property === '次密接' ? (
               <ListItemText
                 className={classes.orangetext}
-                primary={props.detail.contact_type}
+                primary={props.detail.resident_property}
               />
             ) : (
               <ListItemText
                 className={classes.greentext}
-                primary={props.detail.contact_type}
+                primary={props.detail.resident_property}
               />
             )}
           </ListItem>
           <ListItem>
-            <ListItemText
-              secondary={`隔离类型 ${props.detail.isolation_type}`}
-            />
-            <ListItemText
-              className={classes.right}
-              primary={props.detail.place}
-            />
+            {props.detail.quarantine_type ? (
+              <ListItemText
+                secondary={`隔离类型 ${props.detail.quarantine_type}`}
+              />
+            ) : null}
+            {props.detail.quarantine_hotel ? (
+              <ListItemText
+                className={classes.right}
+                primary={props.detail.quarantine_hotel}
+              />
+            ) : (
+              <ListItemText
+                className={classes.right}
+                primary={props.detail.sub_district}
+              />
+            )}
           </ListItem>
         </List>
       </CardContent>
