@@ -93,6 +93,10 @@ a {
   background:#fff;
   z-index: 999;
 }
-.PrivateTabIndicator-colorSecondary-61 {
+.PrivateTabIndicator-colorSecondary-61,
+.PrivateTabIndicator-colorSecondary-173{
+  background-color: #1790FF !important;
+}
+.MuiTabs-scroller .MuiTabs-fixed span {
   background-color: #1790FF !important;
 }

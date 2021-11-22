@@ -71,7 +71,7 @@ export default function NarBar(): JSX.Element {
   }, [location]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{}}>
       {value !== 100 ? (
         <Box
           sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
