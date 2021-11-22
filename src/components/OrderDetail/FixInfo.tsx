@@ -7,8 +7,7 @@ import {
   InputLabel,
   FormControl
 } from '@material-ui/core';
-import Page from '@components/layout/Page';
-export default function FixInfo(): JSX.Element {
+export default function FixInfoPage(): JSX.Element {
   const [detail, setdetail] = useState({
     fillDate: '',
     sourceAttribute: '',
@@ -58,7 +57,7 @@ export default function FixInfo(): JSX.Element {
     initDetail();
   });
   return (
-    <Page title="修改信息">
+    <div>
       {/* <Box padding={1.4}> */}
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
@@ -620,6 +619,6 @@ export default function FixInfo(): JSX.Element {
           </Button>
         </Box>
       </Paper>
-    </Page>
+    </div>
   );
 }

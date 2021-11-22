@@ -37,7 +37,7 @@ export default function Arrive(): JSX.Element {
               onChange={e => {
                 setisolation(e.target.value);
               }}
-              placeholder="请填写隔离备注"
+              placeholder="请填写地址"
               minRows={2}
               maxRows={600}
               disableUnderline

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Grid, Box, Typography, InputLabel } from '@material-ui/core';
 import { MILLISECONDS, OrderStatus } from '@src/constants';
 import StatusIcon from '@components/StatusIcon';
+import WaitIcon from '@components/SvgIcons';
 import { formatDateTime } from '@src/utils';
 // import AccountCircleIcon from '@material-ui/icons';
 type Props = {
@@ -122,7 +123,7 @@ export default function OrderDetailHeader({
           </Box>
           <Box margin={1.5}>
             <Grid container spacing={2}>
-              <Grid xs={5}>
+              <Grid xs={6}>
                 <Typography variant="body2">
                   <span style={{ color: 'gray' }}>来源属性：</span>
                   {sourceAttribute}
