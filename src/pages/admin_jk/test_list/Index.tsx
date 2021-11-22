@@ -3,6 +3,7 @@ import Page from '@components/layout/Page';
 import { searchResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
+import { Link } from 'react-router-dom';
 
 export default function ResidentListPage(): JSX.Element {
   const columns = [
@@ -66,7 +67,11 @@ export default function ResidentListPage(): JSX.Element {
           <SearchCard />
         </form>
         {data.map((item, index) => {
-          return <CardEach detail={item} key={index} />;
+          return (
+            <Link to={`/detail/resident/${item.id}`} key={index}>
+              <CardEach detail={item} key={index} />;
+            </Link>
+          );
         })}
       </div>
     </Page>
