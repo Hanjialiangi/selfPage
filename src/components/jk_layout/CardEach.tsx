@@ -112,7 +112,7 @@ export default function CardEach(props: {
       </CardContent>
       <CardActions className={classes.float}>
         <Button size="small" color="primary" endIcon={<DetailIcon />}>
-          查看详情
+          查看详情&nbsp;
         </Button>
       </CardActions>
     </Card>

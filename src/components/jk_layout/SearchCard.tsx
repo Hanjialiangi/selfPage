@@ -137,12 +137,13 @@ export default function SearchCard(): JSX.Element {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'end',
             width: '100%'
           }}
         >
           {!show ? (
             <Button
+              style={{ marginRight: '15%' }}
               className="more"
               size="small"
               endIcon={<KeyboardArrowDownIcon />}
@@ -152,6 +153,7 @@ export default function SearchCard(): JSX.Element {
             </Button>
           ) : (
             <Button
+              style={{ marginRight: '15%' }}
               className="more"
               size="small"
               endIcon={<KeyboardArrowUpIcon />}
