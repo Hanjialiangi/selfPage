@@ -85,13 +85,15 @@ export default function ResidentListPage(): JSX.Element {
     const resident_property = formData.get('resident_property');
     const quarantine_type = formData.get('quarantine_type');
     const place = formData.get('place');
+    const current_stage = '';
     const formvalue = {
       name,
       contact,
       id_card,
       resident_property,
       quarantine_type,
-      place
+      place,
+      current_stage
     };
     handleSearch(formvalue);
   };

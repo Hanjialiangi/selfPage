@@ -177,14 +177,17 @@ export function getUserInfo(): APIResponse<any> {
 }
 
 //获取全部隔离人员信息
-export function getResidentList(condition: {
-  name?: string;
-  contact?: string;
-  id_card?: string;
-  resident_property?: string;
-  quarantine_type?: string;
-  place?: string;
-}): APIResponse<any> {
+export function getResidentList(
+  condition: {
+    name?: string;
+    contact?: string;
+    id_card?: string;
+    resident_property?: string;
+    quarantine_type?: string;
+    place?: string;
+  },
+  current_state?: string
+): APIResponse<any> {
   const page_size = 15;
   const page = 1;
   if (!condition.name) {
@@ -205,6 +208,9 @@ export function getResidentList(condition: {
   if (!condition.place) {
     condition.place = '';
   }
+  if (!current_state) {
+    current_state = '';
+  }
   const url = qs.stringify({
     page_size,
     page,
@@ -213,7 +219,8 @@ export function getResidentList(condition: {
     id_card: condition.id_card,
     resident_property: condition.resident_property,
     quarantine_type: condition.quarantine_type,
-    place: condition.place
+    home_address: condition.place,
+    current_state: current_state
   });
   return request('/api/resident/list?' + url);
 }

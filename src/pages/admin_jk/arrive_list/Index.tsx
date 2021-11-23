@@ -27,8 +27,8 @@ export default function ResidentListPage(): JSX.Element {
     }
   ]); //数据
   //搜索引擎
-  const handleSearch = async (formvalue = {}) => {
-    const res = await getResidentList(formvalue);
+  const handleSearch = async (formvalue = {}, current_stage = '转运中') => {
+    const res = await getResidentList(formvalue, current_stage);
     const detailResult: DR = [
       {
         open_id: '',
