@@ -84,22 +84,22 @@ export default function NarBar(): JSX.Element {
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="被隔离人员"
-                href="/dist/admin_jk/resident_list"
+                href="/admin_jk/resident_list"
               />
               <LinkTab
                 icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
                 label="待转运人员"
-                href="/dist/admin_jk/transfer_list"
+                href="/admin_jk/transfer_list"
               />
               <LinkTab
                 icon={value !== 2 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收人员"
-                href="/dist/admin_jk/arrive_list"
+                href="/admin_jk/arrive_list"
               />
               <LinkTab
                 icon={value !== 3 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
-                href="/dist/admin_jk/test_list"
+                href="/admin_jk/test_list"
               />
             </Tabs>
           ) : userInfo.role === 'transfer_team' ? (
@@ -112,12 +112,12 @@ export default function NarBar(): JSX.Element {
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="被隔离人员"
-                href="/dist/transfer/resident_list"
+                href="/transfer/resident_list"
               ></LinkTab>
               <LinkTab
                 icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
                 label="待转运人员"
-                href="/dist/transfer/transfer_list"
+                href="/transfer/transfer_list"
               ></LinkTab>
             </Tabs>
           ) : userInfo.role === 'hotel_medical_team' ||
@@ -133,8 +133,8 @@ export default function NarBar(): JSX.Element {
                 label="被隔离人员"
                 href={
                   userInfo.role === 'hotel_medical_team'
-                    ? '/dist/hotel_doctor/resident_list'
-                    : '/dist/community/resident_list'
+                    ? '/hotel_doctor/resident_list'
+                    : '/community/resident_list'
                 }
               ></LinkTab>
               <LinkTab
@@ -142,8 +142,8 @@ export default function NarBar(): JSX.Element {
                 label="待接收人员"
                 href={
                   userInfo.role === 'hotel_medical_team'
-                    ? '/dist/hotel_doctor/arrive_list'
-                    : '/dist/community/arrive_list'
+                    ? '/hotel_doctor/arrive_list'
+                    : '/community/arrive_list'
                 }
               />
               <LinkTab
@@ -151,8 +151,8 @@ export default function NarBar(): JSX.Element {
                 label="本日采样"
                 href={
                   userInfo.role === 'hotel_medical_team'
-                    ? '/dist/hotel_doctor/test_list'
-                    : '/dist/community/test_list'
+                    ? '/hotel_doctor/test_list'
+                    : '/community/test_list'
                 }
               />
             </Tabs>
