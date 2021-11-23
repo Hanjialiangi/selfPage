@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Page from '@components/layout/Page';
 import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
-import { getCreateHotelResident } from '@src/api';
+import { getCreateHotelResident, getHotelReceive } from '@src/api';
 
 export default function Arrive(): JSX.Element {
   const [isolation, setisolation] = useState('');
   const handleSubmit = async () => {
-    const res = await getCreateHotelResident();
+    const res = await getHotelReceive();
     if (res.data == 200) {
       res.data.address = isolation;
     }

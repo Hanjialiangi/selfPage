@@ -122,7 +122,7 @@ export function auth(
 /**
  * 获取用户信息
  */
- export function getUserInfo(): APIResponse<any> {
+export function getUserInfo(): APIResponse<any> {
   // const res: any = {
   //   code: 200,
   //   data: { user_name: '张三', id: 3, role: 1, level: 2, avatar: '' },
@@ -211,6 +211,19 @@ export function getCreateHotelResident(address?: string): APIResponse<any> {
   });
 }
 
+//酒店接收人员
+export function getHotelReceive(): APIResponse<any> {
+  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
+  const hotel_name = '酒店A';
+  const data = JSON.stringify({
+    open_ids,
+    hotel_name
+  });
+  return request('/api/receive/hotel?', data, {
+    method: 'POST'
+  });
+}
+
 //转运到酒店（发起转运）
 export function getTransferHotel(
   planned_quarantine_hotel?: string,
@@ -232,6 +245,7 @@ export function getTransferHotel(
     }
   );
 }
+
 //采样管理上传
 export function getCreateSampling(
   sampling_result?: string,
@@ -246,6 +260,7 @@ export function getCreateSampling(
     method: 'POST'
   });
 }
+
 //健康状况上传
 export function getCreateHealth(
   is_cough?: string,
@@ -255,12 +270,13 @@ export function getCreateHealth(
 ): APIResponse<any> {
   const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
   const data = JSON.stringify({
+    open_id,
     is_cough,
     is_fever,
     is_weak,
     other_health_case
   });
-  return request('api/health/fill?open_id' + open_id, data, {
+  return request('/api/health/fill?', data, {
     method: 'POST'
   });
 }

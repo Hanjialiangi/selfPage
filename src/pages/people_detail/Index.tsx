@@ -78,34 +78,6 @@ export default function PeopleDetailPage(): JSX.Element {
           setinfo(onePerson);
         }
       });
-      // const data = {
-      //   name: res.data.name,
-      //   fillDate: res.data.register_time,
-      //   sourceAttribute: res.data.register_time,
-      //   data_source_type: res.data.data_source_type,
-      //   dataSource: res.data.dataSource,
-      //   personAttribute: res.data.resident_property,
-      //   relatedEvent: res.data.register,
-      //   relatedCase: res.data.related_case,
-      //   associatedContace: res.data.related_resident,
-      //   contactForm: res.data.contact_type,
-      //   IDCard: res.data.id_card,
-      //   gender: res.data.gender,
-      //   age: res.data.age,
-      //   phone: res.data.contact,
-      //   transferAddress: res.data.transfer_from,
-      //   homeAddress: res.data.home_address,
-      //   region: res.data.belong_area,
-      //   street: res.data.sub_district,
-      //   hotel: res.data.planned_quarantine_hotel,
-      //   abnormalState: res.data.quarantine_exception,
-      //   isolationDate: res.data.quarantine_start_time,
-      //   roomNumber: res.data.roomNumber,
-      //   homeManagementTime: res.data.close_contact_home_quarantine_start_time,
-      //   secondSamplingResult: res.data.close_contact_home_second_day_nat_result,
-      //   seventhSamplingResult:
-      //     res.data.close_contact_home_seventh_day_nat_result,
-      //   outcome: res.data.outcome,
       //   //缺
       //   contactType: res.data.contactType,
       //   isolateType: res.data.isolateType,
