@@ -17,14 +17,7 @@ import {
   setUserInfoAction,
   updateAuthAction
 } from './redux/actions';
-import {
-  CookieKey,
-  Dingtalk,
-  Mode,
-  PUBLIC_PATH,
-  Role,
-  RoleName
-} from './constants';
+import { CookieKey, Dingtalk, Mode, PUBLIC_PATH } from './constants';
 import { getCookie, removeCookie } from './utils';
 import { auth, getUserInfo } from '@src/api';
 import { dingGetCode, getPlatform } from '@src/dingtalkAPI';
@@ -41,13 +34,7 @@ const App = () => {
 
   //设置登录信息
   const setAuthInfo = useCallback(
-    (
-      id: number,
-      avatar: string,
-      roleId: Role,
-      name: string,
-      token?: string
-    ) => {
+    (id: number, name: string, role: string, token?: string) => {
       if (token) {
         dispatch(updateAuthAction(`Bearer ${token}`));
       }
@@ -56,9 +43,7 @@ const App = () => {
         setUserInfoAction({
           id,
           name,
-          avatar,
-          role: roleId,
-          roleName: RoleName[roleId]
+          role
         })
       );
     },
@@ -86,10 +71,9 @@ const App = () => {
         }
 
         setAuthInfo(
-          userInfoRes.data.id,
-          userInfoRes.data.avatar,
-          userInfoRes.data.role,
-          userInfoRes.data.user_name
+          userInfoRes.data.roles[0].id,
+          userInfoRes.data.name,
+          userInfoRes.data.roles[0].key
         );
         return;
       }
@@ -98,7 +82,7 @@ const App = () => {
 
       //开发环境登录
       if (process.env.NODE_ENV === Mode.DEVELOPMENT) {
-        const authRes = await auth('', Dingtalk.AGENT_ID, '676722611178585236');
+        const authRes = await auth('', Dingtalk.AGENT_ID, 'debug_user_cdc');
         if (authRes.code !== 200) {
           return;
         }
@@ -106,9 +90,8 @@ const App = () => {
         //加载登录用户信息
         setAuthInfo(
           authRes.data.user_id,
-          authRes.data.avatar,
-          authRes.data.role,
           authRes.data.user_name,
+          authRes.data.role,
           authRes.data.token
         );
         return;
@@ -129,9 +112,8 @@ const App = () => {
       //加载登录用户信息
       setAuthInfo(
         authRes.data.user_id,
-        authRes.data.avatar,
-        authRes.data.role,
         authRes.data.user_name,
+        authRes.data.role,
         authRes.data.token
       );
     };

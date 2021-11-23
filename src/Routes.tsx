@@ -5,7 +5,6 @@ import loadable from '@loadable/component';
 import Fallback from '@pages/Fallback';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from './redux/selectors';
-import { Role } from './constants';
 
 const IndexPage = loadable(() => import('@pages/Index'), {
   fallback: <Fallback />
@@ -150,7 +149,7 @@ export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role === Role.ADMIN) {
+  if (userInfo.role === 'wh_cdc') {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -177,7 +176,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  if (userInfo.role === Role.TRANSFER) {
+  if (userInfo.role === 'transfer_team') {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -199,7 +198,7 @@ export default function Routes(): JSX.Element {
   }
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role === Role.HOTELDOCTOR) {
+  if (userInfo.role === 'hotel_medical_team') {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -223,7 +222,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  if (userInfo.role === Role.COMMUNITY) {
+  if (userInfo.role === 'community') {
     return (
       <Switch>
         {getUserDetailRoutes()}

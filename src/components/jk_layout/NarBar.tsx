@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '@src/redux/selectors';
-import { Role } from '@src/constants';
 import {
   IsolationIcon,
   IsolationActiveIcon,
@@ -71,12 +70,12 @@ export default function NarBar(): JSX.Element {
   }, [location]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{}}>
       {value !== 100 ? (
         <Box
           sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
         >
-          {userInfo.role === Role.ADMIN ? (
+          {userInfo.role === 'wh_cdc' ? (
             <Tabs
               value={value}
               onChange={handleChange}
@@ -85,25 +84,25 @@ export default function NarBar(): JSX.Element {
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="被隔离人员"
-                href="/dist/admin_jk/resident_list"
+                href="/admin_jk/resident_list"
               />
               <LinkTab
                 icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
                 label="待转运人员"
-                href="/dist/admin_jk/transfer_list"
+                href="/admin_jk/transfer_list"
               />
               <LinkTab
                 icon={value !== 2 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收人员"
-                href="/dist/admin_jk/arrive_list"
+                href="/admin_jk/arrive_list"
               />
               <LinkTab
                 icon={value !== 3 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
-                href="/dist/admin_jk/test_list"
+                href="/admin_jk/test_list"
               />
             </Tabs>
-          ) : userInfo.role === Role.TRANSFER ? (
+          ) : userInfo.role === 'transfer_team' ? (
             <Tabs
               style={{ width: '100%' }}
               value={value}
@@ -113,16 +112,16 @@ export default function NarBar(): JSX.Element {
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="被隔离人员"
-                href="/dist/transfer/resident_list"
+                href="/transfer/resident_list"
               ></LinkTab>
               <LinkTab
                 icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
                 label="待转运人员"
-                href="/dist/transfer/transfer_list"
+                href="/transfer/transfer_list"
               ></LinkTab>
             </Tabs>
-          ) : userInfo.role === Role.HOTELDOCTOR ||
-            userInfo.role === Role.COMMUNITY ? (
+          ) : userInfo.role === 'hotel_medical_team' ||
+            userInfo.role === 'community' ? (
             <Tabs
               style={{ width: '100%' }}
               value={value}
@@ -133,27 +132,27 @@ export default function NarBar(): JSX.Element {
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="被隔离人员"
                 href={
-                  userInfo.role === Role.HOTELDOCTOR
-                    ? '/dist/hotel_doctor/resident_list'
-                    : '/dist/community/resident_list'
+                  userInfo.role === 'hotel_medical_team'
+                    ? '/hotel_doctor/resident_list'
+                    : '/community/resident_list'
                 }
               ></LinkTab>
               <LinkTab
                 icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收人员"
                 href={
-                  userInfo.role === Role.HOTELDOCTOR
-                    ? '/dist/hotel_doctor/arrive_list'
-                    : '/dist/community/arrive_list'
+                  userInfo.role === 'hotel_medical_team'
+                    ? '/hotel_doctor/arrive_list'
+                    : '/community/arrive_list'
                 }
               />
               <LinkTab
                 icon={value !== 2 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
                 href={
-                  userInfo.role === Role.HOTELDOCTOR
-                    ? '/dist/hotel_doctor/test_list'
-                    : '/dist/community/test_list'
+                  userInfo.role === 'hotel_medical_team'
+                    ? '/hotel_doctor/test_list'
+                    : '/community/test_list'
                 }
               />
             </Tabs>

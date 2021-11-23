@@ -1,49 +1,93 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
-import { searchResidentList } from '@src/api';
+import { getSamplingList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
+import { Link } from 'react-router-dom';
 
+type DR = [
+  {
+    open_id: string;
+    name: string;
+    resident_property: string;
+    quarantine_type: string;
+    quarantine_hotel: string;
+    sub_district: string;
+  }
+];
 export default function ResidentListPage(): JSX.Element {
-  const columns = [
+  const [data, setData] = useState([
     {
-      id: 1,
-      name: '王五',
-      contact_type: '一般接触',
-      isolation_type: '居家',
-      place: '锦江花园'
-    },
-    {
-      id: 2,
-      name: '陈情',
-      contact_type: '密接',
-      isolation_type: '集中',
-      place: '柏顿酒店'
+      open_id: '',
+      name: '',
+      resident_property: '',
+      quarantine_type: '',
+      quarantine_hotel: '',
+      sub_district: ''
     }
-  ];
-
-  const [data, setData] = useState(columns); //数据
+  ]); //数据
   //搜索引擎
   const handleSearch = async (formvalue = {}) => {
-    const res = await searchResidentList(formvalue);
-    // setData(res.data);
+    const res = await getSamplingList(formvalue);
+    const detailResult: DR = [
+      {
+        open_id: '',
+        name: '',
+        resident_property: '',
+        quarantine_type: '',
+        quarantine_hotel: '',
+        sub_district: ''
+      }
+    ];
+    res.data.data.map((item: any) => {
+      const name = item.name;
+      const open_id = item.open_id;
+      let resident_property = '';
+      let quarantine_type = '';
+      let quarantine_hotel = '';
+      let sub_district = '';
+      item.properties.map((item2: any) => {
+        if (item2.key === 'resident_property') {
+          resident_property = item2.resident_property;
+        }
+        if (item2.key === 'quarantine_type') {
+          quarantine_type = item2.quarantine_type;
+        }
+        if (item2.key === 'quarantine_hotel') {
+          quarantine_hotel = item2.quarantine_hotel;
+        }
+        if (item2.key === 'sub_district') {
+          sub_district = item2.sub_district;
+        }
+      });
+      detailResult.push({
+        open_id,
+        name,
+        resident_property,
+        quarantine_type,
+        quarantine_hotel,
+        sub_district
+      });
+    });
+    detailResult.shift();
+    setData(detailResult);
   };
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
     const formData = new FormData(e.target);
-    const username = formData.get('username');
-    const phone = formData.get('phone');
-    const cardnumber = formData.get('cardnumber');
-    const contact_type = formData.get('contact_type');
-    const isolation_type = formData.get('isolation_type');
+    const name = formData.get('name');
+    const contact = formData.get('contact');
+    const id_card = formData.get('id_card');
+    const resident_property = formData.get('resident_property');
+    const quarantine_type = formData.get('quarantine_type');
     const place = formData.get('place');
     const formvalue = {
-      username,
-      phone,
-      cardnumber,
-      contact_type,
-      isolation_type,
+      name,
+      contact,
+      id_card,
+      resident_property,
+      quarantine_type,
       place
     };
     handleSearch(formvalue);
@@ -52,7 +96,7 @@ export default function ResidentListPage(): JSX.Element {
   //副作用
   useEffect(() => {
     handleSearch();
-  });
+  }, []);
 
   return (
     <Page title="本日采样人员名单">
@@ -66,7 +110,11 @@ export default function ResidentListPage(): JSX.Element {
           <SearchCard />
         </form>
         {data.map((item, index) => {
-          return <CardEach detail={item} key={index} />;
+          return (
+            <Link to={`/detail/resident/${item.open_id}`} key={index}>
+              <CardEach detail={item} key={index} />;
+            </Link>
+          );
         })}
       </div>
     </Page>

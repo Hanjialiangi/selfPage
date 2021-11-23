@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { searchExpert } from '@src/api';
 import Page from '@components/layout/Page';
 import { Box, Paper, Button, Drawer } from '@material-ui/core';
 import TypeList from '@components/TypeList';
