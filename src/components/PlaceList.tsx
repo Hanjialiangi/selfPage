@@ -5,23 +5,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
-type expert = {
+type list = {
   id: number;
   name: string;
 };
 type Props = PropsWithChildren<{
-  expertList: expert[];
-  setSelectExpert: React.Dispatch<React.SetStateAction<expert | null>>;
+  expertList: list[];
+  setSelectExpert: React.Dispatch<React.SetStateAction<list | null>>;
   setIsShowExpertList: React.Dispatch<React.SetStateAction<boolean>>;
 }>;
 
-export default function ExpertList({
+export default function PlaceList({
   expertList,
   setSelectExpert,
   setIsShowExpertList
 }: Props): JSX.Element {
   /* 抽屉拦数据处理 */
-  const handleSelect = (item: expert) => {
+  const handleSelect = (item: list) => {
     setSelectExpert(item);
     setIsShowExpertList(false);
   };
@@ -48,7 +48,7 @@ export default function ExpertList({
       }
       className={classes.root}
     >
-      {expertList.map(function (item: expert) {
+      {expertList.map(function (item: list) {
         return (
           <>
             <ListItem

@@ -7,7 +7,7 @@ import {
   InputLabel,
   FormControl
 } from '@material-ui/core';
-export default function FixInfoPage(): JSX.Element {
+export default function FixInfo(): JSX.Element {
   const [detail, setdetail] = useState({
     fillDate: '',
     sourceAttribute: '',
@@ -51,7 +51,9 @@ export default function FixInfoPage(): JSX.Element {
     });
   };
   //初始化
-  const initDetail = () => {};
+  const initDetail = async () => {
+    
+  };
   const signOrder = () => {};
   useEffect(() => {
     initDetail();

@@ -4,7 +4,7 @@ import { searchExpert } from '@src/api';
 import Page from '@components/layout/Page';
 import { Box, Paper, Button, Input, Drawer } from '@material-ui/core';
 import TypeList from '@components/TypeList';
-import ExpertList from '@components/ExpertList';
+import HotelList from '@components/ExpertList';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -82,7 +82,7 @@ export default function ExpertTransferOrder(): JSX.Element {
     if (transfer == 'toExpert') {
       console.log(selectExpert);
       if (!selectExpert) {
-        setExpertError('请选择转单专家');
+        setExpertError('请选择隔离地区');
         return;
       }
       setIsLoading(true);
@@ -181,11 +181,11 @@ export default function ExpertTransferOrder(): JSX.Element {
                 setIsShowExpertList(false);
               }}
             >
-              <ExpertList
+              <HotelList
                 setIsShowExpertList={setIsShowExpertList}
                 setSelectExpert={setSelectExpert}
                 expertList={expertList}
-              ></ExpertList>
+              ></HotelList>
             </Drawer>
           </FormControl>
           <FormHelperText error>{expertError}</FormHelperText>

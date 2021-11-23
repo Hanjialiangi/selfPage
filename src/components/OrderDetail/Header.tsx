@@ -75,6 +75,7 @@ export default function OrderDetailHeader({
                   color={'secondary'}
                   component={'span'}
                 >
+                  {/* 接触类型 */}
                   {contactType}
                 </Typography>
               </Grid>

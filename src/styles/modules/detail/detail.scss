@@ -6,7 +6,21 @@
 }
 .MuiIconButton-label{
     position: absolute;
-    top: 250px;
     color: black;
-    left:-707%;
+}
+.MuiTypography-root .MuiTypography-body2{
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.MuiGrid-root .MuiGrid-grid-xs-4 {
+    width: 68px;
+    height: 22px;
+    font-size: 16px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: blue;
+    line-height: 22px;
 }

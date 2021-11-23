@@ -2,25 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { searchExpert } from '@src/api';
 import Page from '@components/layout/Page';
-import { Box, Paper, Button, Input, Drawer } from '@material-ui/core';
+import { Box, Paper, Button, Drawer } from '@material-ui/core';
 import TypeList from '@components/TypeList';
-import ExpertList from '@components/ExpertList';
+import HotelList from '@components/HotelList';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import commonStyle from '@styleModules/common.module.scss';
 
-import { ENV_ENUM } from 'dingtalk-jsapi/lib/sdk';
-import { getURL } from '@src/utils';
-import {
-  Category,
-  getCategory,
-  transferOrder,
-  expertDesignateToAdmin
-} from '@src/api';
+import { Category, getCategory, getTransferHotel } from '@src/api';
 import {
   dingAlert,
-  dingQuitPage,
   dingToast,
   dingOpenLink,
   getPlatform
@@ -37,10 +29,9 @@ type expert = {
 };
 export default function ExpertTransferOrder(): JSX.Element {
   /* 从URL参数中读取工单ID */
-  const { orderId, transfer }: { orderId: string; transfer: string } =
-    useParams();
-  /* 工单分类选择的错误提示 */
-  const [expertError, setExpertError] = useState('');
+
+  /* 错误提示 */
+  const [infoError, setInfoError] = useState('');
 
   /* 工单分类选择的错误提示 */
   const [expertList, setExpertList] = useState([]);
@@ -71,47 +62,22 @@ export default function ExpertTransferOrder(): JSX.Element {
     if (categoryRes.code === 200) {
       setCategoryOptions(categoryRes.data);
     }
-    /* 获取专家列表 */
-    const experts = await searchExpert({});
-    if (experts.code === 200) {
-      setExpertList(experts.data);
+    /* 获取酒店列表 */
+    const hotelList = await searchExpert({});
+    if (hotelList.code === 200) {
+      setExpertList(hotelList.data);
     }
   }
   /* 提交工单 */
   const handleReminder = async () => {
-    if (transfer == 'toExpert') {
-      console.log(selectExpert);
-      if (!selectExpert) {
-        setExpertError('请选择转单专家');
-        return;
-      }
-      setIsLoading(true);
-      const res = await transferOrder(
-        selectExpert.id,
-        orderId,
-        category?.fullPath,
-        option
-      );
-
+    const res = await getTransferHotel();
+    if (res.code == 200) {
+      
       if (res.code !== 200) {
         dingAlert('提交失败，请稍后再试。', '错误', '确认');
         return;
       }
       dingToast('提交成功', 'success');
-    } else {
-      const res = await expertDesignateToAdmin(orderId, option);
-
-      if (res.code !== 200) {
-        dingAlert('提交失败，请稍后再试。', '错误', '确认');
-        return;
-      }
-      dingToast('提交成功', 'success');
-    }
-
-    if (getPlatform() === ENV_ENUM.pc) {
-      dingQuitPage();
-    } else {
-      dingOpenLink(getURL(`expert/kanban`));
     }
   };
   const handleCheckExpert = async () => {
@@ -162,7 +128,7 @@ export default function ExpertTransferOrder(): JSX.Element {
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel error={!!expertError} required>
+          <InputLabel error={!!infoError} required>
             选择隔离地区
           </InputLabel>
           <FormControl fullWidth>
@@ -181,33 +147,14 @@ export default function ExpertTransferOrder(): JSX.Element {
                 setIsShowExpertList(false);
               }}
             >
-              <ExpertList
+              <HotelList
                 setIsShowExpertList={setIsShowExpertList}
                 setSelectExpert={setSelectExpert}
                 expertList={expertList}
-              ></ExpertList>
+              ></HotelList>
             </Drawer>
           </FormControl>
-          <FormHelperText error>{expertError}</FormHelperText>
-        </Box>
-      </Paper>
-      <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
-          <InputLabel>转运备注</InputLabel>
-          <FormControl fullWidth>
-            <Input
-              name="ask_evaluate"
-              value={option}
-              onChange={e => {
-                setOption(e.target.value);
-              }}
-              placeholder="请填写转运意见"
-              minRows={7}
-              maxRows={600}
-              disableUnderline
-              multiline
-            />
-          </FormControl>
+          <FormHelperText error>{infoError}</FormHelperText>
         </Box>
       </Paper>
       <Box marginY={1.5} padding={1.5}>

@@ -1,7 +1,7 @@
 import { ContentType, CookieKey, Role } from '@src/constants';
 import { getCookie } from '@src/utils';
 import { OrderStatus } from '@src/constants';
-
+import qs from 'query-string';
 interface Payload {
   method: string;
   headers: {
@@ -176,8 +176,96 @@ export function getUserInfo(): APIResponse<{
 }> {
   return request('/api/user/fetch');
 }
+/************************获取详情页接口*********************************/
+//获取某个居民详细信息
+export function getResidentInfo(): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  return request('/api/resident/info?open_id=' + open_id);
+}
 
-/************************************用户侧******************************************************** */
+//更新居民信息
+export function getFixResidentInfo(): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  return request('/api/resident?open_id=' + open_id);
+}
+/***************************酒店功能************************************/
+//获取酒店列表
+export function getHotelList(): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  return request('/api/hotel/search?open_id=' + open_id);
+}
+// export function getCategory(isChildrenAdmin?: number): APIResponse<Category[]> {
+//   const data = JSON.stringify({
+//     isChildrenAdmin
+//   });
+//   return request('/api/tickets/type', data, { method: 'POST' });
+// }
+
+//添加人员并隔离
+export function getCreateHotelResident(address?: string): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  const data = JSON.stringify({
+    address
+  });
+  return request('/api/hotel?open_id=' + open_id, data, {
+    method: 'POST'
+  });
+}
+
+//转运到酒店（发起转运）
+export function getTransferHotel(
+  planned_quarantine_hotel?: string,
+  quarantine_type?: string,
+  current_state?: string
+): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  const hotel_id = '';
+  const data = JSON.stringify({
+    planned_quarantine_hotel,
+    quarantine_type,
+    current_state
+  });
+  return request(
+    '/api/transfer/hotel?open_id=' + open_id + '&hotel_id=' + hotel_id,
+    data,
+    {
+      method: 'POST'
+    }
+  );
+}
+//采样管理上传
+export function getCreateSampling(
+  sampling_result?: string,
+  sampling_date?: string
+): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  const data = JSON.stringify({
+    sampling_date,
+    sampling_result
+  });
+  return request('/api/sampling?open_id=' + open_id, data, {
+    method: 'POST'
+  });
+}
+//健康状况上传
+export function getCreateHealth(
+  is_cough?: string,
+  is_fever?: string,
+  is_weak?: string,
+  other_health_case?: string
+): APIResponse<any> {
+  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+  const data = JSON.stringify({
+    is_cough,
+    is_fever,
+    is_weak,
+    other_health_case
+  });
+  return request('api/health/fill?open_id' + open_id, data, {
+    method: 'POST'
+  });
+}
+/************************************用户侧************************** */
 /**
  * 用户提交工单
  * @param title 工单标题

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Page from '@components/layout/Page';
 import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
+import { getCreateSampling } from '@src/api';
+
 export default function SamplingResultPage(): JSX.Element {
   const [detect, setdetect] = useState({
     detectDate: '',
@@ -13,8 +15,12 @@ export default function SamplingResultPage(): JSX.Element {
       [e.target.name]: e.target.value
     });
   };
-  const handleSubmit = () => {
-    console.log(detect);
+  const handleSubmit = async () => {
+    const res = await getCreateSampling();
+    if (res.code == 200) {
+      console.log(res.data);
+      console.log(111);
+    }
   };
   return (
     <Page title="上报采样结果">
