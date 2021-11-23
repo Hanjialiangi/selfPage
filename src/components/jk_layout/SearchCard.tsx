@@ -102,6 +102,7 @@ export default function SearchCard(): JSX.Element {
                   <option value="一般接触">一般接触人员</option>
                   <option value="重点接触">重点接触人员</option>
                 </Select>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <ListItemIcon>
                   <IsolationTypeIcon />
                 </ListItemIcon>
