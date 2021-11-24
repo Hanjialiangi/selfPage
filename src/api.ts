@@ -122,7 +122,7 @@ export function auth(
 /**
  * 获取用户信息
  */
- export function getUserInfo(): APIResponse<any> {
+export function getUserInfo(): APIResponse<any> {
   // const res: any = {
   //   code: 200,
   //   data: { user_name: '张三', id: 3, role: 1, level: 2, avatar: '' },
@@ -177,15 +177,19 @@ export function getDingFilePermission(
 
 /************************获取详情页接口*********************************/
 //获取某个居民详细信息
-export function getResidentInfo(): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
+export function getResidentInfo(id: string): APIResponse<any> {
+  const open_id = id;
   return request('/api/resident/info?open_id=' + open_id);
 }
 
 //更新居民信息
-export function getFixResidentInfo(): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
-  return request('/api/resident?open_id=' + open_id);
+export function getFixResidentInfo(
+  id: string,
+  formvalue: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): APIResponse<any> {
+  const data = JSON.stringify({ open_id: id, properties: formvalue });
+  return request('/api/resident', data, { method: 'PUT' });
 }
 /***************************酒店功能************************************/
 //获取酒店列表

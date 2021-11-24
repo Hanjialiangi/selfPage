@@ -9,12 +9,11 @@ import {
   AccordionDetails,
   AccordionSummary
 } from '@material-ui/core';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import OrderDetailHeader from '@components/OrderDetail/Header';
+import PeopleDetailHeader from '@components/jk_layout/detail/PeopleDetailHeader';
+import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailContent';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import commonStyle from '@styleModules/common.module.scss';
-import OrderDetailContent from '@components/OrderDetail/Content';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 import BlockIcon from '@material-ui/icons/Block';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -28,8 +27,7 @@ export type Properties = {
   key_name: string;
   value: string;
 };
-const status = 3; //初始状态
-const content = 'sadsadsad';
+
 export default function PeopleDetailPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
   /* 是否显示转运按钮 */
@@ -61,73 +59,25 @@ export default function PeopleDetailPage(): JSX.Element {
     window.location.href = `/detail/health/${param.id}/edit`;
   };
 
-  //收缩按钮
-  const [showIcon, setshowIcon] = useState(true);
-
-  //
-
-  const [info, setinfo] = useState<any>();
-  const Init = async () => {
+  const [information, setInformation] = useState<Properties[]>();
+  const [expandInformation, setExpandInformation] = useState<Properties[]>();
+  const Init = async (id: string) => {
     //TODO://根据id获取信息
-    const res = await getResidentInfo();
+    const res = await getResidentInfo(id);
     if (res.code == 200) {
-      const onePerson = {};
-      res.data.map(function (proper: Properties, key: number) {
-        Object.assign(onePerson, { [proper.key]: proper.value });
-        if (key == res.data.length - 1) {
-          setinfo(onePerson);
+      res.data.map((item: Properties, index: number) => {
+        if (item.key_name === '预计隔离酒店') {
+          setExpandInformation(res.data.slice(index)); //初始卡片渲染
+          setInformation(res.data.slice(0, index + 1)); //伸展卡片渲染
         }
       });
-      // const data = {
-      //   name: res.data.name,
-      //   fillDate: res.data.register_time,
-      //   sourceAttribute: res.data.register_time,
-      //   data_source_type: res.data.data_source_type,
-      //   dataSource: res.data.dataSource,
-      //   personAttribute: res.data.resident_property,
-      //   relatedEvent: res.data.register,
-      //   relatedCase: res.data.related_case,
-      //   associatedContace: res.data.related_resident,
-      //   contactForm: res.data.contact_type,
-      //   IDCard: res.data.id_card,
-      //   gender: res.data.gender,
-      //   age: res.data.age,
-      //   phone: res.data.contact,
-      //   transferAddress: res.data.transfer_from,
-      //   homeAddress: res.data.home_address,
-      //   region: res.data.belong_area,
-      //   street: res.data.sub_district,
-      //   hotel: res.data.planned_quarantine_hotel,
-      //   abnormalState: res.data.quarantine_exception,
-      //   isolationDate: res.data.quarantine_start_time,
-      //   roomNumber: res.data.roomNumber,
-      //   homeManagementTime: res.data.close_contact_home_quarantine_start_time,
-      //   secondSamplingResult: res.data.close_contact_home_second_day_nat_result,
-      //   seventhSamplingResult:
-      //     res.data.close_contact_home_seventh_day_nat_result,
-      //   outcome: res.data.outcome,
-      //   //缺
-      //   contactType: res.data.contactType,
-      //   isolateType: res.data.isolateType,
-      //   lastContaceTime: res.data.lastContaceTime,
-      //   relatedIDCard: res.data.relatedIDCard,
-      //   relatedPhone: res.data.relatedPhone,
-      //   isolateMethod: res.data.isolateMethod,
-      //   expectSamplingDate: res.data.expectSamplingDate,
-      //   actualSamplingDate: res.data.actualSamplingDate,
-      //   samplingResult: res.data.samplingResult,
-      //   isloatePlace: res.data.isloatePlace,
-      //   transferTime: res.data.transferTime,
-      //   Hospital: res.data.Hospital,
-      //   removeDate: res.data.removeDate,
-      //   finishDate: res.data.finishDate
-      // };
     }
   };
+
   useEffect(() => {
-    Init();
-    console.log(param.id);
+    Init(param.id);
   }, [param.id]);
+
   return (
     <Page title="人员详情" paddingBottom={5}>
       <>
@@ -135,69 +85,21 @@ export default function PeopleDetailPage(): JSX.Element {
           <Box padding={1.5}>
             <Accordion>
               <AccordionSummary
-                expandIcon={showIcon ? <ExpandMore /> : <KeyboardArrowUpIcon />}
+                expandIcon={<ExpandMore />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                {info ? (
-                  <OrderDetailHeader
-                    name={info.name}
-                    contactType={'密切接触'}
-                    status={status}
-                    isolateType={info.isolateType}
-                    isloatePlace={info.isloatePlace}
-                    fillDate={info.register_time}
-                    sourceAttribute={info.data_source_type}
-                    dataSource={info.dataSource}
-                    personAttribute={info.resident_property}
-                    relatedEvent={info.related_event}
-                    relatedCase={info.related_case}
-                    associatedContace={info.related_resident}
-                    contactForm={info.contact_type}
-                    lastContaceTime={info.last_contact_time}
-                    IDCard={info.id_card}
-                    gender={info.gender}
-                    age={info.age}
-                    phone={info.contact}
-                    transferAddress={info.transfer_from}
-                    homeAddress={info.home_address}
-                    region={info.belong_area}
-                    street={info.sub_district}
-                    //wu
-                    relatedIDCard={info.relatedIDCard}
-                    relatedPhone={info.relatedPhone}
-                    hotel={info.planned_quarantine_hotel}
-                  />
-                ) : null}
+                {information ? <PeopleDetailHeader info={information} /> : null}
               </AccordionSummary>
               <AccordionDetails>
-                {info ? (
-                  <OrderDetailContent
-                    abnormalState={info.quarantine_exception}
-                    isolationDate={info.quarantine_start_time}
-                    roomNumber={info.roomNumber}
-                    expectSamplingDate={info.expectSamplingDate}
-                    actualSamplingDate={info.actualSamplingDate}
-                    samplingResult={info.samplingResult}
-                    transferTime={info.transferTime}
-                    Hospital={info.Hospital}
-                    removeDate={info.removeDate}
-                    homeManagementTime={
-                      info.close_contact_home_quarantine_start_time
-                    }
-                    secondSamplingResult={
-                      info.close_contact_home_second_day_nat_result
-                    }
-                    seventhSamplingResult={
-                      info.close_contact_home_seventh_day_nat_result
-                    }
-                    finishDate={info.restriction_end_time}
-                    outcome={info.outcome}
-                    isolateMethod={info.isolateMethod}
-                  >
-                    {content}
-                  </OrderDetailContent>
+                {expandInformation ? (
+                  <PeopleDetailContent info={expandInformation} />
                 ) : null}
+                {/* {expandInformation ? (
+                  <OrderDetailContent
+                   info={expandInformation}
+                  />
+                ) : null} */}
               </AccordionDetails>
             </Accordion>
           </Box>

@@ -175,3 +175,12 @@ export function getTextFromHTML(html: string): string {
     return '';
   }
 }
+
+//工具函数(form表单string序列)
+export function isValidKey(
+  key: string | number | symbol,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  object: object
+): key is keyof typeof object {
+  return key in object;
+}
