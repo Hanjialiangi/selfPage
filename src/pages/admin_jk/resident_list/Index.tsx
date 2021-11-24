@@ -28,8 +28,11 @@ export default function ResidentListPage(): JSX.Element {
   ]); //数据
 
   //搜索引擎
-  const handleSearch = async (formvalue = {}) => {
-    const res = await getResidentList(formvalue);
+  const handleSearch = async (
+    formvalue = {},
+    current_state = ['集中隔离中', '解除后居家隔离中', '居家隔离中']
+  ) => {
+    const res = await getResidentList(formvalue, current_state);
     const detailResult: DR = [
       {
         open_id: '',
@@ -86,16 +89,16 @@ export default function ResidentListPage(): JSX.Element {
     const id_card = formData.get('id_card');
     const resident_property = formData.get('resident_property');
     const quarantine_type = formData.get('quarantine_type');
-    const place = formData.get('place');
-    const current_stage = '';
+    const quarantine_hotel = formData.get('quarantine_hotel');
+    const home_address = formData.get('home_address');
     const formvalue = {
       name,
       contact,
       id_card,
       resident_property,
       quarantine_type,
-      place,
-      current_stage
+      quarantine_hotel,
+      home_address
     };
     handleSearch(formvalue);
   };
@@ -106,7 +109,7 @@ export default function ResidentListPage(): JSX.Element {
   }, []);
 
   return (
-    <Page title="被隔离人员名单">
+    <Page title="管理中人员名单">
       <div style={{ position: 'relative', marginTop: '90px' }}>
         <form
           noValidate

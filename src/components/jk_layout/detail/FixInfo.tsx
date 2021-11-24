@@ -5,7 +5,8 @@ import {
   Button,
   Input,
   InputLabel,
-  FormControl
+  FormControl,
+  Select
 } from '@material-ui/core';
 import { getResidentInfo, getFixResidentInfo } from '@src/api';
 import { Properties } from '@pages/people_detail/Index';
@@ -14,13 +15,22 @@ import { dingAlert } from '@src/dingtalkAPI';
 
 export default function FixInfo(props: { id: string }): JSX.Element {
   const [detail, setDetail] = useState<Properties[]>();
+
+  const [residentValue, setResidentValue] = useState('');
   //初始化
   const initDetail = async () => {
     const res = await getResidentInfo(props.id);
     if (res.code === 200) {
       setDetail(res.data);
+      res.data.map((item: Properties) => {
+        if (item.key === 'resident_property') {
+          setResidentValue(item.value);
+        }
+      });
     }
   };
+
+  //提交动作
   const submit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -42,6 +52,11 @@ export default function FixInfo(props: { id: string }): JSX.Element {
       dingAlert('修改失败', '错误', '确认');
     }
   };
+
+  //修改人员属性
+  const handleChangeContanct = (e: any) => {
+    setResidentValue(e.target.value);
+  };
   useEffect(() => {
     initDetail();
   }, []);
@@ -51,6 +66,30 @@ export default function FixInfo(props: { id: string }): JSX.Element {
         {detail?.map((item: Properties, index: number) => {
           if (item.key === 'current_state') {
             return null;
+          }
+          if (item.key === 'resident_property') {
+            return (
+              <Paper elevation={0} square key={index}>
+                <Box marginY={1.5} padding={1.5}>
+                  <InputLabel>{item.key_name}</InputLabel>
+                  <Select
+                    name="resident_property"
+                    native
+                    defaultValue={residentValue}
+                    onChange={handleChangeContanct}
+                    style={{ marginLeft: '68%' }}
+                  >
+                    <option aria-label="None" value="">
+                      无
+                    </option>
+                    <option value="密接">密切接触</option>
+                    <option value="非密接">非密切接触</option>
+                    <option value="一般接触">一般接触人员</option>
+                    <option value="重点接触">重点接触人员</option>
+                  </Select>
+                </Box>
+              </Paper>
+            );
           }
           return (
             <Paper elevation={0} square key={index}>

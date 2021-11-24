@@ -32,6 +32,12 @@ const ArriveListPage = loadable(
     fallback: <Fallback />
   }
 );
+const EndManagePage = loadable(
+  () => import('@pages/admin_jk/end_manage_list/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
 const TestListPage = loadable(() => import('@pages/admin_jk/test_list/Index'), {
   fallback: <Fallback />
 });
@@ -159,6 +165,9 @@ export default function Routes(): JSX.Element {
         <Route path="/admin_jk/arrive_list">
           <ArriveListPage />
         </Route>
+        <Route path="/admin_jk/end_manage_list">
+          <EndManagePage />
+        </Route>
         <Route path="/admin_jk/resident_list">
           <ResidentListPage />
         </Route>
@@ -169,7 +178,7 @@ export default function Routes(): JSX.Element {
           <AdminHomePage />
         </Route>
         <Route exact path="/">
-          <Redirect to="/admin_jk/resident_list" />
+          <Redirect to="/admin_jk/transfer_list" />
         </Route>
         {ErrorShow()}
       </Switch>
@@ -190,7 +199,7 @@ export default function Routes(): JSX.Element {
           <TransferHomePage />
         </Route>
         <Route exact path="/">
-          <Redirect to="/transfer/resident_list" />
+          <Redirect to="/transfer/transfer_list" />
         </Route>
         {ErrorShow()}
       </Switch>

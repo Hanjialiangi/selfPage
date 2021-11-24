@@ -24,17 +24,29 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
               return (
                 <Typography
                   variant="body2"
-                  style={{ marginBottom: '5px' }}
+                  style={{
+                    marginBottom: '5px',
+                    flex: '1 0 auto',
+                    minWidth: '50%',
+                    alignItems: 'center'
+                  }}
                   key={item.key_id}
                 >
-                  <span style={{ color: 'gray', flexWrap: 'nowrap' }}>
+                  <span
+                    style={{
+                      color: 'gray',
+                      flexWrap: 'nowrap',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
                     {item.key_name}:
                   </span>
                   <span
                     style={{
                       color: 'black',
                       flexWrap: 'nowrap',
-                      marginLeft: '10px'
+                      marginLeft: '10px',
+                      whiteSpace: 'nowrap'
                     }}
                   >
                     {item.value}

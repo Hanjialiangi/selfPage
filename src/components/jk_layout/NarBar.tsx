@@ -13,7 +13,9 @@ import {
   ArriveIcon,
   ArriveActiveIcon,
   TestIcon,
-  TestActiveIcon
+  TestActiveIcon,
+  EndManageIcon,
+  EndManageActiveIcon
 } from '@src/assets/svg/picture';
 
 interface LinkTabProps {
@@ -44,14 +46,16 @@ export default function NarBar(): JSX.Element {
     if (judge === 'detail' || judge === 'error') {
       name = 100;
     } else if (judge === 'admin_jk' || judge === 'transfer') {
-      if (initval === 'resident_list') {
+      if (initval === 'transfer_list') {
         name = 0;
-      } else if (initval === 'transfer_list') {
-        name = 1;
       } else if (initval === 'arrive_list') {
+        name = 1;
+      } else if (initval === 'resident_list') {
         name = 2;
-      } else if (initval === 'test_list') {
+      } else if (initval === 'end_manage_list') {
         name = 3;
+      } else if (initval === 'test_list') {
+        name = 4;
       } else {
         name = 999;
       }
@@ -73,6 +77,7 @@ export default function NarBar(): JSX.Element {
     <Box sx={{}}>
       {value !== 100 ? (
         <Box
+          className="tab"
           sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
         >
           {userInfo.role === 'wh_cdc' ? (
@@ -82,22 +87,27 @@ export default function NarBar(): JSX.Element {
               aria-label="nav tabs example"
             >
               <LinkTab
-                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
-                label="被隔离人员"
-                href="/admin_jk/resident_list"
-              />
-              <LinkTab
-                icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
-                label="待转运人员"
+                icon={value !== 0 ? <TransferIcon /> : <TransferActiceIcon />}
+                label="待转运"
                 href="/admin_jk/transfer_list"
               />
               <LinkTab
-                icon={value !== 2 ? <ArriveIcon /> : <ArriveActiveIcon />}
-                label="待接收人员"
+                icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
+                label="待接收"
                 href="/admin_jk/arrive_list"
               />
               <LinkTab
-                icon={value !== 3 ? <TestIcon /> : <TestActiveIcon />}
+                icon={value !== 2 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href="/admin_jk/resident_list"
+              />
+              <LinkTab
+                icon={value !== 3 ? <EndManageIcon /> : <EndManageActiveIcon />}
+                label="结束管理"
+                href="/admin_jk/end_manage_list"
+              />
+              <LinkTab
+                icon={value !== 4 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
                 href="/admin_jk/test_list"
               />
@@ -111,12 +121,12 @@ export default function NarBar(): JSX.Element {
             >
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
-                label="被隔离人员"
+                label="被隔离"
                 href="/transfer/resident_list"
               ></LinkTab>
               <LinkTab
                 icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
-                label="待转运人员"
+                label="待转运"
                 href="/transfer/transfer_list"
               ></LinkTab>
             </Tabs>
@@ -130,7 +140,7 @@ export default function NarBar(): JSX.Element {
             >
               <LinkTab
                 icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
-                label="被隔离人员"
+                label="被隔离"
                 href={
                   userInfo.role === 'hotel_medical_team'
                     ? '/hotel_doctor/resident_list'
@@ -139,7 +149,7 @@ export default function NarBar(): JSX.Element {
               ></LinkTab>
               <LinkTab
                 icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
-                label="待接收人员"
+                label="待接收"
                 href={
                   userInfo.role === 'hotel_medical_team'
                     ? '/hotel_doctor/arrive_list'

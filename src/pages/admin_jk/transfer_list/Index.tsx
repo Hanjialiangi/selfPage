@@ -27,7 +27,7 @@ export default function ResidentListPage(): JSX.Element {
     }
   ]); //数据
   //搜索引擎
-  const handleSearch = async (formvalue = {}, current_stage = '待转运') => {
+  const handleSearch = async (formvalue = {}, current_stage = ['待转运']) => {
     const res = await getResidentList(formvalue, current_stage);
     const detailResult: DR = [
       {
@@ -83,14 +83,16 @@ export default function ResidentListPage(): JSX.Element {
     const id_card = formData.get('id_card');
     const resident_property = formData.get('resident_property');
     const quarantine_type = formData.get('quarantine_type');
-    const place = formData.get('place');
+    const quarantine_hotel = formData.get('quarantine_hotel');
+    const home_address = formData.get('home_address');
     const formvalue = {
       name,
       contact,
       id_card,
       resident_property,
       quarantine_type,
-      place
+      quarantine_hotel,
+      home_address
     };
     handleSearch(formvalue);
   };

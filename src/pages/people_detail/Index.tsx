@@ -3,6 +3,7 @@ import Page from '@components/layout/Page';
 import { useParams } from 'react-router';
 import {
   Box,
+  Typography,
   Paper,
   Button,
   Accordion,
@@ -20,6 +21,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import '@src/styles/modules/detail/detail.scss';
 import { getResidentInfo } from '@src/api';
+import StatusIcon from '@components/StatusIcon';
 
 export type Properties = {
   key: string;
@@ -28,8 +30,13 @@ export type Properties = {
   value: string;
 };
 
+const status = 3; //状态
 export default function PeopleDetailPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
+
+  const [name, setName] = useState(''); //人员名字
+  const [residentProperty, setResidentProperty] = useState(''); //人员属性
+  const [quarantineType, setQuarantineType] = useState(''); //隔离方式
   /* 是否显示转运按钮 */
   const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(true);
 
@@ -66,6 +73,15 @@ export default function PeopleDetailPage(): JSX.Element {
     const res = await getResidentInfo(id);
     if (res.code == 200) {
       res.data.map((item: Properties, index: number) => {
+        if (item.key === 'name') {
+          setName(item.value);
+        }
+        if (item.key === 'resident_property') {
+          setResidentProperty(item.value);
+        }
+        if (item.key === 'quarantine_type') {
+          setQuarantineType(item.value);
+        }
         if (item.key_name === '预计隔离酒店') {
           setExpandInformation(res.data.slice(index)); //初始卡片渲染
           setInformation(res.data.slice(0, index + 1)); //伸展卡片渲染
@@ -89,17 +105,40 @@ export default function PeopleDetailPage(): JSX.Element {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                {information ? <PeopleDetailHeader info={information} /> : null}
+                <Paper elevation={0} square>
+                  <Box>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <Typography variant="h6">{name}的基本信息</Typography>
+                      <Typography
+                        variant="subtitle1"
+                        color={'secondary'}
+                        component={'span'}
+                      >
+                        {residentProperty}
+                      </Typography>
+                    </div>
+                    <Typography variant="body2" style={{ marginTop: '10px' }}>
+                      <span style={{ color: 'gray' }}>隔离类型：</span>
+                      {quarantineType}
+                    </Typography>
+                    <div style={{ marginTop: '10px' }}>
+                      <StatusIcon exchangeStatus={5} status={status} />
+                    </div>
+                  </Box>
+                  {information ? (
+                    <PeopleDetailHeader info={information} />
+                  ) : null}
+                </Paper>
               </AccordionSummary>
               <AccordionDetails>
                 {expandInformation ? (
                   <PeopleDetailContent info={expandInformation} />
                 ) : null}
-                {/* {expandInformation ? (
-                  <OrderDetailContent
-                   info={expandInformation}
-                  />
-                ) : null} */}
               </AccordionDetails>
             </Accordion>
           </Box>

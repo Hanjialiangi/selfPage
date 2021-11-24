@@ -67,8 +67,8 @@ a {
   padding-bottom: 0 !important;
   width: 90% !important;
 }
-.MuiTab-labelIcon .MuiTab-wrapper > *:first-child {
-  width: 30%;
+.MuiTab-lbelIcon .MuiTab-wrapper > *:first-child {
+  width: 50%;
 }
 .MuiInputBase-input {
   text-align:right;
@@ -102,4 +102,10 @@ a {
 }
 .MuiTabs-scroller .MuiTabs-fixed span {
   background-color: #1790FF !important;
+}
+.tab {
+  width: 100%;
+}
+.MuiTabs-indicator{
+  background-color:#1790FF !important;
 }

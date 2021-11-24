@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
-import { getSamplingList } from '@src/api';
+import { getResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
@@ -26,9 +26,13 @@ export default function ResidentListPage(): JSX.Element {
       sub_district: ''
     }
   ]); //数据
+
   //搜索引擎
-  const handleSearch = async (formvalue = {}) => {
-    const res = await getSamplingList(formvalue);
+  const handleSearch = async (
+    formvalue = {},
+    current_state = ['结案', '医院治疗中']
+  ) => {
+    const res = await getResidentList(formvalue, current_state);
     const detailResult: DR = [
       {
         open_id: '',
@@ -74,9 +78,11 @@ export default function ResidentListPage(): JSX.Element {
       setData(detailResult);
     }
   };
+
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
+    e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get('name');
     const contact = formData.get('contact');
@@ -103,7 +109,7 @@ export default function ResidentListPage(): JSX.Element {
   }, []);
 
   return (
-    <Page title="本日采样人员名单">
+    <Page title="结束管理人员名单">
       <div style={{ position: 'relative', marginTop: '90px' }}>
         <form
           noValidate

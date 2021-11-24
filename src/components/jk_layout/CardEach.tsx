@@ -66,7 +66,6 @@ export default function CardEach(props: {
                 style={{
                   color: 'black',
                   fontSize: '16px',
-                  marginLeft: '5px',
                   marginTop: '-3px'
                 }}
               >

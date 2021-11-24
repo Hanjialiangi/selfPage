@@ -185,6 +185,7 @@ export function getResidentInfo(id: string): APIResponse<any> {
 //更新居民信息
 export function getFixResidentInfo(
   id: string,
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   formvalue: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): APIResponse<any> {
@@ -293,45 +294,38 @@ export function getResidentList(
     id_card?: string;
     resident_property?: string;
     quarantine_type?: string;
-    place?: string;
+    quarantine_hotel?: string;
+    home_address?: string;
   },
-  current_state?: string
+  current_state?: Array<string>
 ): APIResponse<any> {
   const page_size = 15;
   const page = 1;
-  if (!condition.name) {
-    condition.name = '';
-  }
-  if (!condition.contact) {
-    condition.contact = '';
-  }
-  if (!condition.id_card) {
-    condition.id_card = '';
-  }
-  if (!condition.resident_property) {
-    condition.resident_property = '';
-  }
-  if (!condition.quarantine_type) {
-    condition.quarantine_type = '';
-  }
-  if (!condition.place) {
-    condition.place = '';
-  }
-  if (!current_state) {
-    current_state = '';
-  }
-  const url = qs.stringify({
-    page_size,
-    page,
-    name: condition.name,
-    contact: condition.contact,
-    id_card: condition.id_card,
-    resident_property: condition.resident_property,
-    quarantine_type: condition.quarantine_type,
-    home_address: condition.place,
-    current_state: current_state
+  condition.name = condition.name || '';
+  condition.contact = condition.contact || '';
+  condition.id_card = condition.id_card || '';
+  condition.resident_property = condition.resident_property || '';
+  condition.quarantine_type = condition.quarantine_type || '';
+  condition.quarantine_hotel = condition.quarantine_hotel || '';
+  condition.home_address = condition.home_address || '';
+  const url = qs.stringifyUrl({
+    url: '/api/resident/list',
+    query: {
+      page,
+      page_size,
+      name: condition.name,
+      contact: condition.contact,
+      id_card: condition.id_card,
+      'property_queries[]': [
+        `resident_property|${condition.resident_property}`,
+        `quarantine_type|${condition.quarantine_type}`,
+        `home_address|${condition.home_address}`,
+        `quarantine_hotel|${condition.quarantine_hotel}`
+      ],
+      current_state: current_state?.join(',')
+    }
   });
-  return request('/api/resident/list?' + url);
+  return request(url);
 }
 
 //获取采样记录

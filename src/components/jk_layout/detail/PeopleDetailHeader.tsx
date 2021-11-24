@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Box, Typography } from '@material-ui/core';
-import StatusIcon from '@components/StatusIcon';
+import { Box, Typography } from '@material-ui/core';
 import { Properties } from '@pages/people_detail/Index';
 
-const status = 3;
 export default function PeopleDetailHeader(props: { info: any }): JSX.Element {
   const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
-  const [name, setName] = useState(''); //人员名字
-  const [residentProperty, setResidentProperty] = useState(''); //人员属性
-  const [quarantineType, setQuarantineType] = useState(''); //隔离方式
+
   useEffect(() => {
     //处理props
     const array: Properties[] = [];
     props.info.map((item: Properties) => {
-      if (item.key === 'name') {
-        array.push(item);
-        setName(item.value);
-      } else if (item.key === 'resident_property') {
-        setResidentProperty(item.value);
-      } else if (item.key === 'quarantine_type') {
-        setQuarantineType(item.value);
-      } else if (item.key === 'current_state') {
+      if (item.key === 'current_state') {
         return;
       }
       array.push(item);
@@ -29,59 +18,50 @@ export default function PeopleDetailHeader(props: { info: any }): JSX.Element {
   }, []);
   return (
     <Box>
-      <Paper elevation={0} square>
-        <Box>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography variant="h6">{name}的基本信息</Typography>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          marginTop: '10px'
+        }}
+      >
+        {baseInfo?.map((item: Properties) => {
+          return (
             <Typography
-              variant="subtitle1"
-              color={'secondary'}
-              component={'span'}
+              variant="body2"
+              key={item.key_id}
+              style={{
+                marginBottom: '5px',
+                flex: '1 0 auto',
+                minWidth: '50%',
+                alignItems: 'center'
+              }}
             >
-              {residentProperty}
-            </Typography>
-          </div>
-          <Typography variant="body2" style={{ marginTop: '10px' }}>
-            <span style={{ color: 'gray' }}>隔离类型：</span>
-            {quarantineType}
-          </Typography>
-          <div style={{ marginTop: '10px' }}>
-            <StatusIcon exchangeStatus={5} status={status} />
-          </div>
-        </Box>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            marginTop: '10px'
-          }}
-        >
-          {baseInfo?.map((item: Properties) => {
-            return (
-              <Typography
-                variant="body2"
-                key={item.key_id}
-                style={{ marginBottom: '5px' }}
+              <span
+                style={{
+                  color: 'gray',
+                  flexWrap: 'nowrap',
+                  whiteSpace: 'nowrap'
+                }}
               >
-                <span style={{ color: 'gray', flexWrap: 'nowrap' }}>
-                  {item.key_name}:
-                  <span
-                    style={{
-                      color: 'black',
-                      flexWrap: 'nowrap',
-                      marginLeft: '10px'
-                    }}
-                  >
-                    {item.value}
-                  </span>
-                </span>
-              </Typography>
-            );
-          })}
-        </div>
-      </Paper>
+                {item.key_name}:
+              </span>
+              <span
+                style={{
+                  color: 'black',
+                  flexWrap: 'nowrap',
+                  marginLeft: '10px',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {item.value}
+              </span>
+            </Typography>
+          );
+        })}
+      </div>
     </Box>
   );
 }

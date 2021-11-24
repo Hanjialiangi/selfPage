@@ -18,7 +18,8 @@ import {
   SearchIcon,
   IsolationTypeIcon,
   ContactTypeIcon,
-  HotelIcon
+  HotelIcon,
+  CommunityIcon
 } from '@src/assets/svg/picture';
 
 const useStyles = makeStyles({
@@ -119,17 +120,33 @@ export default function SearchCard(): JSX.Element {
                   <option value="社区">社区</option>
                 </Select>
               </ListItem>
-              <ListItem className="style">
-                <ListItemIcon>
-                  <HotelIcon />
-                </ListItemIcon>
-                <Input
-                  name="place"
-                  type="text"
-                  style={{ width: '100%' }}
-                  placeholder="搜索您的酒店/社区名称"
-                />
-              </ListItem>
+              {isolation ? (
+                isolation === '酒店' ? (
+                  <ListItem className="style">
+                    <ListItemIcon>
+                      <HotelIcon />
+                    </ListItemIcon>
+                    <Input
+                      name="quarantine_hotel"
+                      type="text"
+                      style={{ width: '100%' }}
+                      placeholder="搜索酒店名称"
+                    />
+                  </ListItem>
+                ) : (
+                  <ListItem className="style">
+                    <ListItemIcon>
+                      <CommunityIcon />
+                    </ListItemIcon>
+                    <Input
+                      name="home_address"
+                      type="text"
+                      style={{ width: '100%' }}
+                      placeholder="搜索社区名称"
+                    />
+                  </ListItem>
+                )
+              ) : null}
             </div>
           ) : null}
         </List>
