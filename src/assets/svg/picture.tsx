@@ -334,7 +334,7 @@ export function InfoTransfer(): JSX.Element {
 }
 
 export function InfoSamplingIcon(): JSX.Element {
-    return <svg width="13px" height="15px" viewBox="0 0 13 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    return <svg width="13px" height="15px" viewBox="0 0 13 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <title>采样结果@3x</title>
     <g id="疫情页面设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="疫情备份-8" transform="translate(-52.000000, -820.000000)" fill="#1790FF" fill-rule="nonzero">
