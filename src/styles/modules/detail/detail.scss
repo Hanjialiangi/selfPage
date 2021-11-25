@@ -21,3 +21,17 @@
     color: blue;
     line-height: 22px;
 }
+.DetailBox{
+    display: flex;
+    justify-content: center;
+    border: 1px solid #1790FF;
+    border-radius: 5px;
+    color: #1790FF;
+    background-color: #F8F8F8;
+}
+.DetailBoxButton{
+    color: #1790FF;
+}
+.DetailBoxDiv {
+    line-height: 34px;
+}
