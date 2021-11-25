@@ -9,7 +9,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import commonStyle from '@styleModules/common.module.scss';
 
-import { Category, getCategory, getTransferHotel } from '@src/api';
+import {
+  Category,
+  getCategory,
+  getTransferHotel,
+  getTransferCommunity
+} from '@src/api';
 import {
   dingAlert,
   dingToast,
@@ -69,9 +74,17 @@ export default function ExpertTransferOrder(): JSX.Element {
   }
   /* 提交工单 */
   const handleReminder = async () => {
+    //判断接收名单
+    // if (choseCommunity !== 0) {
+    // const res = await getTransferCommunity();
+    // if (res.code == 200) {
+    //   dingAlert('提交成功，请稍后再试。', '错误', '确认');
+    //   return;
+    // }
+    // dingToast('提交成功', 'success');
+    // }
     const res = await getTransferHotel();
     if (res.code == 200) {
-      
       if (res.code !== 200) {
         dingAlert('提交失败，请稍后再试。', '错误', '确认');
         return;

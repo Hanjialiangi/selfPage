@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import { getHotelList } from '@src/api';
+import { getHotelList, getCommunityList } from '@src/api';
 
 type expert = {
   id: number;
@@ -20,7 +20,7 @@ export default function HotelList({
   setSelectExpert,
   setIsShowExpertList
 }: Props): JSX.Element {
-  const [hotelList, sethotelList] = useState([]);
+  const [hotelList, setList] = useState([]);
   /* 抽屉拦数据处理 */
   const handleSelect = (item: expert) => {
     setSelectExpert(item);
@@ -39,9 +39,16 @@ export default function HotelList({
   const classes = useStyles();
   //获取酒店列表
   const Init = async () => {
+    //判断人员角色
+    // if (role == Community){
+    // const res = await getCommunityList();
+    // if (res.code == 200) {
+    //   setList(res.data);
+    // }
+    // };
     const res = await getHotelList();
     if (res.code == 200) {
-      sethotelList(res.data);
+      setList(res.data);
     }
   };
   useEffect(() => {

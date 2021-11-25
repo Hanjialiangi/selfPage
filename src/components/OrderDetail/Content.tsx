@@ -1,14 +1,16 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Paper, Box, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import FileList from '@components/FileList';
+import { InfoDetailIcon } from '@src/assets/svg/picture';
 import { dingCopy, dingToast } from '@src/dingtalkAPI';
 import Switch from '@material-ui/core/Switch';
 import Collapse from '@material-ui/core/Collapse';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 type Props = {
+  hotel: string;
   children: string;
   isolateMethod: string;
   abnormalState: string;
@@ -25,10 +27,23 @@ type Props = {
   seventhSamplingResult: string;
   finishDate: string;
   outcome: string;
+  transferAddress: string;
+  homeAddress: string;
+  region: string;
+  street: string;
+  relatedIDCard: string;
+  relatedPhone: string;
 };
 
 export default function OrderDetailContent({
   children,
+  hotel,
+  transferAddress,
+  homeAddress,
+  region,
+  street,
+  relatedIDCard,
+  relatedPhone,
   abnormalState,
   isolationDate,
   roomNumber,
@@ -54,13 +69,15 @@ export default function OrderDetailContent({
   //     dingToast('复制失败');
   //   }
   // }, [serialNumber]);
+  const [showTag, setshowTag] = useState(true);
+  const [CardHeight, setCardHeight] = useState('178px');
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
     setChecked(prev => !prev);
   };
   return (
-    <Box marginBottom={1}>
+    <Box marginBottom={1} margin={1.5}>
       {/* <Box sx={{ height: 300 }}>
         <FormControlLabel
           control={<Switch checked={checked} onChange={handleChange} />}
@@ -83,7 +100,89 @@ export default function OrderDetailContent({
           </div>
         </Box>
       </Box> */}
-      <Paper elevation={0} square>
+      <Paper
+        style={{
+          height: `${CardHeight}`,
+          position: 'relative',
+          paddingBottom: '10px'
+        }}
+        onClick={() => {
+          setshowTag(!showTag);
+          if (CardHeight == '178px') {
+            setCardHeight('100%');
+          } else if (CardHeight == '100%') {
+            setCardHeight('178px');
+          }
+        }}
+        elevation={0}
+        square
+      >
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>转运地址：</span>
+                {transferAddress}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>家庭住址：</span>
+                {homeAddress}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={6}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>所属区域：</span>
+                {region}
+              </Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>所属街道：</span>
+                {street}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>关联密接身份证号：</span>
+                {relatedIDCard}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>关联密接电话号码：</span>
+                {relatedPhone}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box margin={1.5}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="body2">
+                <span style={{ color: 'gray' }}>预计隔离酒店：</span>
+                {hotel}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
         <Box>
           <Box margin={1.5}>
             <Grid container spacing={2}>
@@ -244,6 +343,20 @@ export default function OrderDetailContent({
             </Grid>
           </Box>
         </Box>
+
+        <div
+          style={{
+            textAlign: 'center',
+            width: '100%',
+            position: 'absolute',
+            bottom: '-8px',
+            backgroundColor: 'white'
+          }}
+        >
+          {showTag ? '查看更多' : '收回更多'}&nbsp;
+          <InfoDetailIcon />
+        </div>
+
         {/* <FileList files={files} /> */}
       </Paper>
     </Box>

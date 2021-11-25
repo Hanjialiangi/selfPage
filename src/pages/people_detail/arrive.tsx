@@ -2,11 +2,22 @@ import React, { useState } from 'react';
 import Page from '@components/layout/Page';
 import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
-import { getCreateHotelResident, getHotelReceive } from '@src/api';
+import {
+  getCreateHotelResident,
+  getHotelReceive,
+  getCommunityReceive
+} from '@src/api';
 
 export default function Arrive(): JSX.Element {
   const [isolation, setisolation] = useState('');
+  //点击接收功能
   const handleSubmit = async () => {
+    // if (role == community) {
+    // const res = await getCommunityReceive();
+    // if (res.code == 200) {
+    //   res.data.address = isolation;
+    // }
+    // }
     const res = await getHotelReceive();
     if (res.data == 200) {
       res.data.address = isolation;

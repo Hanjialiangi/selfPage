@@ -205,7 +205,7 @@ export function getHotelList(): APIResponse<any> {
 //   return request('/api/tickets/type', data, { method: 'POST' });
 // }
 
-//添加人员并隔离
+//酒店添加人员并隔离
 export function getCreateHotelResident(address?: string): APIResponse<any> {
   const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
   const data = JSON.stringify({
@@ -235,20 +235,59 @@ export function getTransferHotel(
   quarantine_type?: string,
   current_state?: string
 ): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
-  const hotel_id = '';
+  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
+  const hotel_name = '酒店A';
   const data = JSON.stringify({
     planned_quarantine_hotel,
     quarantine_type,
     current_state
   });
   return request(
-    '/api/transfer/hotel?open_id=' + open_id + '&hotel_id=' + hotel_id,
+    '/api/transfer/hotel?open_ids=' + open_ids + '&hotel_name=' + hotel_name,
     data,
     {
       method: 'POST'
     }
   );
+}
+
+/*****************************社区功能*****************************************/
+//获取社区列表
+export function getCommunityList(): APIResponse<any> {
+  const page_size = 10;
+  const sub_district = '望江';
+  return request(
+    '/api/community/list?page_size=' +
+      page_size +
+      'sub_district=' +
+      sub_district
+  );
+}
+
+//转运到社区(发起转运)
+export function getTransferCommunity(): APIResponse<any> {
+  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
+  const time = '2021-11-15 10:00:00';
+  const data = JSON.stringify({
+    open_ids,
+    time
+  });
+  return request('/api/transfer/community', data, {
+    method: 'POST'
+  });
+}
+
+//社区接收人员
+export function getCommunityReceive(): APIResponse<any> {
+  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
+  const time = '2021-11-15 10:00:00';
+  const data = JSON.stringify({
+    open_ids,
+    time
+  });
+  return request('/api/receive/community', data, {
+    method: 'POST'
+  });
 }
 
 //采样管理上传

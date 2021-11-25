@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Grid, Box, Typography, InputLabel } from '@material-ui/core';
 import { MILLISECONDS, OrderStatus } from '@src/constants';
 import StatusIcon from '@components/StatusIcon';
+import { InfoNameIcon } from '@src/assets/svg/picture';
 import WaitIcon from '@components/SvgIcons';
 import { formatDateTime } from '@src/utils';
 // import AccountCircleIcon from '@material-ui/icons';
@@ -24,16 +25,8 @@ type Props = {
   gender: string;
   age: string;
   phone: string;
-  transferAddress: string;
-  homeAddress: string;
-  region: string;
-  street: string;
-  hotel: string;
-  relatedIDCard: string;
-  relatedPhone: string;
 };
 export default function OrderDetailHeader({
-  hotel,
   contactType,
   isolateType,
   isloatePlace,
@@ -51,23 +44,20 @@ export default function OrderDetailHeader({
   IDCard,
   gender,
   age,
-  phone,
-  transferAddress,
-  homeAddress,
-  region,
-  street,
-  relatedIDCard,
-  relatedPhone
+  phone
 }: Props): JSX.Element {
   return (
-    <Box>
+    <Box margin={1.5}>
       <Paper elevation={0} square>
         {/* <AccountCircleIcon /> */}
         <Box>
           <Box margin={1.5}>
             <Grid container spacing={2}>
               <Grid xs={8}>
-                <Typography variant="h6">{name}的基本信息</Typography>
+                <Typography variant="h6">
+                  {' '}
+                  <InfoNameIcon /> {name}的基本信息
+                </Typography>
               </Grid>
               <Grid xs={4}>
                 <Typography
@@ -232,72 +222,6 @@ export default function OrderDetailHeader({
                 <Typography variant="body2">
                   <span style={{ color: 'gray' }}>联系电话：</span>
                   {phone}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>转运地址：</span>
-                  {transferAddress}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>家庭住址：</span>
-                  {homeAddress}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>所属区域：</span>
-                  {region}
-                </Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>所属街道：</span>
-                  {street}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联密接身份证号：</span>
-                  {relatedIDCard}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>关联密接电话号码：</span>
-                  {relatedPhone}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          <Box margin={1.5}>
-            <Grid container spacing={2}>
-              <Grid xs={12}>
-                <Typography variant="body2">
-                  <span style={{ color: 'gray' }}>预计隔离酒店：</span>
-                  {hotel}
                 </Typography>
               </Grid>
             </Grid>
