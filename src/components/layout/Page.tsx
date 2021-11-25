@@ -39,17 +39,14 @@ export default function Page(props: PageProps): JSX.Element {
   }, [pageRef, onLoad]);
 
   useEffect(() => {
-    if (navigationRight === undefined) {
-      dingSetRight(true, false, '');
-      return;
-    }
-
     if (navigationRight === false) {
       dingSetRight(false, false, '');
       return;
     }
 
-    dingSetRight(true, true, navigationRight.label, navigationRight.onClick);
+    if (navigationRight) {
+      dingSetRight(true, true, navigationRight.label, navigationRight.onClick);
+    }
   }, [navigationRight]);
 
   return (
