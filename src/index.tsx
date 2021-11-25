@@ -18,9 +18,19 @@ import {
   updateAuthAction
 } from './redux/actions';
 import { CookieKey, Dingtalk, Mode, PUBLIC_PATH } from './constants';
-import { enableDebug, getCookie, removeCookie } from './utils';
+import {
+  insertDebugScript,
+  getCookie,
+  removeCookie,
+  enableDebug
+} from './utils';
 import { auth, getUserInfo } from '@src/api';
-import { dingGetCode, getPlatform } from '@src/dingtalkAPI';
+import {
+  dingGetCode,
+  dingPrompt,
+  dingSetRight,
+  getPlatform
+} from '@src/dingtalkAPI';
 import { ENV_ENUM } from 'dingtalk-jsapi/lib/sdk';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -123,7 +133,18 @@ const App = () => {
 
   useEffect(() => {
     if (process.env.BUILD_TYPE === Mode.DEVELOPMENT) {
-      enableDebug();
+      insertDebugScript();
+      dingSetRight(true, true, '开启调试', async () => {
+        const res = await dingPrompt('请输入调试UUID', '调试', '', [
+          '取消',
+          '开启调试'
+        ]);
+        if (!res || !res.buttonIndex || !res.value) {
+          return;
+        }
+
+        enableDebug(res.value);
+      });
     }
   }, []);
 
