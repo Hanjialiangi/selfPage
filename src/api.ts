@@ -110,12 +110,6 @@ export function auth(
   user_id: number;
 }> {
   const data = JSON.stringify({ code, agentId, debug_ding_user_id });
-  // const res: any = {
-  //   code: 200,
-  //   data: { user_name: '张三', id: 3, role: 1, level: 2, avatar: '' },
-  //   message: 'ok'
-  // };
-  // return res;
   return request('/api/login', data, { method: 'POST' });
 }
 

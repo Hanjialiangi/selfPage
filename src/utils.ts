@@ -201,3 +201,16 @@ export function BScrollConfig(wrapper: any): BScrollConstructor<any> {
     }
   });
 }
+
+export function enableDebug(): void {
+  const script = document.createElement('script');
+  script.src =
+    'https://g.alicdn.com/code/npm/@ali/dingtalk-h5-remote-debug-sdk/0.1.1/app.bundle.js';
+  script.onload = () => {
+    (window as any).h5RemoteDebugSdk.init({
+      uuid: '74875acb-235f-43a2-8c08-42a663e0dc66',
+      observerElement: document.documentElement
+    });
+  };
+  document.body.appendChild(script);
+}

@@ -18,7 +18,7 @@ import {
   updateAuthAction
 } from './redux/actions';
 import { CookieKey, Dingtalk, Mode, PUBLIC_PATH } from './constants';
-import { getCookie, removeCookie } from './utils';
+import { enableDebug, getCookie, removeCookie } from './utils';
 import { auth, getUserInfo } from '@src/api';
 import { dingGetCode, getPlatform } from '@src/dingtalkAPI';
 import { ENV_ENUM } from 'dingtalk-jsapi/lib/sdk';
@@ -103,8 +103,8 @@ const App = () => {
       }
 
       //钉钉内登录
-      //const dingCode = await dingGetCode(Dingtalk.CORP_ID);
-      const authRes = await auth('dingCode.code', Dingtalk.AGENT_ID);
+      const dingCode = await dingGetCode(Dingtalk.CORP_ID);
+      const authRes = await auth(dingCode.code, Dingtalk.AGENT_ID);
       if (authRes.code !== 200) {
         return;
       }
@@ -120,6 +120,12 @@ const App = () => {
 
     window.login();
   }, [handleVisibilityChange, setAuthInfo]);
+
+  useEffect(() => {
+    if (process.env.BUILD_TYPE === Mode.DEVELOPMENT) {
+      enableDebug();
+    }
+  }, []);
 
   return (
     <PotentialError>
