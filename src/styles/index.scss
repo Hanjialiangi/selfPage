@@ -105,7 +105,12 @@ a {
 }
 .tab {
   width: 100%;
+  z-index: 9999;
+  background: #fff;
 }
 .MuiTabs-indicator{
   background-color:#1790FF !important;
+}
+.wrapper {
+  height:100px;
 }

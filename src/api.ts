@@ -288,6 +288,8 @@ export function getCreateHealth(
 
 //获取全部隔离人员信息
 export function getResidentList(
+  page_size: number,
+  page: number,
   condition: {
     name?: string;
     contact?: string;
@@ -299,8 +301,6 @@ export function getResidentList(
   },
   current_state?: Array<string>
 ): APIResponse<any> {
-  const page_size = 15;
-  const page = 1;
   condition.name = condition.name || '';
   condition.contact = condition.contact || '';
   condition.id_card = condition.id_card || '';
@@ -329,43 +329,41 @@ export function getResidentList(
 }
 
 //获取采样记录
-export function getSamplingList(condition: {
-  name?: string;
-  contact?: string;
-  id_card?: string;
-  resident_property?: string;
-  quarantine_type?: string;
-  place?: string;
-}): APIResponse<any> {
-  const page_size = 15;
-  const page = 1;
-  if (!condition.name) {
-    condition.name = '';
+export function getSamplingList(
+  page_size: number,
+  page: number,
+  condition: {
+    name?: string;
+    contact?: string;
+    id_card?: string;
+    resident_property?: string;
+    quarantine_type?: string;
+    quarantine_hotel?: string;
+    home_address?: string;
   }
-  if (!condition.contact) {
-    condition.contact = '';
-  }
-  if (!condition.id_card) {
-    condition.id_card = '';
-  }
-  if (!condition.resident_property) {
-    condition.resident_property = '';
-  }
-  if (!condition.quarantine_type) {
-    condition.quarantine_type = '';
-  }
-  if (!condition.place) {
-    condition.place = '';
-  }
-  const url = qs.stringify({
-    page_size,
-    page,
-    name: condition.name,
-    contact: condition.contact,
-    id_card: condition.id_card,
-    resident_property: condition.resident_property,
-    quarantine_type: condition.quarantine_type,
-    place: condition.place
+): APIResponse<any> {
+  condition.name = condition.name || '';
+  condition.contact = condition.contact || '';
+  condition.id_card = condition.id_card || '';
+  condition.resident_property = condition.resident_property || '';
+  condition.quarantine_type = condition.quarantine_type || '';
+  condition.quarantine_hotel = condition.quarantine_hotel || '';
+  condition.home_address = condition.home_address || '';
+  const url = qs.stringifyUrl({
+    url: '/api/sampling/list',
+    query: {
+      page,
+      page_size,
+      name: condition.name,
+      contact: condition.contact,
+      id_card: condition.id_card,
+      'property_queries[]': [
+        `resident_property|${condition.resident_property}`,
+        `quarantine_type|${condition.quarantine_type}`,
+        `home_address|${condition.home_address}`,
+        `quarantine_hotel|${condition.quarantine_hotel}`
+      ]
+    }
   });
-  return request('/api/sampling/list?' + url);
+  return request(url);
 }

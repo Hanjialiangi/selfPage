@@ -26,7 +26,8 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginBottom: 0,
-    borderRadius: 10
+    borderRadius: 10,
+    margin: '0 10px 0 10px'
   }
 });
 export default function SearchCard(): JSX.Element {
@@ -44,6 +45,7 @@ export default function SearchCard(): JSX.Element {
     SetIsolation(event.target.value);
   };
   const handleShow = () => {
+    console.log('sad');
     setShow(!show);
   };
   return (

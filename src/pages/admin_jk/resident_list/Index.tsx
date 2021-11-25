@@ -4,7 +4,9 @@ import { getResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
+import { BScrollConfig } from '@src/utils';
 
+const pageSize = 10; //页面大小
 type DR = [
   {
     open_id: string;
@@ -27,12 +29,17 @@ export default function ResidentListPage(): JSX.Element {
     }
   ]); //数据
 
+  const [total, setTotal] = useState(1); //总页数
+  const [current, SetCurrent] = useState(1); //当前页数
+  const [form, setForm] = useState<any>(); //表单项
+
   //搜索引擎
   const handleSearch = async (
+    page = 1,
     formvalue = {},
     current_state = ['集中隔离中', '解除后居家隔离中', '居家隔离中']
   ) => {
-    const res = await getResidentList(formvalue, current_state);
+    const res = await getResidentList(pageSize, page, formvalue, current_state);
     const detailResult: DR = [
       {
         open_id: '',
@@ -44,6 +51,8 @@ export default function ResidentListPage(): JSX.Element {
       }
     ];
     if (res.code === 200) {
+      setTotal(Math.ceil(res.data.total / pageSize));
+      SetCurrent(res.data.current_page);
       res.data.data.map((item: any) => {
         const name = item.name;
         const open_id = item.open_id;
@@ -100,7 +109,8 @@ export default function ResidentListPage(): JSX.Element {
       quarantine_hotel,
       home_address
     };
-    handleSearch(formvalue);
+    setForm(formvalue);
+    handleSearch(1, formvalue);
   };
 
   //副作用
@@ -108,24 +118,59 @@ export default function ResidentListPage(): JSX.Element {
     handleSearch();
   }, []);
 
+  useEffect(() => {
+    const wrapper = document.querySelector('.wrapper');
+    if (wrapper) {
+      const bs = BScrollConfig(wrapper);
+      if (total > 1) {
+        bs.on('pullingUp', async () => {
+          //获取页数
+          await handleSearch(current + 1, form);
+          // location.href = `/admin_jk/resident_list/${current + 1}`;
+          if (current < total) {
+            setTimeout(() => {
+              bs.finishPullUp();
+            }, 5000);
+          }
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total, current]);
+
   return (
     <Page title="管理中人员名单">
-      <div style={{ position: 'relative', marginTop: '90px' }}>
-        <form
-          noValidate
-          autoComplete="off"
-          style={{ paddingBottom: '10px' }}
-          onSubmit={submit}
-        >
-          <SearchCard />
-        </form>
-        {data.map((item, index) => {
-          return (
-            <Link to={`/detail/resident/${item.open_id}`} key={index}>
-              <CardEach detail={item} key={index} />
-            </Link>
-          );
-        })}
+      <div className="wrapper">
+        <div style={{ position: 'relative', marginTop: '90px' }}>
+          <form
+            noValidate
+            autoComplete="off"
+            style={{ paddingBottom: '10px' }}
+            onSubmit={submit}
+          >
+            <SearchCard />
+          </form>
+          {data.map((item, index) => {
+            return (
+              <Link to={`/detail/resident/${item.open_id}`} key={index}>
+                <CardEach detail={item} key={index} />
+              </Link>
+            );
+          })}
+          <div
+            style={{
+              textAlign: 'center',
+              margin: '0 auto',
+              color: 'gray'
+            }}
+          >
+            {current >= total ? (
+              <span className="bottom">--已经到底了--</span>
+            ) : (
+              <span className="refsh">上滑刷新</span>
+            )}
+          </div>
+        </div>
       </div>
     </Page>
   );

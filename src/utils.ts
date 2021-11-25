@@ -4,7 +4,11 @@ import qs from 'query-string';
 import { dingActionSheet, dingConfig } from '@src/dingtalkAPI';
 import { Dingtalk, PUBLIC_PATH } from './constants';
 import { getDingConfig } from './api';
+import BScroll from '@better-scroll/core';
+import Pullup from '@better-scroll/pull-up';
+import { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll';
 
+BScroll.use(Pullup);
 /**
  * 设置 Cookie
  * @param key Cookie 键名
@@ -183,4 +187,16 @@ export function isValidKey(
   object: object
 ): key is keyof typeof object {
   return key in object;
+}
+
+//检测页面滑动下一页配置
+export function BScrollConfig(wrapper: any): BScrollConstructor<any> {
+  return new BScroll(wrapper, {
+    probeType: 3,
+    click: false,
+    preventDefault: false,
+    pullUpLoad: {
+      threshold: -20
+    }
+  });
 }

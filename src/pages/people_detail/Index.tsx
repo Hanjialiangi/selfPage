@@ -33,7 +33,6 @@ export type Properties = {
 const status = 3; //状态
 export default function PeopleDetailPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
-
   const [name, setName] = useState(''); //人员名字
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
