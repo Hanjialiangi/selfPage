@@ -196,7 +196,8 @@ export function BScrollConfig(wrapper: any): BScrollConstructor<any> {
     click: false,
     preventDefault: false,
     pullUpLoad: {
-      threshold: -20
+      threshold: -40,
+      stop: 0
     }
   });
 }

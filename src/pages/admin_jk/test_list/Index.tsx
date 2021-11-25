@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
 import { getSamplingList } from '@src/api';
-import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
-import { Link } from 'react-router-dom';
 import { BScrollConfig } from '@src/utils';
+import TestCard from '@components/jk_layout/TestCard';
+import { ArrowDownIcon } from '@src/assets/svg/picture';
 
 const pageSize = 10; //页面大小
-type DR = [
-  {
-    open_id: string;
-    name: string;
-    resident_property: string;
-    quarantine_type: string;
-    quarantine_hotel: string;
-    sub_district: string;
-  }
-];
-export default function ResidentListPage(): JSX.Element {
+
+export default function TestListPage(): JSX.Element {
   const [data, setData] = useState([
     {
-      open_id: '',
       name: '',
-      resident_property: '',
-      quarantine_type: '',
-      quarantine_hotel: '',
-      sub_district: ''
+      contact: '',
+      planned_date: '',
+      sampling_date: '',
+      sampling_result: ''
     }
   ]); //数据
 
@@ -36,51 +26,11 @@ export default function ResidentListPage(): JSX.Element {
   //搜索引擎
   const handleSearch = async (page = 1, formvalue = {}) => {
     const res = await getSamplingList(pageSize, page, formvalue);
-    const detailResult: DR = [
-      {
-        open_id: '',
-        name: '',
-        resident_property: '',
-        quarantine_type: '',
-        quarantine_hotel: '',
-        sub_district: ''
-      }
-    ];
+
     if (res.code === 200) {
       setTotal(Math.ceil(res.data.total / pageSize));
       SetCurrent(res.data.current_page);
-      res.data.data.map((item: any) => {
-        const name = item.name;
-        const open_id = item.open_id;
-        let resident_property = '';
-        let quarantine_type = '';
-        let quarantine_hotel = '';
-        let sub_district = '';
-        item.properties.map((item2: any) => {
-          if (item2.key === 'resident_property') {
-            resident_property = item2.resident_property;
-          }
-          if (item2.key === 'quarantine_type') {
-            quarantine_type = item2.quarantine_type;
-          }
-          if (item2.key === 'quarantine_hotel') {
-            quarantine_hotel = item2.quarantine_hotel;
-          }
-          if (item2.key === 'sub_district') {
-            sub_district = item2.sub_district;
-          }
-        });
-        detailResult.push({
-          open_id,
-          name,
-          resident_property,
-          quarantine_type,
-          quarantine_hotel,
-          sub_district
-        });
-      });
-      detailResult.shift();
-      setData(detailResult);
+      setData(res.data.data);
     }
   };
   //提交按钮
@@ -145,11 +95,7 @@ export default function ResidentListPage(): JSX.Element {
             <SearchCard />
           </form>
           {data.map((item, index) => {
-            return (
-              <Link to={`/detail/resident/${item.open_id}`} key={index}>
-                <CardEach detail={item} key={index} />
-              </Link>
-            );
+            return <TestCard detail={item} key={index} />;
           })}
           <div
             style={{
@@ -161,7 +107,10 @@ export default function ResidentListPage(): JSX.Element {
             {current >= total ? (
               <span className="bottom">--已经到底了--</span>
             ) : (
-              <span className="refsh">上滑刷新</span>
+              <span className="refsh">
+                <ArrowDownIcon />
+                上滑刷新
+              </span>
             )}
           </div>
         </div>
