@@ -45,7 +45,6 @@ export default function SearchCard(): JSX.Element {
     SetIsolation(event.target.value);
   };
   const handleShow = () => {
-    console.log('sad');
     setShow(!show);
   };
   return (

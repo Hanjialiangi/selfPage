@@ -5,6 +5,7 @@ import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
 import { BScrollConfig } from '@src/utils';
+import { ArrowDownIcon } from '@src/assets/svg/picture';
 
 type DR = [
   {
@@ -18,7 +19,7 @@ type DR = [
 ];
 
 const pageSize = 10; //页面大小
-export default function ResidentListPage(): JSX.Element {
+export default function ManageListPage(): JSX.Element {
   const [data, setData] = useState([
     {
       open_id: '',
@@ -168,7 +169,10 @@ export default function ResidentListPage(): JSX.Element {
             {current >= total ? (
               <span className="bottom">--已经到底了--</span>
             ) : (
-              <span className="refsh">上滑刷新</span>
+              <span className="refsh">
+                <ArrowDownIcon />
+                上滑刷新
+              </span>
             )}
           </div>
         </div>
