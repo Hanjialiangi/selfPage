@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
 import { useParams } from 'react-router';
-import {
-  Box,
-  Typography,
-  Paper,
-  Button,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary
-} from '@material-ui/core';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { Box, Typography, Paper, Button, Card } from '@material-ui/core';
 import PeopleDetailHeader from '@components/jk_layout/detail/PeopleDetailHeader';
 import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailContent';
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import commonStyle from '@styleModules/common.module.scss';
-import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
-import BlockIcon from '@material-ui/icons/Block';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import '@src/styles/modules/detail/detail.scss';
 import { getResidentInfo } from '@src/api';
+import {
+  InfoNameIcon,
+  InfoHealthIcon,
+  InfoSamplingIcon,
+  InfoFixIcon,
+  InfoIsolateIcon,
+  InfoTransfer
+} from '@src/assets/svg/picture';
 import StatusIcon from '@components/StatusIcon';
 
 export type Properties = {
@@ -98,123 +91,113 @@ export default function PeopleDetailPage(): JSX.Element {
       <>
         <Paper elevation={0} square>
           <Box padding={1.5}>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMore />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Paper elevation={0} square>
-                  <Box>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <Typography variant="h6">{name}的基本信息</Typography>
-                      <Typography
-                        variant="subtitle1"
-                        color={'secondary'}
-                        component={'span'}
-                      >
-                        {residentProperty}
-                      </Typography>
-                    </div>
-                    <Typography variant="body2" style={{ marginTop: '10px' }}>
-                      <span style={{ color: 'gray' }}>隔离类型：</span>
-                      {quarantineType}
+            <Card>
+              <Paper elevation={0} square>
+                <Box margin={1.5}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <Typography variant="h6">
+                      <InfoNameIcon />
+                      &nbsp;{name}的基本信息
                     </Typography>
-                    <div style={{ marginTop: '10px' }}>
-                      <StatusIcon exchangeStatus={5} status={status} />
-                    </div>
-                  </Box>
+                    <Typography
+                      variant="subtitle1"
+                      color={'secondary'}
+                      component={'span'}
+                    >
+                      {residentProperty}
+                    </Typography>
+                  </div>
+                  <Typography variant="body2" style={{ marginTop: '10px' }}>
+                    <span style={{ color: 'gray' }}>隔离类型：</span>
+                    {quarantineType}
+                  </Typography>
+                  <div style={{ marginTop: '10px' }}>
+                    <StatusIcon exchangeStatus={5} status={status} />
+                  </div>
                   {information ? (
                     <PeopleDetailHeader info={information} />
                   ) : null}
-                </Paper>
-              </AccordionSummary>
-              <AccordionDetails>
-                {expandInformation ? (
-                  <PeopleDetailContent info={expandInformation} />
-                ) : null}
-              </AccordionDetails>
-            </Accordion>
+                  {expandInformation ? (
+                    <PeopleDetailContent info={expandInformation} />
+                  ) : null}
+                </Box>
+              </Paper>
+            </Card>
           </Box>
         </Paper>
         <Paper elevation={0}>
           {isTransferButtonVisible && (
             <Box
               margin={1.5}
-              paddingTop={1}
-              style={{ display: 'flex', justifyContent: 'space-around' }}
+              className="DetailBox"
+              // style={{  }}
             >
               <Button
-                variant="outlined"
+                variant="text"
                 color="primary"
                 onClick={handleTransferOrder}
-                className={commonStyle.whiteBackground}
+                className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
-                <TransferWithinAStationIcon />
-                转运
+                <InfoTransfer />
+                &nbsp;转运
               </Button>
+              <div className="DetailBoxDiv">|</div>
               <Button
-                variant="outlined"
+                variant="text"
                 color="primary"
                 onClick={handleArrive}
-                className={commonStyle.whiteBackground}
+                className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
-                <BlockIcon />
-                接收并开始隔离
+                <InfoIsolateIcon />
+                &nbsp;接收并开始隔离
               </Button>
             </Box>
           )}
           {isArriveButtonVisible && (
             <>
-              <Box
-                margin={1.5}
-                style={{ display: 'flex', justifyContent: 'space-around' }}
-              >
+              <Box margin={1.5} className="DetailBox">
                 <Button
-                  variant="outlined"
+                  variant="text"
                   color="primary"
                   onClick={handleSamplingResult}
-                  className={commonStyle.whiteBackground}
+                  className="DetailBoxButton"
                   style={{ width: '45%' }}
                 >
-                  <AssignmentIcon />
-                  上报采样结果
+                  <InfoSamplingIcon />
+                  &nbsp;上报采样结果
                 </Button>
+                <div className="DetailBoxDiv">|</div>
                 <Button
-                  variant="outlined"
+                  variant="text"
                   color="primary"
                   onClick={handleHealth}
-                  className={commonStyle.whiteBackground}
+                  className="DetailBoxButton"
                   style={{ width: '45%' }}
                 >
-                  <LocalHospitalIcon />
-                  上报健康状况
+                  <InfoHealthIcon />
+                  &nbsp;上报健康状况
                 </Button>
               </Box>
             </>
           )}
           {isTransferButtonVisible && (
-            <Box
-              margin={1.5}
-              style={{ display: 'flex', justifyContent: 'space-around' }}
-              paddingBottom={1}
-            >
+            <Box margin={1.5} className="DetailBox">
               <Button
-                variant="outlined"
+                variant="text"
                 color="primary"
                 onClick={handleFixOrder}
-                className={commonStyle.whiteBackground}
+                className="DetailBoxButton"
                 style={{ width: '95%' }}
               >
-                <FileCopyOutlinedIcon />
-                修改基本信息
+                <InfoFixIcon />
+                &nbsp;修改基本信息
               </Button>
             </Box>
           )}

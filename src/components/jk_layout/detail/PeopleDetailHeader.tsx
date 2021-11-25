@@ -30,13 +30,13 @@ export default function PeopleDetailHeader(props: { info: any }): JSX.Element {
         {baseInfo?.map((item: Properties) => {
           return (
             <Typography
-              variant="body2"
               key={item.key_id}
               style={{
                 marginBottom: '5px',
                 flex: '1 0 auto',
                 minWidth: '50%',
-                alignItems: 'center'
+                alignItems: 'center',
+                fontSize: '14px'
               }}
             >
               <span
