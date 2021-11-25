@@ -17,6 +17,7 @@ import {
   EndManageIcon,
   EndManageActiveIcon
 } from '@src/assets/svg/picture';
+import { getURL } from '@src/utils';
 
 interface LinkTabProps {
   label?: string;
@@ -89,27 +90,27 @@ export default function NarBar(): JSX.Element {
               <LinkTab
                 icon={value !== 0 ? <TransferIcon /> : <TransferActiceIcon />}
                 label="待转运"
-                href="/admin_jk/transfer_list"
+                href={getURL('/admin_jk/transfer_list')}
               />
               <LinkTab
                 icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收"
-                href="/admin_jk/arrive_list"
+                href={getURL('/admin_jk/arrive_list')}
               />
               <LinkTab
                 icon={value !== 2 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="管理中"
-                href="/admin_jk/resident_list"
+                href={getURL('/admin_jk/resident_list')}
               />
               <LinkTab
                 icon={value !== 3 ? <EndManageIcon /> : <EndManageActiveIcon />}
                 label="结束管理"
-                href="/admin_jk/end_manage_list"
+                href={getURL('/admin_jk/end_manage_list')}
               />
               <LinkTab
                 icon={value !== 4 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
-                href="/admin_jk/test_list"
+                href={getURL('/admin_jk/test_list')}
               />
             </Tabs>
           ) : userInfo.role === 'transfer_team' ? (

@@ -92,7 +92,7 @@ const App = () => {
 
       //开发环境登录
       if (process.env.NODE_ENV === Mode.DEVELOPMENT) {
-        const authRes = await auth('', Dingtalk.AGENT_ID, 'debug_user_cdc');
+        const authRes = await auth('', Dingtalk.AGENT_ID, '140236142620880278');
         if (authRes.code !== 200) {
           return;
         }

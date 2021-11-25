@@ -117,12 +117,6 @@ export function auth(
  * 获取用户信息
  */
 export function getUserInfo(): APIResponse<any> {
-  // const res: any = {
-  //   code: 200,
-  //   data: { user_name: '张三', id: 3, role: 1, level: 2, avatar: '' },
-  //   message: 'ok'
-  // };
-  // return res;
   return request('/api/authed_user');
 }
 
@@ -211,9 +205,11 @@ export function getCreateHotelResident(address?: string): APIResponse<any> {
 }
 
 //酒店接收人员
-export function getHotelReceive(): APIResponse<any> {
-  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
-  const hotel_name = '酒店A';
+export function getHotelReceive(
+  open_id: string,
+  hotel_name: string
+): APIResponse<any> {
+  const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
     hotel_name
