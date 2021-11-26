@@ -117,3 +117,12 @@ a {
 .space {
   height: 20px;
 }
+.healthSelect {
+  width: 50% !important;
+}
+.MuiGrid-grid-xs-6 {
+  text-align: right !important;
+}
+div#mui-component-select-is_fever, div#mui-component-select-is_cough, div#mui-component-select-is_weak {
+  font-size: 18px !important;
+}

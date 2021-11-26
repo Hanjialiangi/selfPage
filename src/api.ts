@@ -183,15 +183,8 @@ export function getFixResidentInfo(
 /***************************酒店功能************************************/
 //获取酒店列表
 export function getHotelList(): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
-  return request('/api/hotel/search?open_id=' + open_id);
+  return request('/api/hotel/search');
 }
-// export function getCategory(isChildrenAdmin?: number): APIResponse<Category[]> {
-//   const data = JSON.stringify({
-//     isChildrenAdmin
-//   });
-//   return request('/api/tickets/type', data, { method: 'POST' });
-// }
 
 //酒店添加人员并隔离
 export function getCreateHotelResident(address?: string): APIResponse<any> {
@@ -207,12 +200,24 @@ export function getCreateHotelResident(address?: string): APIResponse<any> {
 //酒店接收人员
 export function getHotelReceive(
   open_id: string,
-  hotel_name: string
+  condition: {
+    hotel_name: string;
+    room: string;
+    time: string;
+    releaseTime: string;
+  }
 ): APIResponse<any> {
   const open_ids = [open_id];
+  const hotel_name = condition.hotel_name;
+  const room = condition.room;
+  const time = condition.time;
+  const release_time = condition.releaseTime;
   const data = JSON.stringify({
     open_ids,
-    hotel_name
+    hotel_name,
+    room,
+    time,
+    release_time
   });
   return request('/api/receive/hotel?', data, {
     method: 'POST'
@@ -221,24 +226,17 @@ export function getHotelReceive(
 
 //转运到酒店（发起转运）
 export function getTransferHotel(
-  planned_quarantine_hotel?: string,
-  quarantine_type?: string,
-  current_state?: string
+  open_id: string,
+  hotel_name?: string
 ): APIResponse<any> {
-  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
-  const hotel_name = '酒店A';
+  const open_ids = [open_id];
   const data = JSON.stringify({
-    planned_quarantine_hotel,
-    quarantine_type,
-    current_state
+    open_ids,
+    hotel_name
   });
-  return request(
-    '/api/transfer/hotel?open_ids=' + open_ids + '&hotel_name=' + hotel_name,
-    data,
-    {
-      method: 'POST'
-    }
-  );
+  return request('/api/transfer/hotel', data, {
+    method: 'POST'
+  });
 }
 
 /*****************************社区功能*****************************************/
@@ -255,9 +253,11 @@ export function getCommunityList(): APIResponse<any> {
 }
 
 //转运到社区(发起转运)
-export function getTransferCommunity(): APIResponse<any> {
-  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
-  const time = '2021-11-15 10:00:00';
+export function getTransferCommunity(
+  open_id: string,
+  time: string
+): APIResponse<any> {
+  const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
     time
@@ -280,29 +280,32 @@ export function getCommunityReceive(): APIResponse<any> {
   });
 }
 
-//采样管理上传
+//采样管理单项上传
 export function getCreateSampling(
-  sampling_result?: string,
-  sampling_date?: string
+  open_id: string,
+  planned_date: string,
+  sampling_date?: string,
+  sampling_result?: string
 ): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
   const data = JSON.stringify({
+    open_id,
+    planned_date,
     sampling_date,
     sampling_result
   });
-  return request('/api/sampling?open_id=' + open_id, data, {
+  return request('/api/sampling', data, {
     method: 'POST'
   });
 }
 
 //健康状况上传
 export function getCreateHealth(
+  open_id: string,
   is_cough?: string,
   is_fever?: string,
   is_weak?: string,
   other_health_case?: string
 ): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
   const data = JSON.stringify({
     open_id,
     is_cough,
@@ -310,7 +313,7 @@ export function getCreateHealth(
     is_weak,
     other_health_case
   });
-  return request('/api/health/fill?', data, {
+  return request('/api/health/fill', data, {
     method: 'POST'
   });
 }

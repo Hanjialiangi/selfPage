@@ -7,20 +7,23 @@ import {
   Button,
   Select,
   Grid,
-  MenuItem,
   FormControl
 } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { getCreateHealth } from '@src/api';
+import { useParams } from 'react-router';
+import { dingAlert } from '@src/dingtalkAPI';
 
 export default function HealthPage(): JSX.Element {
-  //健康状态：1是 2否
+  const param: { id: string } = useParams(); //获取参数
+
   const [healthState, sethealthState] = useState({
-    cough: 1,
-    fever: 1,
-    fatigue: 1
+    is_cough: '否',
+    is_fever: '否',
+    is_weak: '否',
+    other_health_case: ''
   });
-  const [instruction, setinstruction] = useState('');
+
   const updateDetail = (e: any) => {
     sethealthState({
       ...healthState,
@@ -28,42 +31,41 @@ export default function HealthPage(): JSX.Element {
     });
   };
   const handleSubmit = async () => {
-    const res = await getCreateHealth();
+    const res = await getCreateHealth(
+      param.id,
+      healthState.is_cough,
+      healthState.is_fever,
+      healthState.is_weak,
+      healthState.other_health_case
+    );
     if (res.data == 200) {
-      res.data.other_health_case = instruction;
-      {
-        healthState.cough
-          ? res.data.is_cough == '是'
-          : res.data.is_cough == '否';
-      }
-      {
-        healthState.fever
-          ? res.data.is_fever == '是'
-          : res.data.is_fever == '否';
-      }
-      {
-        healthState.fatigue
-          ? res.data.is_weak == '是'
-          : res.data.is_weak == '否';
-      }
+      dingAlert('上传成功', '正确', '确认');
+      window.location.href = `/detail/resident/${param.id}`;
     }
-    console.log(healthState);
-    console.log(instruction);
   };
   return (
-    <Page title="上报采样结果">
+    <Page title="上报健康状况">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <Grid container spacing={2}>
-            <Grid xs={5}>
+            <Grid xs={5} item={true}>
               <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
                 是否咳嗽症状:
               </InputLabel>
             </Grid>
-            <Grid xs={6}>
-              <Select defaultValue={2} name={'cough'} onChange={updateDetail}>
-                <MenuItem value={0}>是</MenuItem>
-                <MenuItem value={1}>否</MenuItem>
+            <Grid xs={6} item={true}>
+              <Select
+                className="healthSelect"
+                value={healthState.is_cough}
+                name="is_cough"
+                onChange={updateDetail}
+              >
+                <option style={{ fontSize: '18px' }} value="是">
+                  是
+                </option>
+                <option style={{ fontSize: '18px' }} value="否">
+                  否
+                </option>
               </Select>
             </Grid>
           </Grid>
@@ -72,15 +74,24 @@ export default function HealthPage(): JSX.Element {
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <Grid container spacing={2}>
-            <Grid xs={5}>
+            <Grid xs={5} item={true}>
               <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
                 是否发烧症状:
               </InputLabel>
             </Grid>
-            <Grid xs={6}>
-              <Select defaultValue={2} name={'fever'} onChange={updateDetail}>
-                <MenuItem value={0}>是</MenuItem>
-                <MenuItem value={1}>否</MenuItem>
+            <Grid xs={6} item={true}>
+              <Select
+                className="healthSelect"
+                value={healthState.is_fever}
+                name="is_fever"
+                onChange={updateDetail}
+              >
+                <option style={{ fontSize: '18px' }} value="是">
+                  是
+                </option>
+                <option style={{ fontSize: '18px' }} value="否">
+                  否
+                </option>
               </Select>
             </Grid>
           </Grid>
@@ -89,15 +100,24 @@ export default function HealthPage(): JSX.Element {
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <Grid container spacing={2}>
-            <Grid xs={5}>
+            <Grid xs={5} item={true}>
               <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
                 是否乏力症状:
               </InputLabel>
             </Grid>
-            <Grid xs={6}>
-              <Select defaultValue={2} name={'fatigue'} onChange={updateDetail}>
-                <MenuItem value={0}>是</MenuItem>
-                <MenuItem value={1}>否</MenuItem>
+            <Grid xs={6} item={true}>
+              <Select
+                className="healthSelect"
+                value={healthState.is_weak}
+                name="is_weak"
+                onChange={updateDetail}
+              >
+                <option style={{ fontSize: '18px' }} value="是">
+                  是
+                </option>
+                <option style={{ fontSize: '18px' }} value="否">
+                  否
+                </option>
               </Select>
             </Grid>
           </Grid>
@@ -108,10 +128,8 @@ export default function HealthPage(): JSX.Element {
           <InputLabel>其他健康状况说明</InputLabel>
           <FormControl fullWidth>
             <Input
-              name="detectDate"
-              onChange={e => {
-                setinstruction(e.target.value);
-              }}
+              name="other_health_case"
+              onChange={updateDetail}
               placeholder="请填写"
               minRows={2}
               maxRows={600}
@@ -126,7 +144,6 @@ export default function HealthPage(): JSX.Element {
           onClick={handleSubmit}
           variant="contained"
           color="primary"
-          // disabled={isLoading}
           disableElevation
           fullWidth
         >

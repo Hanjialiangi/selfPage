@@ -39,13 +39,6 @@ export default function HotelList({
   const classes = useStyles();
   //获取酒店列表
   const Init = async () => {
-    //判断人员角色
-    // if (role == Community){
-    // const res = await getCommunityList();
-    // if (res.code == 200) {
-    //   setList(res.data);
-    // }
-    // };
     const res = await getHotelList();
     if (res.code == 200) {
       setList(res.data);

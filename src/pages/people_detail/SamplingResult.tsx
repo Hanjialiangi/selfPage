@@ -1,59 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
-import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
+import { Box, Paper, Button, Select, FormControl } from '@material-ui/core';
+import { InputLabel, TextField } from '@material-ui/core';
 import { getCreateSampling } from '@src/api';
+import { useParams } from 'react-router';
+import moment from 'moment';
+import { dingAlert } from '@src/dingtalkAPI';
 
 export default function SamplingResultPage(): JSX.Element {
-  const [detect, setdetect] = useState({
-    detectDate: '',
-    detectResult: ''
-  });
-  const updateDetect = (e: any) => {
-    setdetect({
-      ...detect,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [time, setTime] = useState(''); //统一采样时间
+  const [samplingResult, setSamplingResult] = useState(''); //采样结果
+
+  const param: { id: string } = useParams(); //获取路由参数
   const handleSubmit = async () => {
-    const res = await getCreateSampling();
-    if (res.code == 200) {
-      console.log(res.data);
-      console.log(111);
+    const planned_date = moment(time).format('YYYY-MM-DD HH:mm:ss');
+    const sampling_date = moment(time).format('YYYY-MM-DD HH:mm:ss');
+    const res = await getCreateSampling(
+      param.id,
+      planned_date,
+      sampling_date,
+      samplingResult
+    );
+    if (res.code === 200) {
+      dingAlert('上传成功', '正确', '确认');
+      window.location.href = `/detail/resident/${param.id}`;
     }
   };
+
+  useEffect(() => {
+    setTime(moment().format('YYYY-MM-DDTHH:mm'));
+  }, []);
   return (
     <Page title="上报采样结果">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>检测日期</InputLabel>
+          <InputLabel>采样日期</InputLabel>
           <FormControl fullWidth>
-            <Input
-              name="detectDate"
-              onChange={updateDetect}
-              placeholder="请输入检测日期"
-              minRows={2}
-              maxRows={600}
-              disableUnderline
-              multiline
+            <TextField
+              id="datetime-local"
+              type="datetime-local"
+              onChange={(e: any) => {
+                setTime(e.target.value);
+              }}
+              value={time}
+              InputLabelProps={{
+                shrink: true
+              }}
             />
           </FormControl>
         </Box>
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>检测结果</InputLabel>
+          <InputLabel>采样结果</InputLabel>
           <FormControl fullWidth>
-            <Input
-              name="detectResult"
-              //   value={option}
-              onChange={updateDetect}
-              placeholder="请输入检测结果"
-              minRows={2}
-              maxRows={600}
-              disableUnderline
-              multiline
-            />
+            <Select
+              name="sampling_result"
+              value={samplingResult}
+              native
+              onChange={(e: any) => {
+                setSamplingResult(e.target.value);
+              }}
+            >
+              <option aria-label="None" value="">
+                无
+              </option>
+              <option value="阴性">阴性</option>
+              <option value="阳性">阳性</option>
+            </Select>
           </FormControl>
         </Box>
       </Paper>
