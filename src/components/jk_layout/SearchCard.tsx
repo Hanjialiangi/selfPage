@@ -100,9 +100,9 @@ export default function SearchCard(): JSX.Element {
                     人员属性
                   </option>
                   <option value="密接">密切接触</option>
-                  <option value="非密接">非密切接触</option>
-                  <option value="一般接触">一般接触人员</option>
-                  <option value="重点接触">重点接触人员</option>
+                  <option value="次密接">次密切接触</option>
+                  <option value="一般接触者">一般接触者</option>
+                  <option value="重点人员">重点人员</option>
                 </Select>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <ListItemIcon>

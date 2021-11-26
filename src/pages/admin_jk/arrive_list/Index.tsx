@@ -92,6 +92,7 @@ export default function ArriveListPage(): JSX.Element {
   //提交按钮
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
+    e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get('name');
     const contact = formData.get('contact');
