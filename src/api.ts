@@ -268,9 +268,11 @@ export function getTransferCommunity(
 }
 
 //社区接收人员
-export function getCommunityReceive(): APIResponse<any> {
-  const open_ids = ['3f13deea-63f7-4a3d-b925-2aedab9189a9'];
-  const time = '2021-11-15 10:00:00';
+export function getCommunityReceive(
+  open_id: string,
+  time: string
+): APIResponse<any> {
+  const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
     time

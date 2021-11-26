@@ -110,13 +110,22 @@ export default function PeopleDetailPage(): JSX.Element {
                       <InfoNameIcon />
                       &nbsp;{name}的基本信息
                     </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color={'secondary'}
-                      component={'span'}
-                    >
-                      {residentProperty}
-                    </Typography>
+                    {residentProperty === '密接' ||
+                    residentProperty === '次密接' ? (
+                      <Typography
+                        variant="subtitle1"
+                        color={'secondary'}
+                        component={'span'}
+                      >
+                        {residentProperty}
+                      </Typography>
+                    ) : (
+                      <Typography variant="subtitle1" component={'span'}>
+                        <span style={{ color: 'green' }}>
+                          {residentProperty}
+                        </span>
+                      </Typography>
+                    )}
                   </div>
                   <Typography variant="body2" style={{ marginTop: '10px' }}>
                     <span style={{ color: 'gray' }}>隔离类型：</span>
