@@ -30,10 +30,10 @@ export default function PeopleDetailPage(): JSX.Element {
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
   /* 是否显示转运按钮 */
-  const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(true);
+  const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
   /* 是否显示接收并开始隔离 */
-  const [isArriveButtonVisible, setisArriveButtonVisible] = useState(true);
+  const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
   /* 转运 */
   const handleTransferOrder = async () => {
@@ -77,6 +77,12 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.key_name === '预计隔离酒店') {
           setExpandInformation(res.data.slice(index)); //初始卡片渲染
           setInformation(res.data.slice(0, index + 1)); //伸展卡片渲染
+        }
+        if (item.value === '待转运') {
+          setIsTransferButtonVisible(true);
+        }
+        if (item.value === '转运中') {
+          setisArriveButtonVisible(true);
         }
       });
     }
@@ -147,7 +153,14 @@ export default function PeopleDetailPage(): JSX.Element {
                 <InfoTransfer />
                 &nbsp;转运
               </Button>
-              <div className="DetailBoxDiv">|</div>
+            </Box>
+          )}
+          {isArriveButtonVisible && (
+            <Box
+              margin={1.5}
+              className="DetailBox"
+              // style={{  }}
+            >
               <Button
                 variant="text"
                 color="primary"
@@ -160,47 +173,43 @@ export default function PeopleDetailPage(): JSX.Element {
               </Button>
             </Box>
           )}
-          {isArriveButtonVisible && (
-            <>
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleSamplingResult}
-                  className="DetailBoxButton"
-                  style={{ width: '45%' }}
-                >
-                  <InfoSamplingIcon />
-                  &nbsp;上报采样结果
-                </Button>
-                <div className="DetailBoxDiv">|</div>
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleHealth}
-                  className="DetailBoxButton"
-                  style={{ width: '45%' }}
-                >
-                  <InfoHealthIcon />
-                  &nbsp;上报健康状况
-                </Button>
-              </Box>
-            </>
-          )}
-          {isTransferButtonVisible && (
+          <>
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleFixOrder}
+                onClick={handleSamplingResult}
                 className="DetailBoxButton"
-                style={{ width: '95%' }}
+                style={{ width: '45%' }}
               >
-                <InfoFixIcon />
-                &nbsp;修改基本信息
+                <InfoSamplingIcon />
+                &nbsp;上报采样结果
+              </Button>
+              <div className="DetailBoxDiv">|</div>
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleHealth}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <InfoHealthIcon />
+                &nbsp;上报健康状况
               </Button>
             </Box>
-          )}
+          </>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleFixOrder}
+              className="DetailBoxButton"
+              style={{ width: '95%' }}
+            >
+              <InfoFixIcon />
+              &nbsp;修改基本信息
+            </Button>
+          </Box>
         </Paper>
       </>
     </Page>
