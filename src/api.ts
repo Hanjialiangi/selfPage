@@ -186,17 +186,6 @@ export function getHotelList(): APIResponse<any> {
   return request('/api/hotel/search');
 }
 
-//酒店添加人员并隔离
-export function getCreateHotelResident(address?: string): APIResponse<any> {
-  const open_id = '3f13deea-63f7-4a3d-b925-2aedab9189a9';
-  const data = JSON.stringify({
-    address
-  });
-  return request('/api/hotel?open_id=' + open_id, data, {
-    method: 'POST'
-  });
-}
-
 //酒店接收人员
 export function getHotelReceive(
   open_id: string,
