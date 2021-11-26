@@ -98,7 +98,7 @@ export default function PeopleDetailPage(): JSX.Element {
         <Paper elevation={0} square>
           <Box padding={1.5}>
             <Card>
-              <Paper elevation={0} square>
+              <Paper elevation={0} square paddingBottom={1}>
                 <Box margin={1.5}>
                   <div
                     style={{
@@ -137,78 +137,80 @@ export default function PeopleDetailPage(): JSX.Element {
           </Box>
         </Paper>
         <Paper elevation={0}>
-          {isTransferButtonVisible && (
-            <Box
-              margin={1.5}
-              className="DetailBox"
-              // style={{  }}
-            >
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferOrder}
-                className="DetailBoxButton"
-                style={{ width: '45%' }}
+          <Box paddingTop={1.5} paddingBottom={1}>
+            {isTransferButtonVisible && (
+              <Box
+                margin={1.5}
+                className="DetailBox"
+                // style={{  }}
               >
-                <InfoTransfer />
-                &nbsp;转运
-              </Button>
-            </Box>
-          )}
-          {isArriveButtonVisible && (
-            <Box
-              margin={1.5}
-              className="DetailBox"
-              // style={{  }}
-            >
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleArrive}
-                className="DetailBoxButton"
-                style={{ width: '45%' }}
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleTransferOrder}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <InfoTransfer />
+                  &nbsp;转运
+                </Button>
+              </Box>
+            )}
+            {isArriveButtonVisible && (
+              <Box
+                margin={1.5}
+                className="DetailBox"
+                // style={{  }}
               >
-                <InfoIsolateIcon />
-                &nbsp;接收并开始隔离
-              </Button>
-            </Box>
-          )}
-          <>
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleArrive}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <InfoIsolateIcon />
+                  &nbsp;接收并开始隔离
+                </Button>
+              </Box>
+            )}
+            <>
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleSamplingResult}
+                  className="DetailBoxButton"
+                  style={{ width: '45%' }}
+                >
+                  <InfoSamplingIcon />
+                  &nbsp;上报采样结果
+                </Button>
+                <div className="DetailBoxDiv">|</div>
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleHealth}
+                  className="DetailBoxButton"
+                  style={{ width: '45%' }}
+                >
+                  <InfoHealthIcon />
+                  &nbsp;上报健康状况
+                </Button>
+              </Box>
+            </>
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleSamplingResult}
+                onClick={handleFixOrder}
                 className="DetailBoxButton"
-                style={{ width: '45%' }}
+                style={{ width: '95%' }}
               >
-                <InfoSamplingIcon />
-                &nbsp;上报采样结果
-              </Button>
-              <div className="DetailBoxDiv">|</div>
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleHealth}
-                className="DetailBoxButton"
-                style={{ width: '45%' }}
-              >
-                <InfoHealthIcon />
-                &nbsp;上报健康状况
+                <InfoFixIcon />
+                &nbsp;修改基本信息
               </Button>
             </Box>
-          </>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleFixOrder}
-              className="DetailBoxButton"
-              style={{ width: '95%' }}
-            >
-              <InfoFixIcon />
-              &nbsp;修改基本信息
-            </Button>
           </Box>
         </Paper>
       </>
