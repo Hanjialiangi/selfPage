@@ -9,7 +9,7 @@ import {
   Select
 } from '@material-ui/core';
 import { InputLabel, TextField } from '@material-ui/core';
-import { getHotelReceive, getHotelList } from '@src/api';
+import { getHotelReceive, getHotelList, getResidentInfo } from '@src/api';
 import { useParams } from 'react-router-dom';
 import { dingAlert } from '@src/dingtalkAPI';
 import moment from 'moment';
@@ -42,9 +42,21 @@ export default function Arrive(): JSX.Element {
       dingAlert('接收失败', '错误', '确认');
     }
   };
+  const Init = async () => {
+    const res = await getResidentInfo(param.id);
+    if (res.code === 200) {
+      res.data.map((item: any) => {
+        if (item.key === 'planned_quarantine_hotel') {
+          setSelect(item.value);
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     setTime(moment().format('YYYY-MM-DDTHH:mm'));
     setReleaseTime(moment().add(14, 'days').format('YYYY-MM-DDTHH:mm')); //14天后时间
+    Init();
   }, []);
 
   //获取酒店列表
