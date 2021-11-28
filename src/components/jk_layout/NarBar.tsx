@@ -121,14 +121,14 @@ export default function NarBar(): JSX.Element {
               aria-label="nav tabs example"
             >
               <LinkTab
-                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
-                label="被隔离"
-                href="/transfer/resident_list"
+                icon={value !== 0 ? <TransferIcon /> : <TransferActiceIcon />}
+                label="待转运"
+                href={getURL('/transfer/transfer_list')}
               ></LinkTab>
               <LinkTab
-                icon={value !== 1 ? <TransferIcon /> : <TransferActiceIcon />}
-                label="待转运"
-                href="/transfer/transfer_list"
+                icon={value !== 1 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={getURL('/transfer/resident_list')}
               ></LinkTab>
             </Tabs>
           ) : userInfo.role === 'hotel_medical_team' ||
@@ -140,30 +140,30 @@ export default function NarBar(): JSX.Element {
               aria-label="nav tabs example"
             >
               <LinkTab
-                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
-                label="被隔离"
-                href={
-                  userInfo.role === 'hotel_medical_team'
-                    ? '/hotel_doctor/resident_list'
-                    : '/community/resident_list'
-                }
-              ></LinkTab>
-              <LinkTab
-                icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
+                icon={value !== 0 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收"
                 href={
                   userInfo.role === 'hotel_medical_team'
-                    ? '/hotel_doctor/arrive_list'
-                    : '/community/arrive_list'
+                    ? getURL('/hotel_doctor/arrive_list')
+                    : getURL('/community/arrive_list')
                 }
               />
+              <LinkTab
+                icon={value !== 1 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={
+                  userInfo.role === 'hotel_medical_team'
+                    ? getURL('/hotel_doctor/resident_list')
+                    : getURL('/community/resident_list')
+                }
+              ></LinkTab>
               <LinkTab
                 icon={value !== 2 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
                 href={
                   userInfo.role === 'hotel_medical_team'
-                    ? '/hotel_doctor/test_list'
-                    : '/community/test_list'
+                    ? getURL('/hotel_doctor/test_list')
+                    : getURL('/community/test_list')
                 }
               />
             </Tabs>
