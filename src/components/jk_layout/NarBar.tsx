@@ -46,7 +46,7 @@ export default function NarBar(): JSX.Element {
     let name = 0;
     if (judge === 'detail' || judge === 'error') {
       name = 100;
-    } else if (judge === 'admin_jk' || judge === 'transfer') {
+    } else if (judge === 'admin_jk') {
       if (initval === 'transfer_list') {
         name = 0;
       } else if (initval === 'arrive_list') {
@@ -60,11 +60,19 @@ export default function NarBar(): JSX.Element {
       } else {
         name = 999;
       }
+    } else if (judge === 'transfer') {
+      if (initval === 'transfer_list') {
+        name = 0;
+      } else if (initval === 'resident_list') {
+        name = 1;
+      }else {
+        name = 999;
+      }
     } else {
       if (initval === 'resident_list') {
-        name = 0;
-      } else if (initval === 'arrive_list') {
         name = 1;
+      } else if (initval === 'arrive_list') {
+        name = 0;
       } else if (initval === 'test_list') {
         name = 2;
       } else {

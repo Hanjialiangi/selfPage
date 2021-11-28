@@ -15,6 +15,8 @@ import {
   InfoTransfer
 } from '@src/assets/svg/picture';
 import StatusIcon from '@components/StatusIcon';
+import { useSelector } from 'react-redux';
+import { userInfoSelector } from '@src/redux/selectors';
 
 export type Properties = {
   key: string;
@@ -25,6 +27,7 @@ export type Properties = {
 
 const status = 3; //状态
 export default function PeopleDetailPage(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
   const param: { id: string } = useParams(); //获取路由参数
   const [name, setName] = useState(''); //人员名字
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
@@ -98,7 +101,7 @@ export default function PeopleDetailPage(): JSX.Element {
         <Paper elevation={0} square>
           <Box padding={1.5}>
             <Card>
-              <Paper elevation={0} square paddingBottom={1}>
+              <Paper elevation={0} square>
                 <Box margin={1.5}>
                   <div
                     style={{
@@ -147,7 +150,7 @@ export default function PeopleDetailPage(): JSX.Element {
         </Paper>
         <Paper elevation={0}>
           <Box paddingTop={1.5} paddingBottom={1}>
-            {isTransferButtonVisible && (
+            {userInfo.role === 'transfer_team' && isTransferButtonVisible && (
               <Box
                 margin={1.5}
                 className="DetailBox"
@@ -165,24 +168,26 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Button>
               </Box>
             )}
-            {isArriveButtonVisible && (
-              <Box
-                margin={1.5}
-                className="DetailBox"
-                // style={{  }}
-              >
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleArrive}
-                  className="DetailBoxButton"
-                  style={{ width: '100%' }}
+            {(userInfo.role === 'hotel_medical_team' ||
+              userInfo.role === 'community') &&
+              isArriveButtonVisible && (
+                <Box
+                  margin={1.5}
+                  className="DetailBox"
+                  // style={{  }}
                 >
-                  <InfoIsolateIcon />
-                  &nbsp;接收并开始隔离
-                </Button>
-              </Box>
-            )}
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handleArrive}
+                    className="DetailBoxButton"
+                    style={{ width: '100%' }}
+                  >
+                    <InfoIsolateIcon />
+                    &nbsp;接收并开始隔离
+                  </Button>
+                </Box>
+              )}
             <>
               <Box margin={1.5} className="DetailBox">
                 <Button
