@@ -107,7 +107,7 @@ export default function Arrive(): JSX.Element {
         style={{ paddingBottom: '10px' }}
         onSubmit={handleSubmit}
       >
-        {!showCommunity ? (
+        {showCommunity ? (
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>

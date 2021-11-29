@@ -224,7 +224,7 @@ export default function Routes(): JSX.Element {
           <HotelDoctorHomePage />
         </Route>
         <Route exact path="/">
-          <Redirect to="/hotel_doctor/resident_list" />
+          <Redirect to="/hotel_doctor/arrive_list" />
         </Route>
         {ErrorShow()}
       </Switch>
@@ -248,7 +248,7 @@ export default function Routes(): JSX.Element {
           <CommunityHomePage />
         </Route>
         <Route exact path="/">
-          <Redirect to="/community/resident_list" />
+          <Redirect to="/community/arrive_list" />
         </Route>
         {ErrorShow()}
       </Switch>

@@ -150,26 +150,29 @@ export default function PeopleDetailPage(): JSX.Element {
         </Paper>
         <Paper elevation={0}>
           <Box paddingTop={1.5} paddingBottom={1}>
-            {userInfo.role === 'transfer_team' && isTransferButtonVisible && (
-              <Box
-                margin={1.5}
-                className="DetailBox"
-                // style={{  }}
-              >
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleTransferOrder}
-                  className="DetailBoxButton"
-                  style={{ width: '100%' }}
+            {(userInfo.role === 'transfer_team' ||
+              userInfo.role === 'wh_cdc') &&
+              isTransferButtonVisible && (
+                <Box
+                  margin={1.5}
+                  className="DetailBox"
+                  // style={{  }}
                 >
-                  <InfoTransfer />
-                  &nbsp;转运
-                </Button>
-              </Box>
-            )}
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handleTransferOrder}
+                    className="DetailBoxButton"
+                    style={{ width: '100%' }}
+                  >
+                    <InfoTransfer />
+                    &nbsp;转运
+                  </Button>
+                </Box>
+              )}
             {(userInfo.role === 'hotel_medical_team' ||
-              userInfo.role === 'community') &&
+              userInfo.role === 'community' ||
+              userInfo.role === 'wh_cdc') &&
               isArriveButtonVisible && (
                 <Box
                   margin={1.5}
