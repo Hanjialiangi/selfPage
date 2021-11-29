@@ -18,7 +18,7 @@ type PageProps = React.PropsWithChildren<{
 }>;
 
 export default function Page(props: PageProps): JSX.Element {
-  useDocumentTitle(props.title || '工单');
+  useDocumentTitle(props.title || '');
 
   const pageRef = useRef<HTMLElement>(null);
 

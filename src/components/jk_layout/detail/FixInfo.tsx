@@ -98,6 +98,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                 <FormControl fullWidth>
                   <Input
                     name={item.key}
+                    placeholder="请输入内容"
                     defaultValue={item.value}
                     minRows={2}
                     maxRows={600}
