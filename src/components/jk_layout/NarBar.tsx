@@ -65,7 +65,19 @@ export default function NarBar(): JSX.Element {
         name = 0;
       } else if (initval === 'resident_list') {
         name = 1;
-      }else {
+      } else {
+        name = 999;
+      }
+    } else if (judge === 'synthesis') {
+      if (initval === 'transfer_list') {
+        name = 0;
+      } else if (initval === 'arrive_list') {
+        name = 1;
+      } else if (initval === 'resident_list') {
+        name = 2;
+      } else if (initval === 'test_list') {
+        name = 3;
+      } else {
         name = 999;
       }
     } else {
@@ -89,7 +101,7 @@ export default function NarBar(): JSX.Element {
           className="tab"
           sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
         >
-          {userInfo.role === 'wh_cdc' ? (
+          {userInfo.role.includes('wh_cdc') ? (
             <Tabs
               value={value}
               onChange={handleChange}
@@ -121,7 +133,9 @@ export default function NarBar(): JSX.Element {
                 href={getURL('/admin_jk/test_list')}
               />
             </Tabs>
-          ) : userInfo.role === 'transfer_team' ? (
+          ) : userInfo.role.includes('transfer_team') &&
+            !userInfo.role.includes('hotel_medical_team') &&
+            !userInfo.role.includes('community') ? (
             <Tabs
               style={{ width: '100%' }}
               value={value}
@@ -139,8 +153,38 @@ export default function NarBar(): JSX.Element {
                 href={getURL('/transfer/resident_list')}
               ></LinkTab>
             </Tabs>
-          ) : userInfo.role === 'hotel_medical_team' ||
-            userInfo.role === 'community' ? (
+          ) : userInfo.role.includes('transfer_team') &&
+            (userInfo.role.includes('hotel_medical_team') ||
+              userInfo.role.includes('community')) ? (
+            <Tabs
+              style={{ width: '100%' }}
+              value={value}
+              onChange={handleChange}
+              aria-label="nav tabs example"
+            >
+              <LinkTab
+                icon={value !== 0 ? <TransferIcon /> : <TransferActiceIcon />}
+                label="待转运"
+                href={getURL('/synthesis/transfer_list')}
+              ></LinkTab>
+              <LinkTab
+                icon={value !== 1 ? <ArriveIcon /> : <ArriveActiveIcon />}
+                label="待接收"
+                href={getURL('/synthesis/arrive_list')}
+              />
+              <LinkTab
+                icon={value !== 2 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={getURL('/synthesis/resident_list')}
+              ></LinkTab>
+              <LinkTab
+                icon={value !== 3 ? <TestIcon /> : <TestActiveIcon />}
+                label="本日采样"
+                href={getURL('/synthesis/test_list')}
+              />
+            </Tabs>
+          ) : userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('community') ? (
             <Tabs
               style={{ width: '100%' }}
               value={value}
@@ -151,7 +195,7 @@ export default function NarBar(): JSX.Element {
                 icon={value !== 0 ? <ArriveIcon /> : <ArriveActiveIcon />}
                 label="待接收"
                 href={
-                  userInfo.role === 'hotel_medical_team'
+                  userInfo.role.includes('hotel_medical_team')
                     ? getURL('/hotel_doctor/arrive_list')
                     : getURL('/community/arrive_list')
                 }
@@ -160,7 +204,7 @@ export default function NarBar(): JSX.Element {
                 icon={value !== 1 ? <IsolationIcon /> : <IsolationActiveIcon />}
                 label="管理中"
                 href={
-                  userInfo.role === 'hotel_medical_team'
+                  userInfo.role.includes('hotel_medical_team')
                     ? getURL('/hotel_doctor/resident_list')
                     : getURL('/community/resident_list')
                 }
@@ -169,7 +213,7 @@ export default function NarBar(): JSX.Element {
                 icon={value !== 2 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
                 href={
-                  userInfo.role === 'hotel_medical_team'
+                  userInfo.role.includes('hotel_medical_team')
                     ? getURL('/hotel_doctor/test_list')
                     : getURL('/community/test_list')
                 }

@@ -155,7 +155,7 @@ export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role === 'wh_cdc') {
+  if (userInfo.role.includes('wh_cdc')) {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -185,7 +185,12 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  if (userInfo.role === 'transfer_team') {
+  if (
+    userInfo.role.includes('transfer_team') &&
+    !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('hotel_medical_team') &&
+    !userInfo.role.includes('community')
+  ) {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -207,7 +212,11 @@ export default function Routes(): JSX.Element {
   }
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role === 'hotel_medical_team') {
+  if (
+    userInfo.role.includes('hotel_medical_team') &&
+    !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('transfer_team')
+  ) {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -231,7 +240,11 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  if (userInfo.role === 'community') {
+  if (
+    userInfo.role.includes('community') &&
+    !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('transfer_team')
+  ) {
     return (
       <Switch>
         {getUserDetailRoutes()}
@@ -251,6 +264,34 @@ export default function Routes(): JSX.Element {
           <Redirect to="/community/arrive_list" />
         </Route>
         {ErrorShow()}
+      </Switch>
+    );
+  }
+
+  if (
+    userInfo.role.includes('transfer_team') &&
+    !userInfo.role.includes('wh_cdc') &&
+    (userInfo.role.includes('hotel_medical_team') ||
+      userInfo.role.includes('community'))
+  ) {
+    return (
+      <Switch>
+        {getUserDetailRoutes()}
+        <Route path="/synthesis/resident_list">
+          <ResidentListPage />
+        </Route>
+        <Route path="/synthesis/transfer_list">
+          <TransferListPage />
+        </Route>
+        <Route path="/synthesis/arrive_list">
+          <ArriveListPage />
+        </Route>
+        <Route path="/synthesis/test_list">
+          <TestListPage />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/synthesis/transfer_list" />
+        </Route>
       </Switch>
     );
   }

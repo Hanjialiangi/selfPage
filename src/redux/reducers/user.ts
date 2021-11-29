@@ -4,13 +4,13 @@ import { Actions } from '@src/redux/actions';
 export interface UserState {
   id: number;
   name: string;
-  role: string;
+  role: Array<string>;
 }
 
 const initialState: UserState = {
   id: 0,
   name: '',
-  role: ''
+  role: []
 };
 
 export default function (

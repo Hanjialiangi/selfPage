@@ -150,8 +150,8 @@ export default function PeopleDetailPage(): JSX.Element {
         </Paper>
         <Paper elevation={0}>
           <Box paddingTop={1.5} paddingBottom={1}>
-            {(userInfo.role === 'transfer_team' ||
-              userInfo.role === 'wh_cdc') &&
+            {(userInfo.role.includes('transfer_team') ||
+              userInfo.role.includes('wh_cdc')) &&
               isTransferButtonVisible && (
                 <Box
                   margin={1.5}
@@ -170,9 +170,9 @@ export default function PeopleDetailPage(): JSX.Element {
                   </Button>
                 </Box>
               )}
-            {(userInfo.role === 'hotel_medical_team' ||
-              userInfo.role === 'community' ||
-              userInfo.role === 'wh_cdc') &&
+            {(userInfo.role.includes('hotel_medical_team') ||
+              userInfo.role.includes('community') ||
+              userInfo.role.includes('wh_cdc')) &&
               isArriveButtonVisible && (
                 <Box
                   margin={1.5}

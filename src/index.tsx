@@ -44,7 +44,7 @@ const App = () => {
 
   //设置登录信息
   const setAuthInfo = useCallback(
-    (id: number, name: string, role: string, token?: string) => {
+    (id: number, name: string, role: string[], token?: string) => {
       if (token) {
         dispatch(updateAuthAction(`Bearer ${token}`));
       }
@@ -69,6 +69,7 @@ const App = () => {
 
   useEffect(() => {
     handleVisibilityChange();
+    const ArrayRole: any = []; //权限数组
 
     window.login = async (reLogin = false) => {
       const savedAuth = getCookie(CookieKey.AUTHORIZATION);
@@ -80,10 +81,14 @@ const App = () => {
           return;
         }
 
+        //存放权限数组
+        userInfoRes.data.roles.map((item: any) => {
+          return ArrayRole.push(item.key);
+        });
         setAuthInfo(
           userInfoRes.data.roles[0].id,
           userInfoRes.data.name,
-          userInfoRes.data.roles[0].key
+          ArrayRole
         );
         return;
       }
@@ -92,7 +97,7 @@ const App = () => {
 
       //开发环境登录
       if (process.env.NODE_ENV === Mode.DEVELOPMENT) {
-        const authRes = await auth('', Dingtalk.AGENT_ID, 'debug_user_cdc'); //140236142620880278
+        const authRes = await auth('', Dingtalk.AGENT_ID, 'debug_user_cdc'); //140236142620880278 67672261668211
         if (authRes.code !== 200) {
           return;
         }
@@ -101,7 +106,7 @@ const App = () => {
         setAuthInfo(
           authRes.data.user_id,
           authRes.data.user_name,
-          authRes.data.role,
+          ArrayRole,
           authRes.data.token
         );
         return;
@@ -123,7 +128,7 @@ const App = () => {
       setAuthInfo(
         authRes.data.user_id,
         authRes.data.user_name,
-        authRes.data.role,
+        ArrayRole,
         authRes.data.token
       );
     };
