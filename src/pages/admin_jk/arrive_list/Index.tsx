@@ -39,7 +39,7 @@ export default function ArriveListPage(): JSX.Element {
   const handleSearch = async (
     page = 1,
     formvalue = {},
-    current_stage = ['转运中']
+    current_stage = ['转运至酒店中', '转运至社区中']
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_stage);
     const detailResult: DR = [

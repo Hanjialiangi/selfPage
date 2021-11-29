@@ -84,7 +84,7 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.value === '待转运') {
           setIsTransferButtonVisible(true);
         }
-        if (item.value === '转运中') {
+        if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
           setisArriveButtonVisible(true);
         }
       });
