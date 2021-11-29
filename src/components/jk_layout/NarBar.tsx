@@ -18,6 +18,7 @@ import {
   EndManageActiveIcon
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
+import ErrorPage from '@pages/403/Error';
 
 interface LinkTabProps {
   label?: string;
@@ -219,7 +220,9 @@ export default function NarBar(): JSX.Element {
                 }
               />
             </Tabs>
-          ) : null}
+          ) : (
+            <ErrorPage />
+          )}
         </Box>
       ) : null}
     </Box>

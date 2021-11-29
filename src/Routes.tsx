@@ -292,6 +292,7 @@ export default function Routes(): JSX.Element {
         <Route exact path="/">
           <Redirect to="/synthesis/transfer_list" />
         </Route>
+        {ErrorShow()}
       </Switch>
     );
   }

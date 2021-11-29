@@ -26,6 +26,7 @@ import {
 } from './utils';
 import { auth, getUserInfo } from '@src/api';
 import {
+  dingAlert,
   dingGetCode,
   dingPrompt,
   dingSetRight,
@@ -97,8 +98,13 @@ const App = () => {
 
       //开发环境登录
       if (process.env.NODE_ENV === Mode.DEVELOPMENT) {
-        const authRes = await auth('', Dingtalk.AGENT_ID, 'debug_user_cdc'); //140236142620880278 67672261668211
+        const authRes = await auth(
+          '',
+          Dingtalk.AGENT_ID,
+          '140236142620880278  '
+        ); //140236142620880278 67672261668211
         if (authRes.code !== 200) {
+          dingAlert(authRes.message, '失败', '确认');
           return;
         }
 
@@ -121,6 +127,7 @@ const App = () => {
       const dingCode = await dingGetCode(Dingtalk.CORP_ID);
       const authRes = await auth(dingCode.code, Dingtalk.AGENT_ID);
       if (authRes.code !== 200) {
+        dingAlert(authRes.message, '失败', '确认');
         return;
       }
 
