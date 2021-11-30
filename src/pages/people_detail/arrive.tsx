@@ -109,7 +109,7 @@ export default function Arrive(): JSX.Element {
               <Box marginY={1.5} padding={1.5}>
                 <InputLabel>接收时间</InputLabel>
                 <FormControl fullWidth>
-                  <input
+                  {/* <input
                     type="datetime-local"
                     onChange={(e: any) => {
                       setTime(e.target.value);
@@ -120,8 +120,8 @@ export default function Arrive(): JSX.Element {
                       );
                     }}
                     value={time}
-                  />
-                  {/* <TextField
+                  /> */}
+                  <TextField
                     id="datetime-local"
                     type="datetime-local"
                     onChange={(e: any) => {
@@ -136,7 +136,7 @@ export default function Arrive(): JSX.Element {
                     InputLabelProps={{
                       shrink: true
                     }}
-                  /> */}
+                  />
                 </FormControl>
               </Box>
             </Paper>
@@ -183,14 +183,14 @@ export default function Arrive(): JSX.Element {
               <Box marginY={1.5} padding={1.5}>
                 <InputLabel>预计解除隔离时间</InputLabel>
                 <FormControl fullWidth>
-                  <input
+                  {/* <input
                     type="datetime-local"
+                    value={releaseTime}
                     onChange={(e: any) => {
                       setReleaseTime(e.target.value);
                     }}
-                    value={time}
-                  />
-                  {/* <TextField
+                  /> */}
+                  <TextField
                     id="datetime-local"
                     type="datetime-local"
                     onChange={(e: any) => {
@@ -200,7 +200,7 @@ export default function Arrive(): JSX.Element {
                     InputLabelProps={{
                       shrink: true
                     }}
-                  /> */}
+                  />
                 </FormControl>
               </Box>
             </Paper>
