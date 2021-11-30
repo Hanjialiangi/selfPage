@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import BackupIcon from '@material-ui/icons/Backup';
 import PublishIcon from '@material-ui/icons/Publish';
+import { getURL } from '@src/utils';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,12 +20,12 @@ export function UploadButton(): JSX.Element {
 
   //健康弹窗
   const HealthyConfirm = () => {
-    window.location.href = '/dist/';
+    window.location.href = getURL('/');
   };
 
   //人员弹窗
   const PeopleConfirm = () => {
-    window.location.href = '/dist/';
+    window.location.href = getURL('/');
   };
   return (
     <div className={classes.root}>

@@ -6,6 +6,7 @@ import { getCreateSampling } from '@src/api';
 import { useParams } from 'react-router';
 import moment from 'moment';
 import { dingAlert } from '@src/dingtalkAPI';
+import { getURL } from '@src/utils';
 
 export default function SamplingResultPage(): JSX.Element {
   const [time, setTime] = useState(''); //统一采样时间
@@ -23,7 +24,7 @@ export default function SamplingResultPage(): JSX.Element {
     );
     if (res.code === 200) {
       dingAlert('上传成功', '正确', '确认');
-      window.location.href = `/detail/resident/${param.id}`;
+      window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
 

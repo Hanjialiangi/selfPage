@@ -18,6 +18,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { dingAlert } from '@src/dingtalkAPI';
 import moment from 'moment';
+import { getURL } from '@src/utils';
 
 export default function Arrive(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
@@ -46,7 +47,7 @@ export default function Arrive(): JSX.Element {
       const res = await getHotelReceive(param.id, formvalue);
       if (res.code === 200) {
         dingAlert('接收成功', '正确', '确认');
-        window.location.href = `/detail/resident/${param.id}`;
+        window.location.href = getURL(`/detail/resident/${param.id}`);
       } else {
         dingAlert('接收失败', '错误', '确认');
       }
@@ -54,7 +55,7 @@ export default function Arrive(): JSX.Element {
       const res = await getCommunityReceive(param.id, time);
       if (res.code === 200) {
         dingAlert('社区接收成功', '正确', '确认');
-        window.location.href = `/detail/resident/${param.id}`;
+        window.location.href = getURL(`/detail/resident/${param.id}`);
       } else {
         dingAlert('接收失败', '错误', '确认');
       }

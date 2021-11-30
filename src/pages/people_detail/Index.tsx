@@ -17,6 +17,7 @@ import {
 import StatusIcon from '@components/StatusIcon';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '@src/redux/selectors';
+import { getURL } from '@src/utils';
 
 export type Properties = {
   key: string;
@@ -40,25 +41,25 @@ export default function PeopleDetailPage(): JSX.Element {
 
   /* 转运 */
   const handleTransferOrder = async () => {
-    window.location.href = `/detail/transfer/${param.id}/edit`;
+    window.location.href = getURL(`/detail/transfer/${param.id}/edit`);
   };
 
   /* 修改信息 */
   const handleFixOrder = async () => {
-    window.location.href = `/detail/resident/${param.id}/baseinfo/edit`;
+    window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
   };
   /* 修改接收并开始隔离 */
   const handleArrive = async () => {
-    window.location.href = `/detail/arrive/${param.id}/edit`;
+    window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
   };
   /* 上报采样结果 */
   const handleSamplingResult = async () => {
-    window.location.href = `/detail/samplingresult/${param.id}/edit`;
+    window.location.href = getURL(`/detail/samplingresult/${param.id}/edit`);
   };
 
   /* 上报健康状况 */
   const handleHealth = async () => {
-    window.location.href = `/detail/health/${param.id}/edit`;
+    window.location.href = getURL(`/detail/health/${param.id}/edit`);
   };
 
   const [information, setInformation] = useState<Properties[]>();
