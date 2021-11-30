@@ -19,6 +19,7 @@ type DR = [
 ];
 
 const pageSize = 10; //页面大小
+let sum = 0; //累加次数
 export default function ArriveListPage(): JSX.Element {
   const [data, setData] = useState([
     {
@@ -123,12 +124,13 @@ export default function ArriveListPage(): JSX.Element {
     const wrapper = document.querySelector('.wrapper');
     if (wrapper) {
       const bs = BScrollConfig(wrapper);
-      if (total > 1) {
+      if (sum < total - 1) {
         bs.on('pullingUp', async () => {
           //获取页数
-          await handleSearch(current + 1, form);
+          sum++;
+          await handleSearch(current + sum, form);
           // location.href = `/admin_jk/resident_list/${current + 1}`;
-          if (current < total) {
+          if (current + sum < total) {
             setTimeout(() => {
               bs.finishPullUp();
             }, 5000);

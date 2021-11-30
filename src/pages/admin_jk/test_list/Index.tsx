@@ -6,8 +6,8 @@ import { BScrollConfig } from '@src/utils';
 import TestCard from '@components/jk_layout/TestCard';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 
-const pageSize = 10; //页面大小
-
+const pageSize = 10;
+let sum = 0;
 export default function TestListPage(): JSX.Element {
   const [data, setData] = useState([
     {
@@ -67,12 +67,13 @@ export default function TestListPage(): JSX.Element {
     const wrapper = document.querySelector('.wrapper');
     if (wrapper) {
       const bs = BScrollConfig(wrapper);
-      if (total > 1) {
+      if (sum < total - 1) {
         bs.on('pullingUp', async () => {
           //获取页数
-          await handleSearch(current + 1, form);
+          sum++;
+          await handleSearch(current + sum, form);
           // location.href = `/admin_jk/resident_list/${current + 1}`;
-          if (current < total) {
+          if (current + sum < total) {
             setTimeout(() => {
               bs.finishPullUp();
             }, 5000);
