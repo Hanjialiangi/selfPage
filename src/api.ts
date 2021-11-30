@@ -68,7 +68,7 @@ async function request<T>(
   }
 
   const response = await fetch(
-    url,
+    process.env.API_PREFIX + url,
     getPayload(authorization, method, data, contentType)
   );
 
