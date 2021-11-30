@@ -81,7 +81,10 @@ const App = () => {
         if (userInfoRes.code !== 200) {
           return;
         }
-
+        if (!userInfoRes.data.roles[0]) {
+          dingAlert('暂无权限访问', '失败', '确认');
+          return;
+        }
         //存放权限数组
         userInfoRes.data.roles.map((item: any) => {
           return ArrayRole.push(item.key);
