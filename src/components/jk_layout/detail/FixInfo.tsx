@@ -74,7 +74,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           if (item.key === 'resident_property') {
             return (
               <Paper elevation={0} square key={index}>
-                <Box marginY={1.5} padding={1.5}>
+                <Box marginY={0.5} padding={0.5}>
                   <InputLabel>{item.key_name}</InputLabel>
                   <Select
                     name="resident_property"
@@ -98,7 +98,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           if (item.key === 'quarantine_type') {
             return (
               <Paper elevation={0} square key={index}>
-                <Box marginY={1.5} padding={1.5}>
+                <Box marginY={0.5} padding={0.5}>
                   <InputLabel>{item.key_name}</InputLabel>
                   <Select
                     name="quarantine_type"
@@ -121,15 +121,13 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           }
           return (
             <Paper elevation={0} square key={index}>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.5} padding={0.5}>
                 <InputLabel>{item.key_name}</InputLabel>
                 <FormControl fullWidth>
                   <Input
                     name={item.key}
                     placeholder="请输入内容"
-                    value={item.value}
-                    minRows={2}
-                    maxRows={600}
+                    defaultValue={item.value}
                     disableUnderline
                     multiline
                   />
@@ -140,7 +138,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
         })}
         {/* </Box> */}
         <Paper elevation={0} square>
-          <Box margin={1.5} paddingTop={1.5}>
+          <Box margin={0.5} paddingTop={0.5}>
             <Button type="submit" variant="outlined" color="primary" fullWidth>
               确认并修改
             </Button>
