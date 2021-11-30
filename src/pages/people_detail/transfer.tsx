@@ -86,6 +86,7 @@ export default function ExpertTransferOrder(): JSX.Element {
           <Box marginY={1.5} padding={1.5}>
             <InputLabel required>选择隔离酒店</InputLabel>
             <Select
+              className="hotel_name"
               value={hotel}
               native
               style={{ display: 'flex' }}
