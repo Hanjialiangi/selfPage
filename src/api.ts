@@ -110,14 +110,14 @@ export function auth(
   user_id: number;
 }> {
   const data = JSON.stringify({ code, agentId, debug_ding_user_id });
-  return request('/api/login', data, { method: 'POST' });
+  return request('/login', data, { method: 'POST' });
 }
 
 /**
  * 获取用户信息
  */
 export function getUserInfo(): APIResponse<any> {
-  return request('/api/authed_user');
+  return request('/authed_user');
 }
 
 /**
@@ -136,7 +136,7 @@ export function getDingConfig(
   signature: string;
 }> {
   const data = JSON.stringify({ agentId, url });
-  return request('/api/ding/config', data, { method: 'POST' });
+  return request('/ding/config', data, { method: 'POST' });
 }
 
 type DingFilePermission = {
@@ -160,14 +160,14 @@ export function getDingFilePermission(
   fileIds?: string
 ): APIResponse<DingFilePermission> {
   const data = JSON.stringify({ type, fileIds });
-  return request('/api/dingFile/permission', data, { method: 'POST' });
+  return request('/dingFile/permission', data, { method: 'POST' });
 }
 
 /************************获取详情页接口*********************************/
 //获取某个居民详细信息
 export function getResidentInfo(id: string): APIResponse<any> {
   const open_id = id;
-  return request('/api/resident/info?open_id=' + open_id);
+  return request('/resident/info?open_id=' + open_id);
 }
 
 //更新居民信息
@@ -178,12 +178,12 @@ export function getFixResidentInfo(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): APIResponse<any> {
   const data = JSON.stringify({ open_id: id, properties: formvalue });
-  return request('/api/resident', data, { method: 'PUT' });
+  return request('/resident', data, { method: 'PUT' });
 }
 /***************************酒店功能************************************/
 //获取酒店列表
 export function getHotelList(): APIResponse<any> {
-  return request('/api/hotel/search');
+  return request('/hotel/search');
 }
 
 //酒店接收人员
@@ -208,7 +208,7 @@ export function getHotelReceive(
     time,
     release_time
   });
-  return request('/api/receive/hotel?', data, {
+  return request('/receive/hotel?', data, {
     method: 'POST'
   });
 }
@@ -223,7 +223,7 @@ export function getTransferHotel(
     open_ids,
     hotel_name
   });
-  return request('/api/transfer/hotel', data, {
+  return request('/transfer/hotel', data, {
     method: 'POST'
   });
 }
@@ -234,10 +234,7 @@ export function getCommunityList(): APIResponse<any> {
   const page_size = 10;
   const sub_district = '望江';
   return request(
-    '/api/community/list?page_size=' +
-      page_size +
-      'sub_district=' +
-      sub_district
+    '/community/list?page_size=' + page_size + 'sub_district=' + sub_district
   );
 }
 
@@ -251,7 +248,7 @@ export function getTransferCommunity(
     open_ids,
     time
   });
-  return request('/api/transfer/community', data, {
+  return request('/transfer/community', data, {
     method: 'POST'
   });
 }
@@ -266,7 +263,7 @@ export function getCommunityReceive(
     open_ids,
     time
   });
-  return request('/api/receive/community', data, {
+  return request('/receive/community', data, {
     method: 'POST'
   });
 }
@@ -284,7 +281,7 @@ export function getCreateSampling(
     sampling_date,
     sampling_result
   });
-  return request('/api/sampling', data, {
+  return request('/sampling', data, {
     method: 'POST'
   });
 }
@@ -304,7 +301,7 @@ export function getCreateHealth(
     is_weak,
     other_health_case
   });
-  return request('/api/health/fill', data, {
+  return request('/health/fill', data, {
     method: 'POST'
   });
 }
@@ -332,7 +329,7 @@ export function getResidentList(
   condition.quarantine_hotel = condition.quarantine_hotel || '';
   condition.home_address = condition.home_address || '';
   const url = qs.stringifyUrl({
-    url: '/api/resident/list',
+    url: '/resident/list',
     query: {
       page,
       page_size,
@@ -373,7 +370,7 @@ export function getSamplingList(
   condition.quarantine_hotel = condition.quarantine_hotel || '';
   condition.home_address = condition.home_address || '';
   const url = qs.stringifyUrl({
-    url: '/api/sampling/list',
+    url: '/sampling/list',
     query: {
       page,
       page_size,
