@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { getResidentInfo, getFixResidentInfo } from '@src/api';
 import { Properties } from '@pages/people_detail/Index';
-import { isValidKey } from '@src/utils';
+import { getURL, isValidKey } from '@src/utils';
 import { dingAlert } from '@src/dingtalkAPI';
 
 export default function FixInfo(props: { id: string }): JSX.Element {
@@ -47,7 +47,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
     const res = await getFixResidentInfo(props.id, formvalue);
     if (res.code === 200) {
       dingAlert('修改成功', '正确', '确认');
-      window.location.href = `/detail/resident/${props.id}`;
+      window.location.href = getURL(`/detail/resident/${props.id}`);
     } else {
       dingAlert('修改失败', '错误', '确认');
     }

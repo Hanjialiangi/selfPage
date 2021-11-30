@@ -13,6 +13,7 @@ import { InputLabel } from '@material-ui/core';
 import { getCreateHealth } from '@src/api';
 import { useParams } from 'react-router';
 import { dingAlert } from '@src/dingtalkAPI';
+import { getURL } from '@src/utils';
 
 export default function HealthPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取参数
@@ -40,7 +41,7 @@ export default function HealthPage(): JSX.Element {
     );
     if (res.data == 200) {
       dingAlert('上传成功', '正确', '确认');
-      window.location.href = `/detail/resident/${param.id}`;
+      window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
   return (

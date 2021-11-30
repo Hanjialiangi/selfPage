@@ -53,7 +53,8 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         PUBLIC_PATH: JSON.stringify(process.env.PUBLIC_PATH),
-        BUILD_TYPE: JSON.stringify(process.env.BUILD_TYPE)
+        BUILD_TYPE: JSON.stringify(process.env.BUILD_TYPE),
+        API_PREFIX: JSON.stringify(process.env.API_PREFIX)
       }
     }),
     new HtmlWebpackPlugin({

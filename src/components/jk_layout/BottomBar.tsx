@@ -6,6 +6,7 @@ import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
 import ListIcon from '@material-ui/icons/List';
 import PeopleIcon from '@material-ui/icons/People';
 import React from 'react';
+import { getURL } from '@src/utils';
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +24,7 @@ export function BottomBar(props: { value: string }): JSX.Element {
   ) => {
     console.log(event);
     setValue(newValue);
-    window.location.href = `/dist/admin_jk/${newValue}`;
+    window.location.href = getURL(`/admin_jk/${newValue}`);
   };
 
   return (

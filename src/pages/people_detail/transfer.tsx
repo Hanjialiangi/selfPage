@@ -12,6 +12,7 @@ import {
 } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
 import moment from 'moment';
+import { getURL } from '@src/utils';
 
 export default function ExpertTransferOrder(): JSX.Element {
   /* 从URL参数中读取工单ID */
@@ -26,7 +27,7 @@ export default function ExpertTransferOrder(): JSX.Element {
       const res = await getTransferHotel(param.id, hotel);
       if (res.code === 200) {
         dingAlert('转运到酒店成功', '正确', '确认');
-        window.location.href = `/detail/resident/${param.id}`;
+        window.location.href = getURL(`/detail/resident/${param.id}`);
       }
     } else {
       //转运社区
@@ -36,7 +37,7 @@ export default function ExpertTransferOrder(): JSX.Element {
       );
       if (res.code === 200) {
         dingAlert('转运到社区成功', '正确', '确认');
-        window.location.href = `/detail/resident/${param.id}`;
+        window.location.href = getURL(`/detail/resident/${param.id}`);
       }
     }
   };
