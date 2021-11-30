@@ -4,6 +4,21 @@ import { Properties } from '@pages/people_detail/Index';
 
 export default function PeopleDetailContent(props: { info: any }): JSX.Element {
   const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
+  const usual = {
+    marginBottom: '5px',
+    flex: '1 0 auto',
+    minWidth: '50%',
+    alignItems: 'center',
+    fontSize: '14px'
+  }; //普通样式
+  const strong = {
+    marginBottom: '5px',
+    flex: '1 0 auto',
+    minWidth: '50%',
+    alignItems: 'center',
+    fontSize: '14px',
+    width: '100%'
+  }; //加强样式
 
   useEffect(() => {
     //处理props
@@ -31,14 +46,7 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
           return (
             <Typography
               key={item.key_id}
-              style={{
-                marginBottom: '5px',
-                flex: '1 0 auto',
-                minWidth: '50%',
-                alignItems: 'center',
-                fontSize: '14px',
-                width: '100%'
-              }}
+              style={item.value.length > 20 ? strong : usual}
             >
               <span
                 style={{
