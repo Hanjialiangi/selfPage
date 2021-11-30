@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
 import { useParams } from 'react-router';
 import { Box, Typography, Paper, Button, Card } from '@material-ui/core';
-import PeopleDetailHeader from '@components/jk_layout/detail/PeopleDetailHeader';
 import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailContent';
 import '@src/styles/modules/detail/detail.scss';
 import { getResidentInfo } from '@src/api';
@@ -63,12 +62,12 @@ export default function PeopleDetailPage(): JSX.Element {
   };
 
   const [information, setInformation] = useState<Properties[]>();
-  const [expandInformation, setExpandInformation] = useState<Properties[]>();
   const Init = async (id: string) => {
     //TODO://根据id获取信息
     const res = await getResidentInfo(id);
     if (res.code == 200) {
-      res.data.map((item: Properties, index: number) => {
+      const attributeArray: Array<Properties> = [];
+      res.data.map((item: Properties) => {
         if (item.key === 'name') {
           setName(item.value);
         }
@@ -78,17 +77,15 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.key === 'quarantine_type') {
           setQuarantineType(item.value);
         }
-        if (item.key_name === '预计隔离酒店') {
-          setExpandInformation(res.data.slice(index)); //初始卡片渲染
-          setInformation(res.data.slice(0, index + 1)); //伸展卡片渲染
-        }
         if (item.value === '待转运') {
           setIsTransferButtonVisible(true);
         }
         if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
           setisArriveButtonVisible(true);
         }
+        attributeArray.push(item);
       });
+      setInformation(attributeArray);
     }
   };
 
@@ -139,10 +136,7 @@ export default function PeopleDetailPage(): JSX.Element {
                     <StatusIcon exchangeStatus={5} status={status} />
                   </div>
                   {information ? (
-                    <PeopleDetailHeader info={information} />
-                  ) : null}
-                  {expandInformation ? (
-                    <PeopleDetailContent info={expandInformation} />
+                    <PeopleDetailContent info={information} />
                   ) : null}
                 </Box>
               </Paper>

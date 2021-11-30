@@ -1,62 +1,65 @@
-import React from 'react';
-import { Paper, Box } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@material-ui/core';
 import { Properties } from '@pages/people_detail/Index';
 
 export default function PeopleDetailContent(props: { info: any }): JSX.Element {
+  const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
+
+  useEffect(() => {
+    //处理props
+    const array: Properties[] = [];
+    props.info.map((item: Properties) => {
+      if (item.key === 'current_state') {
+        return;
+      }
+      array.push(item);
+      setBaseInfo(array);
+    });
+  }, []);
   return (
-    <Box marginBottom={1}>
-      <Paper elevation={0} square>
-        <Box>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              marginTop: '10px'
-            }}
-          >
-            {props.info?.map((item: Properties) => {
-              if (item.key === 'current_state') {
-                return null;
-              }
-              return (
-                <Typography
-                  variant="body2"
-                  style={{
-                    marginBottom: '5px',
-                    flex: '1 0 auto',
-                    minWidth: '50%',
-                    alignItems: 'center'
-                  }}
-                  key={item.key_id}
-                >
-                  <span
-                    style={{
-                      color: 'gray',
-                      flexWrap: 'nowrap',
-                      whiteSpace: 'nowrap'
-                    }}
-                  >
-                    {item.key_name}:
-                  </span>
-                  <span
-                    style={{
-                      color: 'black',
-                      flexWrap: 'nowrap',
-                      marginLeft: '10px',
-                      whiteSpace: 'nowrap'
-                    }}
-                  >
-                    {item.value}
-                  </span>
-                </Typography>
-              );
-            })}
-          </div>
-        </Box>
-      </Paper>
+    <Box>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          marginTop: '10px'
+        }}
+      >
+        {baseInfo?.map((item: Properties) => {
+          return (
+            <Typography
+              key={item.key_id}
+              style={{
+                marginBottom: '5px',
+                flex: '1 0 auto',
+                minWidth: '50%',
+                alignItems: 'center',
+                fontSize: '14px',
+                width: '100%'
+              }}
+            >
+              <span
+                style={{
+                  color: 'gray',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {item.key_name}:
+              </span>
+              <span
+                style={{
+                  color: 'black',
+                  marginLeft: '10px'
+                }}
+              >
+                {item.value}
+              </span>
+            </Typography>
+          );
+        })}
+      </div>
     </Box>
   );
 }
