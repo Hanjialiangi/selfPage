@@ -16,7 +16,8 @@ import { dingAlert } from '@src/dingtalkAPI';
 export default function FixInfo(props: { id: string }): JSX.Element {
   const [detail, setDetail] = useState<Properties[]>();
 
-  const [residentValue, setResidentValue] = useState('');
+  const [residentValue, setResidentValue] = useState(''); //人员属性
+  const [quarantineValue, setQuarantineValue] = useState(''); //隔离方式
   //初始化
   const initDetail = async () => {
     const res = await getResidentInfo(props.id);
@@ -25,6 +26,9 @@ export default function FixInfo(props: { id: string }): JSX.Element {
       res.data.map((item: Properties) => {
         if (item.key === 'resident_property') {
           setResidentValue(item.value);
+        }
+        if (item.key === 'quarantine_type') {
+          setQuarantineValue(item.value);
         }
       });
     }
@@ -75,17 +79,41 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                   <Select
                     name="resident_property"
                     native
-                    defaultValue={residentValue}
+                    value={residentValue}
                     onChange={handleChangeContanct}
                     style={{ marginLeft: '68%' }}
                   >
                     <option aria-label="None" value="">
                       无
                     </option>
-                    <option value="密接">密切接触</option>
-                    <option value="次密接">次密切接触</option>
+                    <option value="密接">密接</option>
+                    <option value="次密接">次密接</option>
                     <option value="一般接触者">一般接触者</option>
                     <option value="重点人员">重点人员</option>
+                  </Select>
+                </Box>
+              </Paper>
+            );
+          }
+          if (item.key === 'quarantine_type') {
+            return (
+              <Paper elevation={0} square key={index}>
+                <Box marginY={1.5} padding={1.5}>
+                  <InputLabel>{item.key_name}</InputLabel>
+                  <Select
+                    name="quarantine_type"
+                    native
+                    value={quarantineValue}
+                    onChange={(e: any) => {
+                      setQuarantineValue(e.target.value);
+                    }}
+                    style={{ marginLeft: '68%' }}
+                  >
+                    <option aria-label="None" value="">
+                      无
+                    </option>
+                    <option value="集中隔离">集中隔离</option>
+                    <option value="居家隔离">居家隔离</option>
                   </Select>
                 </Box>
               </Paper>
@@ -99,7 +127,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                   <Input
                     name={item.key}
                     placeholder="请输入内容"
-                    defaultValue={item.value}
+                    value={item.value}
                     minRows={2}
                     maxRows={600}
                     disableUnderline
