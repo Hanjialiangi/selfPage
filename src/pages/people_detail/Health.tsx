@@ -56,6 +56,7 @@ export default function HealthPage(): JSX.Element {
             </Grid>
             <Grid xs={6} item={true}>
               <Select
+                native
                 className="healthSelect"
                 value={healthState.is_cough}
                 name="is_cough"
@@ -82,6 +83,7 @@ export default function HealthPage(): JSX.Element {
             </Grid>
             <Grid xs={6} item={true}>
               <Select
+                native
                 className="healthSelect"
                 value={healthState.is_fever}
                 name="is_fever"
@@ -108,6 +110,7 @@ export default function HealthPage(): JSX.Element {
             </Grid>
             <Grid xs={6} item={true}>
               <Select
+                native
                 className="healthSelect"
                 value={healthState.is_weak}
                 name="is_weak"
