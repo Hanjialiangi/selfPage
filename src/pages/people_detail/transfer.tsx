@@ -20,6 +20,7 @@ export default function ExpertTransferOrder(): JSX.Element {
   const [type, setType] = useState(''); //隔离方式
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [hotel, setHotel] = useState(''); //选择的酒店
+  const [subDistrict, setSubDistrict] = useState(''); //所属街道
 
   const handleTransfer = async () => {
     if (hotel) {
@@ -58,6 +59,9 @@ export default function ExpertTransferOrder(): JSX.Element {
             setType('居家隔离');
           }
         }
+        if (item.key === 'sub_district') {
+          setSubDistrict(item.value); //设置所属街道
+        }
       });
     }
   };
@@ -81,6 +85,22 @@ export default function ExpertTransferOrder(): JSX.Element {
           </span>
         </Box>
       </Paper>
+      {type === '居家隔离' && (
+        <Paper elevation={0} square>
+          <Box marginY={1.5} padding={1.5}>
+            <InputLabel>所属街道</InputLabel>
+            <span
+              style={{
+                fontSize: '18px',
+                display: 'flex',
+                flexDirection: 'row-reverse'
+              }}
+            >
+              {subDistrict}
+            </span>
+          </Box>
+        </Paper>
+      )}
       {type === '集中隔离' && (
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
