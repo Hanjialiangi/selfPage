@@ -3,6 +3,8 @@ import Page from '@components/layout/Page';
 import { useParams } from 'react-router';
 import { Box, Typography, Paper, Button, Card } from '@material-ui/core';
 import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailContent';
+import style from '@styleModules/components/statusIcon.module.scss';
+import Chip from '@material-ui/core/Chip';
 import '@src/styles/modules/detail/detail.scss';
 import { getResidentInfo } from '@src/api';
 import {
@@ -13,7 +15,7 @@ import {
   InfoIsolateIcon,
   InfoTransfer
 } from '@src/assets/svg/picture';
-import StatusIcon from '@components/StatusIcon';
+import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '@src/redux/selectors';
 import { getURL } from '@src/utils';
@@ -25,13 +27,13 @@ export type Properties = {
   value: string;
 };
 
-const status = 3; //状态
 export default function PeopleDetailPage(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
   const param: { id: string } = useParams(); //获取路由参数
   const [name, setName] = useState(''); //人员名字
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
+  const [Status, setStatus] = useState('未知'); //当前状态
   /* 是否显示转运按钮 */
   const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
@@ -78,6 +80,7 @@ export default function PeopleDetailPage(): JSX.Element {
           setQuarantineType(item.value);
         }
         if (item.key === 'current_state') {
+          setStatus(item.value);
           if (item.value === '待转运' || item.value === '集中隔离中') {
             setIsTransferButtonVisible(true);
           }
@@ -135,7 +138,16 @@ export default function PeopleDetailPage(): JSX.Element {
                     {quarantineType}
                   </Typography>
                   <div style={{ marginTop: '10px' }}>
-                    <StatusIcon exchangeStatus={5} status={status} />
+                    <>
+                      <Chip
+                        icon={<StatusIcon />}
+                        size="small"
+                        label={Status}
+                        color="primary"
+                        className={`${style.icon} ${style.processing}`}
+                        variant="outlined"
+                      />
+                    </>
                   </div>
                   {information ? (
                     <PeopleDetailContent info={information} />
