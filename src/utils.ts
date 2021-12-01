@@ -221,3 +221,55 @@ export function enableDebug(uuid: string): void {
     observerElement: document.documentElement
   });
 }
+
+type Form = {
+  name: string;
+  contact: string;
+  id_card: string;
+  resident_property: string;
+  quarantine_type: string;
+  quarantine_hotel: string;
+  home_address: string;
+};
+//页面初始化获取表单数据
+export function getFormVaildValue(): Form {
+  const name = (document.querySelector('.name input') as HTMLInputElement)
+    .value;
+  const contact = (document.querySelector('.contact input') as HTMLInputElement)
+    .value;
+  const id_card = (document.querySelector('.id_card input') as HTMLInputElement)
+    .value;
+  const resident_property = document.querySelector('.resident_property select')
+    ? (document.querySelector('.resident_property select') as HTMLInputElement)
+        .value
+    : '';
+  const quarantine_type = document.querySelector('.quarantine_type select')
+    ? (document.querySelector('.quarantine_type select') as HTMLInputElement)
+        .value
+    : '';
+  const quarantine_hotel = document.querySelector('.quarantine_hotel input')
+    ? (document.querySelector('.quarantine_hotel input') as HTMLInputElement)
+        .value
+    : '';
+  const home_address = document.querySelector('.home_address input')
+    ? (document.querySelector('.home_address input') as HTMLInputElement).value
+    : '';
+  const form: Form = {
+    name: '',
+    contact: '',
+    id_card: '',
+    resident_property: '',
+    quarantine_type: '',
+    quarantine_hotel: '',
+    home_address: ''
+  };
+  form.name = name;
+  form.contact = contact;
+  form.id_card = id_card;
+  form.resident_property = resident_property;
+  form.quarantine_hotel = quarantine_hotel;
+  form.quarantine_type = quarantine_type;
+  form.home_address = home_address;
+
+  return form;
+}

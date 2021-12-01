@@ -4,7 +4,7 @@ import { getResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
-import { BScrollConfig } from '@src/utils';
+import { BScrollConfig, getFormVaildValue} from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 
 const pageSize = 10; //页面大小
@@ -127,7 +127,7 @@ export default function TransferListPage(): JSX.Element {
         bs.on('pullingUp', async () => {
           //获取页数
           sum++;
-          await handleSearch(current + sum, form);
+          await handleSearch(current + sum, getFormVaildValue());
           // location.href = `/admin_jk/resident_list/${current + 1}`;
           if (current + sum < total) {
             setTimeout(() => {

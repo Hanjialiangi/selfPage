@@ -32,6 +32,10 @@ const useStyles = makeStyles({
 });
 export default function SearchCard(): JSX.Element {
   const classes = useStyles();
+  const [name, setName] = useState(''); //名字
+  const [contact, setContact] = useState(''); //手机号
+  const [idCard, setIdCard] = useState(''); //身份证号
+
   const [contanct, setContanct] = useState(''); //接触类型
   const [isolation, SetIsolation] = useState(''); //隔离类型
   const [show, setShow] = useState(false); //搜索隐藏
@@ -58,8 +62,13 @@ export default function SearchCard(): JSX.Element {
             <Input
               name="name"
               type="text"
+              value={name}
+              className="name"
               style={{ width: '100%' }}
               placeholder="搜索姓名"
+              onChange={e => {
+                setName(e.target.value);
+              }}
             />
           </ListItem>
           <ListItem className="style">
@@ -67,10 +76,15 @@ export default function SearchCard(): JSX.Element {
               <PhoneIcon />
             </ListItemIcon>
             <Input
+              className="contact"
+              value={contact}
               name="contact"
               type="number"
               style={{ width: '100%' }}
               placeholder="搜索手机号"
+              onChange={e => {
+                setContact(e.target.value);
+              }}
             />
           </ListItem>
           <ListItem className="style">
@@ -78,10 +92,15 @@ export default function SearchCard(): JSX.Element {
               <IdCarIcon />
             </ListItemIcon>
             <Input
+              className="id_card"
               name="id_card"
               type="text"
+              value={idCard}
               style={{ width: '100%' }}
               placeholder="搜索完整身份证号"
+              onChange={e => {
+                setIdCard(e.target.value);
+              }}
             />
           </ListItem>
           {show ? (
@@ -91,6 +110,7 @@ export default function SearchCard(): JSX.Element {
                   <ContactTypeIcon />
                 </ListItemIcon>
                 <Select
+                  className="resident_property"
                   name="resident_property"
                   native
                   value={contanct}
@@ -109,6 +129,7 @@ export default function SearchCard(): JSX.Element {
                   <IsolationTypeIcon />
                 </ListItemIcon>
                 <Select
+                  className="quarantine_type"
                   name="quarantine_type"
                   native
                   value={isolation}
@@ -128,6 +149,7 @@ export default function SearchCard(): JSX.Element {
                       <HotelIcon />
                     </ListItemIcon>
                     <Input
+                      className="quarantine_hotel"
                       name="quarantine_hotel"
                       type="text"
                       style={{ width: '100%' }}
@@ -140,6 +162,7 @@ export default function SearchCard(): JSX.Element {
                       <CommunityIcon />
                     </ListItemIcon>
                     <Input
+                      className="home_address"
                       name="home_address"
                       type="text"
                       style={{ width: '100%' }}

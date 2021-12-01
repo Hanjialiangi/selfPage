@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
 import { getSamplingList } from '@src/api';
 import SearchCard from '@components/jk_layout/SearchCard';
-import { BScrollConfig } from '@src/utils';
+import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import TestCard from '@components/jk_layout/TestCard';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 
@@ -71,7 +71,7 @@ export default function TestListPage(): JSX.Element {
         bs.on('pullingUp', async () => {
           //获取页数
           sum++;
-          await handleSearch(current + sum, form);
+          await handleSearch(current + sum, getFormVaildValue());
           // location.href = `/admin_jk/resident_list/${current + 1}`;
           if (current + sum < total) {
             setTimeout(() => {
