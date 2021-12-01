@@ -46,7 +46,7 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
           return (
             <Typography
               key={item.key_id}
-              style={item.value.length > 20 ? strong : usual}
+              style={item.value.length > 18 ? strong : usual}
             >
               <span
                 style={{
