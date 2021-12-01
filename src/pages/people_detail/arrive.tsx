@@ -26,7 +26,7 @@ export default function Arrive(): JSX.Element {
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [select, setSelect] = useState(''); //选中值
-  const [isCommunity,setIsCommunity] = useState(false); //社区
+  const [isCommunity, setIsCommunity] = useState(false); //社区
   //点击接收功能
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -65,16 +65,21 @@ export default function Arrive(): JSX.Element {
     const res = await getResidentInfo(param.id);
     if (res.code === 200) {
       res.data.map((item: any) => {
+        if (item.key === 'current_state') {
+          if (item.value === '转运至社区中') {
+            setIsCommunity(true); //社区接收(接收)
+          }
+        }
         if (item.key === 'planned_quarantine_hotel') {
           if (item.value) {
             setSelect(item.value); //酒店接收
           }
         }
-        if (item.key === 'quarantine_hotel') {
-          if (item.value) {
-            setIsCommunity(true); //社区接收(二次接收)
-          }
-        }
+        // if (item.key === 'quarantine_hotel') {
+        //   if (item.value) {
+        //     setIsCommunity(true); //社区接收(二次接收)
+        //   }
+        // }
       });
     }
   };
