@@ -42,8 +42,7 @@ export default function ResidentListPage(): JSX.Element {
     current_state = ['集中隔离中', '解除后居家隔离中', '居家隔离中']
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_state);
-    if (formvalue !== getFormVaildValue()) {
-      //判断是否一致，不一致清除全局变量
+    if (page === 1) {
       sum = 0;
     }
     const detailResult: DR = [

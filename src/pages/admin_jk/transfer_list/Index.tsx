@@ -42,8 +42,7 @@ export default function TransferListPage(): JSX.Element {
     current_stage = ['待转运']
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_stage);
-    if (formvalue !== getFormVaildValue()) {
-      //判断是否一致，不一致清除全局变量
+    if (page === 1) {
       sum = 0;
     }
     const detailResult: DR = [

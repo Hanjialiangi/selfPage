@@ -26,8 +26,7 @@ export default function TestListPage(): JSX.Element {
   //搜索引擎
   const handleSearch = async (page = 1, formvalue = {}) => {
     const res = await getSamplingList(pageSize, page, formvalue);
-    if (formvalue !== getFormVaildValue()) {
-      //判断是否一致，不一致清除全局变量
+    if (page === 1) {
       sum = 0;
     }
     if (res.code === 200) {

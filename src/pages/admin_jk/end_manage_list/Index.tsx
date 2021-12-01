@@ -43,8 +43,7 @@ export default function ManageListPage(): JSX.Element {
     current_state = ['结案', '医院治疗中']
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_state);
-    if (formvalue !== getFormVaildValue()) {
-      //判断是否一致，不一致清除全局变量
+    if (page === 1) {
       sum = 0;
     }
     const detailResult: DR = [
