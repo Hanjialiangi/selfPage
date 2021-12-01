@@ -24,9 +24,9 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
     //处理props
     const array: Properties[] = [];
     props.info.map((item: Properties) => {
-      if (item.key === 'current_state') {
-        return;
-      }
+      // if (item.key === 'current_state') {
+      //   return;
+      // }
       array.push(item);
       setBaseInfo(array);
     });

@@ -21,6 +21,7 @@ export default function ExpertTransferOrder(): JSX.Element {
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [hotel, setHotel] = useState(''); //选择的酒店
   const [subDistrict, setSubDistrict] = useState(''); //所属街道
+  const [isCommunity, setIsCoummunity] = useState(false); //是否社区
 
   const handleTransfer = async () => {
     if (hotel) {
@@ -62,6 +63,11 @@ export default function ExpertTransferOrder(): JSX.Element {
         if (item.key === 'sub_district') {
           setSubDistrict(item.value); //设置所属街道
         }
+        if (item.key === 'quarantine_hotel') {
+          if (item.value) {
+            setIsCoummunity(true); // 二次转运给社区(酒店转社区)
+          }
+        }
       });
     }
   };
@@ -85,7 +91,7 @@ export default function ExpertTransferOrder(): JSX.Element {
           </span>
         </Box>
       </Paper>
-      {type === '居家隔离' && (
+      {(type === '居家隔离' || isCommunity) && (
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
             <InputLabel>所属街道</InputLabel>
@@ -101,7 +107,7 @@ export default function ExpertTransferOrder(): JSX.Element {
           </Box>
         </Paper>
       )}
-      {type === '集中隔离' && (
+      {type === '集中隔离' && !isCommunity && (
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
             <InputLabel required>选择隔离酒店</InputLabel>

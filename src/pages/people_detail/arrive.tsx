@@ -26,11 +26,12 @@ export default function Arrive(): JSX.Element {
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [select, setSelect] = useState(''); //选中值
+  const [isCommunity,setIsCommunity] = useState(false); //社区
   //点击接收功能
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    if (select) {
+    if (select && !isCommunity) {
       const hotel_name = formData.get('hotel_name') + '';
       const room = formData.get('room') + '';
       const finalTime = moment(time).format('YYYY-MM-DD HH:mm:ss');
@@ -66,7 +67,12 @@ export default function Arrive(): JSX.Element {
       res.data.map((item: any) => {
         if (item.key === 'planned_quarantine_hotel') {
           if (item.value) {
-            setSelect(item.value); //酒店接受
+            setSelect(item.value); //酒店接收
+          }
+        }
+        if (item.key === 'quarantine_hotel') {
+          if (item.value) {
+            setIsCommunity(true); //社区接收(二次接收)
           }
         }
       });
@@ -103,7 +109,7 @@ export default function Arrive(): JSX.Element {
         style={{ paddingBottom: '10px' }}
         onSubmit={handleSubmit}
       >
-        {select ? (
+        {select && !isCommunity ? (
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
