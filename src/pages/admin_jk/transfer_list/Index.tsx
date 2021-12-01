@@ -4,7 +4,7 @@ import { getResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
 import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
-import { BScrollConfig, getFormVaildValue} from '@src/utils';
+import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 
 const pageSize = 10; //页面大小
@@ -42,6 +42,10 @@ export default function TransferListPage(): JSX.Element {
     current_stage = ['待转运']
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_stage);
+    if (formvalue !== getFormVaildValue()) {
+      //判断是否一致，不一致清除全局变量
+      sum = 0;
+    }
     const detailResult: DR = [
       {
         open_id: '',
