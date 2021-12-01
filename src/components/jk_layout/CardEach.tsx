@@ -47,6 +47,7 @@ export default function CardEach(props: {
     quarantine_type: string;
     quarantine_hotel: string;
     sub_district: string;
+    planned_quarantine_hotel?: string;
   };
 }): JSX.Element {
   const classes = useStyles();
@@ -95,10 +96,14 @@ export default function CardEach(props: {
                 secondary={`隔离类型 ${props.detail.quarantine_type}`}
               />
             ) : null}
-            {props.detail.quarantine_hotel ? (
+            {props.detail.quarantine_hotel ||
+            props.detail.planned_quarantine_hotel ? (
               <ListItemText
                 className={classes.right}
-                primary={props.detail.quarantine_hotel}
+                primary={
+                  props.detail.quarantine_hotel ||
+                  props.detail.planned_quarantine_hotel
+                }
               />
             ) : (
               <ListItemText

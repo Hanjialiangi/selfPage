@@ -64,16 +64,16 @@ export default function ResidentListPage(): JSX.Element {
         let sub_district = '';
         item.properties.map((item2: any) => {
           if (item2.key === 'resident_property') {
-            resident_property = item2.resident_property;
+            resident_property = item2.value;
           }
           if (item2.key === 'quarantine_type') {
-            quarantine_type = item2.quarantine_type;
+            quarantine_type = item2.value;
           }
           if (item2.key === 'quarantine_hotel') {
-            quarantine_hotel = item2.quarantine_hotel;
+            quarantine_hotel = item2.value;
           }
           if (item2.key === 'sub_district') {
-            sub_district = item2.sub_district;
+            sub_district = item2.value;
           }
         });
         detailResult.push({

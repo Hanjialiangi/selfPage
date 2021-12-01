@@ -77,11 +77,13 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.key === 'quarantine_type') {
           setQuarantineType(item.value);
         }
-        if (item.value === '待转运') {
-          setIsTransferButtonVisible(true);
-        }
-        if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
-          setisArriveButtonVisible(true);
+        if (item.key === 'current_state') {
+          if (item.value === '待转运' || item.value === '集中隔离中') {
+            setIsTransferButtonVisible(true);
+          }
+          if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
+            setisArriveButtonVisible(true);
+          }
         }
         attributeArray.push(item);
       });

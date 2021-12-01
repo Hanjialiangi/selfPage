@@ -15,6 +15,7 @@ type DR = [
     quarantine_type: string;
     quarantine_hotel: string;
     sub_district: string;
+    planned_quarantine_hotel: string;
   }
 ];
 
@@ -28,7 +29,8 @@ export default function ArriveListPage(): JSX.Element {
       resident_property: '',
       quarantine_type: '',
       quarantine_hotel: '',
-      sub_district: ''
+      sub_district: '',
+      planned_quarantine_hotel: ''
     }
   ]); //数据
 
@@ -50,7 +52,8 @@ export default function ArriveListPage(): JSX.Element {
         resident_property: '',
         quarantine_type: '',
         quarantine_hotel: '',
-        sub_district: ''
+        sub_district: '',
+        planned_quarantine_hotel: ''
       }
     ];
     if (res.code === 200) {
@@ -63,18 +66,22 @@ export default function ArriveListPage(): JSX.Element {
         let quarantine_type = '';
         let quarantine_hotel = '';
         let sub_district = '';
+        let planned_quarantine_hotel = '';
         item.properties.map((item2: any) => {
           if (item2.key === 'resident_property') {
-            resident_property = item2.resident_property;
+            resident_property = item2.value;
           }
           if (item2.key === 'quarantine_type') {
-            quarantine_type = item2.quarantine_type;
+            quarantine_type = item2.value;
           }
           if (item2.key === 'quarantine_hotel') {
-            quarantine_hotel = item2.quarantine_hotel;
+            quarantine_hotel = item2.value;
           }
           if (item2.key === 'sub_district') {
-            sub_district = item2.sub_district;
+            sub_district = item2.value;
+          }
+          if (item2.key === 'planned_quarantine_hotel') {
+            planned_quarantine_hotel = item2.value;
           }
         });
         detailResult.push({
@@ -83,7 +90,8 @@ export default function ArriveListPage(): JSX.Element {
           resident_property,
           quarantine_type,
           quarantine_hotel,
-          sub_district
+          sub_district,
+          planned_quarantine_hotel
         });
       });
       detailResult.shift();
