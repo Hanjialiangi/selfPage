@@ -25,6 +25,9 @@ export default function SamplingResultPage(): JSX.Element {
     if (res.code === 200) {
       dingAlert('上传成功', '正确', '确认');
       window.location.href = getURL(`/detail/resident/${param.id}`);
+    } else {
+      dingAlert(res.message, '错误', '确认');
+      window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
 

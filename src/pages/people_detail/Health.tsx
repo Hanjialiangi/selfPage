@@ -39,7 +39,7 @@ export default function HealthPage(): JSX.Element {
       healthState.is_weak,
       healthState.other_health_case
     );
-    if (res.data == 200) {
+    if (res.code === 200) {
       dingAlert('上传成功', '正确', '确认');
       window.location.href = getURL(`/detail/resident/${param.id}`);
     }

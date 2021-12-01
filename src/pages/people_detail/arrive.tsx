@@ -235,14 +235,14 @@ export default function Arrive(): JSX.Element {
               <Box marginY={1.5} padding={1.5}>
                 <InputLabel>社区接收时间</InputLabel>
                 <FormControl fullWidth>
-                  <input
+                  {/* <input
                     type="datetime-local"
                     onChange={(e: any) => {
                       setTime(e.target.value);
                     }}
                     value={time}
-                  />
-                  {/* <TextField
+                  /> */}
+                  <TextField
                     id="datetime-local"
                     type="datetime-local"
                     onChange={(e: any) => {
@@ -252,7 +252,7 @@ export default function Arrive(): JSX.Element {
                     InputLabelProps={{
                       shrink: true
                     }}
-                  /> */}
+                  />
                 </FormControl>
               </Box>
             </Paper>
