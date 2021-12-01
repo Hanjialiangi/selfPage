@@ -103,7 +103,7 @@ export default function PeopleDetailPage(): JSX.Element {
       <>
         <Paper elevation={0} square>
           <Box padding={1.5}>
-            <Card>
+            <Card className="InfoCard">
               <Paper elevation={0} square>
                 <Box margin={1.5}>
                   <div

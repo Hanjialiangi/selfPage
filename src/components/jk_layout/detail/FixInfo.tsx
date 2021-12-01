@@ -81,7 +81,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                     native
                     value={residentValue}
                     onChange={handleChangeContanct}
-                    style={{ marginLeft: '68%' }}
+                    style={{ marginLeft: '78%' }}
                   >
                     <option aria-label="None" value="">
                       无
@@ -107,7 +107,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                     onChange={(e: any) => {
                       setQuarantineValue(e.target.value);
                     }}
-                    style={{ marginLeft: '68%' }}
+                    style={{ marginLeft: '78%' }}
                   >
                     <option aria-label="None" value="">
                       无
