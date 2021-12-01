@@ -10,7 +10,7 @@ import { getURL } from '@src/utils';
 
 export default function SamplingResultPage(): JSX.Element {
   const [time, setTime] = useState(''); //统一采样时间
-  const [samplingResult, setSamplingResult] = useState(''); //采样结果
+  const [samplingResult, setSamplingResult] = useState('阴性'); //采样结果
 
   const param: { id: string } = useParams(); //获取路由参数
   const handleSubmit = async () => {
@@ -63,9 +63,6 @@ export default function SamplingResultPage(): JSX.Element {
                 setSamplingResult(e.target.value);
               }}
             >
-              <option aria-label="None" value="">
-                无
-              </option>
               <option value="阴性">阴性</option>
               <option value="阳性">阳性</option>
             </Select>
