@@ -161,7 +161,7 @@ export default function PeopleDetailPage(): JSX.Element {
                         icon={<StatusIcon />}
                         size="small"
                         label={Status}
-                        color="primary"
+                        style={{ color: '#1790FF' }}
                         className={`${style.icon} ${style.processing}`}
                         variant="outlined"
                       />
