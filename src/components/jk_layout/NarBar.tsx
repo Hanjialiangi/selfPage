@@ -101,7 +101,8 @@ export default function NarBar(): JSX.Element {
           className="tab"
           sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
         >
-          {userInfo.role.includes('wh_cdc') ? (
+          {userInfo.role.includes('wh_cdc') ||
+          userInfo.role.includes('close_contact_team') ? (
             <Tabs
               value={value}
               onChange={handleChange}

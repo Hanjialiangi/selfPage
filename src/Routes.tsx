@@ -114,29 +114,6 @@ function getUserDetailRoutes(): JSX.Element[] {
   ];
 }
 
-// function UserDetailRoutes(): JSX.Element[] {
-//   return [
-//     <Route path="/transfer/:orderId/edit/toExpert">
-//       <ExpertTransferOrderPage />
-//     </Route>,
-//     <Route path="/resident/:orderId/baseinfo/edit">
-//       <ExpertFixInfoOrderPage />
-//     </Route>,
-//     <Route path="/arrive/:orderId/edit">
-//       <ExpertArrivePage />
-//     </Route>,
-//     <Route path="/samplingresult/:orderId/edit">
-//       <ExpertSamplingResultPage />
-//     </Route>,
-//     <Route path="/health/:orderId/edit">
-//       <ExpertHealthPage />
-//     </Route>,
-//     <Route path="/expert/order/:orderId">
-//       <ExpertOrderDetailPage />
-//     </Route>
-//   ];
-// }
-
 function ErrorShow(): JSX.Element[] {
   return [
     <Route path="/error" key="error">
@@ -155,7 +132,10 @@ export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
   //Todo: 临时关闭管理端，完成相关页面后再开启
-  if (userInfo.role.includes('wh_cdc')) {
+  if (
+    userInfo.role.includes('wh_cdc') ||
+    userInfo.role.includes('close_contact_team')
+  ) {
     return (
       <Switch>
         {getUserDetailRoutes()}
