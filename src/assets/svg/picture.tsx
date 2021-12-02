@@ -290,10 +290,10 @@ export function InfoHealthIcon(): JSX.Element {
 }
 
 export function InfoDetailIcon(): JSX.Element {
-    return <svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-    <title>详情</title>
-    <g id="疫情页面设计" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g id="疫情备份-8" transform="translate(-217.000000, -711.000000)" fill="#858585" fillRule="nonzero">
+    return <svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>详情备份@3x</title>
+    <g id="疫情页面设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="疫情备份-8" transform="translate(-217.000000, -711.000000)" fill="#858585" fill-rule="nonzero">
             <g id="编组" transform="translate(153.000000, 706.000000)">
                 <g id="详情备份" transform="translate(64.000000, 5.000000)">
                     <path d="M4.80159892,4.99272686 L0.168923175,9.20570361 C0.061290878,9.29279651 0,9.41650006 0,9.54520706 C0,9.79602519 0.223236818,10 0.498297009,10 C0.618386256,10 0.735486059,9.95906856 0.833152796,9.88016173 L5.83954822,5.33017912 L5.85848357,5.31244216 C5.89759996,5.27446686 5.92724862,5.23103416 5.94992116,5.18464532 C5.98106477,5.12529476 6,5.05980472 6,4.98976602 C6,4.9126786 5.97832401,4.83786464 5.93771279,4.77123777 L5.92027239,4.74849808 L5.85873271,4.69210366 C5.85125825,4.68482696 5.84353467,4.67777761 5.83556189,4.67095578 L0.908396241,0.153947456 C0.813470592,0.0561669284 0.677933721,0 0.536416954,0 C0.26160635,0 0.0381199445,0.203974812 0.0381199445,0.454792938 C0.0381199445,0.564625529 0.0829667537,0.671501875 0.169421565,0.760413972 L4.80159366,4.99271767 L4.80159892,4.99272686 Z" id="路径"></path>

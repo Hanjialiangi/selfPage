@@ -13,7 +13,8 @@ import {
   InfoSamplingIcon,
   InfoFixIcon,
   InfoIsolateIcon,
-  InfoTransfer
+  InfoTransfer,
+  InfoDetailIcon
 } from '@src/assets/svg/picture';
 import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
@@ -34,6 +35,8 @@ export default function PeopleDetailPage(): JSX.Element {
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
   const [Status, setStatus] = useState('未知'); //当前状态
+  const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
+  const [BoxTag, setBoxtTag] = useState('查看更多');
   /* 是否显示转运按钮 */
   const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
@@ -94,6 +97,17 @@ export default function PeopleDetailPage(): JSX.Element {
     }
   };
 
+  const handleClick = () => {
+    if (BoxHight === '335px') {
+      setBoxHeight('100%');
+      setBoxtTag('点击收回');
+    }
+    if (BoxHight === '100%') {
+      setBoxHeight('335px');
+      setBoxtTag('查看更多');
+    }
+  };
+
   useEffect(() => {
     Init(param.id);
   }, [param.id]);
@@ -105,7 +119,11 @@ export default function PeopleDetailPage(): JSX.Element {
           <Box margin={1.5} padding={1.5}>
             <Card className="InfoCard">
               <Paper elevation={0} square>
-                <Box margin={1.5}>
+                <Box
+                  margin={1.5}
+                  style={{ height: `${BoxHight}` }}
+                  onClick={handleClick}
+                >
                   <div
                     style={{
                       display: 'flex',
@@ -153,12 +171,23 @@ export default function PeopleDetailPage(): JSX.Element {
                     <PeopleDetailContent info={information} />
                   ) : null}
                 </Box>
+                <Button
+                  onClick={handleClick}
+                  style={{
+                    width: '100%',
+                    textAlign: 'center',
+                    backgroundColor: '#fff'
+                  }}
+                >
+                  {BoxTag}&nbsp;
+                  <InfoDetailIcon />
+                </Button>
               </Paper>
             </Card>
           </Box>
         </Paper>
         <Paper elevation={0}>
-          <Box paddingTop={1.5} paddingBottom={1}>
+          <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
             {(userInfo.role.includes('transfer_team') ||
               userInfo.role.includes('wh_cdc')) &&
               isTransferButtonVisible && (
@@ -231,7 +260,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 color="primary"
                 onClick={handleFixOrder}
                 className="DetailBoxButton"
-                style={{ width: '95%' }}
+                fullWidth
               >
                 <InfoFixIcon />
                 &nbsp;修改基本信息
