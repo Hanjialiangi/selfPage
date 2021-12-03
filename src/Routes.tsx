@@ -85,6 +85,17 @@ const SamplingResultPage = loadable(
     fallback: <Fallback />
   }
 );
+//新增接收模块
+const ReceivePage = loadable(() => import('@pages/people_detail/receive'), {
+  fallback: <Fallback />
+});
+//转运到社区/居家隔离酒店
+const TransferCommunity = loadable(
+  () => import('@pages/people_detail/TransferCommunity'),
+  {
+    fallback: <Fallback />
+  }
+);
 
 //403
 const ErrorPage = loadable(() => import('@pages/403/Error'), {
@@ -93,6 +104,12 @@ const ErrorPage = loadable(() => import('@pages/403/Error'), {
 
 function getUserDetailRoutes(): JSX.Element[] {
   return [
+    <Route path="/detail/receive/:id/edit" key="receive">
+      <ReceivePage />
+    </Route>,
+    <Route path="/detail/transfercommunity/:id/edit" key="transfercommunity">
+      <TransferCommunity />
+    </Route>,
     <Route path="/detail/resident/:id/baseinfo/edit" key="update">
       <UserUpdatePage />
     </Route>,
