@@ -131,6 +131,43 @@ function getUserDetailRoutes(): JSX.Element[] {
   ];
 }
 
+//酒店管理组
+const HotelListPage = loadable(
+  () => import('@pages/admin_jk/hotel_list/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const HotelDetail = loadable(
+  () => import('@pages/admin_jk/hotel_detail/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const FixPage = loadable(() => import('@pages/admin_jk/hotel_detail/fit'), {
+  fallback: <Fallback />
+});
+const UpdatePage = loadable(
+  () => import('@pages/admin_jk/hotel_detail/update'),
+  {
+    fallback: <Fallback />
+  }
+);
+
+function HotelDetailInfo(): JSX.Element[] {
+  return [
+    <Route path="/detail/hotel/:id" key="hotel">
+      <HotelDetail />
+    </Route>,
+    <Route path="/detail/hotel/:id/fix" key="fix">
+      <FixPage />
+    </Route>,
+    <Route path="/detail/hotel/:id/update" key="update">
+      <UpdatePage />
+    </Route>
+  ];
+}
+
 function ErrorShow(): JSX.Element[] {
   return [
     <Route path="/error" key="error">
@@ -156,6 +193,10 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
+        <Route path="/admin_jk/hotel_list">
+          <HotelListPage />
+        </Route>
         <Route path="/admin_jk/test_list">
           <TestListPage />
         </Route>

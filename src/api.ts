@@ -186,6 +186,39 @@ export function getHotelList(): APIResponse<any> {
   return request('/hotel/search');
 }
 
+//分页获取酒店列表
+export function getHotelListAll(
+  page_size: number,
+  page: number,
+  condition: {
+    hotel_name?: string;
+    state?: string;
+    capacity?: string;
+  }
+): APIResponse<any> {
+  const hotel_name = condition.hotel_name || '';
+  const state = condition.state || '';
+  const capacity = condition.capacity || '';
+  const url = qs.stringifyUrl({
+    url: '/hotel/list',
+    query: {
+      page,
+      page_size,
+      'property_queries[]': [
+        `resident_property|${hotel_name}`,
+        `quarantine_type|${state}`,
+        `home_address|${capacity}`
+      ]
+    }
+  });
+  return request(url);
+}
+
+//获取酒店详细信息
+export function getHotelDetailInfo(id: string): APIResponse<any> {
+  return request('/hotel/info?id=' + id);
+}
+
 //酒店接收人员
 export function getHotelReceive(
   open_id: string,
