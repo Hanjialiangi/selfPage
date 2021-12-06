@@ -84,6 +84,10 @@ export default function PeopleDetailPage(): JSX.Element {
       `/detail/hotel_doctor/${param.id}/trasfer_hospital`
     );
   };
+  /* 反馈 */
+  const handleFeedBack = () => {
+    window.location.href = getURL('/detail/feedback/:id/edit');
+  };
 
   const [information, setInformation] = useState<Properties[]>();
   const Init = async (id: string) => {
@@ -320,6 +324,18 @@ export default function PeopleDetailPage(): JSX.Element {
               >
                 <InfoFixIcon />
                 &nbsp;修改基本信息
+              </Button>
+            </Box>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleFeedBack}
+                className="DetailBoxButton"
+                fullWidth
+              >
+                <InfoFixIcon />
+                &nbsp;反馈
               </Button>
             </Box>
           </Box>
