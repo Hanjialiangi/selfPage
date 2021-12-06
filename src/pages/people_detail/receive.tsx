@@ -6,7 +6,8 @@ import {
   Button,
   Input,
   FormControl,
-  InputLabel
+  InputLabel,
+  Typography
 } from '@material-ui/core';
 import { useParams } from 'react-router';
 import { getHotelList, getResidentInfo } from '@src/api';
@@ -26,17 +27,12 @@ export default function ReceivePage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
   const [hotel, setHotel] = useState(''); //初始化计划酒店选择
   const [available, setAvailable] = useState(0); //对应酒店剩余容量
-  const [show, setShow] = useState(false); //按钮显示
+  const [show, setShow] = useState(false); //按钮展示
 
   //提交动作
   const handleSubmit = (e: any) => {
     e.preventDefault();
     //TODO: 使用接口去通知酒店接受(open_id,hotel_name)
-  };
-
-  //反馈按钮
-  const handleFeedBack = () => {
-    //TODO: 接口反馈
   };
 
   //设置剩余容量
@@ -49,10 +45,9 @@ export default function ReceivePage(): JSX.Element {
     data.map((item: any) => {
       if (item.name === value) {
         item.available_number && setAvailable(item.available_number);
-
-        if (item.available_number > 0) {
-          setShow(true);
-        }
+      }
+      if (item.available_number > 0) {
+        setShow(true);
       }
     });
   };
@@ -84,7 +79,7 @@ export default function ReceivePage(): JSX.Element {
       <form onSubmit={handleSubmit}>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <InputLabel>隔离酒店</InputLabel>
+            <InputLabel>预计隔离酒店地址</InputLabel>
             <FormControl fullWidth>
               <Input name="hotel_name" value={hotel} disabled />
             </FormControl>
@@ -94,40 +89,28 @@ export default function ReceivePage(): JSX.Element {
           <Box marginY={1.5} padding={1.5}>
             <InputLabel>酒店剩余容量</InputLabel>
             <FormControl fullWidth>
-              <Input
-                name="available_number"
-                value={available || 0}
-                disabled
-              ></Input>
+              <Typography variant="h5" style={{ textAlign: 'center' }}>
+                {available}
+              </Typography>
             </FormControl>
           </Box>
         </Paper>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            {show ? (
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disableElevation
-                fullWidth
-              >
-                通知酒店接收
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                disableElevation
-                fullWidth
-                onClick={handleFeedBack}
-              >
-                反馈
-              </Button>
-            )}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disableElevation
+              fullWidth
+              disabled={show}
+            >
+              通知酒店接收
+            </Button>
           </Box>
         </Paper>
       </form>
+      <a href="/detail/feedback/:id/edit">出现问题？点击反馈</a>
     </Page>
   );
 }

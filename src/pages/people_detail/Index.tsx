@@ -39,19 +39,26 @@ export default function PeopleDetailPage(): JSX.Element {
   const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
   const [BoxTag, setBoxtTag] = useState('查看更多');
   /* 是否显示转运按钮 */
-  const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
+  // const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
   // /* 是否显示接收并开始隔离 */
   // const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
   /* 转运 */
   const handleTransferOrder = () => {
+    window.location.href = getURL(`/detail/receive/${param.id}/edit`);
     // window.location.href = getURL(`/detail/transfer/${param.id}/edit`);
+    //window.location.href = getURL(`/detail/transfercommunity/${param.id}/edit`);
+  };
+
+  /*转运到社区 */
+  const handleTransferCommunity = () => {
     window.location.href = getURL(`/detail/transfercommunity/${param.id}/edit`);
   };
-  /* 社区卫生服务中心转运到酒店 */
-  const handleTransferHotel = () => {
-    window.location.href = getURL(`/detail/receive/${param.id}/edit`);
+
+  /* 分配 */
+  const handleDistriute = () => {
+    window.location.href = getURL(`/detail/distriute/${param.id}/edit`);
   };
   /* 修改信息 */
   const handleFixOrder = () => {
@@ -96,12 +103,12 @@ export default function PeopleDetailPage(): JSX.Element {
         }
         if (item.key === 'current_state') {
           setStatus(item.value);
-          if (item.value === '待转运' || item.value === '集中隔离中') {
-            setIsTransferButtonVisible(true);
-          }
-          if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
-            setisArriveButtonVisible(true);
-          }
+          // if (item.value === '待转运' || item.value === '集中隔离中') {
+          //   setIsTransferButtonVisible(true);
+          // }
+          // if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
+          //   setisArriveButtonVisible(true);
+          // }
         }
         attributeArray.push(item);
       });
@@ -204,37 +211,24 @@ export default function PeopleDetailPage(): JSX.Element {
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleTransferHotel}
+                onClick={handleDistriute}
                 className="DetailBoxButton"
+                style={{ width: '100%' }}
               >
-                社区服务中心送酒店
+                <InfoTransfer />
+                &nbsp;发起转运任务(疾控)
               </Button>
             </Box>
-            {(userInfo.role.includes('transfer_team') ||
-              userInfo.role.includes('wh_cdc')) &&
-              isTransferButtonVisible && (
-                <Box margin={1.5} className="DetailBox">
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handleTransferOrder}
-                    className="DetailBoxButton"
-                    style={{ width: '100%' }}
-                  >
-                    <InfoTransfer />
-                    &nbsp;转运
-                  </Button>
-                </Box>
-              )}
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
+                // onClick={handleSamplingResult}
                 className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
                 <InfoSamplingIcon />
-                &nbsp;推送街道(社区)
+                &nbsp;推送街道
               </Button>
               <div className="DetailBoxDiv">|</div>
               <Button
@@ -245,7 +239,19 @@ export default function PeopleDetailPage(): JSX.Element {
                 style={{ width: '45%' }}
               >
                 <InfoIsolateIcon />
-                &nbsp;转运至酒店（社区）
+                &nbsp;转运至酒店
+              </Button>
+            </Box>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferCommunity}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoTransfer />
+                &nbsp;转运至社区
               </Button>
             </Box>
             {/* {(userInfo.role.includes('hotel_medical_team') ||

@@ -79,12 +79,6 @@ const UserFeedbackPage = loadable(
     fallback: <Fallback />
   }
 );
-const UserSetPlannedHotelPage = loadable(
-  () => import('@pages/people_detail/setPlannedHotel'),
-  {
-    fallback: <Fallback />
-  }
-);
 const UserTransferPage = loadable(
   () => import('@pages/people_detail/transfer'),
   {
@@ -239,9 +233,6 @@ export default function Routes(): JSX.Element {
         </Route>
         <Route path="/admin_jk/end_manage_list">
           <EndManagePage />
-        </Route>
-        <Route path="/detail/set_planned_hotel/:id/edit">
-          <UserSetPlannedHotelPage />
         </Route>
         <Route path="/admin_jk/resident_list">
           <ResidentListPage />

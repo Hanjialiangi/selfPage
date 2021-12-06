@@ -27,7 +27,7 @@ export default function Arrive(): JSX.Element {
   const [hotelList, setHotelList] = useState<any>([]); //酒店列表
   const [select, setSelect] = useState(''); //选中值
   const [isCommunity, setIsCommunity] = useState(false); //社区
-  const [Available_number, setAvailable_number] = useState(); //可使用房间数量
+  const [Available_number, setAvailable_number] = useState(0); //可使用房间数量
   const [IsSend, setIsSend] = useState(false);
   //点击接收功能
   const handleSubmit = async (e: any) => {
