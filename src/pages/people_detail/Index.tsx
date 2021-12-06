@@ -47,7 +47,14 @@ export default function PeopleDetailPage(): JSX.Element {
   const handleTransferOrder = async () => {
     window.location.href = getURL(`/detail/transfer/${param.id}/edit`);
   };
-
+  /* 疾控中心设置预计隔离酒店 */
+  const handleSetPlannedHotel = async () => {
+    window.location.href = getURL(`/detail/set_planned_hotel/${param.id}/edit`);
+  };
+  /* 分配 */
+  const handleDistriute = async () => {
+    window.location.href = getURL(`/detail/distriute/${param.id}/edit`);
+  };
   /* 修改信息 */
   const handleFixOrder = async () => {
     window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
@@ -188,26 +195,77 @@ export default function PeopleDetailPage(): JSX.Element {
         </Paper>
         <Paper elevation={0}>
           <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
-            {(userInfo.role.includes('transfer_team') ||
-              userInfo.role.includes('wh_cdc')) &&
-              isTransferButtonVisible && (
-                <Box
-                  margin={1.5}
-                  className="DetailBox"
-                  // style={{  }}
-                >
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handleTransferOrder}
-                    className="DetailBoxButton"
-                    style={{ width: '100%' }}
-                  >
-                    <InfoTransfer />
-                    &nbsp;转运
-                  </Button>
-                </Box>
-              )}
+            <Box
+              margin={1.5}
+              className="DetailBox"
+              // style={{  }}
+            >
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleDistriute}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoTransfer />
+                &nbsp;发起转运任务(疾控)
+              </Button>
+            </Box>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                // onClick={handleSamplingResult}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <InfoSamplingIcon />
+                &nbsp;推送街道(社区)
+              </Button>
+              <div className="DetailBoxDiv">|</div>
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferOrder}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <InfoIsolateIcon />
+                &nbsp;转运至酒店（社区）
+              </Button>
+            </Box>
+            {/* <Box
+              margin={1.5}
+              className="DetailBox"
+              // style={{  }}
+            >
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferOrder}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoTransfer />
+                &nbsp;转运
+              </Button>
+            </Box> */}
+            {/* <Box
+              margin={1.5}
+              className="DetailBox"
+              // style={{  }}
+            >
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleSetPlannedHotel}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoTransfer />
+                &nbsp;设置预计隔离酒店
+              </Button>
+            </Box> */}
             {(userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('community') ||
               userInfo.role.includes('wh_cdc')) &&

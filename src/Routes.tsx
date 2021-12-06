@@ -67,6 +67,24 @@ const PeopleDetailPage = loadable(() => import('@pages/people_detail/Index'), {
 const UserUpdatePage = loadable(() => import('@pages/people_detail/update'), {
   fallback: <Fallback />
 });
+const UserDistriutePage = loadable(
+  () => import('@pages/people_detail/distriute'),
+  {
+    fallback: <Fallback />
+  }
+);
+const UserFeedbackPage = loadable(
+  () => import('@pages/people_detail/feedback'),
+  {
+    fallback: <Fallback />
+  }
+);
+const UserSetPlannedHotelPage = loadable(
+  () => import('@pages/people_detail/setPlannedHotel'),
+  {
+    fallback: <Fallback />
+  }
+);
 const UserTransferPage = loadable(
   () => import('@pages/people_detail/transfer'),
   {
@@ -98,6 +116,12 @@ function getUserDetailRoutes(): JSX.Element[] {
     </Route>,
     <Route path="/detail/transfer/:id/edit" key="transfer">
       <UserTransferPage />
+    </Route>,
+    <Route path="/detail/distriute/:id/edit" key="distriute">
+      <UserDistriutePage />
+    </Route>,
+    <Route path="/detail/feedback/:id/edit" key="feedback">
+      <UserFeedbackPage />
     </Route>,
     <Route path="/detail/arrive/:id/edit" key="arrive">
       <UserArrivePage />
@@ -147,6 +171,9 @@ export default function Routes(): JSX.Element {
         </Route>
         <Route path="/admin_jk/end_manage_list">
           <EndManagePage />
+        </Route>
+        <Route path="/detail/set_planned_hotel/:id/edit">
+          <UserSetPlannedHotelPage />
         </Route>
         <Route path="/admin_jk/resident_list">
           <ResidentListPage />
