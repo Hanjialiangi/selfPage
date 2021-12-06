@@ -268,8 +268,12 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
         <Route path="/detail/hotel_doctor/:id/trasfer_hospital">
           <TransferHospital />
+        </Route>
+        <Route path="/hotel_doctor/hotel_list">
+          <HotelListPage />
         </Route>
         <Route path="/hotel_doctor/resident_list">
           <ResidentListPage />
@@ -329,8 +333,12 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
         <Route path="/synthesis/resident_list">
           <ResidentListPage />
+        </Route>
+        <Route path="/synthesis/hotel_list">
+          <HotelListPage />
         </Route>
         <Route path="/synthesis/transfer_list">
           <TransferListPage />

@@ -8,10 +8,14 @@ a {
   text-decoration: none;
   color: unset;
 }
-
+.MuiTabs-root {
+  overflow-x: scroll !important;
+}
+.MuiTabs-scroller.MuiTabs-fixed {
+  overflow-x: scroll !important;
+}
 .MuiBox-root-1 {
   position: fixed;
-  display: flex;
   height:90px;
   z-index: 9999;
 }
@@ -48,7 +52,7 @@ a {
   margin-right: 10px !important;
 }
 .MuiBox-root-2 {
-  width:100%;
+  // width:100%;
   background-color:#fff;
   z-index:9999;
 }
@@ -60,7 +64,7 @@ a {
   padding: 0 !important;
 }
 .MuiTabs-flexContainer {
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 .MuiListItem-root {
   padding-right: 0 !important;
@@ -105,6 +109,7 @@ a {
 }
 .tab {
   width: 100%;
+  overflow-x: scroll;
   z-index: 9999;
   background: #fff;
 }
