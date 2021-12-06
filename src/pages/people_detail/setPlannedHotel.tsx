@@ -97,6 +97,7 @@ export default function Arrive(): JSX.Element {
     const res = await getHotelList();
     if (res.code === 200) {
       setHotelList(res.data);
+      setAvailable_number(hotelList[0].available_number);
     }
   };
   //点击更新、判断剩余房间数和
@@ -127,7 +128,7 @@ export default function Arrive(): JSX.Element {
         <>
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>转运酒店地址</InputLabel>
+              <InputLabel>预计隔离酒店地址</InputLabel>
               <FormControl fullWidth>
                 <Select
                   name="hotel_name"
@@ -166,14 +167,13 @@ export default function Arrive(): JSX.Element {
                 variant="contained"
                 color="primary"
                 disableElevation
-                disabled={IsSend}
                 fullWidth
+                disabled={IsSend}
               >
-                确认转运
+                确认发送
               </Button>
             </Box>
           </Paper>
-          <a href="/detail/feedback/:id/edit">出现问题？点击反馈</a>
         </>
       </form>
     </Page>

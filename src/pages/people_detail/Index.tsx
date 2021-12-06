@@ -41,8 +41,8 @@ export default function PeopleDetailPage(): JSX.Element {
   /* 是否显示转运按钮 */
   const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
-  /* 是否显示接收并开始隔离 */
-  const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
+  // /* 是否显示接收并开始隔离 */
+  // const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
   /* 转运 */
   const handleTransferOrder = () => {
@@ -58,9 +58,9 @@ export default function PeopleDetailPage(): JSX.Element {
     window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
   };
   /* 修改接收并开始隔离 */
-  const handleArrive = () => {
-    window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
-  };
+  // const handleArrive = () => {
+  //   window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
+  // };
   /* 上报采样结果 */
   const handleSamplingResult = () => {
     window.location.href = getURL(`/detail/samplingresult/${param.id}/edit`);
@@ -213,11 +213,7 @@ export default function PeopleDetailPage(): JSX.Element {
             {(userInfo.role.includes('transfer_team') ||
               userInfo.role.includes('wh_cdc')) &&
               isTransferButtonVisible && (
-                <Box
-                  margin={1.5}
-                  className="DetailBox"
-                  // style={{  }}
-                >
+                <Box margin={1.5} className="DetailBox">
                   <Button
                     variant="text"
                     color="primary"
@@ -230,14 +226,35 @@ export default function PeopleDetailPage(): JSX.Element {
                   </Button>
                 </Box>
               )}
-            {(userInfo.role.includes('hotel_medical_team') ||
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <InfoSamplingIcon />
+                &nbsp;推送街道(社区)
+              </Button>
+              <div className="DetailBoxDiv">|</div>
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferOrder}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <InfoIsolateIcon />
+                &nbsp;转运至酒店（社区）
+              </Button>
+            </Box>
+            {/* {(userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('community') ||
               userInfo.role.includes('wh_cdc')) &&
-              isArriveButtonVisible && (
+              isArriveButtonVisible && (W
                 <Box
                   margin={1.5}
                   className="DetailBox"
-                  // style={{  }}
                 >
                   <Button
                     variant="text"
@@ -250,7 +267,7 @@ export default function PeopleDetailPage(): JSX.Element {
                     &nbsp;接收并开始隔离
                   </Button>
                 </Box>
-              )}
+              )} */}
             <Box>
               <Box margin={1.5} className="DetailBox">
                 <Button
