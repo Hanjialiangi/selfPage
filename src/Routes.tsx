@@ -144,6 +144,13 @@ const HotelDetail = loadable(
     fallback: <Fallback />
   }
 );
+//转院
+const TransferHospital = loadable(
+  () => import('@pages/people_detail/TransferHospital'),
+  {
+    fallback: <Fallback />
+  }
+);
 const FixPage = loadable(() => import('@pages/admin_jk/hotel_detail/fit'), {
   fallback: <Fallback />
 });
@@ -185,7 +192,7 @@ function ErrorShow(): JSX.Element[] {
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
-  //Todo: 临时关闭管理端，完成相关页面后再开启
+  //管理员
   if (
     userInfo.role.includes('wh_cdc') ||
     userInfo.role.includes('close_contact_team')
@@ -193,6 +200,9 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        <Route path="/detail/hotel_doctor/:id/trasfer_hospital">
+          <TransferHospital />
+        </Route>
         {HotelDetailInfo()}
         <Route path="/admin_jk/hotel_list">
           <HotelListPage />
@@ -222,7 +232,7 @@ export default function Routes(): JSX.Element {
       </Switch>
     );
   }
-
+  //转运组
   if (
     userInfo.role.includes('transfer_team') &&
     !userInfo.role.includes('wh_cdc') &&
@@ -249,7 +259,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  //Todo: 临时关闭管理端，完成相关页面后再开启
+  //酒店
   if (
     userInfo.role.includes('hotel_medical_team') &&
     !userInfo.role.includes('wh_cdc') &&
@@ -258,6 +268,9 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        <Route path="/detail/hotel_doctor/:id/trasfer_hospital">
+          <TransferHospital />
+        </Route>
         <Route path="/hotel_doctor/resident_list">
           <ResidentListPage />
         </Route>
@@ -278,6 +291,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
+  //社区
   if (
     userInfo.role.includes('community') &&
     !userInfo.role.includes('wh_cdc') &&

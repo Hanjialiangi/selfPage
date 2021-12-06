@@ -14,7 +14,8 @@ import {
   InfoFixIcon,
   InfoIsolateIcon,
   InfoTransfer,
-  InfoDetailIcon
+  InfoDetailIcon,
+  HotelIcon
 } from '@src/assets/svg/picture';
 import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
@@ -44,26 +45,37 @@ export default function PeopleDetailPage(): JSX.Element {
   const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
   /* 转运 */
-  const handleTransferOrder = async () => {
-    window.location.href = getURL(`/detail/transfer/${param.id}/edit`);
+  const handleTransferOrder = () => {
+    // window.location.href = getURL(`/detail/transfer/${param.id}/edit`);
+    window.location.href = getURL(`/detail/transfercommunity/${param.id}/edit`);
   };
-
+  /* 社区卫生服务中心转运到酒店 */
+  const handleTransferHotel = () => {
+    window.location.href = getURL(`/detail/receive/${param.id}/edit`);
+  };
   /* 修改信息 */
-  const handleFixOrder = async () => {
+  const handleFixOrder = () => {
     window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
   };
   /* 修改接收并开始隔离 */
-  const handleArrive = async () => {
+  const handleArrive = () => {
     window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
   };
   /* 上报采样结果 */
-  const handleSamplingResult = async () => {
+  const handleSamplingResult = () => {
     window.location.href = getURL(`/detail/samplingresult/${param.id}/edit`);
   };
 
   /* 上报健康状况 */
-  const handleHealth = async () => {
+  const handleHealth = () => {
     window.location.href = getURL(`/detail/health/${param.id}/edit`);
+  };
+
+  /* 转院 */
+  const handleTransferHospital = () => {
+    window.location.href = getURL(
+      `/detail/hotel_doctor/${param.id}/trasfer_hospital`
+    );
   };
 
   const [information, setInformation] = useState<Properties[]>();
@@ -188,6 +200,16 @@ export default function PeopleDetailPage(): JSX.Element {
         </Paper>
         <Paper elevation={0}>
           <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferHotel}
+                className="DetailBoxButton"
+              >
+                社区服务中心送酒店
+              </Button>
+            </Box>
             {(userInfo.role.includes('transfer_team') ||
               userInfo.role.includes('wh_cdc')) &&
               isTransferButtonVisible && (
@@ -229,7 +251,7 @@ export default function PeopleDetailPage(): JSX.Element {
                   </Button>
                 </Box>
               )}
-            <>
+            <Box>
               <Box margin={1.5} className="DetailBox">
                 <Button
                   variant="text"
@@ -253,7 +275,18 @@ export default function PeopleDetailPage(): JSX.Element {
                   &nbsp;上报健康状况
                 </Button>
               </Box>
-            </>
+            </Box>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferHospital}
+                fullWidth
+              >
+                <HotelIcon />
+                &nbsp;转院
+              </Button>
+            </Box>
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"

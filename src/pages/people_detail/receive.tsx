@@ -6,7 +6,6 @@ import {
   Button,
   Input,
   FormControl,
-  Select,
   InputLabel
 } from '@material-ui/core';
 import { useParams } from 'react-router';
@@ -26,20 +25,18 @@ export interface HotelType {
 export default function ReceivePage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
   const [hotel, setHotel] = useState(''); //初始化计划酒店选择
-  const [hotelList, setHotelList] = useState([]); //初始化酒店列表
   const [available, setAvailable] = useState(0); //对应酒店剩余容量
-  const [clickable, setClickable] = useState(false); //按钮可点击
-
-  //改变选中值
-  const handleChange = (e: any) => {
-    setHotel(e.target.value); //设置当前酒店
-    installCapacity(hotelList, e.target.value);
-  };
+  const [show, setShow] = useState(false); //按钮显示
 
   //提交动作
   const handleSubmit = (e: any) => {
     e.preventDefault();
     //TODO: 使用接口去通知酒店接受(open_id,hotel_name)
+  };
+
+  //反馈按钮
+  const handleFeedBack = () => {
+    //TODO: 接口反馈
   };
 
   //设置剩余容量
@@ -54,7 +51,7 @@ export default function ReceivePage(): JSX.Element {
         item.available_number && setAvailable(item.available_number);
 
         if (item.available_number > 0) {
-          setClickable(true);
+          setShow(true);
         }
       }
     });
@@ -75,7 +72,6 @@ export default function ReceivePage(): JSX.Element {
     }
     const result = await getHotelList(); //获取酒店列表
     if (result.code === 200) {
-      setHotelList(result.data);
       installCapacity(result.data, middleWare); //设置容量
     }
   };
@@ -90,20 +86,7 @@ export default function ReceivePage(): JSX.Element {
           <Box marginY={1.5} padding={1.5}>
             <InputLabel>隔离酒店</InputLabel>
             <FormControl fullWidth>
-              <Select
-                name="hotel_name"
-                value={hotel}
-                native
-                onChange={handleChange}
-              >
-                {hotelList.map((item: any) => {
-                  return (
-                    <option value={item.name} key={item.id}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </Select>
+              <Input name="hotel_name" value={hotel} disabled />
             </FormControl>
           </Box>
         </Paper>
@@ -121,16 +104,27 @@ export default function ReceivePage(): JSX.Element {
         </Paper>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disableElevation
-              fullWidth
-              disabled={!clickable}
-            >
-              通知酒店接收
-            </Button>
+            {show ? (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disableElevation
+                fullWidth
+              >
+                通知酒店接收
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                fullWidth
+                onClick={handleFeedBack}
+              >
+                反馈
+              </Button>
+            )}
           </Box>
         </Paper>
       </form>
