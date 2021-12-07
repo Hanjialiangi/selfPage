@@ -420,3 +420,15 @@ export function getSamplingList(
   });
   return request(url);
 }
+
+//转院
+export function transferHospital(
+  open_id: string,
+  time: string,
+  hospital: string
+): APIResponse<any> {
+  const data = JSON.stringify({ open_id, time, hospital });
+  return request('/transfer/hospital', data, {
+    method: 'POST'
+  });
+}
