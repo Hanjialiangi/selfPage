@@ -2,7 +2,7 @@ import Page from '@components/layout/Page';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Box, Typography, Paper, Button, Card } from '@material-ui/core';
-import { InfoFixIcon, InfoNameIcon } from '@src/assets/svg/picture';
+import { InfoFixIcon, HotelIcon } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
 import '@src/styles/modules/detail/detail.scss';
 import { getHotelDetailInfo } from '@src/api';
@@ -52,7 +52,7 @@ export default function HotelDetailPage(): JSX.Element {
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
                     <Typography variant="h6">
-                      <InfoNameIcon />
+                      <HotelIcon />
                       &nbsp;酒店的基本信息
                     </Typography>
                     <Typography variant="subtitle1" component={'span'}>
