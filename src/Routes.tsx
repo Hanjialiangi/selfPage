@@ -188,14 +188,14 @@ const UpdatePage = loadable(
 
 function HotelDetailInfo(): JSX.Element[] {
   return [
-    <Route path="/detail/hotel/:id" key="hotel">
-      <HotelDetail />
-    </Route>,
     <Route path="/detail/hotel/:id/fix" key="fix">
       <FixPage />
     </Route>,
     <Route path="/detail/hotel/:id/update" key="update">
       <UpdatePage />
+    </Route>,
+    <Route path="/detail/hotel/:id" key="hotel">
+      <HotelDetail />
     </Route>
   ];
 }
