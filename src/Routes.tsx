@@ -131,7 +131,7 @@ function getUserDetailRoutes(): JSX.Element[] {
     <Route path="/detail/distriute/:id/edit" key="distriute">
       <UserDistriutePage />
     </Route>,
-    <Route path="/detail/feedback/:id/edit" key="feedback">
+    <Route path="/detail/feedback/:id/:type?/edit" key="feedback">
       <UserFeedbackPage />
     </Route>,
     <Route path="/detail/arrive/:id/edit" key="arrive">

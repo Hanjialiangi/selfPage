@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
 import {
   Box,
@@ -14,14 +14,19 @@ import { useParams } from 'react-router';
 // import { getURL } from '@src/utils';
 
 export default function HealthPage(): JSX.Element {
-  const param: { id: string } = useParams(); //获取参数
+  const param: { id: string; type: string } = useParams(); //获取参数
 
-  const [problemType, setProblemType] = useState(''); //设置问题类别
+  const [problemType, setProblemType] = useState('不属于本区管控'); //设置问题类别
   const [otherProblem, setOtherProblem] = useState(''); //其他问题描述
 
   const handleSubmit = async () => {
     console.log(param.id);
   };
+  useEffect(() => {
+    if (param.type) {
+      setProblemType('预计酒店容量不足');
+    }
+  }, []);
   return (
     <Page>
       <Paper elevation={0} square>
