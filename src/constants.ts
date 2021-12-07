@@ -37,7 +37,7 @@ export const RoleName = {
   [Role.UNKNOWN]: '',
   [Role.ADMIN]: '疾控中心',
   [Role.TRANSFER]: '转运组',
-  [Role.HOTELDOCTOR]: '酒店医疗组',
+  [Role.HOTELDOCTOR]: '酒店管理组',
   [Role.COMMUNITY]: '社区'
 };
 
