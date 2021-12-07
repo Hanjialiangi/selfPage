@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Box, Typography, Paper, Button, Card } from '@material-ui/core';
 import { InfoFixIcon, InfoNameIcon } from '@src/assets/svg/picture';
-import HotelInfoContent from '@components/hotel/HotelInfoContent';
 import { getURL } from '@src/utils';
 import '@src/styles/modules/detail/detail.scss';
+import { getHotelDetailInfo } from '@src/api';
 
 export type Properties = {
   key: string;
@@ -27,17 +27,7 @@ export default function HotelDetailPage(): JSX.Element {
   const handleFixHotelInfo = () => {
     window.location.href = getURL(`/detail/hotel/${param.id}/update`);
   };
-  const [detail, setdetail] = useState<Properties[]>();
-  // const Init = async (id: string) => {
-  //   const res = await getHotel(id);
-  //   if (res.code === 200) {
-  //     const attributeArray: Array<Properties> = [];
-  //     res.data.map((item: Properties) => {
-  //       attributeArray.push(item.value);
-  //     });
-  //     setdetail(attributeArray);
-  //   }
-  // };
+
   const handleFixHotelState = () => {
     if (HotelState === '启动') {
       setHotelState('禁用');
@@ -69,7 +59,6 @@ export default function HotelDetailPage(): JSX.Element {
                       <span style={{ color: `${color}` }}>{HotelState}中</span>
                     </Typography>
                   </div>
-                  {/* <HotelInfoContent info={data} /> */}
                 </Box>
               </Paper>
             </Card>
