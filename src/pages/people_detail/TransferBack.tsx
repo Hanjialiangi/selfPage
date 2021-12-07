@@ -2,24 +2,23 @@ import Page from '@components/layout/Page';
 import { Box, Button, Input, InputLabel, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { transferHospital } from '@src/api';
+import { transferBack } from '@src/api';
 import moment from 'moment';
 import { getURL } from '@src/utils';
 import { dingAlert } from '@src/dingtalkAPI';
 
-export default function TransferHospital(): JSX.Element {
+export default function TransferBack(): JSX.Element {
   const param: { id: string } = useParams();
   const [value, setValue] = useState(''); //设置属性值
 
   const handleSubmit = async () => {
-    //TODO:接口改变转运医院信息
-    const res = await transferHospital(
+    const res = await transferBack(
       param.id,
       moment().format('YYYY-MM-DD HH:mm:ss'),
       value
     );
     if (res.code === 200) {
-      dingAlert('转院成功', '正确', '确认');
+      dingAlert('转归成功', '正确', '确认');
       window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
@@ -29,11 +28,11 @@ export default function TransferHospital(): JSX.Element {
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
             <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              转院信息:
+              转归信息:
             </InputLabel>
             <Input
-              name="hospital"
-              placeholder="请填写医院名称"
+              name="overcome"
+              placeholder="请填写转归理由"
               minRows={2}
               maxRows={600}
               disableUnderline
@@ -52,7 +51,7 @@ export default function TransferHospital(): JSX.Element {
             fullWidth
             onClick={handleSubmit}
           >
-            确认转院
+            确认转归
           </Button>
         </Box>
       </Paper>

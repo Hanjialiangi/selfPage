@@ -81,12 +81,16 @@ export default function PeopleDetailPage(): JSX.Element {
   /* 转院 */
   const handleTransferHospital = () => {
     window.location.href = getURL(
-      `/detail/hotel_doctor/${param.id}/trasfer_hospital`
+      `/detail/hotel_doctor/${param.id}/transfer_hospital`
     );
   };
   /* 反馈 */
   const handleFeedBack = () => {
-    window.location.href = getURL('/detail/feedback/:id/edit');
+    window.location.href = getURL(`/detail/feedback/${param.id}/edit`);
+  };
+  /*转归 */
+  const handleTransferBack = () => {
+    window.location.href = getURL(`detail/transferback/${param.id}/edit`);
   };
 
   const [information, setInformation] = useState<Properties[]>();
@@ -336,6 +340,18 @@ export default function PeopleDetailPage(): JSX.Element {
               >
                 <InfoFixIcon />
                 &nbsp;反馈
+              </Button>
+            </Box>
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferBack}
+                className="DetailBoxButton"
+                fullWidth
+              >
+                <InfoFixIcon />
+                &nbsp;转归
               </Button>
             </Box>
           </Box>

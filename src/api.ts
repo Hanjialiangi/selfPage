@@ -432,3 +432,15 @@ export function transferHospital(
     method: 'POST'
   });
 }
+
+//转归
+export function transferBack(
+  open_id: string,
+  time: string,
+  outcome: string
+): APIResponse<any> {
+  const data = JSON.stringify({ open_id, time, outcome });
+  return request('/outcome', data, {
+    method: 'POST'
+  });
+}

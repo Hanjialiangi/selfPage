@@ -119,6 +119,15 @@ function getUserDetailRoutes(): JSX.Element[] {
     <Route path="/detail/receive/:id/edit" key="receive">
       <ReceivePage />
     </Route>,
+    <Route path="/detail/transferback/:id/edit" key="transferback">
+      <TransferBack />
+    </Route>,
+    <Route
+      path="/detail/hotel_doctor/:id/transfer_hospital"
+      key="transferhospital"
+    >
+      <TransferHospital />
+    </Route>,
     <Route path="/detail/transfercommunity/:id/edit" key="transfercommunity">
       <TransferCommunity />
     </Route>,
@@ -140,7 +149,7 @@ function getUserDetailRoutes(): JSX.Element[] {
     <Route path="/detail/health/:id/edit" key="health">
       <HealthPage />
     </Route>,
-    <Route path="/detail/samplingresult/:id/edit" key="health">
+    <Route path="/detail/samplingresult/:id/edit" key="samplingresult">
       <SamplingResultPage />
     </Route>,
     <Route path="/detail/resident/:id" key="detail">
@@ -165,6 +174,13 @@ const HotelDetail = loadable(
 //转院
 const TransferHospital = loadable(
   () => import('@pages/people_detail/TransferHospital'),
+  {
+    fallback: <Fallback />
+  }
+);
+//转归
+const TransferBack = loadable(
+  () => import('@pages/people_detail/TransferBack'),
   {
     fallback: <Fallback />
   }
@@ -218,9 +234,6 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
-        <Route path="/detail/hotel_doctor/:id/trasfer_hospital">
-          <TransferHospital />
-        </Route>
         {HotelDetailInfo()}
         <Route path="/admin_jk/hotel_list">
           <HotelListPage />
@@ -287,9 +300,6 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
-        <Route path="/detail/hotel_doctor/:id/trasfer_hospital">
-          <TransferHospital />
-        </Route>
         <Route path="/hotel_doctor/hotel_list">
           <HotelListPage />
         </Route>
