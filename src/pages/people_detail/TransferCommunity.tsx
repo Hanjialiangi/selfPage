@@ -45,7 +45,7 @@ export default function TransferCommunity(): JSX.Element {
     setHomeHotel(e.target.value); //设置选择的居家隔离酒店
     homeQuarantineHotelList?.map((item: any) => {
       if (item.name === e.target.value) {
-        setHotelSubDistrict('芳草街街道'); //设置街道信息TODO:无属性
+        setHotelSubDistrict(item.address); //设置街道信息TODO:无属性
       }
     });
   };
