@@ -112,7 +112,7 @@ export default function ReceivePage(): JSX.Element {
       </form>
       <Typography style={{ textAlign: 'center', paddingTop: '80%' }}>
         出现问题？点击
-        <a style={{ color: 'blue' }} href="/detail/feedback/:id/edit">
+        <a style={{ color: 'blue' }} href={`/detail/feedback/${param.id}/edit`}>
           反馈
         </a>
       </Typography>

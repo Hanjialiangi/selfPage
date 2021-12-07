@@ -23,7 +23,7 @@ export default function TransferBack(): JSX.Element {
     }
   };
   return (
-    <Page title="转院">
+    <Page title="转归">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">

@@ -79,12 +79,6 @@ const UserFeedbackPage = loadable(
     fallback: <Fallback />
   }
 );
-const UserTransferPage = loadable(
-  () => import('@pages/people_detail/transfer'),
-  {
-    fallback: <Fallback />
-  }
-);
 const UserArrivePage = loadable(() => import('@pages/people_detail/arrive'), {
   fallback: <Fallback />
 });
@@ -133,9 +127,6 @@ function getUserDetailRoutes(): JSX.Element[] {
     </Route>,
     <Route path="/detail/resident/:id/baseinfo/edit" key="update">
       <UserUpdatePage />
-    </Route>,
-    <Route path="/detail/transfer/:id/edit" key="transfer">
-      <UserTransferPage />
     </Route>,
     <Route path="/detail/distriute/:id/edit" key="distriute">
       <UserDistriutePage />

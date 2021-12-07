@@ -10,32 +10,15 @@ import { getHotelList, getResidentInfo } from '@src/api';
 
 export default function ExpertTransferOrder(): JSX.Element {
   const param: { id: string } = useParams();
-  // const [type, setType] = useState(''); //隔离方式
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [hotel, setHotel] = useState(''); //选择的酒店
   const [subDistrict, setSubDistrict] = useState(''); //所属街道
-  // const [isCommunity, setIsCoummunity] = useState(false); //是否社区
+  const [serviceCenterList, setServiceCenterList] = useState(['']); //设置服务中心
+  const [serivice, setSerivice] = useState(''); //选择的服务中心
 
   const handleTransfer = async () => {
     //TODO: 发起转运任务
-    // if (hotel) {
-    //   //送去酒店转运
-    //   const res = await getTransferHotel(param.id, hotel);
-    //   if (res.code === 200) {
-    //     dingAlert('转运到酒店成功', '正确', '确认');
-    //     window.location.href = getURL(`/detail/resident/${param.id}`);
-    //   }
-    // } else {
-    //   //转运社区
-    //   const res = await getTransferCommunity(
-    //     param.id,
-    //     moment().format('YYYY-MM-DD HH:mm:ss')
-    //   );
-    //   if (res.code === 200) {
-    //     dingAlert('转运到社区成功', '正确', '确认');
-    //     window.location.href = getURL(`/detail/resident/${param.id}`);
-    //   }
-    // }
+    console.log(param.id, hotel, subDistrict, serivice);
   };
 
   //init
@@ -43,29 +26,18 @@ export default function ExpertTransferOrder(): JSX.Element {
     const res = await getResidentInfo(param.id);
     if (res.code === 200) {
       res.data.map(async (item: any) => {
-        // if (item.key === 'resident_property') {
-        //   if (item.value === '密接' || item.value === '次密接') {
-        //     setType('集中隔离');
-        //     const res = await getHotelList();
-        //     if (res.code === 200) {
-        //       setHotelList(res.data);
-        //     }
-        //   } else {
-        //     setType('居家隔离');
-        //   }
-        // }
         if (item.key === 'sub_district') {
           setSubDistrict(item.value); //设置所属街道
+          //TODO: //根据所属街道设置对应服务中心,isArray判断
+
+          setServiceCenterList(['xxx服务中心']);
+          setSerivice('xxx服务中心');
         }
-        // if (item.key === 'quarantine_hotel') {
-        //   if (item.value) {
-        //     setIsCoummunity(true); // 二次转运给社区(酒店转社区)
-        //   }
-        // }
       });
       const result = await getHotelList(); //获取预计隔离酒店列表
       if (result.code === 200) {
         setHotelList(result.data);
+        setHotel(result.data[0].name); //默认显示第一个
       }
     }
   };
@@ -74,21 +46,7 @@ export default function ExpertTransferOrder(): JSX.Element {
   }, []);
 
   return (
-    <Page title="转运">
-      {/* <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
-          <InputLabel>隔离方式</InputLabel>
-          <span
-            style={{
-              fontSize: '18px',
-              display: 'flex',
-              flexDirection: 'row-reverse'
-            }}
-          >
-            {type}
-          </span>
-        </Box>
-      </Paper> */}
+    <Page title="发起转运">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <InputLabel required>选择预计隔离酒店</InputLabel>
@@ -129,42 +87,25 @@ export default function ExpertTransferOrder(): JSX.Element {
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
             <InputLabel>通知所属社区服务中心</InputLabel>
-            <span
-              style={{
-                fontSize: '18px',
-                display: 'flex',
-                flexDirection: 'row-reverse'
+            <Select
+              className="serivice"
+              value={serivice}
+              native
+              style={{ display: 'flex' }}
+              onChange={(e: any) => {
+                setSerivice(e.target.value);
               }}
             >
-              XXX社区服务中心
-            </span>
+              {serviceCenterList.map((item: any) => {
+                return (
+                  <option value="xxx服务中心" key="1">
+                    xxx服务中心
+                  </option>
+                );
+              })}
+            </Select>
           </Box>
         </Paper>
-        {/* <Paper elevation={0} square>
-            <Box marginY={1.5} padding={1.5}>
-              <InputLabel required>选择通知社区卫生服务中心</InputLabel>
-              <Select
-                className="hotel_name"
-                value={hotel}
-                native
-                style={{ display: 'flex' }}
-                onChange={(e: any) => {
-                  setHotel(e.target.value);
-                }}
-              >
-                <option aria-label="None" value="">
-                  无
-                </option>
-                {hotelList.map((item: any) => {
-                  return (
-                    <option value={item.name} key={item.id}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </Select>
-            </Box>
-          </Paper> */}
       </>
       <Box marginY={1.5} padding={1.5}>
         <Button
@@ -174,7 +115,7 @@ export default function ExpertTransferOrder(): JSX.Element {
           disableElevation
           fullWidth
         >
-          确认转运
+          确认发起转运
         </Button>
       </Box>
     </Page>
