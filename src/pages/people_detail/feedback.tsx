@@ -24,7 +24,9 @@ export default function HealthPage(): JSX.Element {
     <Page>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>异常类别</InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>异常类别
+          </InputLabel>
           <FormControl fullWidth>
             <Select
               className="problem_type"
@@ -48,6 +50,11 @@ export default function HealthPage(): JSX.Element {
           variant="contained"
           color="primary"
           disableElevation
+          style={{
+            background: '#1790FF',
+            color: '#FFFFFF',
+            height: '47px'
+          }}
           fullWidth
         >
           确认反馈

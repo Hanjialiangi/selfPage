@@ -29,7 +29,7 @@ export default function TransferHospital(): JSX.Element {
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
             <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              转院信息:
+              <span style={{ color: '#1790FF' }}>*</span>转院信息:
             </InputLabel>
             <Input
               name="hospital"
@@ -50,6 +50,11 @@ export default function TransferHospital(): JSX.Element {
             color="primary"
             disableElevation
             fullWidth
+            style={{
+              background: '#1790FF',
+              color: '#FFFFFF',
+              height: '47px'
+            }}
             onClick={handleSubmit}
           >
             确认转院

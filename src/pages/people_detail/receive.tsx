@@ -134,6 +134,11 @@ export default function ReceivePage(): JSX.Element {
                 color="primary"
                 disableElevation
                 fullWidth
+                style={{
+                  background: '#1790FF',
+                  color: '#FFFFFF',
+                  height: '47px'
+                }}
                 onClick={handleTransfer}
               >
                 申请转运至别的酒店

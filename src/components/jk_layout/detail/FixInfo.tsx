@@ -152,7 +152,6 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                   <Grid item xs={5}>
                     <FormControl
                       style={{
-                        textAlign: 'center',
                         lineHeight: '30px',
                         marginLeft: '7%'
                       }}

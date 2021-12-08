@@ -39,7 +39,7 @@ export default function TransferCommunity(): JSX.Element {
       );
       if (res.code === 200) {
         dingAlert('通知成功', '正确', '确认');
-        window.location.href = getURL(`/detail/resident/${param.id}`);
+        // window.location.href = getURL(`/detail/resident/${param.id}`);
       }
     } else {
       const res = await transferHomeQuarantineHotel(
@@ -95,7 +95,9 @@ export default function TransferCommunity(): JSX.Element {
       <form onSubmit={handleSubmit}>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <InputLabel>转运方式</InputLabel>
+            <InputLabel>
+              <span style={{ color: '#1790FF' }}>*</span>转运方式
+            </InputLabel>
             <FormControl fullWidth>
               <Select
                 name="transfer_type"
@@ -112,7 +114,9 @@ export default function TransferCommunity(): JSX.Element {
         {transferType === '居家隔离酒店' && (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>选择居家隔离酒店</InputLabel>
+              <InputLabel>
+                <span style={{ color: '#1790FF' }}>*</span>选择居家隔离酒店
+              </InputLabel>
               <FormControl fullWidth>
                 <Select
                   name="home_hotel"
@@ -134,7 +138,9 @@ export default function TransferCommunity(): JSX.Element {
         {transferType === '居家隔离' ? (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>所属街道</InputLabel>
+              <InputLabel>
+                <span style={{ color: '#1790FF' }}>*</span>所属街道
+              </InputLabel>
               <FormControl fullWidth>
                 <Input value={subDistrict} disabled></Input>
               </FormControl>
@@ -143,7 +149,9 @@ export default function TransferCommunity(): JSX.Element {
         ) : (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>当前酒店所属街道</InputLabel>
+              <InputLabel>
+                <span style={{ color: '#1790FF' }}>*</span>当前酒店所属街道
+              </InputLabel>
               <FormControl fullWidth>
                 <Input value={hotelSubDistrict} disabled></Input>
               </FormControl>
@@ -158,6 +166,11 @@ export default function TransferCommunity(): JSX.Element {
               color="primary"
               disableElevation
               fullWidth
+              style={{
+                background: '#1790FF',
+                color: '#FFFFFF',
+                height: '47px'
+              }}
             >
               通知街道遣送
             </Button>

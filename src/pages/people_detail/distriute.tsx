@@ -81,13 +81,15 @@ export default function UserDistriutePage(): JSX.Element {
   return (
     <Page title="发起转运">
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
-          <InputLabel required>选择预计隔离酒店</InputLabel>
+        <Box marginTop={1.5} padding={1.5}>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>选择预计隔离酒店
+          </InputLabel>
           <Select
             className="hotel_name"
             value={hotel}
             native
-            style={{ display: 'flex' }}
+            style={{ display: 'flex', borderBottom: '1px solid gray' }}
             onChange={(e: any) => {
               setHotel(e.target.value);
             }}
@@ -104,13 +106,15 @@ export default function UserDistriutePage(): JSX.Element {
       </Paper>
       <>
         <Paper elevation={0} square>
-          <Box marginY={1.5} padding={1.5}>
-            <InputLabel required>所属街道</InputLabel>
+          <Box padding={1.5}>
+            <InputLabel>
+              <span style={{ color: '#1790FF' }}>*</span>所属街道
+            </InputLabel>
             <Select
               className="sub_district"
               value={subDistrict}
               native
-              style={{ display: 'flex' }}
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setSubDistrict(e.target.value);
                 gainService(e.target.value);
@@ -129,13 +133,15 @@ export default function UserDistriutePage(): JSX.Element {
         </Paper>
         {subDistrict && (
           <Paper elevation={0} square>
-            <Box marginY={1.5} padding={1.5}>
-              <InputLabel required>通知所属社区服务中心</InputLabel>
+            <Box padding={1.5}>
+              <InputLabel>
+                <span style={{ color: '#1790FF' }}>*</span>通知所属社区服务中心
+              </InputLabel>
               <Select
                 className="serivice"
                 value={serivice}
                 native
-                style={{ display: 'flex' }}
+                style={{ display: 'flex', borderBottom: '1px solid gray' }}
                 onChange={(e: any) => {
                   setSerivice(e.target.value);
                 }}
@@ -152,12 +158,12 @@ export default function UserDistriutePage(): JSX.Element {
           </Paper>
         )}
       </>
-      <Box marginY={1.5} padding={1.5}>
+      <Box padding={1.5}>
         <Button
           onClick={handleTransfer}
           variant="contained"
-          color="primary"
           disabled={!subDistrict}
+          style={{ background: '#1790FF', color: '#FFFFFF', height: '47px' }}
           fullWidth
         >
           确认发起转运

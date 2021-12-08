@@ -66,7 +66,7 @@ export default function HealthPage(): JSX.Element {
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
             <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              是否咳嗽症状:
+              <span style={{ color: '#1790FF' }}>*</span>是否咳嗽症状:
             </InputLabel>
             <Radio name="is_cough" value={healthState.is_cough} />
           </div>
@@ -76,7 +76,7 @@ export default function HealthPage(): JSX.Element {
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
             <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              是否发烧症状:
+              <span style={{ color: '#1790FF' }}>*</span>是否发烧症状:
             </InputLabel>
             <Radio name="is_fever" value={healthState.is_fever} />
           </div>
@@ -86,7 +86,7 @@ export default function HealthPage(): JSX.Element {
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
             <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              是否乏力症状:
+              <span style={{ color: '#1790FF' }}>*</span>是否乏力症状:
             </InputLabel>
             <Radio name="is_weak" value={healthState.is_weak}></Radio>
           </div>
@@ -94,7 +94,9 @@ export default function HealthPage(): JSX.Element {
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>其他健康状况说明</InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>其他健康状况说明
+          </InputLabel>
           <FormControl fullWidth>
             <Input
               name="other_health_case"
@@ -114,6 +116,11 @@ export default function HealthPage(): JSX.Element {
           variant="contained"
           color="primary"
           disableElevation
+          style={{
+            background: '#1790FF',
+            color: '#FFFFFF',
+            height: '47px'
+          }}
           fullWidth
         >
           确认提交
