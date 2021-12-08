@@ -463,3 +463,24 @@ export function getServiceCenter(sub_district: string): APIResponse<any> {
   });
   return request(url);
 }
+
+//更新人员预计隔离酒店以及街道信息
+export function updatePersonInfo(
+  open_id: string,
+  planned_quarantine_hotel: string,
+  sub_district?: string
+): APIResponse<any> {
+  const hotel = {
+    key: 'planned_quarantine_hotel',
+    value: planned_quarantine_hotel
+  };
+  const sub = sub_district &&{
+    key: 'sub_district',
+    value: sub_district
+  };
+  const properties = sub_district ? [hotel, sub] : [hotel];
+  const data = JSON.stringify({ open_id, properties });
+  return request('/resident', data, {
+    method: 'PUT'
+  });
+}

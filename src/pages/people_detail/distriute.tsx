@@ -8,9 +8,10 @@ import {
   getHotelList,
   getResidentInfo,
   getSubDistrict,
-  getServiceCenter
+  getServiceCenter,
+  updatePersonInfo
 } from '@src/api';
-// import { dingAlert } from '@src/dingtalkAPI';
+import { dingAlert } from '@src/dingtalkAPI';
 // import { getURL } from '@src/utils';
 
 type StreetType = {
@@ -30,7 +31,10 @@ export default function UserDistriutePage(): JSX.Element {
 
   const handleTransfer = async () => {
     //TODO: 发起转运任务
-    console.log(param.id, hotel, subDistrict, serivice);
+    const res = await updatePersonInfo(param.id, hotel, subDistrict);
+    if (res.code === 200) {
+      dingAlert('发起成功', '正确', '确认');
+    }
   };
   //获取服务中心
   const gainService = async (value: string) => {
