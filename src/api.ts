@@ -249,12 +249,14 @@ export function getHotelReceive(
 //转运到酒店（发起转运）
 export function getTransferHotel(
   open_id: string,
-  hotel_name?: string
+  hotel_name?: string,
+  sub_district?: string
 ): APIResponse<any> {
   const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
-    hotel_name
+    hotel_name,
+    sub_district
   });
   return request('/transfer/hotel', data, {
     method: 'POST'
