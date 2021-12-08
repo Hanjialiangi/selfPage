@@ -444,3 +444,9 @@ export function transferBack(
     method: 'POST'
   });
 }
+
+//获取街道列表
+export function getSubDistrict(): APIResponse<any> {
+  const page_size = 100;
+  return request('/sub_district/list?page_size=' + page_size);
+}

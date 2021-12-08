@@ -4,7 +4,6 @@ import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel, TextField } from '@material-ui/core';
 import {
   getHotelReceive,
-  getHotelList,
   getResidentInfo,
   getCommunityReceive
 } from '@src/api';

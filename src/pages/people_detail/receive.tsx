@@ -10,7 +10,9 @@ import {
   Typography
 } from '@material-ui/core';
 import { useParams } from 'react-router';
-import { getHotelList, getResidentInfo } from '@src/api';
+import { getHotelList, getResidentInfo, getTransferHotel } from '@src/api';
+import { dingAlert } from '@src/dingtalkAPI';
+import { getURL } from '@src/utils';
 
 export interface HotelType {
   address: string;
@@ -30,9 +32,14 @@ export default function ReceivePage(): JSX.Element {
   const [show, setShow] = useState(false); //按钮展示
 
   //提交动作
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     //TODO: 使用接口去通知酒店接受(open_id,hotel_name)
+    const res = await getTransferHotel(param.id, hotel);
+    if (res.code === 200) {
+      dingAlert('转运成功', '正确', '确认');
+      window.location.href = getURL(`/detail/resident/${param.id}`);
+    }
   };
 
   //设置剩余容量
