@@ -224,7 +224,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 style={{ width: '100%' }}
               >
                 <InfoTransfer />
-                &nbsp;发起转运任务(疾控)
+                &nbsp;发起转运任务(转运组)
               </Button>
             </Box>
             <Box margin={1.5} className="DetailBox">
