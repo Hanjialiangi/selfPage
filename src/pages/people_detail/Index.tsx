@@ -15,7 +15,11 @@ import {
   InfoIsolateIcon,
   InfoTransfer,
   InfoDetailIcon,
-  HotelIcon
+  HotelIcon,
+  FeedBackIcon,
+  BackHomeIcon,
+  PushToStreetIcon,
+  StartTransferIcon
 } from '@src/assets/svg/picture';
 import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
@@ -223,7 +227,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 className="DetailBoxButton"
                 style={{ width: '100%' }}
               >
-                <InfoTransfer />
+                <StartTransferIcon />
                 &nbsp;发起转运任务(转运组)
               </Button>
             </Box>
@@ -235,7 +239,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
-                <InfoSamplingIcon />
+                <PushToStreetIcon />
                 &nbsp;推送街道
               </Button>
               <div className="DetailBoxDiv">|</div>
@@ -335,7 +339,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 className="DetailBoxButton"
                 fullWidth
               >
-                <InfoFixIcon />
+                <FeedBackIcon />
                 &nbsp;反馈
               </Button>
             </Box>
@@ -347,7 +351,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 className="DetailBoxButton"
                 fullWidth
               >
-                <InfoFixIcon />
+                <BackHomeIcon />
                 &nbsp;转归
               </Button>
             </Box>
