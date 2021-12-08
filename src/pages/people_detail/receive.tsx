@@ -34,11 +34,18 @@ export default function ReceivePage(): JSX.Element {
   //提交动作
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await getTransferHotel(param.id, hotel);
-    if (res.code === 200) {
-      dingAlert('转运成功', '正确', '确认');
-      window.location.href = getURL(`/detail/resident/${param.id}`);
+    if (hotel) {
+      const res = await getTransferHotel(param.id, hotel);
+      if (res.code === 200) {
+        dingAlert('转运成功', '正确', '确认');
+        window.location.href = getURL(`/detail/resident/${param.id}`);
+      }
     }
+  };
+
+  //申请转酒店
+  const handleTransfer = async () => {
+    //TODO: //接口缺失
   };
 
   //设置剩余容量
@@ -51,9 +58,9 @@ export default function ReceivePage(): JSX.Element {
     data.map((item: any) => {
       if (item.name === value) {
         item.available_number && setAvailable(item.available_number);
-      }
-      if (item.available_number > 0) {
-        setShow(true);
+        if (item.available_number > 0) {
+          setShow(true);
+        }
       }
     });
   };
@@ -103,28 +110,30 @@ export default function ReceivePage(): JSX.Element {
         </Paper>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disableElevation
-              fullWidth
-              disabled={!show}
-            >
-              转运至酒店
-            </Button>
+            {show ? (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disableElevation
+                fullWidth
+              >
+                转运至酒店
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                fullWidth
+                onClick={handleTransfer}
+              >
+                申请转运至别的酒店
+              </Button>
+            )}
           </Box>
         </Paper>
       </form>
-      <Typography style={{ textAlign: 'center', paddingTop: '80%' }}>
-        出现问题？点击
-        <a
-          style={{ color: 'blue' }}
-          href={`/detail/feedback/${param.id}/no_enough/edit`}
-        >
-          反馈
-        </a>
-      </Typography>
     </Page>
   );
 }

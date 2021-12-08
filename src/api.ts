@@ -495,3 +495,13 @@ export function transferHomeQuarantineHotel(
   const data = JSON.stringify({ open_ids, hotel_name, time });
   return request('/transfer/home_quarantine_hotel', data, { method: 'POST' });
 }
+
+//提交异常情况
+export function uploadException(
+  open_id: string,
+  exception: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, exception });
+  return request('/quarantine_exception', data, { method: 'POST' });
+}

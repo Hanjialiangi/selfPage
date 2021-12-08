@@ -35,7 +35,6 @@ export default function Arrive(): JSX.Element {
         time: finalTime,
         releaseTime: finalReleaseTime
       };
-      console.log(formvalue);
       const res = await getHotelReceive(param.id, formvalue);
       if (res.code === 200) {
         dingAlert('接收成功', '正确', '确认');
