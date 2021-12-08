@@ -34,7 +34,6 @@ export default function ReceivePage(): JSX.Element {
   //提交动作
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    //TODO: 使用接口去通知酒店接受(open_id,hotel_name)
     const res = await getTransferHotel(param.id, hotel);
     if (res.code === 200) {
       dingAlert('转运成功', '正确', '确认');

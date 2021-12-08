@@ -10,8 +10,16 @@ import {
   InputLabel
 } from '@material-ui/core';
 import { useParams } from 'react-router';
-import { getHotelList, getResidentInfo } from '@src/api';
+import {
+  getHotelList,
+  getResidentInfo,
+  getTransferCommunity,
+  transferHomeQuarantineHotel
+} from '@src/api';
 import { HotelType } from './receive';
+import moment from 'moment';
+import { dingAlert } from '@src/dingtalkAPI';
+import { getURL } from '@src/utils';
 
 export default function TransferCommunity(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
@@ -22,9 +30,28 @@ export default function TransferCommunity(): JSX.Element {
   const [homeHotel, setHomeHotel] = useState(''); //选择后的居家隔离酒店
   const [hotelSubDistrict, setHotelSubDistrict] = useState(''); //对应酒店的街道信息
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    //TODO: //调用接口
+    if (transferType === '居家隔离') {
+      const res = await getTransferCommunity(
+        param.id,
+        moment().format('YYYY-MM-DD HH:mm:ss')
+      );
+      if (res.code === 200) {
+        dingAlert('通知成功', '正确', '确认');
+        window.location.href = getURL(`/detail/resident/${param.id}`);
+      }
+    } else {
+      const res = await transferHomeQuarantineHotel(
+        param.id,
+        homeHotel,
+        moment().format('YYYY_MM-DD HH:mm:ss')
+      );
+      if (res.code === 200) {
+        dingAlert('通知成功', '正确', '确认');
+        window.location.href = getURL(`/detail/resident/${param.id}`);
+      }
+    }
   };
 
   //设置列表
@@ -45,7 +72,7 @@ export default function TransferCommunity(): JSX.Element {
     setHomeHotel(e.target.value); //设置选择的居家隔离酒店
     homeQuarantineHotelList?.map((item: any) => {
       if (item.name === e.target.value) {
-        setHotelSubDistrict(item.address); //设置街道信息TODO:无属性
+        setHotelSubDistrict(item.address); //设置街道信息
       }
     });
   };

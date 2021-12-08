@@ -474,7 +474,7 @@ export function updatePersonInfo(
     key: 'planned_quarantine_hotel',
     value: planned_quarantine_hotel
   };
-  const sub = sub_district &&{
+  const sub = sub_district && {
     key: 'sub_district',
     value: sub_district
   };
@@ -483,4 +483,15 @@ export function updatePersonInfo(
   return request('/resident', data, {
     method: 'PUT'
   });
+}
+
+//转运到居家隔离酒店
+export function transferHomeQuarantineHotel(
+  open_id: string,
+  hotel_name: string,
+  time: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, hotel_name, time });
+  return request('/transfer/home_quarantine_hotel', data, { method: 'POST' });
 }

@@ -12,6 +12,7 @@ import {
   updatePersonInfo
 } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
+import { getURL } from '@src/utils';
 // import { getURL } from '@src/utils';
 
 type StreetType = {
@@ -34,6 +35,7 @@ export default function UserDistriutePage(): JSX.Element {
     const res = await updatePersonInfo(param.id, hotel, subDistrict);
     if (res.code === 200) {
       dingAlert('发起成功', '正确', '确认');
+      window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
   //获取服务中心
