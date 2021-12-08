@@ -16,7 +16,7 @@ export default function HealthPage(): JSX.Element {
     const res = await uploadException(param.id, problemType);
     if (res.code === 200) {
       dingAlert('上报成功', '正确', '确认');
-     // window.location.href = getURL(`/detail/resident/${param.id}`);
+      window.location.href = getURL(`/detail/resident/${param.id}`);
     }
   };
 
