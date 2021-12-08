@@ -11,8 +11,9 @@ import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import {
   HotelIcon,
-  IsolationTypeIcon,
-  SearchIcon
+  SearchIcon,
+  HotelVolume,
+  HotelStateSetIcon
 } from '@src/assets/svg/picture';
 
 const useStyles = makeStyles({
@@ -58,7 +59,7 @@ export default function SearchCard(): JSX.Element {
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <ListItemIcon>
-              <IsolationTypeIcon />
+              <HotelStateSetIcon />
             </ListItemIcon>
             <Select
               className="state"
@@ -77,7 +78,7 @@ export default function SearchCard(): JSX.Element {
             </Select>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <ListItemIcon>
-              <IsolationTypeIcon />
+              <HotelVolume />
             </ListItemIcon>
             <Select
               className="capacity"

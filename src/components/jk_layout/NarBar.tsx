@@ -15,7 +15,9 @@ import {
   TestIcon,
   TestActiveIcon,
   EndManageIcon,
-  EndManageActiveIcon
+  EndManageActiveIcon,
+  HotelManagementOn,
+  HotelManagementOff
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
 
@@ -140,7 +142,9 @@ export default function NarBar(): JSX.Element {
                 href={getURL('/admin_jk/test_list')}
               />
               <LinkTab
-                icon={value !== 5 ? <EndManageIcon /> : <EndManageActiveIcon />}
+                icon={
+                  value !== 5 ? <HotelManagementOff /> : <HotelManagementOn />
+                }
                 label="酒店管理"
                 href={getURL('/admin_jk/hotel_list')}
               />
@@ -196,7 +200,9 @@ export default function NarBar(): JSX.Element {
               />
               {userInfo.role.includes('hotel_medical_team') ? (
                 <LinkTab
-                  icon={value !== 4 ? <TestIcon /> : <TestActiveIcon />}
+                  icon={
+                    value !== 4 ? <HotelManagementOff /> : <HotelManagementOn />
+                  }
                   label="酒店管理"
                   href={getURL('/synthesis/hotel_list')}
                 />
@@ -239,7 +245,9 @@ export default function NarBar(): JSX.Element {
               />
               {userInfo.role.includes('hotel_medical_team') ? (
                 <LinkTab
-                  icon={value !== 3 ? <TestIcon /> : <TestActiveIcon />}
+                  icon={
+                    value !== 3 ? <HotelManagementOff /> : <HotelManagementOn />
+                  }
                   label="酒店管理"
                   href={getURL('/hotel_doctor/hotel_list')}
                 />
