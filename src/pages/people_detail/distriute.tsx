@@ -4,7 +4,12 @@ import Page from '@components/layout/Page';
 import { Box, Paper, Button, Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 
-import { getHotelList, getResidentInfo, getSubDistrict } from '@src/api';
+import {
+  getHotelList,
+  getResidentInfo,
+  getSubDistrict,
+  getServiceCenter
+} from '@src/api';
 // import { dingAlert } from '@src/dingtalkAPI';
 // import { getURL } from '@src/utils';
 
@@ -14,7 +19,7 @@ type StreetType = {
   created_at?: string;
   update_at?: string;
 };
-export default function ExpertTransferOrder(): JSX.Element {
+export default function UserDistriutePage(): JSX.Element {
   const param: { id: string } = useParams();
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [hotel, setHotel] = useState(''); //选择的酒店
@@ -27,6 +32,14 @@ export default function ExpertTransferOrder(): JSX.Element {
     //TODO: 发起转运任务
     console.log(param.id, hotel, subDistrict, serivice);
   };
+  //获取服务中心
+  const gainService = async (value: string) => {
+    const res = await getServiceCenter(value);
+    if (res.code === 200) {
+      setServiceCenterList(res.data.data); //设置服务中心列表
+      setSerivice(res.data.data[0].name); //默认第一个
+    }
+  };
 
   //init
   const Init = async () => {
@@ -36,11 +49,9 @@ export default function ExpertTransferOrder(): JSX.Element {
       res.data.map(async (item: any) => {
         if (item.key === 'sub_district') {
           setSubDistrict(item.value); //设置所属街道
-          //TODO: //根据所属街道设置对应服务中心,isArray判断
           middleWare = item.value;
           setStreetList([{ id: 1, name: middleWare }]); //单独设置
-          setServiceCenterList(['xxx服务中心']);
-          setSerivice('xxx服务中心');
+          gainService(middleWare);
           return;
         }
       });
@@ -88,7 +99,7 @@ export default function ExpertTransferOrder(): JSX.Element {
       <>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <InputLabel>所属街道</InputLabel>
+            <InputLabel required>所属街道</InputLabel>
             <Select
               className="sub_district"
               value={subDistrict}
@@ -96,9 +107,10 @@ export default function ExpertTransferOrder(): JSX.Element {
               style={{ display: 'flex' }}
               onChange={(e: any) => {
                 setSubDistrict(e.target.value);
+                gainService(e.target.value);
               }}
             >
-              <option value=""></option>
+              <option value="" key="none"></option>
               {streetList?.map((item: any) => {
                 return (
                   <option value={item.name} key={item.id}>
@@ -112,7 +124,7 @@ export default function ExpertTransferOrder(): JSX.Element {
         {subDistrict && (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>通知所属社区服务中心</InputLabel>
+              <InputLabel required>通知所属社区服务中心</InputLabel>
               <Select
                 className="serivice"
                 value={serivice}
@@ -124,8 +136,8 @@ export default function ExpertTransferOrder(): JSX.Element {
               >
                 {serviceCenterList.map((item: any) => {
                   return (
-                    <option value="xxx服务中心" key="1">
-                      xxx服务中心
+                    <option value={item.name} key={item.id}>
+                      {item.name}
                     </option>
                   );
                 })}

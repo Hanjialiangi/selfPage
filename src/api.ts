@@ -450,3 +450,16 @@ export function getSubDistrict(): APIResponse<any> {
   const page_size = 100;
   return request('/sub_district/list?page_size=' + page_size);
 }
+
+//获取社区服务中心
+export function getServiceCenter(sub_district: string): APIResponse<any> {
+  const page_size = 100;
+  const url = qs.stringifyUrl({
+    url: '/healthcare_center/list',
+    query: {
+      page_size,
+      sub_district
+    }
+  });
+  return request(url);
+}
