@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
-import {
-  Box,
-  Paper,
-  Button,
-  Input,
-  FormControl,
-  Select,
-  Typography
-} from '@material-ui/core';
+import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel, TextField } from '@material-ui/core';
 import {
   getHotelReceive,
@@ -25,17 +17,14 @@ export default function Arrive(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
   const [time, setTime] = useState<string>(''); //获取初始时间
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
-  const [hotelList, setHotelList] = useState<any>([]); //酒店列表
   const [select, setSelect] = useState(''); //选中值
   const [isCommunity, setIsCommunity] = useState(false); //社区
-  const [Available_number, setAvailable_number] = useState(); //可使用房间数量
-  const [IsSend, setIsSend] = useState(false);
   //点击接收功能
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     if (select && !isCommunity) {
-      const hotel_name = formData.get('hotel_name') + '';
+      const hotel_name = select;
       const room = formData.get('room') + '';
       const finalTime = moment(time).format('YYYY-MM-DD HH:mm:ss');
       const finalReleaseTime = moment(releaseTime).format(
@@ -47,6 +36,7 @@ export default function Arrive(): JSX.Element {
         time: finalTime,
         releaseTime: finalReleaseTime
       };
+      console.log(formvalue);
       const res = await getHotelReceive(param.id, formvalue);
       if (res.code === 200) {
         dingAlert('接收成功', '正确', '确认');
@@ -93,30 +83,6 @@ export default function Arrive(): JSX.Element {
     Init();
   }, []);
 
-  //获取酒店列表
-  const gainHotel = async () => {
-    const res = await getHotelList();
-    if (res.code === 200) {
-      setHotelList(res.data);
-    }
-  };
-  //点击更新、判断剩余房间数和
-  const handleChange = (e: any) => {
-    setSelect(e.target.value);
-    for (let i = 0; i < hotelList.length; i++) {
-      if (hotelList[i].name === e.target.value) {
-        setAvailable_number(hotelList[i].available_number);
-        if (hotelList[i].available_number === 0) {
-          setIsSend(true);
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    gainHotel();
-  }, []);
-
   return (
     <Page title="接收并开始隔离">
       <form
@@ -131,33 +97,7 @@ export default function Arrive(): JSX.Element {
               <Box marginY={1.5} padding={1.5}>
                 <InputLabel>接收酒店地址</InputLabel>
                 <FormControl fullWidth>
-                  <Select
-                    name="hotel_name"
-                    value={select}
-                    native
-                    onChange={handleChange}
-                  >
-                    <option aria-label="None" value="">
-                      无
-                    </option>
-                    {hotelList?.map((item: any) => {
-                      return (
-                        <option value={item.name} key={item.id}>
-                          {item.name}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </Box>
-            </Paper>
-            <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
-                <InputLabel>预计隔离酒店剩余房间数</InputLabel>
-                <FormControl fullWidth>
-                  <Typography variant="h5" style={{ textAlign: 'center' }}>
-                    {Available_number}
-                  </Typography>
+                  <Input name="hotel_name" value={select} disabled />
                 </FormControl>
               </Box>
             </Paper>
@@ -243,14 +183,12 @@ export default function Arrive(): JSX.Element {
                   variant="contained"
                   color="primary"
                   disableElevation
-                  disabled={IsSend}
                   fullWidth
                 >
                   确认隔离
                 </Button>
               </Box>
             </Paper>
-            <a href="/detail/feedback/:id/edit">出现问题？点击反馈</a>
           </>
         ) : (
           <>

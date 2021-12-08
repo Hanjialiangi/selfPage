@@ -103,9 +103,9 @@ export default function ReceivePage(): JSX.Element {
               color="primary"
               disableElevation
               fullWidth
-              disabled={show}
+              disabled={!show}
             >
-              通知酒店接收
+              转运至酒店
             </Button>
           </Box>
         </Paper>

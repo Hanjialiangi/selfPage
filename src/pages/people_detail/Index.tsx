@@ -41,8 +41,8 @@ export default function PeopleDetailPage(): JSX.Element {
   /* 是否显示转运按钮 */
   // const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
-  // /* 是否显示接收并开始隔离 */
-  // const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
+  /* 是否显示接收并开始隔离 */
+  const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
   /* 转运 */
   const handleTransferOrder = () => {
@@ -65,9 +65,9 @@ export default function PeopleDetailPage(): JSX.Element {
     window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
   };
   /* 修改接收并开始隔离 */
-  // const handleArrive = () => {
-  //   window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
-  // };
+  const handleArrive = () => {
+    window.location.href = getURL(`/detail/arrive/${param.id}/edit`);
+  };
   /* 上报采样结果 */
   const handleSamplingResult = () => {
     window.location.href = getURL(`/detail/samplingresult/${param.id}/edit`);
@@ -114,9 +114,9 @@ export default function PeopleDetailPage(): JSX.Element {
           // if (item.value === '待转运' || item.value === '集中隔离中') {
           //   setIsTransferButtonVisible(true);
           // }
-          // if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
-          //   setisArriveButtonVisible(true);
-          // }
+          if (item.value === '转运至酒店中' || item.value === '转运至社区中') {
+            setisArriveButtonVisible(true);
+          }
         }
         attributeArray.push(item);
       });
@@ -262,14 +262,11 @@ export default function PeopleDetailPage(): JSX.Element {
                 &nbsp;转运至社区
               </Button>
             </Box>
-            {/* {(userInfo.role.includes('hotel_medical_team') ||
+            {(userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('community') ||
               userInfo.role.includes('wh_cdc')) &&
-              isArriveButtonVisible && (W
-                <Box
-                  margin={1.5}
-                  className="DetailBox"
-                >
+              isArriveButtonVisible && (
+                <Box margin={1.5} className="DetailBox">
                   <Button
                     variant="text"
                     color="primary"
@@ -281,7 +278,7 @@ export default function PeopleDetailPage(): JSX.Element {
                     &nbsp;接收并开始隔离
                   </Button>
                 </Box>
-              )} */}
+              )}
             <Box>
               <Box margin={1.5} className="DetailBox">
                 <Button
