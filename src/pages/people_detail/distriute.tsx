@@ -32,7 +32,7 @@ export default function UserDistriutePage(): JSX.Element {
 
   const handleTransfer = async () => {
     //TODO: 发起转运任务
-    const res = await updatePersonInfo(param.id, hotel, subDistrict);
+    const res = await updatePersonInfo(param.id, hotel, serivice, subDistrict);
     if (res.code === 200) {
       dingAlert('发起成功', '正确', '确认');
       window.location.href = getURL(`/detail/resident/${param.id}`);

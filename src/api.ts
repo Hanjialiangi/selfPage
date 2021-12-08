@@ -250,13 +250,15 @@ export function getHotelReceive(
 export function getTransferHotel(
   open_id: string,
   hotel_name?: string,
-  sub_district?: string
+  sub_district?: string,
+  healthcare_center?: string
 ): APIResponse<any> {
   const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
     hotel_name,
-    sub_district
+    sub_district,
+    healthcare_center
   });
   return request('/transfer/hotel', data, {
     method: 'POST'
@@ -470,17 +472,24 @@ export function getServiceCenter(sub_district: string): APIResponse<any> {
 export function updatePersonInfo(
   open_id: string,
   planned_quarantine_hotel: string,
+  healthcare_center: string,
   sub_district?: string
 ): APIResponse<any> {
   const hotel = {
     key: 'planned_quarantine_hotel',
     value: planned_quarantine_hotel
   };
+  const healthCenter = {
+    key: 'healthcare_center',
+    value: healthcare_center
+  };
   const sub = sub_district && {
     key: 'sub_district',
     value: sub_district
   };
-  const properties = sub_district ? [hotel, sub] : [hotel];
+  const properties = sub_district
+    ? [hotel, healthCenter, sub]
+    : [hotel, healthCenter];
   const data = JSON.stringify({ open_id, properties });
   return request('/resident', data, {
     method: 'PUT'

@@ -31,12 +31,13 @@ export default function ReceivePage(): JSX.Element {
   const [available, setAvailable] = useState(0); //对应酒店剩余容量
   const [show, setShow] = useState(false); //按钮展示
   const [street, setStreet] = useState(''); //街道信息
+  const [healthCenter, setHealthCenter] = useState(''); //社区卫生服务中心
 
   //提交动作
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (hotel) {
-      const res = await getTransferHotel(param.id, hotel, street);
+      const res = await getTransferHotel(param.id, hotel, street, healthCenter);
       if (res.code === 200) {
         dingAlert('转运成功', '正确', '确认');
         window.location.href = getURL(`/detail/resident/${param.id}`);
@@ -79,6 +80,9 @@ export default function ReceivePage(): JSX.Element {
         }
         if (item.key === 'sub_district') {
           setStreet(item.value);
+        }
+        if (item.key === 'healthcare_center') {
+          setHealthCenter(item.value);
         }
       });
     }
