@@ -67,8 +67,14 @@ const PeopleDetailPage = loadable(() => import('@pages/people_detail/Index'), {
 const UserUpdatePage = loadable(() => import('@pages/people_detail/update'), {
   fallback: <Fallback />
 });
-const UserTransferPage = loadable(
-  () => import('@pages/people_detail/transfer'),
+const UserDistriutePage = loadable(
+  () => import('@pages/people_detail/distriute'),
+  {
+    fallback: <Fallback />
+  }
+);
+const UserFeedbackPage = loadable(
+  () => import('@pages/people_detail/feedback'),
   {
     fallback: <Fallback />
   }
@@ -85,6 +91,17 @@ const SamplingResultPage = loadable(
     fallback: <Fallback />
   }
 );
+//新增接收模块
+const ReceivePage = loadable(() => import('@pages/people_detail/receive'), {
+  fallback: <Fallback />
+});
+//转运到社区/居家隔离酒店
+const TransferCommunity = loadable(
+  () => import('@pages/people_detail/TransferCommunity'),
+  {
+    fallback: <Fallback />
+  }
+);
 
 //403
 const ErrorPage = loadable(() => import('@pages/403/Error'), {
@@ -93,11 +110,29 @@ const ErrorPage = loadable(() => import('@pages/403/Error'), {
 
 function getUserDetailRoutes(): JSX.Element[] {
   return [
+    <Route path="/detail/receive/:id/edit" key="receive">
+      <ReceivePage />
+    </Route>,
+    <Route path="/detail/transferback/:id/edit" key="transferback">
+      <TransferBack />
+    </Route>,
+    <Route
+      path="/detail/hotel_doctor/:id/transfer_hospital"
+      key="transferhospital"
+    >
+      <TransferHospital />
+    </Route>,
+    <Route path="/detail/transfercommunity/:id/edit" key="transfercommunity">
+      <TransferCommunity />
+    </Route>,
     <Route path="/detail/resident/:id/baseinfo/edit" key="update">
       <UserUpdatePage />
     </Route>,
-    <Route path="/detail/transfer/:id/edit" key="transfer">
-      <UserTransferPage />
+    <Route path="/detail/distriute/:id/edit" key="distriute">
+      <UserDistriutePage />
+    </Route>,
+    <Route path="/detail/feedback/:id/edit" key="feedback">
+      <UserFeedbackPage />
     </Route>,
     <Route path="/detail/arrive/:id/edit" key="arrive">
       <UserArrivePage />
@@ -105,11 +140,62 @@ function getUserDetailRoutes(): JSX.Element[] {
     <Route path="/detail/health/:id/edit" key="health">
       <HealthPage />
     </Route>,
-    <Route path="/detail/samplingresult/:id/edit" key="health">
+    <Route path="/detail/samplingresult/:id/edit" key="samplingresult">
       <SamplingResultPage />
     </Route>,
     <Route path="/detail/resident/:id" key="detail">
       <PeopleDetailPage />
+    </Route>
+  ];
+}
+
+//酒店管理组
+const HotelListPage = loadable(
+  () => import('@pages/admin_jk/hotel_list/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const HotelDetail = loadable(
+  () => import('@pages/admin_jk/hotel_detail/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+//转院
+const TransferHospital = loadable(
+  () => import('@pages/people_detail/TransferHospital'),
+  {
+    fallback: <Fallback />
+  }
+);
+//转归
+const TransferBack = loadable(
+  () => import('@pages/people_detail/TransferBack'),
+  {
+    fallback: <Fallback />
+  }
+);
+const FixPage = loadable(() => import('@pages/admin_jk/hotel_detail/fit'), {
+  fallback: <Fallback />
+});
+const UpdatePage = loadable(
+  () => import('@pages/admin_jk/hotel_detail/update'),
+  {
+    fallback: <Fallback />
+  }
+);
+
+function HotelDetailInfo(): JSX.Element[] {
+  return [
+    <Route path="/detail/hotel/:id/fix" key="fix">
+      <FixPage />
+    </Route>,
+    <Route path="/detail/hotel/:id/update" key="update">
+      <UpdatePage />
+    </Route>,
+    <Route path="/detail/hotel/:id" key="hotel">
+      <HotelDetail />
     </Route>
   ];
 }
@@ -131,7 +217,7 @@ function ErrorShow(): JSX.Element[] {
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
 
-  //Todo: 临时关闭管理端，完成相关页面后再开启
+  //管理员
   if (
     userInfo.role.includes('wh_cdc') ||
     userInfo.role.includes('close_contact_team')
@@ -139,6 +225,10 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
+        <Route path="/admin_jk/hotel_list">
+          <HotelListPage />
+        </Route>
         <Route path="/admin_jk/test_list">
           <TestListPage />
         </Route>
@@ -164,7 +254,7 @@ export default function Routes(): JSX.Element {
       </Switch>
     );
   }
-
+  //转运组
   if (
     userInfo.role.includes('transfer_team') &&
     !userInfo.role.includes('wh_cdc') &&
@@ -191,7 +281,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
-  //Todo: 临时关闭管理端，完成相关页面后再开启
+  //酒店
   if (
     userInfo.role.includes('hotel_medical_team') &&
     !userInfo.role.includes('wh_cdc') &&
@@ -200,6 +290,10 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
+        <Route path="/hotel_doctor/hotel_list">
+          <HotelListPage />
+        </Route>
         <Route path="/hotel_doctor/resident_list">
           <ResidentListPage />
         </Route>
@@ -220,6 +314,7 @@ export default function Routes(): JSX.Element {
     );
   }
 
+  //社区
   if (
     userInfo.role.includes('community') &&
     !userInfo.role.includes('wh_cdc') &&
@@ -257,8 +352,12 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
         <Route path="/synthesis/resident_list">
           <ResidentListPage />
+        </Route>
+        <Route path="/synthesis/hotel_list">
+          <HotelListPage />
         </Route>
         <Route path="/synthesis/transfer_list">
           <TransferListPage />

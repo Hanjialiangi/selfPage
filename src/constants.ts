@@ -30,12 +30,20 @@ export enum Role {
   ADMIN,
   TRANSFER,
   HOTELDOCTOR,
-  COMMUNITY
+  COMMUNITY,
+  SERVICECENTER,
+  STREET,
+  MANAGE,
+  ISOLATE
 }
 
 export const RoleName = {
   [Role.UNKNOWN]: '',
   [Role.ADMIN]: '疾控中心',
+  [Role.MANAGE]: '密接管理组',
+  [Role.ISOLATE]: '集中隔离组',
+  [Role.STREET]: '街道',
+  [Role.SERVICECENTER]: '社区服务中心',
   [Role.TRANSFER]: '转运组',
   [Role.HOTELDOCTOR]: '酒店管理组',
   [Role.COMMUNITY]: '社区'

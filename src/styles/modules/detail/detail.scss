@@ -31,10 +31,14 @@
 }
 .DetailBoxButton{
     color: #1790FF;
+    height: 40px;
 }
 .DetailBoxDiv {
     line-height: 34px;
 }
 .InfoCard{
     box-shadow: 0px 2px 7px 0px rgba(169, 169, 169, 0.5);
+}
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2{
+    text-align: left;
 }

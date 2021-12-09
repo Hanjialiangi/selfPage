@@ -38,11 +38,14 @@ export default function SamplingResultPage(): JSX.Element {
     <Page title="上报采样结果">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>采样日期</InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>采样日期
+          </InputLabel>
           <FormControl fullWidth>
             <TextField
               id="datetime-local"
               type="datetime-local"
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setTime(e.target.value);
               }}
@@ -56,12 +59,15 @@ export default function SamplingResultPage(): JSX.Element {
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>采样结果</InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>采样结果
+          </InputLabel>
           <FormControl fullWidth>
             <Select
               name="sampling_result"
               value={samplingResult}
               native
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setSamplingResult(e.target.value);
               }}
@@ -77,7 +83,11 @@ export default function SamplingResultPage(): JSX.Element {
           onClick={handleSubmit}
           variant="contained"
           color="primary"
-          // disabled={isLoading}
+          style={{
+            background: '#1790FF',
+            color: '#FFFFFF',
+            height: '47px'
+          }}
           disableElevation
           fullWidth
         >

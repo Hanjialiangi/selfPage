@@ -5,15 +5,16 @@ import {
   Input,
   Paper,
   Button,
-  Select,
-  Grid,
-  FormControl
+  FormControl,
+  RadioGroup,
+  FormControlLabel
 } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { getCreateHealth } from '@src/api';
 import { useParams } from 'react-router';
 import { dingAlert } from '@src/dingtalkAPI';
 import { getURL } from '@src/utils';
+import StyleRadio from '@components/jk_layout/StyleRadio';
 
 export default function HealthPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取参数
@@ -25,6 +26,21 @@ export default function HealthPage(): JSX.Element {
     other_health_case: ''
   });
 
+  //单选框集成
+  const Radio = (props: { name: string; value: string }) => {
+    return (
+      <RadioGroup
+        row
+        aria-label="gender"
+        name={props.name}
+        value={props.value}
+        onChange={updateDetail}
+      >
+        <FormControlLabel value="是" control={<StyleRadio />} label="是" />
+        <FormControlLabel value="否" control={<StyleRadio />} label="否" />
+      </RadioGroup>
+    );
+  };
   const updateDetail = (e: any) => {
     sethealthState({
       ...healthState,
@@ -48,88 +64,39 @@ export default function HealthPage(): JSX.Element {
     <Page title="上报健康状况">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <Grid container spacing={2}>
-            <Grid xs={5} item={true}>
-              <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-                是否咳嗽症状:
-              </InputLabel>
-            </Grid>
-            <Grid xs={6} item={true}>
-              <Select
-                native
-                className="healthSelect"
-                value={healthState.is_cough}
-                name="is_cough"
-                onChange={updateDetail}
-              >
-                <option style={{ fontSize: '18px' }} value="是">
-                  是
-                </option>
-                <option style={{ fontSize: '18px' }} value="否">
-                  否
-                </option>
-              </Select>
-            </Grid>
-          </Grid>
+          <div className="flex">
+            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
+              <span style={{ color: '#1790FF' }}>*</span>是否咳嗽症状:
+            </InputLabel>
+            <Radio name="is_cough" value={healthState.is_cough} />
+          </div>
         </Box>
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <Grid container spacing={2}>
-            <Grid xs={5} item={true}>
-              <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-                是否发烧症状:
-              </InputLabel>
-            </Grid>
-            <Grid xs={6} item={true}>
-              <Select
-                native
-                className="healthSelect"
-                value={healthState.is_fever}
-                name="is_fever"
-                onChange={updateDetail}
-              >
-                <option style={{ fontSize: '18px' }} value="是">
-                  是
-                </option>
-                <option style={{ fontSize: '18px' }} value="否">
-                  否
-                </option>
-              </Select>
-            </Grid>
-          </Grid>
+          <div className="flex">
+            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
+              <span style={{ color: '#1790FF' }}>*</span>是否发烧症状:
+            </InputLabel>
+            <Radio name="is_fever" value={healthState.is_fever} />
+          </div>
         </Box>
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <Grid container spacing={2}>
-            <Grid xs={5} item={true}>
-              <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-                是否乏力症状:
-              </InputLabel>
-            </Grid>
-            <Grid xs={6} item={true}>
-              <Select
-                native
-                className="healthSelect"
-                value={healthState.is_weak}
-                name="is_weak"
-                onChange={updateDetail}
-              >
-                <option style={{ fontSize: '18px' }} value="是">
-                  是
-                </option>
-                <option style={{ fontSize: '18px' }} value="否">
-                  否
-                </option>
-              </Select>
-            </Grid>
-          </Grid>
+          <div className="flex">
+            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
+              <span style={{ color: '#1790FF' }}>*</span>是否乏力症状:
+            </InputLabel>
+            <Radio name="is_weak" value={healthState.is_weak}></Radio>
+          </div>
         </Box>
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>其他健康状况说明</InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>其他健康状况说明
+          </InputLabel>
           <FormControl fullWidth>
             <Input
               name="other_health_case"
@@ -149,6 +116,11 @@ export default function HealthPage(): JSX.Element {
           variant="contained"
           color="primary"
           disableElevation
+          style={{
+            background: '#1790FF',
+            color: '#FFFFFF',
+            height: '47px'
+          }}
           fullWidth
         >
           确认提交

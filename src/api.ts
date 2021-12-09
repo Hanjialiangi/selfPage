@@ -186,6 +186,39 @@ export function getHotelList(): APIResponse<any> {
   return request('/hotel/search');
 }
 
+//分页获取酒店列表
+export function getHotelListAll(
+  page_size: number,
+  page: number,
+  condition: {
+    hotel_name?: string;
+    state?: string;
+    capacity?: string;
+  }
+): APIResponse<any> {
+  const hotel_name = condition.hotel_name || '';
+  const state = condition.state || '';
+  const capacity = condition.capacity || '';
+  const url = qs.stringifyUrl({
+    url: '/hotel/list',
+    query: {
+      page,
+      page_size,
+      'property_queries[]': [
+        `resident_property|${hotel_name}`,
+        `quarantine_type|${state}`,
+        `home_address|${capacity}`
+      ]
+    }
+  });
+  return request(url);
+}
+
+//获取酒店详细信息
+export function getHotelDetailInfo(id: string): APIResponse<any> {
+  return request('/hotel/info?id=' + id);
+}
+
 //酒店接收人员
 export function getHotelReceive(
   open_id: string,
@@ -216,12 +249,16 @@ export function getHotelReceive(
 //转运到酒店（发起转运）
 export function getTransferHotel(
   open_id: string,
-  hotel_name?: string
+  hotel_name?: string,
+  sub_district?: string,
+  healthcare_center?: string
 ): APIResponse<any> {
   const open_ids = [open_id];
   const data = JSON.stringify({
     open_ids,
-    hotel_name
+    hotel_name,
+    sub_district,
+    healthcare_center
   });
   return request('/transfer/hotel', data, {
     method: 'POST'
@@ -386,4 +423,96 @@ export function getSamplingList(
     }
   });
   return request(url);
+}
+
+//转院
+export function transferHospital(
+  open_id: string,
+  time: string,
+  hospital: string
+): APIResponse<any> {
+  const data = JSON.stringify({ open_id, time, hospital });
+  return request('/transfer/hospital', data, {
+    method: 'POST'
+  });
+}
+
+//转归
+export function transferBack(
+  open_id: string,
+  time: string,
+  outcome: string
+): APIResponse<any> {
+  const data = JSON.stringify({ open_id, time, outcome });
+  return request('/outcome', data, {
+    method: 'POST'
+  });
+}
+
+//获取街道列表
+export function getSubDistrict(): APIResponse<any> {
+  const page_size = 100;
+  return request('/sub_district/list?page_size=' + page_size);
+}
+
+//获取社区服务中心
+export function getServiceCenter(sub_district: string): APIResponse<any> {
+  const page_size = 100;
+  const url = qs.stringifyUrl({
+    url: '/healthcare_center/list',
+    query: {
+      page_size,
+      sub_district
+    }
+  });
+  return request(url);
+}
+
+//更新人员预计隔离酒店以及街道信息
+export function updatePersonInfo(
+  open_id: string,
+  planned_quarantine_hotel: string,
+  healthcare_center: string,
+  sub_district?: string
+): APIResponse<any> {
+  const hotel = {
+    key: 'planned_quarantine_hotel',
+    value: planned_quarantine_hotel
+  };
+  const healthCenter = {
+    key: 'healthcare_center',
+    value: healthcare_center
+  };
+  const sub = sub_district && {
+    key: 'sub_district',
+    value: sub_district
+  };
+  const properties = sub_district
+    ? [hotel, healthCenter, sub]
+    : [hotel, healthCenter];
+  const data = JSON.stringify({ open_id, properties });
+  return request('/resident', data, {
+    method: 'PUT'
+  });
+}
+
+//转运到居家隔离酒店
+export function transferHomeQuarantineHotel(
+  open_id: string,
+  hotel_name: string,
+  time: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, hotel_name, time });
+  return request('/transfer/home_quarantine_hotel', data, { method: 'POST' });
+}
+
+//提交异常情况
+export function uploadException(
+  open_id: string,
+  exception: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, exception });
+  return request('/quarantine_exception', data, { method: 'POST' });
 }

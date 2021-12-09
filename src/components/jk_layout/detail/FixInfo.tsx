@@ -4,9 +4,9 @@ import {
   Paper,
   Button,
   Input,
-  InputLabel,
   FormControl,
-  Select
+  Select,
+  Grid
 } from '@material-ui/core';
 import { getResidentInfo, getFixResidentInfo } from '@src/api';
 import { Properties } from '@pages/people_detail/Index';
@@ -75,22 +75,35 @@ export default function FixInfo(props: { id: string }): JSX.Element {
             return (
               <Paper elevation={0} square key={index}>
                 <Box marginY={0.5} padding={0.5}>
-                  <InputLabel>{item.key_name}</InputLabel>
-                  <Select
-                    name="resident_property"
-                    native
-                    value={residentValue}
-                    onChange={handleChangeContanct}
-                    style={{ marginLeft: '78%' }}
-                  >
-                    <option aria-label="None" value="">
-                      无
-                    </option>
-                    <option value="密接">密接</option>
-                    <option value="次密接">次密接</option>
-                    <option value="一般接触者">一般接触者</option>
-                    <option value="重点人员">重点人员</option>
-                  </Select>
+                  <Grid container spacing={2}>
+                    <Grid item xs={5}>
+                      <FormControl
+                        style={{
+                          textAlign: 'center',
+                          lineHeight: '30px',
+                          marginLeft: '7%'
+                        }}
+                      >
+                        {item.key_name}:
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <Select
+                        name="resident_property"
+                        native
+                        value={residentValue}
+                        onChange={handleChangeContanct}
+                      >
+                        <option aria-label="None" value="">
+                          无
+                        </option>
+                        <option value="密接">密接</option>
+                        <option value="次密接">次密接</option>
+                        <option value="一般接触者">一般接触者</option>
+                        <option value="重点人员">重点人员</option>
+                      </Select>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Paper>
             );
@@ -99,22 +112,35 @@ export default function FixInfo(props: { id: string }): JSX.Element {
             return (
               <Paper elevation={0} square key={index}>
                 <Box marginY={0.5} padding={0.5}>
-                  <InputLabel>{item.key_name}</InputLabel>
-                  <Select
-                    name="quarantine_type"
-                    native
-                    value={quarantineValue}
-                    onChange={(e: any) => {
-                      setQuarantineValue(e.target.value);
-                    }}
-                    style={{ marginLeft: '78%' }}
-                  >
-                    <option aria-label="None" value="">
-                      无
-                    </option>
-                    <option value="集中隔离">集中隔离</option>
-                    <option value="居家隔离">居家隔离</option>
-                  </Select>
+                  <Grid container spacing={2}>
+                    <Grid item xs={5}>
+                      <FormControl
+                        style={{
+                          textAlign: 'center',
+                          lineHeight: '30px',
+                          marginLeft: '7%'
+                        }}
+                      >
+                        {item.key_name}:
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <Select
+                        name="quarantine_type"
+                        native
+                        value={quarantineValue}
+                        onChange={(e: any) => {
+                          setQuarantineValue(e.target.value);
+                        }}
+                      >
+                        <option aria-label="None" value="">
+                          无
+                        </option>
+                        <option value="集中隔离">集中隔离</option>
+                        <option value="居家隔离">居家隔离</option>
+                      </Select>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Paper>
             );
@@ -122,28 +148,49 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           return (
             <Paper elevation={0} square key={index}>
               <Box marginY={0.5} padding={0.5}>
-                <InputLabel>{item.key_name}</InputLabel>
-                <FormControl fullWidth>
-                  <Input
-                    name={item.key}
-                    placeholder="请输入内容"
-                    defaultValue={item.value}
-                    disableUnderline
-                    multiline
-                  />
-                </FormControl>
+                <Grid container spacing={2}>
+                  <Grid item xs={5}>
+                    <FormControl
+                      style={{
+                        lineHeight: '30px',
+                        marginLeft: '7%'
+                      }}
+                    >
+                      {item.key_name}:
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <Input
+                      name={item.key}
+                      placeholder="请输入内容"
+                      defaultValue={item.value}
+                      disableUnderline
+                      multiline
+                      fullWidth
+                      style={{ textAlign: 'center', fontSize: '16px' }}
+                    />
+                  </Grid>
+                </Grid>
               </Box>
             </Paper>
           );
         })}
         {/* </Box> */}
-        <Paper elevation={0} square>
-          <Box margin={0.5} paddingTop={0.5}>
-            <Button type="submit" variant="outlined" color="primary" fullWidth>
-              确认并修改
-            </Button>
-          </Box>
-        </Paper>
+        <Box margin={0.5} paddingTop={0.5} marginBottom={1.5}>
+          <Button
+            type="submit"
+            variant="outlined"
+            color="primary"
+            fullWidth
+            style={{
+              background: '#1790FF',
+              color: '#FFFFFF',
+              height: '47px'
+            }}
+          >
+            确认并修改
+          </Button>
+        </Box>
       </form>
     </div>
   );

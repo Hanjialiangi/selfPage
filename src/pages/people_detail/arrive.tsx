@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Page from '@components/layout/Page';
-import {
-  Box,
-  Paper,
-  Button,
-  Input,
-  FormControl,
-  Select
-} from '@material-ui/core';
+import { Box, Paper, Button, Input, FormControl } from '@material-ui/core';
 import { InputLabel, TextField } from '@material-ui/core';
 import {
   getHotelReceive,
-  getHotelList,
   getResidentInfo,
   getCommunityReceive
 } from '@src/api';
@@ -24,7 +16,6 @@ export default function Arrive(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
   const [time, setTime] = useState<string>(''); //获取初始时间
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
-  const [hotelList, setHotelList] = useState([]); //酒店列表
   const [select, setSelect] = useState(''); //选中值
   const [isCommunity, setIsCommunity] = useState(false); //社区
   //点击接收功能
@@ -32,7 +23,7 @@ export default function Arrive(): JSX.Element {
     e.preventDefault();
     const formData = new FormData(e.target);
     if (select && !isCommunity) {
-      const hotel_name = formData.get('hotel_name') + '';
+      const hotel_name = select;
       const room = formData.get('room') + '';
       const finalTime = moment(time).format('YYYY-MM-DD HH:mm:ss');
       const finalReleaseTime = moment(releaseTime).format(
@@ -90,22 +81,6 @@ export default function Arrive(): JSX.Element {
     Init();
   }, []);
 
-  //获取酒店列表
-  const gainHotel = async () => {
-    const res = await getHotelList();
-    if (res.code === 200) {
-      setHotelList(res.data);
-    }
-  };
-  //点击更新
-  const handleChange = (e: any) => {
-    setSelect(e.target.value);
-  };
-
-  useEffect(() => {
-    gainHotel();
-  }, []);
-
   return (
     <Page title="接收并开始隔离">
       <form
@@ -118,7 +93,19 @@ export default function Arrive(): JSX.Element {
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
-                <InputLabel>接收时间</InputLabel>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>接收酒店地址
+                </InputLabel>
+                <FormControl fullWidth>
+                  <Input name="hotel_name" value={select} disabled />
+                </FormControl>
+              </Box>
+            </Paper>
+            <Paper elevation={0} square>
+              <Box marginY={1.5} padding={1.5}>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>接收时间
+                </InputLabel>
                 <FormControl fullWidth>
                   {/* <input
                     type="datetime-local"
@@ -153,31 +140,9 @@ export default function Arrive(): JSX.Element {
             </Paper>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
-                <InputLabel>接收酒店地址</InputLabel>
-                <FormControl fullWidth>
-                  <Select
-                    name="hotel_name"
-                    value={select}
-                    native
-                    onChange={handleChange}
-                  >
-                    <option aria-label="None" value="">
-                      无
-                    </option>
-                    {hotelList?.map((item: any) => {
-                      return (
-                        <option value={item.name} key={item.id}>
-                          {item.name}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </Box>
-            </Paper>
-            <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
-                <InputLabel>隔离房间号</InputLabel>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>隔离房间号
+                </InputLabel>
                 <FormControl fullWidth>
                   <Input
                     name="room"
@@ -192,7 +157,9 @@ export default function Arrive(): JSX.Element {
             </Paper>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
-                <InputLabel>预计解除隔离时间</InputLabel>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>预计解除隔离时间
+                </InputLabel>
                 <FormControl fullWidth>
                   {/* <input
                     type="datetime-local"
@@ -233,7 +200,9 @@ export default function Arrive(): JSX.Element {
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
-                <InputLabel>社区接收时间</InputLabel>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>社区接收时间
+                </InputLabel>
                 <FormControl fullWidth>
                   {/* <input
                     type="datetime-local"
@@ -263,6 +232,11 @@ export default function Arrive(): JSX.Element {
                   variant="contained"
                   color="primary"
                   disableElevation
+                  style={{
+                    background: '#1790FF',
+                    color: '#FFFFFF',
+                    height: '47px'
+                  }}
                   fullWidth
                 >
                   确认隔离

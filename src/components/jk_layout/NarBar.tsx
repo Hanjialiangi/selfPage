@@ -15,7 +15,9 @@ import {
   TestIcon,
   TestActiveIcon,
   EndManageIcon,
-  EndManageActiveIcon
+  EndManageActiveIcon,
+  HotelManagementOn,
+  HotelManagementOff
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
 
@@ -57,6 +59,8 @@ export default function NarBar(): JSX.Element {
         name = 3;
       } else if (initval === 'test_list') {
         name = 4;
+      } else if (initval === 'hotel_list') {
+        name = 5;
       } else {
         name = 999;
       }
@@ -77,6 +81,8 @@ export default function NarBar(): JSX.Element {
         name = 2;
       } else if (initval === 'test_list') {
         name = 3;
+      } else if (initval === 'hotel_list') {
+        name = 4;
       } else {
         name = 999;
       }
@@ -87,6 +93,8 @@ export default function NarBar(): JSX.Element {
         name = 0;
       } else if (initval === 'test_list') {
         name = 2;
+      } else if (initval === 'hotel_list') {
+        name = 3;
       } else {
         name = 999;
       }
@@ -132,6 +140,13 @@ export default function NarBar(): JSX.Element {
                 icon={value !== 4 ? <TestIcon /> : <TestActiveIcon />}
                 label="本日采样"
                 href={getURL('/admin_jk/test_list')}
+              />
+              <LinkTab
+                icon={
+                  value !== 5 ? <HotelManagementOff /> : <HotelManagementOn />
+                }
+                label="酒店管理"
+                href={getURL('/admin_jk/hotel_list')}
               />
             </Tabs>
           ) : userInfo.role.includes('transfer_team') &&
@@ -183,6 +198,15 @@ export default function NarBar(): JSX.Element {
                 label="本日采样"
                 href={getURL('/synthesis/test_list')}
               />
+              {userInfo.role.includes('hotel_medical_team') ? (
+                <LinkTab
+                  icon={
+                    value !== 4 ? <HotelManagementOff /> : <HotelManagementOn />
+                  }
+                  label="酒店管理"
+                  href={getURL('/synthesis/hotel_list')}
+                />
+              ) : null}
             </Tabs>
           ) : userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ? (
@@ -219,6 +243,15 @@ export default function NarBar(): JSX.Element {
                     : getURL('/community/test_list')
                 }
               />
+              {userInfo.role.includes('hotel_medical_team') ? (
+                <LinkTab
+                  icon={
+                    value !== 3 ? <HotelManagementOff /> : <HotelManagementOn />
+                  }
+                  label="酒店管理"
+                  href={getURL('/hotel_doctor/hotel_list')}
+                />
+              ) : null}
             </Tabs>
           ) : null}
         </Box>
