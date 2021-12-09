@@ -57,7 +57,10 @@ export default function Arrive(): JSX.Element {
     if (res.code === 200) {
       res.data.map((item: any) => {
         if (item.key === 'current_state') {
-          if (item.value === '转运至社区中') {
+          if (
+            item.value === '转运至社区中' ||
+            item.value === '转运至居家隔离酒店中'
+          ) {
             setIsCommunity(true); //社区接收(接收)
           }
         }
