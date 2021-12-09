@@ -1,5 +1,12 @@
 import Page from '@components/layout/Page';
-import { Box, Button, Input, InputLabel, Paper } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Input,
+  InputLabel,
+  Paper,
+  FormControl
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { transferHospital } from '@src/api';
@@ -27,22 +34,22 @@ export default function TransferHospital(): JSX.Element {
     <Page title="转院">
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <div className="flex">
-            <InputLabel style={{ textAlign: 'center', marginTop: '8px' }}>
-              <span style={{ color: '#1790FF' }}>*</span>转院信息:
-            </InputLabel>
+          <InputLabel>
+            <span style={{ color: '#1790FF' }}>*</span>转院信息:
+          </InputLabel>
+          <FormControl fullWidth>
             <Input
               name="hospital"
               placeholder="请填写医院名称"
               disableUnderline
-              minRows={2}
+              minRows={4}
               maxRows={600}
               multiline
               onChange={(e: any) => {
                 setValue(e.target.value);
               }}
             />
-          </div>
+          </FormControl>
         </Box>
       </Paper>
       <Box marginY={1.5} padding={1.5}>

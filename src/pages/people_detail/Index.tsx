@@ -164,77 +164,74 @@ export default function PeopleDetailPage(): JSX.Element {
   return (
     <Page title="人员详情" paddingBottom={5}>
       <>
-        <Paper elevation={0} square>
-          <Box margin={1.5} padding={1.5}>
-            <Card className="InfoCard">
-              <Paper elevation={0} square>
-                <Box
-                  margin={1.5}
-                  style={{ height: `${BoxHight}` }}
-                  onClick={handleClick}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between'
-                    }}
-                  >
-                    <Typography variant="h6">
-                      <InfoNameIcon />
-                      &nbsp;{name}的基本信息
-                    </Typography>
-                    {residentProperty === '密接' ||
-                    residentProperty === '次密接' ? (
-                      <Typography
-                        variant="subtitle1"
-                        color={'secondary'}
-                        component={'span'}
-                      >
-                        {residentProperty}
-                      </Typography>
-                    ) : (
-                      <Typography variant="subtitle1" component={'span'}>
-                        <span style={{ color: 'green' }}>
-                          {residentProperty}
-                        </span>
-                      </Typography>
-                    )}
-                  </div>
-                  <Typography variant="body2" style={{ marginTop: '10px' }}>
-                    <span style={{ color: 'gray' }}>隔离类型：</span>
-                    {quarantineType}
-                  </Typography>
-                  <div style={{ marginTop: '10px' }}>
-                    <>
-                      <Chip
-                        icon={<StatusIcon />}
-                        size="small"
-                        label={Status}
-                        style={{ color: '#1790FF' }}
-                        className={`${style.icon} ${style.processing}`}
-                        variant="outlined"
-                      />
-                    </>
-                  </div>
-                  {information ? (
-                    <PeopleDetailContent info={information} />
-                  ) : null}
-                </Box>
-                <Button
-                  onClick={handleClick}
+        <Paper elevation={0} square style={{ height: '8px' }} />
+        <Box margin={1.5} padding={1.5}>
+          <Card className="InfoCard">
+            <Paper elevation={0} square>
+              <Box
+                margin={1.5}
+                style={{ height: `${BoxHight}` }}
+                onClick={handleClick}
+              >
+                <div
                   style={{
-                    width: '100%',
-                    textAlign: 'center',
-                    backgroundColor: '#fff'
+                    display: 'flex',
+                    justifyContent: 'space-between'
                   }}
                 >
-                  {BoxTag}&nbsp;
-                  <InfoDetailIcon />
-                </Button>
-              </Paper>
-            </Card>
-          </Box>
-        </Paper>
+                  <Typography variant="h6">
+                    <InfoNameIcon />
+                    &nbsp;{name}的基本信息
+                  </Typography>
+                  {residentProperty === '密接' ||
+                  residentProperty === '次密接' ? (
+                    <Typography
+                      variant="subtitle1"
+                      color={'secondary'}
+                      component={'span'}
+                    >
+                      {residentProperty}
+                    </Typography>
+                  ) : (
+                    <Typography variant="subtitle1" component={'span'}>
+                      <span style={{ color: 'green' }}>{residentProperty}</span>
+                    </Typography>
+                  )}
+                </div>
+                <Typography variant="body2" style={{ marginTop: '10px' }}>
+                  <span style={{ color: 'gray' }}>隔离类型：</span>
+                  {quarantineType}
+                </Typography>
+                <div style={{ marginTop: '10px' }}>
+                  <>
+                    <Chip
+                      icon={<StatusIcon />}
+                      size="small"
+                      label={Status}
+                      style={{ color: '#1790FF' }}
+                      className={`${style.icon} ${style.processing}`}
+                      variant="outlined"
+                    />
+                  </>
+                </div>
+                {information ? (
+                  <PeopleDetailContent info={information} />
+                ) : null}
+              </Box>
+              <Button
+                onClick={handleClick}
+                style={{
+                  width: '100%',
+                  textAlign: 'center',
+                  backgroundColor: '#fff'
+                }}
+              >
+                {BoxTag}&nbsp;
+                <InfoDetailIcon />
+              </Button>
+            </Paper>
+          </Card>
+        </Box>
         <Box paddingTop={1} paddingBottom={1} margin={1.5}>
           <Box margin={1.5} className="DetailBox">
             <Button

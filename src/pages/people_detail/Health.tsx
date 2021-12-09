@@ -102,7 +102,7 @@ export default function HealthPage(): JSX.Element {
               name="other_health_case"
               onChange={updateDetail}
               placeholder="请填写"
-              minRows={2}
+              minRows={4}
               maxRows={600}
               disableUnderline
               multiline
