@@ -43,7 +43,7 @@ export default function TransferBack(): JSX.Element {
                 setValue(e.target.value);
               }}
               placeholder="请填写转归理由"
-              minRows={2}
+              minRows={4}
               maxRows={600}
               disableUnderline
               multiline
