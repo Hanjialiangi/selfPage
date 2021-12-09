@@ -186,6 +186,20 @@ export function getHotelList(): APIResponse<any> {
   return request('/hotel/search');
 }
 
+//修改酒店信息
+export function updateHotelInfo(
+  id: string,
+  condition: {
+    address: string;
+    available_number: string;
+    capacity: string;
+    name: string;
+  }
+): APIResponse<any> {
+  const data = JSON.stringify({ id, data: [condition] });
+  return request('/hotel', data, { method: 'PUT' });
+}
+
 //分页获取酒店列表
 export function getHotelListAll(
   page_size: number,

@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
-import { Properties } from '@pages/people_detail/Index';
+import { isValidKey } from '@src/utils';
 
-export default function HotelInfoContent(props: { info: any }): JSX.Element {
-  const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
+export default function HotelInfoContent(props: {
+  info: {
+    address: string;
+    available_number: string;
+    capacity: string;
+    name: string;
+  };
+}): JSX.Element {
+  const [baseInfo, setBaseInfo] = useState({
+    address: '',
+    available_number: '',
+    capacity: '',
+    name: ''
+  }); //基础属性
   const usual = {
     marginBottom: '5px',
     flex: '1 0 auto',
@@ -22,12 +34,9 @@ export default function HotelInfoContent(props: { info: any }): JSX.Element {
 
   useEffect(() => {
     //处理props
-    const array: Properties[] = [];
-    props.info.map((item: Properties) => {
-      array.push(item);
-      setBaseInfo(array);
-    });
-  }, []);
+    setBaseInfo(props.info);
+  }, [props.info]);
+
   return (
     <Box>
       <div
@@ -39,19 +48,16 @@ export default function HotelInfoContent(props: { info: any }): JSX.Element {
           marginTop: '10px'
         }}
       >
-        {baseInfo?.map((item: Properties) => {
+        {Object.keys(baseInfo).map(key => {
           return (
-            <Typography
-              key={item.key_id}
-              style={item.value.length > 18 ? strong : usual}
-            >
+            <Typography key={key} style={key.length > 18 ? strong : usual}>
               <span
                 style={{
                   color: 'gray',
                   whiteSpace: 'nowrap'
                 }}
               >
-                {item.key_name}:
+                {key}:
               </span>
               <span
                 style={{
@@ -59,7 +65,7 @@ export default function HotelInfoContent(props: { info: any }): JSX.Element {
                   marginLeft: '10px'
                 }}
               >
-                {item.value}
+                {isValidKey(key, baseInfo) && baseInfo[key]}
               </span>
             </Typography>
           );

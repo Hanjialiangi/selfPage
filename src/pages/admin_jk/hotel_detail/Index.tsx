@@ -6,17 +6,16 @@ import { InfoFixIcon, HotelIcon } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
 import '@src/styles/modules/detail/detail.scss';
 import { getHotelDetailInfo } from '@src/api';
-
-export type Properties = {
-  key: string;
-  key_id: string;
-  key_name: string;
-  value: string;
-};
+import HotelInfoContent from '@components/hotel/HotelInfoContent';
 
 export default function HotelDetailPage(): JSX.Element {
   const param: { id: string } = useParams(); //获取路由参数
-  const [data, setData] = useState(); //酒店详细信息
+  const [data, setData] = useState({
+    address: '',
+    available_number: '',
+    capacity: '',
+    name: ''
+  }); //酒店详细信息
   const [color, setcolor] = useState('green'); //设置状态颜色
   const [HotelState, setHotelState] = useState('启动'); //设置酒店启用状态
   const Init = async () => {
@@ -61,6 +60,7 @@ export default function HotelDetailPage(): JSX.Element {
                   </div>
                 </Box>
               </Paper>
+              {<HotelInfoContent info={data} />}
             </Card>
           </Box>
         </Paper>
