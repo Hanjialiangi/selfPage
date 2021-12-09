@@ -19,7 +19,7 @@ type DR = [
     sub_district: string;
   }
 ];
-export default function ResidentListPage(): JSX.Element {
+export default function StreetTaskListPage(): JSX.Element {
   const [data, setData] = useState([
     {
       open_id: '',
@@ -39,12 +39,7 @@ export default function ResidentListPage(): JSX.Element {
   const handleSearch = async (
     page = 1,
     formvalue = {},
-    current_state = [
-      '集中隔离中',
-      '解除后居家隔离中',
-      '居家隔离中',
-      '健康监测中'
-    ]
+    current_state = ['社区卫生服务中心联合街道接送中'] //社区卫生服务中心接送中
   ) => {
     const res = await getResidentList(pageSize, page, formvalue, current_state);
     if (page === 1) {
@@ -150,7 +145,7 @@ export default function ResidentListPage(): JSX.Element {
   }, [total, current]);
 
   return (
-    <Page title="管理中人员名单">
+    <Page title="街道任务人员名单">
       <div className="wrapper">
         <div style={{ position: 'relative', marginTop: '90px' }}>
           <form

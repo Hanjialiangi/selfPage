@@ -41,6 +41,19 @@ const EndManagePage = loadable(
 const TestListPage = loadable(() => import('@pages/admin_jk/test_list/Index'), {
   fallback: <Fallback />
 });
+//街道任务清单
+const StreetTaskList = loadable(
+  () => import('@pages/admin_jk/street_task_list/Index'),
+  {
+    fallback: <Fallback />
+  }
+); //todo:调整路由(权限)
+const HealthServiceList = loadable(
+  () => import('@pages/admin_jk/task_list/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
 
 //transfer
 const TransferHomePage = loadable(() => import('@pages/transfer/Index'), {
@@ -226,6 +239,12 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
+        <Route path="/admin_jk/street_task_list">
+          <StreetTaskList />
+        </Route>
+        <Route path="/admin_jk/health_service_task_list">
+          <HealthServiceList />
+        </Route>
         <Route path="/admin_jk/hotel_list">
           <HotelListPage />
         </Route>

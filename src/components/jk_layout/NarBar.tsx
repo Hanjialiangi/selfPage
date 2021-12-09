@@ -61,6 +61,10 @@ export default function NarBar(): JSX.Element {
         name = 4;
       } else if (initval === 'hotel_list') {
         name = 5;
+      } else if (initval === 'street_task_list') {
+        name = 6;
+      } else if (initval === 'health_service_task_list') {
+        name = 7;
       } else {
         name = 999;
       }
@@ -147,6 +151,20 @@ export default function NarBar(): JSX.Element {
                 }
                 label="酒店管理"
                 href={getURL('/admin_jk/hotel_list')}
+              />
+              <LinkTab
+                icon={
+                  value !== 6 ? <HotelManagementOff /> : <HotelManagementOn />
+                }
+                label="街道任务"
+                href={getURL('/admin_jk/street_task_list')}
+              />
+              <LinkTab
+                icon={
+                  value !== 7 ? <HotelManagementOff /> : <HotelManagementOn />
+                }
+                label="任务列表"
+                href={getURL('/admin_jk/health_service_task_list')}
               />
             </Tabs>
           ) : userInfo.role.includes('transfer_team') &&
