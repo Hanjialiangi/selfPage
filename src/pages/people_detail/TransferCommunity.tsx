@@ -140,9 +140,7 @@ export default function TransferCommunity(): JSX.Element {
         {transferType === '居家隔离' ? (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>
-                <span style={{ color: '#1790FF' }}>*</span>所属街道
-              </InputLabel>
+              <InputLabel>所属街道</InputLabel>
               <FormControl fullWidth>
                 <Input value={subDistrict} disabled></Input>
               </FormControl>
@@ -151,9 +149,7 @@ export default function TransferCommunity(): JSX.Element {
         ) : (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>
-                <span style={{ color: '#1790FF' }}>*</span>当前酒店所属街道
-              </InputLabel>
+              <InputLabel>当前酒店所属街道</InputLabel>
               <FormControl fullWidth>
                 <Input value={hotelSubDistrict} disabled></Input>
               </FormControl>

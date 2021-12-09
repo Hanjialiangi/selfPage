@@ -34,6 +34,7 @@ export default function TransferHospital(): JSX.Element {
             <Input
               name="hospital"
               placeholder="请填写医院名称"
+              disableUnderline
               minRows={2}
               maxRows={600}
               multiline
@@ -43,23 +44,23 @@ export default function TransferHospital(): JSX.Element {
             />
           </div>
         </Box>
-        <Box marginY={1.5} padding={1.5}>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            fullWidth
-            style={{
-              background: '#1790FF',
-              color: '#FFFFFF',
-              height: '47px'
-            }}
-            onClick={handleSubmit}
-          >
-            确认转院
-          </Button>
-        </Box>
       </Paper>
+      <Box marginY={1.5} padding={1.5}>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          fullWidth
+          style={{
+            background: '#1790FF',
+            color: '#FFFFFF',
+            height: '47px'
+          }}
+          onClick={handleSubmit}
+        >
+          确认转院
+        </Button>
+      </Box>
     </Page>
   );
 }

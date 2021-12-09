@@ -176,7 +176,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           );
         })}
         {/* </Box> */}
-        <Box margin={0.5} paddingTop={0.5} marginBottom={1.5}>
+        <Box margin={0.5} paddingTop={0.5} marginBottom={5}>
           <Button
             type="submit"
             variant="outlined"
