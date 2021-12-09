@@ -473,7 +473,7 @@ export function updatePersonInfo(
   open_id: string,
   planned_quarantine_hotel: string,
   healthcare_center: string,
-  sub_district?: string
+  sub_district: string
 ): APIResponse<any> {
   const hotel = {
     key: 'planned_quarantine_hotel',
@@ -483,13 +483,11 @@ export function updatePersonInfo(
     key: 'healthcare_center',
     value: healthcare_center
   };
-  const sub = sub_district && {
+  const sub = {
     key: 'sub_district',
     value: sub_district
   };
-  const properties = sub_district
-    ? [hotel, healthCenter, sub]
-    : [hotel, healthCenter];
+  const properties = [hotel, healthCenter, sub];
   const data = JSON.stringify({ open_id, properties });
   return request('/resident', data, {
     method: 'PUT'

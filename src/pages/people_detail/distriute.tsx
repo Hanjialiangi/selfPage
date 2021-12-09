@@ -123,7 +123,7 @@ export default function UserDistriutePage(): JSX.Element {
               <option value="" key="none"></option>
               {streetList?.map((item: any) => {
                 return (
-                  <option value={item.name} key={item.id}>
+                  <option key={item.id} value={item.name}>
                     {item.name}
                   </option>
                 );
