@@ -10,7 +10,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { useParams } from 'react-router';
-import { getHotelList, getResidentInfo, getTransferHotel } from '@src/api';
+import { getHotelList, getResidentInfo, updateState } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
 import { getURL } from '@src/utils';
 
@@ -30,14 +30,12 @@ export default function ReceivePage(): JSX.Element {
   const [hotel, setHotel] = useState(''); //初始化计划酒店选择
   const [available, setAvailable] = useState(0); //对应酒店剩余容量
   const [show, setShow] = useState(false); //按钮展示
-  const [street, setStreet] = useState(''); //街道信息
-  const [healthCenter, setHealthCenter] = useState(''); //社区卫生服务中心
 
   //提交动作
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (hotel) {
-      const res = await getTransferHotel(param.id, hotel, street, healthCenter);
+      const res = await updateState(param.id, '转运至酒店中');
       if (res.code === 200) {
         dingAlert('转运成功', '正确', '确认');
         window.location.href = getURL(`/detail/resident/${param.id}`);
@@ -77,12 +75,6 @@ export default function ReceivePage(): JSX.Element {
             setHotel(item.value);
             middleWare = item.value; //中间酒店值
           }
-        }
-        if (item.key === 'sub_district') {
-          setStreet(item.value);
-        }
-        if (item.key === 'healthcare_center') {
-          setHealthCenter(item.value);
         }
       });
     }

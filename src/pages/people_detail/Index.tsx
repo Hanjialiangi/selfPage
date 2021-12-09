@@ -268,6 +268,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
+                <PushToStreetIcon />
                 通知服务中心
               </Button>
             )}

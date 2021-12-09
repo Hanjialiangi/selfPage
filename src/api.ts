@@ -546,3 +546,13 @@ export function recievePeople(open_id: string): APIResponse<any> {
     method: 'POST'
   });
 }
+
+//修改当前状态
+export function updateState(
+  open_id: string,
+  current_state: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, current_state });
+  return request('/update/current_state', data, { method: 'POST' });
+}

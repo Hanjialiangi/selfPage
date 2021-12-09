@@ -9,7 +9,7 @@ import {
   getResidentInfo,
   getSubDistrict,
   getServiceCenter,
-  updatePersonInfo
+  getTransferHotel
 } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
 import { getURL } from '@src/utils';
@@ -31,8 +31,8 @@ export default function UserDistriutePage(): JSX.Element {
   const [serivice, setSerivice] = useState(''); //选择的服务中心
 
   const handleTransfer = async () => {
-    //TODO: 发起转运任务
-    const res = await updatePersonInfo(param.id, hotel, serivice, subDistrict);
+    //发起转运任务
+    const res = await getTransferHotel(param.id, hotel, subDistrict, serivice);
     if (res.code === 200) {
       dingAlert('发起成功', '正确', '确认');
       window.location.href = getURL(`/detail/resident/${param.id}`);
