@@ -39,7 +39,7 @@ export default function TransferCommunity(): JSX.Element {
       );
       if (res.code === 200) {
         dingAlert('通知成功', '正确', '确认');
-        // window.location.href = getURL(`/detail/resident/${param.id}`);
+        window.location.href = getURL(`/detail/resident/${param.id}`);
       }
     } else {
       const res = await transferHomeQuarantineHotel(
