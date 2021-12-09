@@ -217,146 +217,144 @@ export default function PeopleDetailPage(): JSX.Element {
             </Card>
           </Box>
         </Paper>
-        <Paper elevation={0}>
-          <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
+        <Box paddingTop={1} paddingBottom={1} margin={1.5}>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleDistriute}
+              className="DetailBoxButton"
+              style={{ width: '100%' }}
+            >
+              <StartTransferIcon />
+              &nbsp;发起转运任务(转运组)
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              // onClick={handleSamplingResult}
+              className="DetailBoxButton"
+              style={{ width: '45%' }}
+            >
+              <PushToStreetIcon />
+              &nbsp;推送街道
+            </Button>
+            <div className="DetailBoxDiv">|</div>
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleTransferOrder}
+              className="DetailBoxButton"
+              style={{ width: '45%' }}
+            >
+              <InfoTransfer />
+              &nbsp;转运至酒店
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleTransferCommunity}
+              className="DetailBoxButton"
+              style={{ width: '100%' }}
+            >
+              <InfoTransfer />
+              &nbsp;转运至社区
+            </Button>
+          </Box>
+          {(userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('community') ||
+            userInfo.role.includes('wh_cdc')) &&
+            isArriveButtonVisible && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleArrive}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <InfoIsolateIcon />
+                  &nbsp;接收并开始隔离
+                </Button>
+              </Box>
+            )}
+          <Box>
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleDistriute}
-                className="DetailBoxButton"
-                style={{ width: '100%' }}
-              >
-                <StartTransferIcon />
-                &nbsp;发起转运任务(转运组)
-              </Button>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                // onClick={handleSamplingResult}
+                onClick={handleSamplingResult}
                 className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
-                <PushToStreetIcon />
-                &nbsp;推送街道
+                <InfoSamplingIcon />
+                &nbsp;上报采样结果
               </Button>
               <div className="DetailBoxDiv">|</div>
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleTransferOrder}
+                onClick={handleHealth}
                 className="DetailBoxButton"
                 style={{ width: '45%' }}
               >
-                <InfoIsolateIcon />
-                &nbsp;转运至酒店
-              </Button>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferCommunity}
-                className="DetailBoxButton"
-                style={{ width: '100%' }}
-              >
-                <InfoTransfer />
-                &nbsp;转运至社区
-              </Button>
-            </Box>
-            {(userInfo.role.includes('hotel_medical_team') ||
-              userInfo.role.includes('community') ||
-              userInfo.role.includes('wh_cdc')) &&
-              isArriveButtonVisible && (
-                <Box margin={1.5} className="DetailBox">
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handleArrive}
-                    className="DetailBoxButton"
-                    style={{ width: '100%' }}
-                  >
-                    <InfoIsolateIcon />
-                    &nbsp;接收并开始隔离
-                  </Button>
-                </Box>
-              )}
-            <Box>
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleSamplingResult}
-                  className="DetailBoxButton"
-                  style={{ width: '45%' }}
-                >
-                  <InfoSamplingIcon />
-                  &nbsp;上报采样结果
-                </Button>
-                <div className="DetailBoxDiv">|</div>
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleHealth}
-                  className="DetailBoxButton"
-                  style={{ width: '45%' }}
-                >
-                  <InfoHealthIcon />
-                  &nbsp;上报健康状况
-                </Button>
-              </Box>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferHospital}
-                fullWidth
-              >
-                <HotelIcon />
-                &nbsp;转院
-              </Button>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleFixOrder}
-                className="DetailBoxButton"
-                fullWidth
-              >
-                <InfoFixIcon />
-                &nbsp;修改基本信息
-              </Button>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleFeedBack}
-                className="DetailBoxButton"
-                fullWidth
-              >
-                <FeedBackIcon />
-                &nbsp;反馈
-              </Button>
-            </Box>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferBack}
-                className="DetailBoxButton"
-                fullWidth
-              >
-                <BackHomeIcon />
-                &nbsp;转归
+                <InfoHealthIcon />
+                &nbsp;上报健康状况
               </Button>
             </Box>
           </Box>
-        </Paper>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleTransferHospital}
+              fullWidth
+            >
+              <HotelIcon />
+              &nbsp;转院
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleFixOrder}
+              className="DetailBoxButton"
+              fullWidth
+            >
+              <InfoFixIcon />
+              &nbsp;修改基本信息
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleFeedBack}
+              className="DetailBoxButton"
+              fullWidth
+            >
+              <FeedBackIcon />
+              &nbsp;反馈
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleTransferBack}
+              className="DetailBoxButton"
+              fullWidth
+            >
+              <BackHomeIcon />
+              &nbsp;转归
+            </Button>
+          </Box>
+        </Box>
       </>
     </Page>
   );

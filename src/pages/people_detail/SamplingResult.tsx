@@ -45,6 +45,7 @@ export default function SamplingResultPage(): JSX.Element {
             <TextField
               id="datetime-local"
               type="datetime-local"
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setTime(e.target.value);
               }}
@@ -66,6 +67,7 @@ export default function SamplingResultPage(): JSX.Element {
               name="sampling_result"
               value={samplingResult}
               native
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setSamplingResult(e.target.value);
               }}

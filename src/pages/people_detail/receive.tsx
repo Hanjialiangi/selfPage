@@ -116,36 +116,34 @@ export default function ReceivePage(): JSX.Element {
             </FormControl>
           </Box>
         </Paper>
-        <Paper elevation={0} square>
-          <Box marginY={1.5} padding={1.5}>
-            {show ? (
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disableElevation
-                fullWidth
-              >
-                转运至酒店
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                disableElevation
-                fullWidth
-                style={{
-                  background: '#1790FF',
-                  color: '#FFFFFF',
-                  height: '47px'
-                }}
-                onClick={handleTransfer}
-              >
-                申请转运至别的酒店
-              </Button>
-            )}
-          </Box>
-        </Paper>
+        <Box marginY={1.5} padding={1.5}>
+          {show ? (
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disableElevation
+              fullWidth
+            >
+              转运至酒店
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              fullWidth
+              style={{
+                background: '#1790FF',
+                color: '#FFFFFF',
+                height: '47px'
+              }}
+              onClick={handleTransfer}
+            >
+              申请转运至别的酒店
+            </Button>
+          )}
+        </Box>
       </form>
     </Page>
   );

@@ -103,6 +103,7 @@ export default function TransferCommunity(): JSX.Element {
                 name="transfer_type"
                 value={transferType}
                 native
+                style={{ display: 'flex', borderBottom: '1px solid gray' }}
                 onChange={handleChange}
               >
                 <option value="居家隔离">居家隔离</option>
@@ -122,6 +123,7 @@ export default function TransferCommunity(): JSX.Element {
                   name="home_hotel"
                   value={homeHotel}
                   onChange={handleHotel}
+                  style={{ display: 'flex', borderBottom: '1px solid gray' }}
                 >
                   {homeQuarantineHotelList?.map((item: any) => {
                     return (
@@ -158,24 +160,22 @@ export default function TransferCommunity(): JSX.Element {
             </Box>
           </Paper>
         )}
-        <Paper elevation={0} square>
-          <Box marginY={1.5} padding={1.5}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disableElevation
-              fullWidth
-              style={{
-                background: '#1790FF',
-                color: '#FFFFFF',
-                height: '47px'
-              }}
-            >
-              通知街道遣送
-            </Button>
-          </Box>
-        </Paper>
+        <Box marginY={1.5} padding={1.5}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+            fullWidth
+            style={{
+              background: '#1790FF',
+              color: '#FFFFFF',
+              height: '47px'
+            }}
+          >
+            通知街道遣送
+          </Button>
+        </Box>
       </form>
     </Page>
   );

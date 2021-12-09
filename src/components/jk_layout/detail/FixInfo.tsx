@@ -176,13 +176,21 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           );
         })}
         {/* </Box> */}
-        <Paper elevation={0} square>
-          <Box margin={0.5} paddingTop={0.5}>
-            <Button type="submit" variant="outlined" color="primary" fullWidth>
-              确认并修改
-            </Button>
-          </Box>
-        </Paper>
+        <Box margin={0.5} paddingTop={0.5} marginBottom={1.5}>
+          <Button
+            type="submit"
+            variant="outlined"
+            color="primary"
+            fullWidth
+            style={{
+              background: '#1790FF',
+              color: '#FFFFFF',
+              height: '47px'
+            }}
+          >
+            确认并修改
+          </Button>
+        </Box>
       </form>
     </div>
   );

@@ -28,7 +28,7 @@ export default function TransferHospital(): JSX.Element {
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
           <div className="flex">
-            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
+            <InputLabel style={{ textAlign: 'center', marginTop: '8px' }}>
               <span style={{ color: '#1790FF' }}>*</span>转院信息:
             </InputLabel>
             <Input
@@ -36,7 +36,6 @@ export default function TransferHospital(): JSX.Element {
               placeholder="请填写医院名称"
               minRows={2}
               maxRows={600}
-              disableUnderline
               multiline
               onChange={(e: any) => {
                 setValue(e.target.value);

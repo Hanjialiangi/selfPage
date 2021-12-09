@@ -32,7 +32,7 @@ export default function HealthPage(): JSX.Element {
               className="problem_type"
               value={problemType}
               native
-              style={{ display: 'flex' }}
+              style={{ display: 'flex', borderBottom: '1px solid gray' }}
               onChange={(e: any) => {
                 setProblemType(e.target.value);
               }}
