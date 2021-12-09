@@ -6,7 +6,7 @@ import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailConten
 import style from '@styleModules/components/statusIcon.module.scss';
 import Chip from '@material-ui/core/Chip';
 import '@src/styles/modules/detail/detail.scss';
-import { getResidentInfo } from '@src/api';
+import { getResidentInfo, pushToStreet, recievePeople } from '@src/api';
 import {
   InfoNameIcon,
   InfoHealthIcon,
@@ -25,6 +25,7 @@ import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '@src/redux/selectors';
 import { getURL } from '@src/utils';
+import { dingAlert } from '@src/dingtalkAPI';
 
 export type Properties = {
   key: string;
@@ -42,6 +43,8 @@ export default function PeopleDetailPage(): JSX.Element {
   const [Status, setStatus] = useState('未知'); //当前状态
   const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
   const [BoxTag, setBoxtTag] = useState('查看更多');
+
+  const [click, setClick] = useState(true); //临时点击按钮
   /* 是否显示转运按钮 */
   // const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
@@ -95,6 +98,21 @@ export default function PeopleDetailPage(): JSX.Element {
   /*转归 */
   const handleTransferBack = () => {
     window.location.href = getURL(`detail/transferback/${param.id}/edit`);
+  };
+  /*处理推送街道 */
+  const handlePush = async () => {
+    const res = await pushToStreet(param.id); //推送街道
+    if (res.code === 200) {
+      dingAlert('推送成功', '正确', '确认');
+      setClick(false);
+    }
+  };
+  /*通知服务中心 */
+  const handleNotice = async () => {
+    const res = await recievePeople(param.id); //接收人
+    if (res.code === 200) {
+      dingAlert('通知成功', '正确', '确认');
+    }
   };
 
   const [information, setInformation] = useState<Properties[]>();
@@ -231,16 +249,28 @@ export default function PeopleDetailPage(): JSX.Element {
             </Button>
           </Box>
           <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              // onClick={handleSamplingResult}
-              className="DetailBoxButton"
-              style={{ width: '45%' }}
-            >
-              <PushToStreetIcon />
-              &nbsp;推送街道
-            </Button>
+            {click ? (
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handlePush}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                <PushToStreetIcon />
+                &nbsp;推送街道
+              </Button>
+            ) : (
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleNotice}
+                className="DetailBoxButton"
+                style={{ width: '45%' }}
+              >
+                通知服务中心
+              </Button>
+            )}
             <div className="DetailBoxDiv">|</div>
             <Button
               variant="text"

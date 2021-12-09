@@ -514,3 +514,21 @@ export function uploadException(
   const data = JSON.stringify({ open_ids, exception });
   return request('/quarantine_exception', data, { method: 'POST' });
 }
+
+//社区服务中心推送到街道
+export function pushToStreet(open_id: string): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids });
+  return request('/healthcare_center/tranfer_to/sub_district', data, {
+    method: 'POST'
+  });
+}
+
+//街道通知卫生服务中心接人
+export function recievePeople(open_id: string): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids });
+  return request('/sub_district/inform/healthcare_center', data, {
+    method: 'POST'
+  });
+}
