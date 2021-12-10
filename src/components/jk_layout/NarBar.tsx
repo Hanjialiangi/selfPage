@@ -17,7 +17,11 @@ import {
   EndManageIcon,
   EndManageActiveIcon,
   HotelManagementOn,
-  HotelManagementOff
+  HotelManagementOff,
+  StreetTaskOnIcon,
+  StreetTaskOffIcon,
+  CommunityTaskOnIcon,
+  CommunityTaskOffIcon
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
 
@@ -154,14 +158,18 @@ export default function NarBar(): JSX.Element {
               />
               <LinkTab
                 icon={
-                  value !== 6 ? <HotelManagementOff /> : <HotelManagementOn />
+                  value !== 6 ? <StreetTaskOffIcon /> : <StreetTaskOnIcon />
                 }
                 label="街道任务"
                 href={getURL('/admin_jk/street_task_list')}
               />
               <LinkTab
                 icon={
-                  value !== 7 ? <HotelManagementOff /> : <HotelManagementOn />
+                  value !== 7 ? (
+                    <CommunityTaskOffIcon />
+                  ) : (
+                    <CommunityTaskOnIcon />
+                  )
                 }
                 label="任务列表"
                 href={getURL('/admin_jk/health_service_task_list')}
