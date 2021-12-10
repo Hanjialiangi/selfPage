@@ -99,8 +99,6 @@ export default function FixInfo(props: { id: string }): JSX.Element {
                         </option>
                         <option value="密接">密接</option>
                         <option value="次密接">次密接</option>
-                        <option value="一般接触者">一般接触者</option>
-                        <option value="重点人员">重点人员</option>
                       </Select>
                     </Grid>
                   </Grid>
