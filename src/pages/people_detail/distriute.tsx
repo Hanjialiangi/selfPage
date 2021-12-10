@@ -163,7 +163,11 @@ export default function UserDistriutePage(): JSX.Element {
           onClick={handleTransfer}
           variant="contained"
           disabled={!subDistrict}
-          style={{ background: '#1790FF', color: '#FFFFFF', height: '47px' }}
+          style={
+            subDistrict
+              ? { background: '#1790FF', color: '#FFFFFF', height: '47px' }
+              : { height: '47px' }
+          }
           fullWidth
         >
           确认发起转运
