@@ -86,10 +86,16 @@ export default function TransferCommunity(): JSX.Element {
   //处理街道
   const handleStreet = async (e: any) => {
     setStreet(e.target.value); //设置当前街道
-    const res = await getServiceCenter(e.target.value); //获取服务中心
-    if (res.code === 200) {
-      setServiceList(res.data.data); //设置服务中心列表
-      setService(res.data.data[0].name); //默认第一个
+    console.log(e.target.value);
+    if (e.target.value) {
+      console.log('sda');
+      const res = await getServiceCenter(e.target.value); //获取服务中心
+      if (res.code === 200) {
+        setServiceList(res.data.data); //设置服务中心列表
+        setService(res.data.data[0].name); //默认第一个
+      }
+    } else {
+      setService(''); //置空
     }
   };
 
@@ -180,7 +186,7 @@ export default function TransferCommunity(): JSX.Element {
                 <InputLabel>当前酒店所属街道</InputLabel>
                 <FormControl fullWidth>
                   <Select value={street} native onChange={handleStreet}>
-                    <option value=" "></option>
+                    <option value=""></option>
                     {subDistrictList?.map((item: any) => {
                       return (
                         <option value={item.name} key={item.id}>
@@ -212,24 +218,29 @@ export default function TransferCommunity(): JSX.Element {
             )}
           </>
         )}
-        {(subDistrict || street) && (
-          <Box marginY={1.5} padding={1.5}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disableElevation
-              fullWidth
-              style={{
-                background: '#1790FF',
-                color: '#FFFFFF',
-                height: '47px'
-              }}
-            >
-              通知街道遣送
-            </Button>
-          </Box>
-        )}
+        <Box marginY={1.5} padding={1.5}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+            disabled={transferType === '居家隔离酒店' && !street}
+            fullWidth
+            style={
+              transferType === '居家隔离酒店' && !street
+                ? {
+                    height: '47px'
+                  }
+                : {
+                    background: '#1790FF',
+                    color: '#FFFFFF',
+                    height: '47px'
+                  }
+            }
+          >
+            通知街道遣送
+          </Button>
+        </Box>
       </form>
     </Page>
   );
