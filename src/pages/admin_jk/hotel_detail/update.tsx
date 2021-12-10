@@ -52,31 +52,54 @@ export default function UpdatePage(): JSX.Element {
           return (
             <Paper elevation={0} square key={key}>
               <Box marginY={0.5} padding={0.5}>
-                <Grid>
-                  <FormControl>{key}</FormControl>
-                </Grid>
-                <Grid>
-                  <Input
-                    name={key}
-                    placeholder="请输入内容"
-                    defaultValue={isValidKey(key, detail) && detail[key]}
-                    disableUnderline
-                    multiline
-                    fullWidth
-                    style={{ textAlign: 'center', fontSize: '16px' }}
-                  />
+                <Grid container spacing={2} style={{ width: '100%' }}>
+                  <Grid item xs={5}>
+                    <FormControl
+                      style={{
+                        lineHeight: '30px',
+                        marginLeft: '7%'
+                      }}
+                    >
+                      {key}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <Input
+                      name={key}
+                      placeholder="请输入内容"
+                      defaultValue={isValidKey(key, detail) && detail[key]}
+                      disableUnderline
+                      multiline
+                      fullWidth
+                      style={{ textAlign: 'center', fontSize: '16px' }}
+                    />
+                  </Grid>
                 </Grid>
               </Box>
             </Paper>
           );
         })}
-        <Paper elevation={0} square>
-          <Box margin={0.5} paddingTop={0.5}>
-            <Button type="submit" variant="outlined" color="primary" fullWidth>
-              确认并修改
-            </Button>
-          </Box>
-        </Paper>
+        <Box
+          margin={0.5}
+          paddingTop={0.5}
+          marginBottom={5}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            style={{
+              background: '#1790FF',
+              color: '#FFFFFF',
+              width: '95%',
+              height: '47px'
+            }}
+            color="primary"
+            fullWidth
+          >
+            确认并修改
+          </Button>
+        </Box>
       </form>
     </Page>
   );

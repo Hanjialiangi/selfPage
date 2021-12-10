@@ -64,34 +64,34 @@ export default function HotelDetailPage(): JSX.Element {
             </Card>
           </Box>
         </Paper>
-        <Paper elevation={0}>
-          <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleFixHotelInfo}
-                fullWidth
-              >
-                <InfoFixIcon />
-                &nbsp;修改酒店信息
-              </Button>
-            </Box>
+        <Box margin={1.5}>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              className="DetailBoxButton"
+              onClick={handleFixHotelInfo}
+              fullWidth
+            >
+              <InfoFixIcon />
+              &nbsp;修改酒店信息
+            </Button>
           </Box>
-          <Box paddingTop={1.5} paddingBottom={1} margin={1.5}>
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleFixHotelState}
-                fullWidth
-              >
-                <InfoFixIcon />
-                &nbsp;修改酒店状态
-              </Button>
-            </Box>
+        </Box>
+        <Box marginY={1} margin={1.5}>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              className="DetailBoxButton"
+              onClick={handleFixHotelState}
+              fullWidth
+            >
+              <InfoFixIcon />
+              &nbsp;修改酒店状态
+            </Button>
           </Box>
-        </Paper>
+        </Box>
       </>
     </Page>
   );
