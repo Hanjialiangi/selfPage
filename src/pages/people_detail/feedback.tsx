@@ -23,7 +23,7 @@ export default function HealthPage(): JSX.Element {
   return (
     <Page>
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>异常类别
           </InputLabel>
@@ -32,7 +32,7 @@ export default function HealthPage(): JSX.Element {
               className="problem_type"
               value={problemType}
               native
-              style={{ display: 'flex', borderBottom: '1px solid gray' }}
+              style={{ display: 'flex' }}
               onChange={(e: any) => {
                 setProblemType(e.target.value);
               }}

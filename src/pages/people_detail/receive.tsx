@@ -91,7 +91,7 @@ export default function ReceivePage(): JSX.Element {
     <Page title="通知接收">
       <form onSubmit={handleSubmit}>
         <Paper elevation={0} square>
-          <Box marginY={1.5} padding={1.5}>
+          <Box padding={1.5}>
             <InputLabel>预计隔离酒店</InputLabel>
             <FormControl fullWidth>
               <Input name="hotel_name" value={hotel} disabled />

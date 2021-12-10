@@ -33,7 +33,7 @@ export default function TransferHospital(): JSX.Element {
   return (
     <Page title="转院">
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>转院信息:
           </InputLabel>

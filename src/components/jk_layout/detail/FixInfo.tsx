@@ -74,7 +74,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           if (item.key === 'resident_property') {
             return (
               <Paper elevation={0} square key={index}>
-                <Box marginY={0.5} padding={0.5}>
+                <Box marginY={0.2} padding={0.5}>
                   <Grid container spacing={2}>
                     <Grid item xs={5}>
                       <FormControl
@@ -109,7 +109,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           if (item.key === 'quarantine_type') {
             return (
               <Paper elevation={0} square key={index}>
-                <Box marginY={0.5} padding={0.5}>
+                <Box marginY={0.2} padding={0.5}>
                   <Grid container spacing={2}>
                     <Grid item xs={5}>
                       <FormControl
@@ -145,7 +145,7 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           }
           return (
             <Paper elevation={0} square key={index}>
-              <Box marginY={0.5} padding={0.5}>
+              <Box marginY={0.2} padding={0.5}>
                 <Grid container spacing={2}>
                   <Grid item xs={5}>
                     <FormControl
@@ -174,15 +174,19 @@ export default function FixInfo(props: { id: string }): JSX.Element {
           );
         })}
         {/* </Box> */}
-        <Box margin={0.5} paddingTop={0.5} marginBottom={5}>
+        <Box
+          margin={0.5}
+          paddingTop={0.5}
+          marginBottom={5}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <Button
             type="submit"
             variant="outlined"
-            color="primary"
-            fullWidth
             style={{
               background: '#1790FF',
               color: '#FFFFFF',
+              width: '95%',
               height: '47px'
             }}
           >

@@ -63,30 +63,48 @@ export default function HealthPage(): JSX.Element {
   return (
     <Page title="上报健康状况">
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <div className="flex">
-            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              <span style={{ color: '#1790FF' }}>*</span>是否咳嗽症状:
+            <InputLabel
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                color: '#000000'
+              }}
+            >
+              <span style={{ color: '#1790FF' }}>*</span>是否咳嗽症状
             </InputLabel>
             <Radio name="is_cough" value={healthState.is_cough} />
           </div>
         </Box>
       </Paper>
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box marginY={0.2} padding={1.5}>
           <div className="flex">
-            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              <span style={{ color: '#1790FF' }}>*</span>是否发烧症状:
+            <InputLabel
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                color: '#000000'
+              }}
+            >
+              <span style={{ color: '#1790FF' }}>*</span>是否发烧症状
             </InputLabel>
             <Radio name="is_fever" value={healthState.is_fever} />
           </div>
         </Box>
       </Paper>
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box marginY={0.2} padding={1.5}>
           <div className="flex">
-            <InputLabel style={{ textAlign: 'center', marginTop: '10px' }}>
-              <span style={{ color: '#1790FF' }}>*</span>是否乏力症状:
+            <InputLabel
+              style={{
+                textAlign: 'center',
+                marginTop: '10px',
+                color: '#000000'
+              }}
+            >
+              <span style={{ color: '#1790FF' }}>*</span>是否乏力症状
             </InputLabel>
             <Radio name="is_weak" value={healthState.is_weak}></Radio>
           </div>
@@ -94,7 +112,7 @@ export default function HealthPage(): JSX.Element {
       </Paper>
       <Paper elevation={0} square>
         <Box marginY={1.5} padding={1.5}>
-          <InputLabel>
+          <InputLabel style={{ color: '#000000' }}>
             <span style={{ color: '#1790FF' }}>*</span>其他健康状况说明
           </InputLabel>
           <FormControl fullWidth>

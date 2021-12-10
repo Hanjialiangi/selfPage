@@ -32,7 +32,7 @@ export default function TransferBack(): JSX.Element {
   return (
     <Page title="转归">
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>转归信息:
           </InputLabel>
