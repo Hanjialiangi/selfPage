@@ -78,7 +78,7 @@ export default function FixInfo(props: {
             return (
               <Paper elevation={0} square key={index}>
                 <Box marginY={0.2} padding={0.5}>
-                  <Grid container spacing={2}>
+                  <Grid container spacing={2} style={{ width: '100%' }}>
                     <Grid item xs={5}>
                       <FormControl
                         style={{
@@ -113,7 +113,7 @@ export default function FixInfo(props: {
             return (
               <Paper elevation={0} square key={index}>
                 <Box marginY={0.2} padding={0.5}>
-                  <Grid container spacing={2}>
+                  <Grid container spacing={2} style={{ width: '100%' }}>
                     <Grid item xs={5}>
                       <FormControl
                         style={{
@@ -149,7 +149,7 @@ export default function FixInfo(props: {
           return (
             <Paper elevation={0} square key={index}>
               <Box marginY={0.2} padding={0.5}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} style={{ width: '100%' }}>
                   <Grid item xs={5}>
                     <FormControl
                       style={{
