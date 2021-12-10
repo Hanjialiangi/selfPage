@@ -51,7 +51,7 @@ export default function TransferBack(): JSX.Element {
           </FormControl>
         </Box>
       </Paper>
-      <Box marginY={1.5} padding={1.5}>
+      <Box marginTop={4} padding={1.5}>
         <Button
           variant="contained"
           color="primary"

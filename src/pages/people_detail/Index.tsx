@@ -344,6 +344,7 @@ export default function PeopleDetailPage(): JSX.Element {
               variant="text"
               color="primary"
               onClick={handleTransferHospital}
+              className="DetailBoxButton"
               fullWidth
             >
               <HotelIcon />

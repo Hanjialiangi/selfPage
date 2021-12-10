@@ -158,7 +158,7 @@ export default function UserDistriutePage(): JSX.Element {
           </Paper>
         )}
       </>
-      <Box padding={1.5}>
+      <Box padding={1.5} marginTop={4}>
         <Button
           onClick={handleTransfer}
           variant="contained"
