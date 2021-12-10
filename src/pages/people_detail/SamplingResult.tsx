@@ -37,7 +37,7 @@ export default function SamplingResultPage(): JSX.Element {
   return (
     <Page title="上报采样结果">
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>采样日期
           </InputLabel>
@@ -45,7 +45,7 @@ export default function SamplingResultPage(): JSX.Element {
             <TextField
               id="datetime-local"
               type="datetime-local"
-              style={{ display: 'flex', borderBottom: '1px solid gray' }}
+              style={{ display: 'flex' }}
               onChange={(e: any) => {
                 setTime(e.target.value);
               }}
@@ -67,7 +67,7 @@ export default function SamplingResultPage(): JSX.Element {
               name="sampling_result"
               value={samplingResult}
               native
-              style={{ display: 'flex', borderBottom: '1px solid gray' }}
+              style={{ display: 'flex' }}
               onChange={(e: any) => {
                 setSamplingResult(e.target.value);
               }}

@@ -85,7 +85,7 @@ export default function UserDistriutePage(): JSX.Element {
   return (
     <Page title="发起转运">
       <Paper elevation={0} square>
-        <Box marginTop={1.5} padding={1.5}>
+        <Box padding={1.5}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>选择预计隔离酒店
           </InputLabel>
@@ -93,7 +93,7 @@ export default function UserDistriutePage(): JSX.Element {
             className="hotel_name"
             value={hotel}
             native
-            style={{ display: 'flex', borderBottom: '1px solid gray' }}
+            style={{ display: 'flex' }}
             onChange={(e: any) => {
               setHotel(e.target.value);
             }}
@@ -110,7 +110,7 @@ export default function UserDistriutePage(): JSX.Element {
       </Paper>
       <>
         <Paper elevation={0} square>
-          <Box padding={1.5}>
+          <Box marginY={0.2} padding={1.5}>
             <InputLabel>
               <span style={{ color: '#1790FF' }}>*</span>所属街道
             </InputLabel>
@@ -118,7 +118,7 @@ export default function UserDistriutePage(): JSX.Element {
               className="sub_district"
               value={subDistrict}
               native
-              style={{ display: 'flex', borderBottom: '1px solid gray' }}
+              style={{ display: 'flex' }}
               onChange={(e: any) => {
                 setSubDistrict(e.target.value);
                 gainService(e.target.value);
@@ -145,7 +145,7 @@ export default function UserDistriutePage(): JSX.Element {
                 className="serivice"
                 value={serivice}
                 native
-                style={{ display: 'flex', borderBottom: '1px solid gray' }}
+                style={{ display: 'flex' }}
                 onChange={(e: any) => {
                   setSerivice(e.target.value);
                 }}
@@ -162,7 +162,7 @@ export default function UserDistriutePage(): JSX.Element {
           </Paper>
         )}
       </>
-      <Box padding={1.5}>
+      <Box padding={1.5} marginTop={4}>
         <Button
           onClick={handleTransfer}
           variant="contained"

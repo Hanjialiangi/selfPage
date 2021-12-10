@@ -133,7 +133,7 @@ export default function TransferCommunity(): JSX.Element {
     <Page title="转运社区">
       <form onSubmit={handleSubmit}>
         <Paper elevation={0} square>
-          <Box marginY={1.5} padding={1.5}>
+          <Box padding={1.5}>
             <InputLabel>
               <span style={{ color: '#1790FF' }}>*</span>转运方式
             </InputLabel>
@@ -142,7 +142,7 @@ export default function TransferCommunity(): JSX.Element {
                 name="transfer_type"
                 value={transferType}
                 native
-                style={{ display: 'flex', borderBottom: '1px solid gray' }}
+                style={{ display: 'flex' }}
                 onChange={handleChange}
               >
                 <option value="居家隔离">居家隔离</option>
@@ -163,7 +163,7 @@ export default function TransferCommunity(): JSX.Element {
                   value={homeHotel}
                   native
                   onChange={handleHotel}
-                  style={{ display: 'flex', borderBottom: '1px solid gray' }}
+                  style={{ display: 'flex' }}
                 >
                   {homeQuarantineHotelList?.map((item: any) => {
                     return (
