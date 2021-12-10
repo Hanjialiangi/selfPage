@@ -58,6 +58,8 @@ export default function TransferCommunity(): JSX.Element {
         param.id,
         homeHotel,
         moment().format('YYYY_MM-DD HH:mm:ss'),
+        street,
+        service,
         role
       );
       if (res.code === 200) {
@@ -93,9 +95,7 @@ export default function TransferCommunity(): JSX.Element {
   //处理街道
   const handleStreet = async (e: any) => {
     setStreet(e.target.value); //设置当前街道
-    console.log(e.target.value);
     if (e.target.value) {
-      console.log('sda');
       const res = await getServiceCenter(e.target.value); //获取服务中心
       if (res.code === 200) {
         setServiceList(res.data.data); //设置服务中心列表

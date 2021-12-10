@@ -180,7 +180,12 @@ export function getTextFromHTML(html: string): string {
   }
 }
 
-//工具函数(form表单string序列)
+/**
+ * 工具函数(form表单string序列)
+ * @param key 序列索引
+ * @param object 对象
+ * @returns 索引
+ */
 export function isValidKey(
   key: string | number | symbol,
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -188,8 +193,11 @@ export function isValidKey(
 ): key is keyof typeof object {
   return key in object;
 }
-
-//检测页面滑动下一页配置
+/**
+ * 检测页面滑动下一页配置
+ * @param wrapper 选择的容器
+ * @returns bscroll配置
+ */
 export function BScrollConfig(wrapper: any): BScrollConstructor<any> {
   return new BScroll(wrapper, {
     probeType: 3,
@@ -231,6 +239,11 @@ type Form = {
   quarantine_hotel: string;
   home_address: string;
 };
+
+/**
+ *
+ * @returns 返回表单对象
+ */
 //页面初始化获取表单数据
 export function getFormVaildValue(): Form {
   const name = (document.querySelector('.name input') as HTMLInputElement)
@@ -275,6 +288,11 @@ export function getFormVaildValue(): Form {
 }
 
 //权限判断
+/**
+ * 处理权限数组
+ * @param value 权限数组
+ * @returns 权限逗号分隔的字符串
+ */
 export function judgeRole(value: Array<string>): string {
   const role: Array<string> = []; //权限设置
   value.map((item: any) => {

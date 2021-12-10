@@ -5,7 +5,8 @@ import { InputLabel, TextField } from '@material-ui/core';
 import {
   getHotelReceive,
   getResidentInfo,
-  getCommunityReceive
+  getCommunityReceive,
+  homeHotelRecieve
 } from '@src/api';
 import { useParams } from 'react-router-dom';
 import { dingAlert } from '@src/dingtalkAPI';
@@ -22,12 +23,13 @@ export default function Arrive(): JSX.Element {
   const [time, setTime] = useState<string>(''); //获取初始时间
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
   const [select, setSelect] = useState(''); //选中值
-  const [isCommunity, setIsCommunity] = useState(false); //社区
+  const [Type, setType] = useState(''); //类型值
+  const [homeHotel, setHomeHotel] = useState(''); //居家隔离酒店
   //点击接收功能
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    if (select && !isCommunity) {
+    if (select && Type === '转运至酒店中') {
       const hotel_name = select;
       const room = formData.get('room') + '';
       const finalTime = moment(time).format('YYYY-MM-DD HH:mm:ss');
@@ -42,15 +44,23 @@ export default function Arrive(): JSX.Element {
       };
       const res = await getHotelReceive(param.id, formvalue);
       if (res.code === 200) {
-        dingAlert('接收成功', '正确', '确认');
+        dingAlert('酒店接收成功', '正确', '确认');
         window.location.href = getURL(`/detail/resident/${param.id}`);
       } else {
         dingAlert('接收失败', '错误', '确认');
       }
-    } else {
+    } else if (Type === '转运至社区中') {
       const res = await getCommunityReceive(param.id, time);
       if (res.code === 200) {
         dingAlert('社区接收成功', '正确', '确认');
+        window.location.href = getURL(`/detail/resident/${param.id}`);
+      } else {
+        dingAlert('接收失败', '错误', '确认');
+      }
+    } else if (Type === '转运至居家隔离酒店中') {
+      const res = await homeHotelRecieve(param.id, homeHotel, time, role);
+      if (res.code === 200) {
+        dingAlert('居家隔离酒店接收成功', '正确', '确认');
         window.location.href = getURL(`/detail/resident/${param.id}`);
       } else {
         dingAlert('接收失败', '错误', '确认');
@@ -62,23 +72,18 @@ export default function Arrive(): JSX.Element {
     if (res.code === 200) {
       res.data.map((item: any) => {
         if (item.key === 'current_state') {
-          if (
-            item.value === '转运至社区中' ||
-            item.value === '转运至居家隔离酒店中'
-          ) {
-            setIsCommunity(true); //社区接收(接收)
-          }
+          setType(item.value); //设置类型
         }
         if (item.key === 'planned_quarantine_hotel') {
           if (item.value) {
             setSelect(item.value); //酒店接收
           }
         }
-        // if (item.key === 'quarantine_hotel') {
-        //   if (item.value) {
-        //     setIsCommunity(true); //社区接收(二次接收)
-        //   }
-        // }
+        if (item.key === 'home_quarantine_hotel') {
+          if (item.value) {
+            setHomeHotel(item.value); //设置居家隔离酒店
+          }
+        }
       });
     }
   };
@@ -97,7 +102,7 @@ export default function Arrive(): JSX.Element {
         style={{ paddingBottom: '10px' }}
         onSubmit={handleSubmit}
       >
-        {select && !isCommunity ? (
+        {Type === '转运至酒店中' ? (
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
@@ -209,7 +214,10 @@ export default function Arrive(): JSX.Element {
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
                 <InputLabel>
-                  <span style={{ color: '#1790FF' }}>*</span>社区接收时间
+                  <span style={{ color: '#1790FF' }}>*</span>
+                  {Type === '转运至社区中'
+                    ? '社区接收时间'
+                    : '居家隔离酒店接收时间'}
                 </InputLabel>
                 <FormControl fullWidth>
                   {/* <input

@@ -525,10 +525,18 @@ export function transferHomeQuarantineHotel(
   open_id: string,
   hotel_name: string,
   time: string,
+  healthcare_center: string,
+  sub_district: string,
   role: string
 ): APIResponse<any> {
   const open_ids = [open_id];
-  const data = JSON.stringify({ open_ids, hotel_name, time });
+  const data = JSON.stringify({
+    open_ids,
+    hotel_name,
+    time,
+    healthcare_center,
+    sub_district
+  });
   const query = qs.stringify({
     access_control_role: role
   });
@@ -583,4 +591,21 @@ export function updateState(
   });
   const data = JSON.stringify({ open_ids, current_state });
   return request('/update/current_state?' + query, data, { method: 'POST' });
+}
+
+//居家隔离酒店接收
+export function homeHotelRecieve(
+  open_id: string,
+  hotel_name: string,
+  time: string,
+  role: string
+): APIResponse<any> {
+  const open_ids = [open_id];
+  const data = JSON.stringify({ open_ids, hotel_name, time });
+  const query = qs.stringify({
+    access_control_role: role
+  });
+  return request('/receive/home_quarantine_hotel?' + query, data, {
+    method: 'POST'
+  });
 }
