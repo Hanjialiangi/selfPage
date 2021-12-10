@@ -24,7 +24,7 @@ import {
 import { StatusIcon } from '@src/assets/svg/picture';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '@src/redux/selectors';
-import { getURL } from '@src/utils';
+import { getURL, judgeRole } from '@src/utils';
 import { dingAlert } from '@src/dingtalkAPI';
 
 export type Properties = {
@@ -36,6 +36,8 @@ export type Properties = {
 
 export default function PeopleDetailPage(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
+  const role = judgeRole(userInfo.role);
+
   const param: { id: string } = useParams(); //获取路由参数
   const [name, setName] = useState(''); //人员名字
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
@@ -101,7 +103,7 @@ export default function PeopleDetailPage(): JSX.Element {
   };
   /*处理推送街道 */
   const handlePush = async () => {
-    const res = await pushToStreet(param.id); //推送街道
+    const res = await pushToStreet(param.id, role); //推送街道
     if (res.code === 200) {
       dingAlert('推送成功', '正确', '确认');
       setClick(false);
@@ -109,7 +111,7 @@ export default function PeopleDetailPage(): JSX.Element {
   };
   /*通知服务中心 */
   const handleNotice = async () => {
-    const res = await recievePeople(param.id); //接收人
+    const res = await recievePeople(param.id, role); //接收人
     if (res.code === 200) {
       dingAlert('通知成功', '正确', '确认');
     }
@@ -118,7 +120,7 @@ export default function PeopleDetailPage(): JSX.Element {
   const [information, setInformation] = useState<Properties[]>();
   const Init = async (id: string) => {
     //TODO://根据id获取信息
-    const res = await getResidentInfo(id);
+    const res = await getResidentInfo(id, role);
     if (res.code == 200) {
       const attributeArray: Array<Properties> = [];
       res.data.map((item: Properties) => {

@@ -165,9 +165,19 @@ export function getDingFilePermission(
 
 /************************获取详情页接口*********************************/
 //获取某个居民详细信息
-export function getResidentInfo(id: string): APIResponse<any> {
-  const open_id = id;
-  return request('/resident/info?open_id=' + open_id);
+export function getResidentInfo(
+  open_id: string,
+  access_control_role: string
+): APIResponse<any> {
+  const url = qs.stringifyUrl({
+    url: '/resident/info',
+    query: {
+      access_control_role,
+      open_id
+    }
+  });
+
+  return request(url);
 }
 
 //更新居民信息
@@ -361,6 +371,7 @@ export function getCreateHealth(
 export function getResidentList(
   page_size: number,
   page: number,
+  access_control_role: string,
   condition: {
     name?: string;
     contact?: string;
@@ -382,6 +393,7 @@ export function getResidentList(
   const url = qs.stringifyUrl({
     url: '/resident/list',
     query: {
+      access_control_role,
       page,
       page_size,
       name: condition.name,
@@ -512,11 +524,17 @@ export function updatePersonInfo(
 export function transferHomeQuarantineHotel(
   open_id: string,
   hotel_name: string,
-  time: string
+  time: string,
+  role: string
 ): APIResponse<any> {
   const open_ids = [open_id];
   const data = JSON.stringify({ open_ids, hotel_name, time });
-  return request('/transfer/home_quarantine_hotel', data, { method: 'POST' });
+  const query = qs.stringify({
+    access_control_role: role
+  });
+  return request('/transfer/home_quarantine_hotel?' + query, data, {
+    method: 'POST'
+  });
 }
 
 //提交异常情况
@@ -530,19 +548,25 @@ export function uploadException(
 }
 
 //社区服务中心推送到街道
-export function pushToStreet(open_id: string): APIResponse<any> {
+export function pushToStreet(open_id: string, role: string): APIResponse<any> {
   const open_ids = [open_id];
+  const query = qs.stringify({
+    access_control_role: role
+  });
   const data = JSON.stringify({ open_ids });
-  return request('/healthcare_center/tranfer_to/sub_district', data, {
+  return request('/healthcare_center/tranfer_to/sub_district?' + query, data, {
     method: 'POST'
   });
 }
 
 //街道通知卫生服务中心接人
-export function recievePeople(open_id: string): APIResponse<any> {
+export function recievePeople(open_id: string, role: string): APIResponse<any> {
   const open_ids = [open_id];
   const data = JSON.stringify({ open_ids });
-  return request('/sub_district/inform/healthcare_center', data, {
+  const query = qs.stringify({
+    access_control_role: role
+  });
+  return request('/sub_district/inform/healthcare_center?' + query, data, {
     method: 'POST'
   });
 }
@@ -550,9 +574,13 @@ export function recievePeople(open_id: string): APIResponse<any> {
 //修改当前状态
 export function updateState(
   open_id: string,
-  current_state: string
+  current_state: string,
+  role: string
 ): APIResponse<any> {
   const open_ids = [open_id];
+  const query = qs.stringify({
+    access_control_role: role
+  });
   const data = JSON.stringify({ open_ids, current_state });
-  return request('/update/current_state', data, { method: 'POST' });
+  return request('/update/current_state?' + query, data, { method: 'POST' });
 }

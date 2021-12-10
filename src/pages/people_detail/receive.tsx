@@ -13,6 +13,9 @@ import { useParams } from 'react-router';
 import { getHotelList, getResidentInfo, updateState } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
 import { getURL } from '@src/utils';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
+import { judgeRole } from '@src/utils';
 
 export interface HotelType {
   address: string;
@@ -26,6 +29,8 @@ export interface HotelType {
   updated_at: string;
 }
 export default function ReceivePage(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
+  const role = judgeRole(userInfo.role); //拆分数组
   const param: { id: string } = useParams(); //获取路由参数
   const [hotel, setHotel] = useState(''); //初始化计划酒店选择
   const [available, setAvailable] = useState(0); //对应酒店剩余容量
@@ -35,7 +40,7 @@ export default function ReceivePage(): JSX.Element {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (hotel) {
-      const res = await updateState(param.id, '转运至酒店中');
+      const res = await updateState(param.id, '转运至酒店中', role);
       if (res.code === 200) {
         dingAlert('转运成功', '正确', '确认');
         window.location.href = getURL(`/detail/resident/${param.id}`);
@@ -67,7 +72,7 @@ export default function ReceivePage(): JSX.Element {
   //初始化
   const Init = async () => {
     let middleWare = '';
-    const res = await getResidentInfo(param.id); //获取人员属性信息
+    const res = await getResidentInfo(param.id, role); //获取人员属性信息
     if (res.code === 200) {
       res.data.map(async (item: any) => {
         if (item.key === 'planned_quarantine_hotel') {

@@ -6,6 +6,9 @@ import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
 import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
+import { judgeRole } from '@src/utils';
 
 const pageSize = 10; //页面大小
 let sum = 0; //累加次数
@@ -20,6 +23,7 @@ type DR = [
   }
 ];
 export default function ResidentListPage(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
   const [data, setData] = useState([
     {
       open_id: '',
@@ -46,7 +50,14 @@ export default function ResidentListPage(): JSX.Element {
       '健康监测中'
     ]
   ) => {
-    const res = await getResidentList(pageSize, page, formvalue, current_state);
+    const role = judgeRole(userInfo.role); //拆分数组
+    const res = await getResidentList(
+      pageSize,
+      page,
+      role,
+      formvalue,
+      current_state
+    );
     if (page === 1) {
       sum = 0;
     }

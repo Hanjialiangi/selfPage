@@ -6,6 +6,9 @@ import SearchCard from '@components/jk_layout/SearchCard';
 import { Link } from 'react-router-dom';
 import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
+import { judgeRole } from '@src/utils';
 
 type DR = [
   {
@@ -21,6 +24,7 @@ type DR = [
 const pageSize = 10; //页面大小
 let sum = 0; //累加次数
 export default function ManageListPage(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
   const [data, setData] = useState([
     {
       open_id: '',
@@ -42,7 +46,14 @@ export default function ManageListPage(): JSX.Element {
     formvalue = {},
     current_state = ['结案', '医院治疗中']
   ) => {
-    const res = await getResidentList(pageSize, page, formvalue, current_state);
+    const role = judgeRole(userInfo.role);
+    const res = await getResidentList(
+      pageSize,
+      page,
+      role,
+      formvalue,
+      current_state
+    );
     if (page === 1) {
       sum = 0;
     }

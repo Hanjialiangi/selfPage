@@ -273,3 +273,12 @@ export function getFormVaildValue(): Form {
 
   return form;
 }
+
+//权限判断
+export function judgeRole(value: Array<string>): string {
+  const role: Array<string> = []; //权限设置
+  value.map((item: any) => {
+    role.push(item);
+  });
+  return role.join(',');
+}

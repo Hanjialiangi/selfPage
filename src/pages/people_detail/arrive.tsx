@@ -10,9 +10,14 @@ import {
 import { useParams } from 'react-router-dom';
 import { dingAlert } from '@src/dingtalkAPI';
 import moment from 'moment';
-import { getURL } from '@src/utils';
+import { getURL, judgeRole } from '@src/utils';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
 
 export default function Arrive(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
+  const role = judgeRole(userInfo.role);
+
   const param: { id: string } = useParams(); //获取路由参数
   const [time, setTime] = useState<string>(''); //获取初始时间
   const [releaseTime, setReleaseTime] = useState(''); //获取接触时间
@@ -53,7 +58,7 @@ export default function Arrive(): JSX.Element {
     }
   };
   const Init = async () => {
-    const res = await getResidentInfo(param.id);
+    const res = await getResidentInfo(param.id, role);
     if (res.code === 200) {
       res.data.map((item: any) => {
         if (item.key === 'current_state') {

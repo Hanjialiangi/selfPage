@@ -12,8 +12,9 @@ import {
   getTransferHotel
 } from '@src/api';
 import { dingAlert } from '@src/dingtalkAPI';
-import { getURL } from '@src/utils';
-// import { getURL } from '@src/utils';
+import { getURL, judgeRole } from '@src/utils';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
 
 type StreetType = {
   id: number;
@@ -22,6 +23,9 @@ type StreetType = {
   update_at?: string;
 };
 export default function UserDistriutePage(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
+  const role = judgeRole(userInfo.role);
+
   const param: { id: string } = useParams();
   const [hotelList, setHotelList] = useState([]); //酒店列表
   const [hotel, setHotel] = useState(''); //选择的酒店
@@ -50,7 +54,7 @@ export default function UserDistriutePage(): JSX.Element {
   //init
   const Init = async () => {
     let middleWare;
-    const res = await getResidentInfo(param.id);
+    const res = await getResidentInfo(param.id, role);
     if (res.code === 200) {
       res.data.map(async (item: any) => {
         if (item.key === 'sub_district') {

@@ -13,14 +13,17 @@ import { Properties } from '@pages/people_detail/Index';
 import { getURL, isValidKey } from '@src/utils';
 import { dingAlert } from '@src/dingtalkAPI';
 
-export default function FixInfo(props: { id: string }): JSX.Element {
+export default function FixInfo(props: {
+  id: string;
+  role: string;
+}): JSX.Element {
   const [detail, setDetail] = useState<Properties[]>();
 
   const [residentValue, setResidentValue] = useState(''); //人员属性
   const [quarantineValue, setQuarantineValue] = useState(''); //隔离方式
   //初始化
   const initDetail = async () => {
-    const res = await getResidentInfo(props.id);
+    const res = await getResidentInfo(props.id, props.role);
     if (res.code === 200) {
       setDetail(res.data);
       res.data.map((item: Properties) => {

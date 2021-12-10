@@ -22,8 +22,14 @@ import { HotelType } from './receive';
 import moment from 'moment';
 import { dingAlert } from '@src/dingtalkAPI';
 import { getURL } from '@src/utils';
+import { userInfoSelector } from '@src/redux/selectors';
+import { useSelector } from 'react-redux';
+import { judgeRole } from '@src/utils';
 
 export default function TransferCommunity(): JSX.Element {
+  const userInfo = useSelector(userInfoSelector);
+  const role = judgeRole(userInfo.role); //拆分数组
+
   const param: { id: string } = useParams(); //获取路由参数
   const [transferType, setTransferType] = useState('居家隔离'); //转运方式
   const [subDistrict, setSubDistrict] = useState(''); //所属街道
@@ -51,7 +57,8 @@ export default function TransferCommunity(): JSX.Element {
       const res = await transferHomeQuarantineHotel(
         param.id,
         homeHotel,
-        moment().format('YYYY_MM-DD HH:mm:ss')
+        moment().format('YYYY_MM-DD HH:mm:ss'),
+        role
       );
       if (res.code === 200) {
         dingAlert('通知成功', '正确', '确认');
@@ -106,7 +113,7 @@ export default function TransferCommunity(): JSX.Element {
 
   //初始化
   const Init = async () => {
-    const res = await getResidentInfo(param.id); //获取人员属性
+    const res = await getResidentInfo(param.id, role); //获取人员属性
     if (res.code === 200) {
       res.data.map((item: any) => {
         if (item.key === 'sub_district') {
