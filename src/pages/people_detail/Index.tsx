@@ -287,7 +287,7 @@ export default function PeopleDetailPage(): JSX.Element {
               </Button>
             </Box>
           )}
-          {userInfo.role.includes('community') &&
+          {userInfo.role.includes('community_healthcare_center') &&
             isToStreetOrHotelButtonVisible && (
               <Box margin={1.5} className="DetailBox">
                 <>
