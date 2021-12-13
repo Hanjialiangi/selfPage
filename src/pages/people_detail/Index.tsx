@@ -42,16 +42,28 @@ export default function PeopleDetailPage(): JSX.Element {
   const [name, setName] = useState(''); //人员名字
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
-  const [Status, setStatus] = useState('未知'); //当前状态
+  const [current_status, setCurrent_status] = useState('未知'); //当前状态
   const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
   const [BoxTag, setBoxtTag] = useState('查看更多');
 
-  const [click, setClick] = useState(true); //临时点击按钮
   /* 是否显示转运按钮 */
   // const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
 
   /* 是否显示接收并开始隔离 */
   const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
+
+  /* 是否显示转运社区 */
+  const [isTransferButtonVisible, setisTransferButtonVisible] = useState(false);
+
+  /* 是否显示推送街道和转运至酒店 */
+  const [isToStreetOrHotelButtonVisible, setisToStreetOrHotelButtonVisible] =
+    useState(false);
+
+  /* 是否显示上报采样结果和上报健康状况 */
+  const [isSubmitButtonVisible, setisSubmitButtonVisible] = useState(false);
+
+  /* 转归 */
+  const [isFeedbackButtonVisible, setisFeedbackButtonVisible] = useState(false);
 
   /* 转运 */
   const handleTransferOrder = () => {
@@ -106,7 +118,6 @@ export default function PeopleDetailPage(): JSX.Element {
     const res = await pushToStreet(param.id, role); //推送街道
     if (res.code === 200) {
       dingAlert('推送成功', '正确', '确认');
-      setClick(false);
     }
   };
   /*通知服务中心 */
@@ -134,16 +145,39 @@ export default function PeopleDetailPage(): JSX.Element {
           setQuarantineType(item.value);
         }
         if (item.key === 'current_state') {
-          setStatus(item.value);
-          // if (item.value === '待转运' || item.value === '集中隔离中') {
-          //   setIsTransferButtonVisible(true);
-          // }
+          setCurrent_status(item.value);
           if (
             item.value === '转运至酒店中' ||
             item.value === '转运至社区中' ||
             item.value === '转运至居家隔离酒店中'
           ) {
             setisArriveButtonVisible(true);
+          }
+          if (item.value === '医院治疗中' || item.value === '集中隔离中') {
+            setisTransferButtonVisible(true);
+          }
+          if (
+            item.value === '医院治疗中' ||
+            item.value === '集中隔离中' ||
+            item.value === '居家隔离中' ||
+            item.value === '解除后居家隔离中' ||
+            item.value === '健康监测中'
+          ) {
+            setisSubmitButtonVisible(true);
+          }
+          if (
+            item.value === '医院治疗中' ||
+            item.value === '居家隔离中' ||
+            item.value === '健康监测中' ||
+            item.value === '解除后居家隔离中'
+          ) {
+            setisFeedbackButtonVisible(true);
+          }
+          if (
+            item.value === '社区卫生服务中心接送中' ||
+            item.value === '社区卫生服务中心联合街道接送中'
+          ) {
+            setisToStreetOrHotelButtonVisible(true);
           }
         }
         attributeArray.push(item);
@@ -213,7 +247,7 @@ export default function PeopleDetailPage(): JSX.Element {
                     <Chip
                       icon={<StatusIcon />}
                       size="small"
-                      label={Status}
+                      label={current_status}
                       style={{ color: '#1790FF' }}
                       className={`${style.icon} ${style.processing}`}
                       variant="outlined"
@@ -239,66 +273,63 @@ export default function PeopleDetailPage(): JSX.Element {
           </Card>
         </Box>
         <Box paddingTop={1} paddingBottom={1} margin={1.5}>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleDistriute}
-              className="DetailBoxButton"
-              style={{ width: '100%' }}
-            >
-              <StartTransferIcon />
-              &nbsp;发起转运任务(转运组)
-            </Button>
-          </Box>
-          <Box margin={1.5} className="DetailBox">
-            {click ? (
+          {current_status === '待转运' && (
+            <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handlePush}
+                onClick={handleDistriute}
                 className="DetailBoxButton"
-                style={{ width: '45%' }}
+                style={{ width: '100%' }}
               >
-                <PushToStreetIcon />
-                &nbsp;推送街道
+                <StartTransferIcon />
+                &nbsp;发起转运任务
               </Button>
-            ) : (
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleNotice}
-                className="DetailBoxButton"
-                style={{ width: '45%' }}
-              >
-                <PushToStreetIcon />
-                通知服务中心
-              </Button>
+            </Box>
+          )}
+          {userInfo.role.includes('hotel_medical_team') &&
+            isToStreetOrHotelButtonVisible && (
+              <Box margin={1.5} className="DetailBox">
+                <>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handlePush}
+                    className="DetailBoxButton"
+                    style={{ width: '45%' }}
+                  >
+                    <PushToStreetIcon />
+                    &nbsp;推送街道
+                  </Button>
+                  <div className="DetailBoxDiv">|</div>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handleTransferOrder}
+                    className="DetailBoxButton"
+                    style={{ width: '45%' }}
+                  >
+                    <InfoTransfer />
+                    &nbsp;转运至酒店
+                  </Button>
+                </>
+              </Box>
             )}
-            <div className="DetailBoxDiv">|</div>
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleTransferOrder}
-              className="DetailBoxButton"
-              style={{ width: '45%' }}
-            >
-              <InfoTransfer />
-              &nbsp;转运至酒店
-            </Button>
-          </Box>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleTransferCommunity}
-              className="DetailBoxButton"
-              style={{ width: '100%' }}
-            >
-              <InfoTransfer />
-              &nbsp;转运至社区
-            </Button>
-          </Box>
+          {userInfo.role.includes('sub_district') &&
+            isToStreetOrHotelButtonVisible && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleNotice}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <PushToStreetIcon />
+                  &nbsp;通知服务中心
+                </Button>
+              </Box>
+            )}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
             userInfo.role.includes('wh_cdc')) &&
@@ -316,43 +347,61 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Button>
               </Box>
             )}
-          <Box>
+          {isTransferButtonVisible && (
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleSamplingResult}
+                onClick={handleTransferCommunity}
                 className="DetailBoxButton"
-                style={{ width: '45%' }}
+                style={{ width: '100%' }}
               >
-                <InfoSamplingIcon />
-                &nbsp;上报采样结果
+                <InfoTransfer />
+                &nbsp;转运至社区
               </Button>
-              <div className="DetailBoxDiv">|</div>
+            </Box>
+          )}
+          {isSubmitButtonVisible && (
+            <Box>
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleSamplingResult}
+                  className="DetailBoxButton"
+                  style={{ width: '45%' }}
+                >
+                  <InfoSamplingIcon />
+                  &nbsp;上报采样结果
+                </Button>
+                <div className="DetailBoxDiv">|</div>
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleHealth}
+                  className="DetailBoxButton"
+                  style={{ width: '45%' }}
+                >
+                  <InfoHealthIcon />
+                  &nbsp;上报健康状况
+                </Button>
+              </Box>
+            </Box>
+          )}
+          {current_status === '集中隔离中' && (
+            <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
                 color="primary"
-                onClick={handleHealth}
+                onClick={handleTransferHospital}
                 className="DetailBoxButton"
-                style={{ width: '45%' }}
+                fullWidth
               >
-                <InfoHealthIcon />
-                &nbsp;上报健康状况
+                <HotelIcon />
+                &nbsp;转院
               </Button>
             </Box>
-          </Box>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleTransferHospital}
-              className="DetailBoxButton"
-              fullWidth
-            >
-              <HotelIcon />
-              &nbsp;转院
-            </Button>
-          </Box>
+          )}
           <Box margin={1.5} className="DetailBox">
             <Button
               variant="text"
@@ -365,30 +414,37 @@ export default function PeopleDetailPage(): JSX.Element {
               &nbsp;修改基本信息
             </Button>
           </Box>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleFeedBack}
-              className="DetailBoxButton"
-              fullWidth
-            >
-              <FeedBackIcon />
-              &nbsp;反馈
-            </Button>
-          </Box>
-          <Box margin={1.5} className="DetailBox">
-            <Button
-              variant="text"
-              color="primary"
-              onClick={handleTransferBack}
-              className="DetailBoxButton"
-              fullWidth
-            >
-              <BackHomeIcon />
-              &nbsp;转归
-            </Button>
-          </Box>
+          {current_status === '结案' ? null : (
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleFeedBack}
+                className="DetailBoxButton"
+                fullWidth
+              >
+                <FeedBackIcon />
+                &nbsp;反馈
+              </Button>
+            </Box>
+          )}
+          {(userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('community') ||
+            userInfo.role.includes('wh_cdc')) &&
+            isFeedbackButtonVisible && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleTransferBack}
+                  className="DetailBoxButton"
+                  fullWidth
+                >
+                  <BackHomeIcon />
+                  &nbsp;转归
+                </Button>
+              </Box>
+            )}
         </Box>
       </>
     </Page>
