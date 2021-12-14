@@ -46,7 +46,12 @@ export default function ArriveListPage(): JSX.Element {
   const handleSearch = async (
     page = 1,
     formvalue = {},
-    current_stage = ['转运至酒店中', '转运至社区中', '转运至居家隔离酒店中']
+    current_stage = [
+      '转运至酒店中',
+      '转运至社区中',
+      '转运至居家隔离酒店中',
+      '转运至居家隔离中'
+    ]
   ) => {
     const role = judgeRole(userInfo.role);
     const res = await getResidentList(

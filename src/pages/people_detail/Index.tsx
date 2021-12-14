@@ -46,9 +46,6 @@ export default function PeopleDetailPage(): JSX.Element {
   const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
   const [BoxTag, setBoxtTag] = useState('查看更多');
 
-  /* 是否显示转运按钮 */
-  // const [isTransferButtonVisible, setIsTransferButtonVisible] = useState(false);
-
   /* 是否显示接收并开始隔离 */
   const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
 
@@ -178,11 +175,10 @@ export default function PeopleDetailPage(): JSX.Element {
           }
           if (item.value === '社区卫生服务中心接送中') {
             setisToStreetOrHotelButtonVisible(true);
+            setisFeedback(true);
           }
           if (item.value === '社区卫生服务中心联合街道接送中') {
             setIsToCenterButtonVisible(true);
-          }
-          if (item.value === '待转运' || item.value === '结案') {
             setisFeedback(true);
           }
         }
@@ -426,7 +422,7 @@ export default function PeopleDetailPage(): JSX.Element {
               &nbsp;修改基本信息
             </Button>
           </Box>
-          {isFeedaback ? null : (
+          {isFeedaback ? (
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
@@ -439,7 +435,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 &nbsp;反馈
               </Button>
             </Box>
-          )}
+          ) : null}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
             userInfo.role.includes('wh_cdc') ||

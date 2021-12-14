@@ -87,7 +87,7 @@ export default function FixInfo(props: {
                           marginLeft: '7%'
                         }}
                       >
-                        {item.key_name}:
+                        {item.key_name}
                       </FormControl>
                     </Grid>
                     <Grid item xs={7}>
@@ -122,7 +122,7 @@ export default function FixInfo(props: {
                           marginLeft: '7%'
                         }}
                       >
-                        {item.key_name}:
+                        {item.key_name}
                       </FormControl>
                     </Grid>
                     <Grid item xs={7}>
@@ -157,7 +157,7 @@ export default function FixInfo(props: {
                         marginLeft: '7%'
                       }}
                     >
-                      {item.key_name}:
+                      {item.key_name}
                     </FormControl>
                   </Grid>
                   <Grid item xs={7}>
