@@ -56,6 +56,7 @@ export default function PeopleDetailPage(): JSX.Element {
   const [isTransferButtonVisible, setisTransferButtonVisible] = useState(false);
 
   /* 是否显示推送街道和转运至酒店 */
+  const [isToCenterButtonVisible, setIsToCenterButtonVisible] = useState(false);
   const [isToStreetOrHotelButtonVisible, setisToStreetOrHotelButtonVisible] =
     useState(false);
 
@@ -173,11 +174,11 @@ export default function PeopleDetailPage(): JSX.Element {
           ) {
             setisFeedbackButtonVisible(true);
           }
-          if (
-            item.value === '社区卫生服务中心接送中' ||
-            item.value === '社区卫生服务中心联合街道接送中'
-          ) {
+          if (item.value === '社区卫生服务中心接送中') {
             setisToStreetOrHotelButtonVisible(true);
+          }
+          if (item.value === '社区卫生服务中心联合街道接送中') {
+            setIsToCenterButtonVisible(true);
           }
         }
         attributeArray.push(item);
@@ -273,20 +274,23 @@ export default function PeopleDetailPage(): JSX.Element {
           </Card>
         </Box>
         <Box paddingTop={1} paddingBottom={1} margin={1.5}>
-          {current_status === '待转运' && (
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleDistriute}
-                className="DetailBoxButton"
-                style={{ width: '100%' }}
-              >
-                <StartTransferIcon />
-                &nbsp;发起转运任务
-              </Button>
-            </Box>
-          )}
+          {(userInfo.role.includes('transfer_team') ||
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) &&
+            current_status === '待转运' && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleDistriute}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <StartTransferIcon />
+                  &nbsp;发起转运任务
+                </Button>
+              </Box>
+            )}
           {userInfo.role.includes('community_healthcare_center') &&
             isToStreetOrHotelButtonVisible && (
               <Box margin={1.5} className="DetailBox">
@@ -315,24 +319,24 @@ export default function PeopleDetailPage(): JSX.Element {
                 </>
               </Box>
             )}
-          {userInfo.role.includes('sub_district') &&
-            isToStreetOrHotelButtonVisible && (
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleNotice}
-                  className="DetailBoxButton"
-                  style={{ width: '100%' }}
-                >
-                  <PushToStreetIcon />
-                  &nbsp;通知服务中心
-                </Button>
-              </Box>
-            )}
+          {userInfo.role.includes('sub_district') && isToCenterButtonVisible && (
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleNotice}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <PushToStreetIcon />
+                &nbsp;通知服务中心
+              </Button>
+            </Box>
+          )}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
-            userInfo.role.includes('wh_cdc')) &&
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) &&
             isArriveButtonVisible && (
               <Box margin={1.5} className="DetailBox">
                 <Button
@@ -347,20 +351,22 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Button>
               </Box>
             )}
-          {isTransferButtonVisible && (
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferCommunity}
-                className="DetailBoxButton"
-                style={{ width: '100%' }}
-              >
-                <InfoTransfer />
-                &nbsp;转运至社区
-              </Button>
-            </Box>
-          )}
+          {(userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('wh_cdc')) &&
+            isTransferButtonVisible && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleTransferCommunity}
+                  className="DetailBoxButton"
+                  style={{ width: '100%' }}
+                >
+                  <InfoTransfer />
+                  &nbsp;转运至社区
+                </Button>
+              </Box>
+            )}
           {isSubmitButtonVisible && (
             <Box>
               <Box margin={1.5} className="DetailBox">
@@ -388,20 +394,21 @@ export default function PeopleDetailPage(): JSX.Element {
               </Box>
             </Box>
           )}
-          {current_status === '集中隔离中' && (
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleTransferHospital}
-                className="DetailBoxButton"
-                fullWidth
-              >
-                <HotelIcon />
-                &nbsp;转院
-              </Button>
-            </Box>
-          )}
+          {current_status === '集中隔离中' &&
+            userInfo.role.includes('hotel_medical_team') && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleTransferHospital}
+                  className="DetailBoxButton"
+                  fullWidth
+                >
+                  <HotelIcon />
+                  &nbsp;转院
+                </Button>
+              </Box>
+            )}
           <Box margin={1.5} className="DetailBox">
             <Button
               variant="text"
@@ -430,7 +437,8 @@ export default function PeopleDetailPage(): JSX.Element {
           )}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
-            userInfo.role.includes('wh_cdc')) &&
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) &&
             isFeedbackButtonVisible && (
               <Box margin={1.5} className="DetailBox">
                 <Button
