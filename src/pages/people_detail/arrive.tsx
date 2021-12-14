@@ -105,7 +105,7 @@ export default function Arrive(): JSX.Element {
         {Type === '转运至酒店中' ? (
           <>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>接收酒店地址
                 </InputLabel>
@@ -115,7 +115,7 @@ export default function Arrive(): JSX.Element {
               </Box>
             </Paper>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.2} padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>接收时间
                 </InputLabel>
@@ -152,7 +152,7 @@ export default function Arrive(): JSX.Element {
               </Box>
             </Paper>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.2} padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>隔离房间号
                 </InputLabel>
@@ -169,7 +169,7 @@ export default function Arrive(): JSX.Element {
               </Box>
             </Paper>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.2} padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>预计解除隔离时间
                 </InputLabel>
@@ -195,24 +195,27 @@ export default function Arrive(): JSX.Element {
                 </FormControl>
               </Box>
             </Paper>
-            <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                  fullWidth
-                >
-                  确认隔离
-                </Button>
-              </Box>
-            </Paper>
+            <Box marginY={0.2} padding={1.5} marginTop={4}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disableElevation
+                style={{
+                  background: '#1790FF',
+                  color: '#FFFFFF',
+                  height: '47px'
+                }}
+                fullWidth
+              >
+                确认隔离
+              </Button>
+            </Box>
           </>
         ) : (
           <>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.2} padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>
                   {Type === '转运至社区中'
@@ -242,7 +245,7 @@ export default function Arrive(): JSX.Element {
               </Box>
             </Paper>
             <Paper elevation={0} square>
-              <Box marginY={1.5} padding={1.5}>
+              <Box marginY={0.2} padding={1.5} marginTop={4}>
                 <Button
                   type="submit"
                   variant="contained"

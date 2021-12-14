@@ -111,7 +111,7 @@ export default function HealthPage(): JSX.Element {
         </Box>
       </Paper>
       <Paper elevation={0} square>
-        <Box marginY={1.5} padding={1.5}>
+        <Box marginY={0.2} padding={1.5}>
           <InputLabel style={{ color: '#000000' }}>
             <span style={{ color: '#1790FF' }}>*</span>其他健康状况说明
           </InputLabel>
@@ -128,7 +128,7 @@ export default function HealthPage(): JSX.Element {
           </FormControl>
         </Box>
       </Paper>
-      <Box marginY={1.5} padding={1.5}>
+      <Box marginY={1.5} padding={1.5} marginTop={4}>
         <Button
           onClick={handleSubmit}
           variant="contained"

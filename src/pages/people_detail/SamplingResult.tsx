@@ -78,7 +78,7 @@ export default function SamplingResultPage(): JSX.Element {
           </FormControl>
         </Box>
       </Paper>
-      <Box marginY={1.5} padding={1.5}>
+      <Box marginY={1.5} padding={1.5} marginTop={4}>
         <Button
           onClick={handleSubmit}
           variant="contained"

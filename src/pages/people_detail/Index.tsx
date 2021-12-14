@@ -62,6 +62,8 @@ export default function PeopleDetailPage(): JSX.Element {
 
   /* 是否显示上报采样结果和上报健康状况 */
   const [isSubmitButtonVisible, setisSubmitButtonVisible] = useState(false);
+  /* 是否显示反馈 */
+  const [isFeedaback, setisFeedback] = useState(false);
 
   /* 转归 */
   const [isFeedbackButtonVisible, setisFeedbackButtonVisible] = useState(false);
@@ -179,6 +181,9 @@ export default function PeopleDetailPage(): JSX.Element {
           }
           if (item.value === '社区卫生服务中心联合街道接送中') {
             setIsToCenterButtonVisible(true);
+          }
+          if (item.value === '待转运' || item.value === '结案') {
+            setisFeedback(true);
           }
         }
         attributeArray.push(item);
@@ -421,7 +426,7 @@ export default function PeopleDetailPage(): JSX.Element {
               &nbsp;修改基本信息
             </Button>
           </Box>
-          {current_status === '结案' ? null : (
+          {isFeedaback ? null : (
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
