@@ -24,7 +24,6 @@ import {
   CommunityTaskOffIcon
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
-import { setUserInfoAction } from '@src/redux/actions';
 
 interface LinkTabProps {
   label?: string;
