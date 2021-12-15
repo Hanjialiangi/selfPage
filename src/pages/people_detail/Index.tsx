@@ -44,7 +44,7 @@ export default function PeopleDetailPage(): JSX.Element {
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
   const [current_status, setCurrent_status] = useState('未知'); //当前状态
   const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
-  const [BoxTag, setBoxtTag] = useState('查看更多');
+  const [BoxTag, setBoxtTag] = useState('查看更多'); //点击按钮收缩
 
   /* 是否显示接收并开始隔离 */
   const [isArriveButtonVisible, setisArriveButtonVisible] = useState(false);
@@ -353,7 +353,9 @@ export default function PeopleDetailPage(): JSX.Element {
               </Box>
             )}
           {(userInfo.role.includes('hotel_medical_team') ||
-            userInfo.role.includes('wh_cdc')) &&
+            userInfo.role.includes('focus_quarantine_group') ||
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) &&
             isTransferButtonVisible && (
               <Box margin={1.5} className="DetailBox">
                 <Button
@@ -396,7 +398,10 @@ export default function PeopleDetailPage(): JSX.Element {
             </Box>
           )}
           {current_status === '集中隔离中' &&
-            userInfo.role.includes('hotel_medical_team') && (
+            (userInfo.role.includes('hotel_medical_team') ||
+              userInfo.role.includes('focus_quarantine_group') ||
+              userInfo.role.includes('wh_cdc') ||
+              userInfo.role.includes('close_contact_team')) && (
               <Box margin={1.5} className="DetailBox">
                 <Button
                   variant="text"
