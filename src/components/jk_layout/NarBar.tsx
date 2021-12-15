@@ -24,6 +24,7 @@ import {
   CommunityTaskOffIcon
 } from '@src/assets/svg/picture';
 import { getURL } from '@src/utils';
+import { setUserInfoAction } from '@src/redux/actions';
 
 interface LinkTabProps {
   label?: string;
@@ -77,6 +78,10 @@ export default function NarBar(): JSX.Element {
         name = 0;
       } else if (initval === 'resident_list') {
         name = 1;
+      } else if (initval === 'street_task_list') {
+        name = 2;
+      } else if (initval === 'health_service_task_list') {
+        userInfo.role.includes('sub_district') ? (name = 3) : (name = 2);
       } else {
         name = 999;
       }
@@ -91,8 +96,39 @@ export default function NarBar(): JSX.Element {
         name = 3;
       } else if (initval === 'hotel_list') {
         name = 4;
+      } else if (initval === 'street_task_list') {
+        userInfo.role.includes('hotel_medical_team') ? (name = 5) : (name = 4);
+      } else if (initval === 'health_service_task_list') {
+        userInfo.role.includes('hotel_medical_team') &&
+        userInfo.role.includes('sub_district')
+          ? (name = 6)
+          : !userInfo.role.includes('hotel_medical_team') &&
+            userInfo.role.includes('sub_district')
+          ? (name = 5)
+          : userInfo.role.includes('hotel_medical_team') &&
+            !userInfo.role.includes('sub_district')
+          ? (name = 5)
+          : (name = 4);
       } else {
         name = 999;
+      }
+    } else if (judge === 'community_healthcare_center') {
+      if (initval === 'resident_list') {
+        name = 0;
+      } else if (initval === 'test_list') {
+        name = 1;
+      } else if (initval === 'street_task_list') {
+        name = 2;
+      } else if (initval === 'health_service_task_list') {
+        userInfo.role.includes('sub_district') ? (name = 3) : (name = 2);
+      }
+    } else if (judge === 'sub_district') {
+      if (initval === 'resident_list') {
+        name = 0;
+      } else if (initval === 'test_list') {
+        name = 1;
+      } else if (initval === 'street_task_list') {
+        name = 2;
       }
     } else {
       if (initval === 'resident_list') {
@@ -108,7 +144,7 @@ export default function NarBar(): JSX.Element {
       }
     }
     setValue(name);
-  }, [location]);
+  }, [location, userInfo]);
 
   return (
     <Box sx={{}}>
@@ -194,6 +230,29 @@ export default function NarBar(): JSX.Element {
                 label="管理中"
                 href={getURL('/transfer/resident_list')}
               ></LinkTab>
+              {userInfo.role.includes('sub_district') && (
+                <LinkTab
+                  icon={
+                    value !== 2 ? <StreetTaskOffIcon /> : <StreetTaskOnIcon />
+                  }
+                  label="街道任务"
+                  href={getURL('/transfer/street_task_list')}
+                ></LinkTab>
+              )}
+              {userInfo.role.includes('community_healthcare_center') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('sub_district') ? 3 : 2) ? (
+                      <CommunityTaskOffIcon />
+                    ) : (
+                      <CommunityTaskOnIcon />
+                    )
+                  }
+                  label="任务列表"
+                  href={getURL('/transfer/health_service_task_list')}
+                ></LinkTab>
+              )}
             </Tabs>
           ) : userInfo.role.includes('transfer_team') &&
             (userInfo.role.includes('hotel_medical_team') ||
@@ -233,6 +292,43 @@ export default function NarBar(): JSX.Element {
                   href={getURL('/synthesis/hotel_list')}
                 />
               ) : null}
+              {userInfo.role.includes('sub_district') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('hotel_medical_team') ? 5 : 4) ? (
+                      <StreetTaskOffIcon />
+                    ) : (
+                      <StreetTaskOnIcon />
+                    )
+                  }
+                  label="街道任务"
+                  href={getURL('/synthesis/street_task_list')}
+                ></LinkTab>
+              )}
+              {userInfo.role.includes('community_healthcare_center') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('hotel_medical_team') &&
+                    userInfo.role.includes('sub_district')
+                      ? 6
+                      : !userInfo.role.includes('hotel_medical_team') &&
+                        userInfo.role.includes('sub_district')
+                      ? 5
+                      : userInfo.role.includes('hotel_medical_team') &&
+                        !userInfo.role.includes('sub_district')
+                      ? 5
+                      : 4) ? (
+                      <CommunityTaskOffIcon />
+                    ) : (
+                      <CommunityTaskOnIcon />
+                    )
+                  }
+                  label="任务列表"
+                  href={getURL('/synthesis/health_service_task_list')}
+                ></LinkTab>
+              )}
             </Tabs>
           ) : userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ? (
@@ -278,6 +374,71 @@ export default function NarBar(): JSX.Element {
                   href={getURL('/hotel_doctor/hotel_list')}
                 />
               ) : null}
+            </Tabs>
+          ) : userInfo.role.includes('community_healthcare_center') ? (
+            <Tabs
+              style={{ width: '100%' }}
+              value={value}
+              onChange={handleChange}
+              aria-label="nav tabs example"
+            >
+              <LinkTab
+                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={getURL('/community_healthcare_center/resident_list')}
+              ></LinkTab>
+              <LinkTab
+                icon={value !== 1 ? <TestIcon /> : <TestActiveIcon />}
+                label="本日采样"
+                href={getURL('/community_healthcare_center/test_list')}
+              />
+              {userInfo.role.includes('sub_district') && (
+                <LinkTab
+                  icon={
+                    value !== 2 ? <StreetTaskOffIcon /> : <StreetTaskOnIcon />
+                  }
+                  label="街道任务"
+                  href={getURL('/community_healthcare_center/street_task_list')}
+                />
+              )}
+              <LinkTab
+                icon={
+                  value !== (userInfo.role.includes('sub_district') ? 3 : 2) ? (
+                    <CommunityTaskOffIcon />
+                  ) : (
+                    <CommunityTaskOnIcon />
+                  )
+                }
+                label="任务列表"
+                href={getURL(
+                  '/community_healthcare_center/health_service_task_list'
+                )}
+              />
+            </Tabs>
+          ) : userInfo.role.includes('sub_district') ? (
+            <Tabs
+              style={{ width: '100%' }}
+              value={value}
+              onChange={handleChange}
+              aria-label="nav tabs example"
+            >
+              <LinkTab
+                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={getURL('/sub_district/resident_list')}
+              ></LinkTab>
+              <LinkTab
+                icon={value !== 1 ? <TestIcon /> : <TestActiveIcon />}
+                label="本日采样"
+                href={getURL('/sub_district/test_list')}
+              />
+              <LinkTab
+                icon={
+                  value !== 2 ? <StreetTaskOffIcon /> : <StreetTaskOnIcon />
+                }
+                label="街道任务"
+                href={getURL('/sub_district/street_task_list')}
+              />
             </Tabs>
           ) : null}
         </Box>

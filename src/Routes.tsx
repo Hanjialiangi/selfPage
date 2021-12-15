@@ -227,9 +227,29 @@ function ErrorShow(): JSX.Element[] {
   ];
 }
 
+//社区卫生服务中心
+function HealthCenter(value: string): JSX.Element[] {
+  return [
+    <Route
+      path={`/${value}/health_service_task_list`}
+      key="community_healthcare_center"
+    >
+      <HealthServiceList />
+    </Route>
+  ];
+}
+
+//街道
+function StreetTask(value: string): JSX.Element[] {
+  return [
+    <Route path={`/${value}/street_task_list`} key="sub_district">
+      <StreetTaskList />
+    </Route>
+  ];
+}
+
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
-
   //管理员
   if (
     userInfo.role.includes('wh_cdc') ||
@@ -239,12 +259,8 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
-        <Route path="/admin_jk/street_task_list">
-          <StreetTaskList />
-        </Route>
-        <Route path="/admin_jk/health_service_task_list">
-          <HealthServiceList />
-        </Route>
+        {StreetTask('admin_jk')}
+        {HealthCenter('admin_jk')}
         <Route path="/admin_jk/hotel_list">
           <HotelListPage />
         </Route>
@@ -273,16 +289,22 @@ export default function Routes(): JSX.Element {
       </Switch>
     );
   }
+
   //转运组
   if (
     userInfo.role.includes('transfer_team') &&
+    !userInfo.role.includes('close_contact_team') &&
     !userInfo.role.includes('wh_cdc') &&
     !userInfo.role.includes('hotel_medical_team') &&
     !userInfo.role.includes('community')
   ) {
+    //转运组
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {userInfo.role.includes('sub_district') && StreetTask('transfer')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('transfer')}
         <Route path="/transfer/transfer_list">
           <TransferListPage />
         </Route>
@@ -304,6 +326,7 @@ export default function Routes(): JSX.Element {
   if (
     userInfo.role.includes('hotel_medical_team') &&
     !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('close_contact_team') &&
     !userInfo.role.includes('transfer_team')
   ) {
     return (
@@ -337,6 +360,7 @@ export default function Routes(): JSX.Element {
   if (
     userInfo.role.includes('community') &&
     !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('close_contact_team') &&
     !userInfo.role.includes('transfer_team')
   ) {
     return (
@@ -365,6 +389,7 @@ export default function Routes(): JSX.Element {
   if (
     userInfo.role.includes('transfer_team') &&
     !userInfo.role.includes('wh_cdc') &&
+    !userInfo.role.includes('close_contact_team') &&
     (userInfo.role.includes('hotel_medical_team') ||
       userInfo.role.includes('community'))
   ) {
@@ -372,6 +397,9 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
+        {userInfo.role.includes('sub_district') && StreetTask('synthesis')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('synthesis')}
         <Route path="/synthesis/resident_list">
           <ResidentListPage />
         </Route>
@@ -395,6 +423,43 @@ export default function Routes(): JSX.Element {
     );
   }
 
+  if (userInfo.role.includes('community_healthcare_center')) {
+    return (
+      <Switch>
+        {getUserDetailRoutes()}
+        {userInfo.role.includes('sub_district') &&
+          StreetTask('community_healthcare_center')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('community_healthcare_center')}
+        <Route path="/community_healthcare_center/resident_list">
+          <ResidentListPage />
+        </Route>
+        <Route path="/community_healthcare_center/test_list">
+          <TestListPage />
+        </Route>
+        <Route path="/">
+          <Redirect to="/community_healthcare_center/resident_list" />
+        </Route>
+      </Switch>
+    );
+  }
+  if (userInfo.role.includes('sub_district')) {
+    return (
+      <Switch>
+        {getUserDetailRoutes()}
+        {userInfo.role.includes('sub_district') && StreetTask('sub_district')}
+        <Route path="/sub_district/resident_list">
+          <ResidentListPage />
+        </Route>
+        <Route path="/sub_district/test_list">
+          <TestListPage />
+        </Route>
+        <Route path="/">
+          <Redirect to="/sub_district/resident_list" />
+        </Route>
+      </Switch>
+    );
+  }
   return (
     <Switch>
       <Route path="*">
