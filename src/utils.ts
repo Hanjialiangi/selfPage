@@ -300,3 +300,36 @@ export function judgeRole(value: Array<string>): string {
   });
   return role.join(',');
 }
+
+/**
+ * 控制接收状态
+ */
+export function controlArriveState(Role: Array<string>): Array<string> {
+  let state: Array<string> = [''];
+  if (Role.includes('wh_cdc') || Role.includes('close_contact_team')) {
+    state = ['转运至酒店中', '转运至社区中', '转运至居家隔离酒店中'];
+  } else if (
+    Role.includes('hotel_medical_team') &&
+    Role.includes('community')
+  ) {
+    state = ['转运至酒店中', '转运至社区中', '转运至居家隔离酒店中'];
+  } else if (Role.includes('hotel_medical_team ')) {
+    state = ['转运至酒店中', '转运至居家隔离酒店中'];
+  } else if (Role.includes('community')) {
+    state = ['转运至社区中'];
+  }
+  return state;
+}
+
+/**
+ * 控制结束管理查询条件
+ */
+export function controlEndManageState(Role: Array<string>): Array<string> {
+  let state: Array<string> = [''];
+  if (Role.includes('wh_cdc') || Role.includes('close_contact_team')) {
+    state = ['结案', '医院治疗中'];
+  } else if (Role.includes('hotel_medical_team')) {
+    state = ['医院治疗中'];
+  }
+  return state;
+}

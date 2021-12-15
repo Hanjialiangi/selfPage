@@ -8,7 +8,7 @@ import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 import { userInfoSelector } from '@src/redux/selectors';
 import { useSelector } from 'react-redux';
-import { judgeRole } from '@src/utils';
+import { judgeRole, controlArriveState } from '@src/utils';
 
 type DR = [
   {
@@ -43,17 +43,9 @@ export default function ArriveListPage(): JSX.Element {
   const [form, setForm] = useState<any>(); //表单项
 
   //搜索引擎
-  const handleSearch = async (
-    page = 1,
-    formvalue = {},
-    current_stage = [
-      '转运至酒店中',
-      '转运至社区中',
-      '转运至居家隔离酒店中',
-      '转运至居家隔离中'
-    ]
-  ) => {
+  const handleSearch = async (page = 1, formvalue = {}) => {
     const role = judgeRole(userInfo.role);
+    const current_stage = controlArriveState(userInfo.role);
     const res = await getResidentList(
       pageSize,
       page,
