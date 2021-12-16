@@ -8,7 +8,7 @@ import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 import { userInfoSelector } from '@src/redux/selectors';
 import { useSelector } from 'react-redux';
-import { judgeRole,controlEndManageState } from '@src/utils';
+import { judgeRole, controlEndManageState } from '@src/utils';
 
 type DR = [
   {
