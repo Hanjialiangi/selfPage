@@ -146,8 +146,10 @@ export default function NarBar(): JSX.Element {
         name = 0;
       } else if (initval === 'test_list') {
         name = 2;
-      } else if (initval === 'hotel_list') {
+      } else if (initval === 'end_manage_list') {
         name = 3;
+      } else if (initval === 'hotel_list') {
+        name = 4;
       } else {
         name = 999;
       }
@@ -384,7 +386,16 @@ export default function NarBar(): JSX.Element {
               {userInfo.role.includes('hotel_medical_team') ? (
                 <LinkTab
                   icon={
-                    value !== 3 ? <HotelManagementOff /> : <HotelManagementOn />
+                    value !== 3 ? <EndManageIcon /> : <EndManageActiveIcon />
+                  }
+                  label="结束管理"
+                  href={getURL('/hotel_doctor/end_manage_list')}
+                />
+              ) : null}
+              {userInfo.role.includes('hotel_medical_team') ? (
+                <LinkTab
+                  icon={
+                    value !== 4 ? <HotelManagementOff /> : <HotelManagementOn />
                   }
                   label="酒店管理"
                   href={getURL('/hotel_doctor/hotel_list')}

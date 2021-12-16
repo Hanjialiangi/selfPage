@@ -8,7 +8,7 @@ import { BScrollConfig, getFormVaildValue } from '@src/utils';
 import { ArrowDownIcon } from '@src/assets/svg/picture';
 import { userInfoSelector } from '@src/redux/selectors';
 import { useSelector } from 'react-redux';
-import { judgeRole } from '@src/utils';
+import { judgeRole,controlEndManageState } from '@src/utils';
 
 type DR = [
   {
@@ -41,12 +41,9 @@ export default function ManageListPage(): JSX.Element {
   const [form, setForm] = useState<any>(); //表单项
 
   //搜索引擎
-  const handleSearch = async (
-    page = 1,
-    formvalue = {},
-    current_state = ['结案', '医院治疗中']
-  ) => {
+  const handleSearch = async (page = 1, formvalue = {}) => {
     const role = judgeRole(userInfo.role);
+    const current_state = controlEndManageState(userInfo.role);
     const res = await getResidentList(
       pageSize,
       page,

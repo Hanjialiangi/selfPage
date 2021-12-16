@@ -333,6 +333,9 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
+        <Route path="/hotel_doctor/end_manage_list">
+          <EndManagePage />
+        </Route>
         <Route path="/hotel_doctor/hotel_list">
           <HotelListPage />
         </Route>
