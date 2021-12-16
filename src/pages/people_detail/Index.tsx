@@ -160,8 +160,7 @@ export default function PeopleDetailPage(): JSX.Element {
             item.value === '医院治疗中' ||
             item.value === '集中隔离中' ||
             item.value === '居家隔离中' ||
-            item.value === '解除后居家隔离中' ||
-            item.value === '健康监测中'
+            item.value === '解除后居家隔离中'
           ) {
             setisSubmitButtonVisible(true);
           }
@@ -353,7 +352,10 @@ export default function PeopleDetailPage(): JSX.Element {
               </Box>
             )}
           {(userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('community_healthcare_center') ||
             userInfo.role.includes('focus_quarantine_group') ||
+            userInfo.role.includes('sub_district') ||
+            userInfo.role.includes('transfer_team') ||
             userInfo.role.includes('wh_cdc') ||
             userInfo.role.includes('close_contact_team')) &&
             isTransferButtonVisible && (
@@ -366,24 +368,41 @@ export default function PeopleDetailPage(): JSX.Element {
                   style={{ width: '100%' }}
                 >
                   <InfoTransfer />
-                  &nbsp;转运至社区
+                  &nbsp;转运至社区/居家隔离酒店
                 </Button>
               </Box>
             )}
-          {isSubmitButtonVisible && (
+          {(userInfo.role.includes('hotel_medical_team') ||
+            userInfo.role.includes('focus_quarantine_group') ||
+            userInfo.role.includes('community_healthcare_center') ||
+            userInfo.role.includes('transfer_team') ||
+            userInfo.role.includes('sub_district') ||
+            userInfo.role.includes('community') ||
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) &&
+            isSubmitButtonVisible && (
+              <Box>
+                <Box margin={1.5} className="DetailBox">
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handleSamplingResult}
+                    className="DetailBoxButton"
+                    style={{
+                      width: `${
+                        current_status === '健康监测中' ? '45%' : '100%'
+                      }`
+                    }}
+                  >
+                    <InfoSamplingIcon />
+                    &nbsp;上报采样结果
+                  </Button>
+                </Box>
+              </Box>
+            )}
+          {current_status === '健康监测中' && (
             <Box>
               <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleSamplingResult}
-                  className="DetailBoxButton"
-                  style={{ width: '45%' }}
-                >
-                  <InfoSamplingIcon />
-                  &nbsp;上报采样结果
-                </Button>
-                <div className="DetailBoxDiv">|</div>
                 <Button
                   variant="text"
                   color="primary"
@@ -399,6 +418,9 @@ export default function PeopleDetailPage(): JSX.Element {
           )}
           {current_status === '集中隔离中' &&
             (userInfo.role.includes('hotel_medical_team') ||
+              userInfo.role.includes('sub_district') ||
+              userInfo.role.includes('community_healthcare_center') ||
+              userInfo.role.includes('transfer_team') ||
               userInfo.role.includes('focus_quarantine_group') ||
               userInfo.role.includes('wh_cdc') ||
               userInfo.role.includes('close_contact_team')) && (
@@ -443,6 +465,10 @@ export default function PeopleDetailPage(): JSX.Element {
           ) : null}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
+            userInfo.role.includes('sub_district') ||
+            userInfo.role.includes('community_healthcare_center') ||
+            userInfo.role.includes('transfer_team') ||
+            userInfo.role.includes('focus_quarantine_group') ||
             userInfo.role.includes('wh_cdc') ||
             userInfo.role.includes('close_contact_team')) &&
             isFeedbackButtonVisible && (
