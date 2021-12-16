@@ -101,18 +101,29 @@ export default function NarBar(): JSX.Element {
         name = 2;
       } else if (initval === 'test_list') {
         name = 3;
-      } else if (initval === 'hotel_list') {
+      } else if (initval === 'end_manage_list') {
         name = 4;
+      } else if (initval === 'hotel_list') {
+        userInfo.role.includes('hotel_medical_team') ? (name = 5) : (name = 4); //酒店管理组/集中
       } else if (initval === 'street_task_list') {
-        userInfo.role.includes('hotel_medical_team') ? (name = 5) : (name = 4);
+        userInfo.role.includes('hotel_medical_team')
+          ? (name = 6)
+          : userInfo.role.includes('focus_quarantine_group')
+          ? (name = 5)
+          : (name = 4);
       } else if (initval === 'health_service_task_list') {
+        //社区卫生服务中心
         userInfo.role.includes('hotel_medical_team') &&
         userInfo.role.includes('sub_district')
-          ? (name = 6)
+          ? (name = 7)
           : !userInfo.role.includes('hotel_medical_team') &&
+            userInfo.role.includes('focus_quarantine_group') &&
             userInfo.role.includes('sub_district')
-          ? (name = 5)
+          ? (name = 6)
           : userInfo.role.includes('hotel_medical_team') &&
+            !userInfo.role.includes('sub_district')
+          ? (name = 5)
+          : userInfo.role.includes('focus_quarantine_group') &&
             !userInfo.role.includes('sub_district')
           ? (name = 5)
           : (name = 4);
@@ -322,11 +333,29 @@ export default function NarBar(): JSX.Element {
                 label="本日采样"
                 href={getURL('/synthesis/test_list')}
               />
+              {userInfo.role.includes('hotel_medical_team') && (
+                <LinkTab
+                  icon={
+                    value !== 4 ? <EndManageIcon /> : <EndManageActiveIcon />
+                  }
+                  label="结束管理"
+                  href={getURL('/synthesis/end_manage_list')}
+                />
+              )}
               {userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('focus_quarantine_group') ? (
                 <LinkTab
                   icon={
-                    value !== 4 ? <HotelManagementOff /> : <HotelManagementOn />
+                    value !==
+                    (userInfo.role.includes('hotel_medical_team')
+                      ? 5
+                      : userInfo.role.includes('focus_quarantine_group')
+                      ? 4
+                      : 4) ? (
+                      <HotelManagementOff />
+                    ) : (
+                      <HotelManagementOn />
+                    )
                   }
                   label="酒店管理"
                   href={getURL('/synthesis/hotel_list')}
@@ -336,8 +365,9 @@ export default function NarBar(): JSX.Element {
                 <LinkTab
                   icon={
                     value !==
-                    (userInfo.role.includes('hotel_medical_team') ||
-                    userInfo.role.includes('focus_quarantine_group')
+                    (userInfo.role.includes('hotel_medical_team')
+                      ? 6
+                      : userInfo.role.includes('focus_quarantine_group')
                       ? 5
                       : 4) ? (
                       <StreetTaskOffIcon />
@@ -353,16 +383,20 @@ export default function NarBar(): JSX.Element {
                 <LinkTab
                   icon={
                     value !==
-                    ((userInfo.role.includes('hotel_medical_team') ||
-                      userInfo.role.includes('focus_quarantine_group')) &&
+                    (userInfo.role.includes('hotel_medical_team') &&
                     userInfo.role.includes('sub_district')
-                      ? 6
+                      ? 7
                       : !userInfo.role.includes('hotel_medical_team') &&
                         !userInfo.role.includes('focus_quarantine_group') &&
                         userInfo.role.includes('sub_district')
-                      ? 5
-                      : (userInfo.role.includes('hotel_medical_team') ||
-                          userInfo.role.includes('focus_quarantine_group')) &&
+                      ? 4
+                      : userInfo.role.includes('hotel_medical_team') &&
+                        !userInfo.role.includes('sub_district')
+                      ? 6
+                      : userInfo.role.includes('focus_quarantine_group') &&
+                        userInfo.role.includes('sub_district')
+                      ? 6
+                      : userInfo.role.includes('focus_quarantine_group') &&
                         !userInfo.role.includes('sub_district')
                       ? 5
                       : 4) ? (

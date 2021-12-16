@@ -410,6 +410,9 @@ export default function Routes(): JSX.Element {
         <Route path="/synthesis/resident_list">
           <ResidentListPage />
         </Route>
+        <Route path="/synthesis/end_manage_list">
+          <EndManagePage />
+        </Route>
         <Route path="/synthesis/hotel_list">
           <HotelListPage />
         </Route>
