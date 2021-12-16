@@ -81,6 +81,14 @@ export default function NarBar(): JSX.Element {
         name = 2;
       } else if (initval === 'health_service_task_list') {
         userInfo.role.includes('sub_district') ? (name = 3) : (name = 2);
+      } else if (initval === 'hotel_list') {
+        userInfo.role.includes('sub_district') &&
+        userInfo.role.includes('communuty_healthcare_center')
+          ? (name = 4)
+          : userInfo.role.includes('sub_district') ||
+            userInfo.role.includes('community_healthcare_center')
+          ? (name = 3)
+          : (name = 2);
       } else {
         name = 999;
       }
@@ -263,6 +271,26 @@ export default function NarBar(): JSX.Element {
                   label="任务列表"
                   href={getURL('/transfer/health_service_task_list')}
                 ></LinkTab>
+              )}
+              {userInfo.role.includes('focus_quarantine_group') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('sub_district') &&
+                    userInfo.role.includes('communuty_healthcare_center')
+                      ? 4
+                      : userInfo.role.includes('sub_district') ||
+                        userInfo.role.includes('community_healthcare_center')
+                      ? 3
+                      : 2) ? (
+                      <HotelManagementOff />
+                    ) : (
+                      <HotelManagementOn />
+                    )
+                  }
+                  label="酒店管理"
+                  href={getURL('/transfer/hotel_list')}
+                />
               )}
             </Tabs>
           ) : userInfo.role.includes('transfer_team') &&

@@ -302,11 +302,15 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
         {userInfo.role.includes('sub_district') && StreetTask('transfer')}
         {userInfo.role.includes('community_healthcare_center') &&
           HealthCenter('transfer')}
         <Route path="/transfer/transfer_list">
           <TransferListPage />
+        </Route>
+        <Route path="/transfer/hotel_list">
+          <HotelListPage />
         </Route>
         <Route path="/transfer/resident_list">
           <ResidentListPage />
@@ -430,6 +434,7 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {HotelDetailInfo()}
         {userInfo.role.includes('sub_district') &&
           StreetTask('focus_quarantine_group')}
         {userInfo.role.includes('community_healthcare_center') &&
