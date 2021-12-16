@@ -313,7 +313,7 @@ export function controlArriveState(Role: Array<string>): Array<string> {
     Role.includes('community')
   ) {
     state = ['转运至酒店中', '转运至社区中', '转运至居家隔离酒店中'];
-  } else if (Role.includes('hotel_medical_team ')) {
+  } else if (Role.includes('hotel_medical_team')) {
     state = ['转运至酒店中', '转运至居家隔离酒店中'];
   } else if (Role.includes('community')) {
     state = ['转运至社区中'];

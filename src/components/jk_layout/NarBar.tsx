@@ -111,6 +111,16 @@ export default function NarBar(): JSX.Element {
       } else {
         name = 999;
       }
+    } else if (judge === 'focus_quarantine_group') {
+      if (initval === 'resident_list') {
+        name = 0;
+      } else if (initval === 'hotel_list') {
+        name = 1;
+      } else if (initval === 'street_task_list') {
+        name = 2;
+      } else if (initval === 'health_service_task_list') {
+        userInfo.role.includes('sub_district') ? (name = 3) : (name = 2);
+      }
     } else if (judge === 'community_healthcare_center') {
       if (initval === 'resident_list') {
         name = 0;
@@ -282,7 +292,8 @@ export default function NarBar(): JSX.Element {
                 label="本日采样"
                 href={getURL('/synthesis/test_list')}
               />
-              {userInfo.role.includes('hotel_medical_team') ? (
+              {userInfo.role.includes('hotel_medical_team') ||
+              userInfo.role.includes('focus_quarantine_group') ? (
                 <LinkTab
                   icon={
                     value !== 4 ? <HotelManagementOff /> : <HotelManagementOn />
@@ -295,7 +306,10 @@ export default function NarBar(): JSX.Element {
                 <LinkTab
                   icon={
                     value !==
-                    (userInfo.role.includes('hotel_medical_team') ? 5 : 4) ? (
+                    (userInfo.role.includes('hotel_medical_team') ||
+                    userInfo.role.includes('focus_quarantine_group')
+                      ? 5
+                      : 4) ? (
                       <StreetTaskOffIcon />
                     ) : (
                       <StreetTaskOnIcon />
@@ -309,13 +323,16 @@ export default function NarBar(): JSX.Element {
                 <LinkTab
                   icon={
                     value !==
-                    (userInfo.role.includes('hotel_medical_team') &&
+                    ((userInfo.role.includes('hotel_medical_team') ||
+                      userInfo.role.includes('focus_quarantine_group')) &&
                     userInfo.role.includes('sub_district')
                       ? 6
                       : !userInfo.role.includes('hotel_medical_team') &&
+                        !userInfo.role.includes('focus_quarantine_group') &&
                         userInfo.role.includes('sub_district')
                       ? 5
-                      : userInfo.role.includes('hotel_medical_team') &&
+                      : (userInfo.role.includes('hotel_medical_team') ||
+                          userInfo.role.includes('focus_quarantine_group')) &&
                         !userInfo.role.includes('sub_district')
                       ? 5
                       : 4) ? (
@@ -373,6 +390,51 @@ export default function NarBar(): JSX.Element {
                   href={getURL('/hotel_doctor/hotel_list')}
                 />
               ) : null}
+            </Tabs>
+          ) : userInfo.role.includes('focus_quarantine_group') ? (
+            <Tabs
+              style={{ width: '100%' }}
+              value={value}
+              onChange={handleChange}
+              aria-label="nav tabs example"
+            >
+              <LinkTab
+                icon={value !== 0 ? <IsolationIcon /> : <IsolationActiveIcon />}
+                label="管理中"
+                href={getURL('/focus_quarantine_group/resident_list')}
+              ></LinkTab>
+              <LinkTab
+                icon={
+                  value !== 1 ? <HotelManagementOff /> : <HotelManagementOn />
+                }
+                label="酒店管理"
+                href={getURL('/focus_quarantine_group/hotel_list')}
+              />
+              {userInfo.role.includes('sub_district') && (
+                <LinkTab
+                  icon={
+                    value !== 2 ? <StreetTaskOffIcon /> : <StreetTaskOnIcon />
+                  }
+                  label="街道任务"
+                  href={getURL('/focus_quarantine_group/street_task_list')}
+                />
+              )}
+              {userInfo.role.includes('community_healthcare_center') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('sub_district') ? 3 : 2) ? (
+                      <CommunityTaskOffIcon />
+                    ) : (
+                      <CommunityTaskOnIcon />
+                    )
+                  }
+                  label="任务列表"
+                  href={getURL(
+                    '/focus_quarantine_group/health_service_task_list'
+                  )}
+                />
+              )}
             </Tabs>
           ) : userInfo.role.includes('community_healthcare_center') ? (
             <Tabs

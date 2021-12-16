@@ -422,6 +422,27 @@ export default function Routes(): JSX.Element {
       </Switch>
     );
   }
+  //集中隔离组
+  if (userInfo.role.includes('focus_quarantine_group')) {
+    return (
+      <Switch>
+        {getUserDetailRoutes()}
+        {userInfo.role.includes('sub_district') &&
+          StreetTask('focus_quarantine_group')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('focus_quarantine_group')}
+        <Route path="/focus_quarantine_group/resident_list">
+          <ResidentListPage />
+        </Route>
+        <Route path="/focus_quarantine_group/hotel_list">
+          <HotelListPage />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/focus_quarantine_group/resident_list" />
+        </Route>
+      </Switch>
+    );
+  }
 
   if (userInfo.role.includes('community_healthcare_center')) {
     return (
