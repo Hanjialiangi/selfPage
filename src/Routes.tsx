@@ -337,6 +337,9 @@ export default function Routes(): JSX.Element {
       <Switch>
         {getUserDetailRoutes()}
         {HotelDetailInfo()}
+        {userInfo.role.includes('sub_district') && StreetTask('hotel_doctor')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('hotel_doctor')}
         <Route path="/hotel_doctor/end_manage_list">
           <EndManagePage />
         </Route>
@@ -373,6 +376,9 @@ export default function Routes(): JSX.Element {
     return (
       <Switch>
         {getUserDetailRoutes()}
+        {userInfo.role.includes('sub_district') && StreetTask('community')}
+        {userInfo.role.includes('community_healthcare_center') &&
+          HealthCenter('community')}
         <Route path="/community/resident_list">
           <ResidentListPage />
         </Route>

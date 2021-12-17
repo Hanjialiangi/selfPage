@@ -169,6 +169,16 @@ export default function NarBar(): JSX.Element {
         name = 3;
       } else if (initval === 'hotel_list') {
         name = 4;
+      } else if (initval === 'street_task_list') {
+        userInfo.role.includes('hotel_medical_team') ? (name = 5) : (name = 4);
+      } else if (initval === 'health_service_task_list') {
+        userInfo.role.includes('sub_district') &&
+        userInfo.role.includes('hotel_medical_team')
+          ? (name = 6)
+          : !userInfo.role.includes('sub_district') &&
+            !userInfo.role.includes('hotel_medical_team')
+          ? (name = 4)
+          : (name = 5);
       } else {
         name = 999;
       }
@@ -463,6 +473,48 @@ export default function NarBar(): JSX.Element {
                   href={getURL('/hotel_doctor/hotel_list')}
                 />
               ) : null}
+              {userInfo.role.includes('sub_district') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('hotel_medical_team') ? 5 : 4) ? (
+                      <StreetTaskOffIcon />
+                    ) : (
+                      <StreetTaskOnIcon />
+                    )
+                  }
+                  label="街道任务"
+                  href={
+                    userInfo.role.includes('hotel_medical_team')
+                      ? getURL('/hotel_doctor/street_task_list')
+                      : getURL('/community/street_task_list')
+                  }
+                />
+              )}
+              {userInfo.role.includes('community_healthcare_center') && (
+                <LinkTab
+                  icon={
+                    value !==
+                    (userInfo.role.includes('hotel_medical_team') &&
+                    userInfo.role.includes('sub_district')
+                      ? 6
+                      : !userInfo.role.includes('hotel_medical_team') &&
+                        !userInfo.role.includes('sub_district')
+                      ? 4
+                      : 5) ? (
+                      <CommunityTaskOffIcon />
+                    ) : (
+                      <CommunityTaskOnIcon />
+                    )
+                  }
+                  label="任务列表"
+                  href={
+                    userInfo.role.includes('hotel_medical_team')
+                      ? getURL('/hotel_doctor/health_service_task_list')
+                      : getURL('/community/health_service_task_list')
+                  }
+                />
+              )}
             </Tabs>
           ) : userInfo.role.includes('focus_quarantine_group') ? (
             <Tabs
