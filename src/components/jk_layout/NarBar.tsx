@@ -177,7 +177,7 @@ export default function NarBar(): JSX.Element {
           ? (name = 6)
           : !userInfo.role.includes('sub_district') &&
             !userInfo.role.includes('hotel_medical_team')
-          ? (name = 4)
+          ? (name = 3)
           : (name = 5);
       } else {
         name = 999;
@@ -500,7 +500,7 @@ export default function NarBar(): JSX.Element {
                       ? 6
                       : !userInfo.role.includes('hotel_medical_team') &&
                         !userInfo.role.includes('sub_district')
-                      ? 4
+                      ? 3
                       : 5) ? (
                       <CommunityTaskOffIcon />
                     ) : (
