@@ -47,7 +47,8 @@ export default function ResidentListPage(): JSX.Element {
       '集中隔离中',
       '解除后居家隔离中',
       '居家隔离中',
-      '健康监测中'
+      '健康监测中',
+      '医院治疗中'
     ]
   ) => {
     const role = judgeRole(userInfo.role); //拆分数组

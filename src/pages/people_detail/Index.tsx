@@ -6,7 +6,12 @@ import PeopleDetailContent from '@components/jk_layout/detail/PeopleDetailConten
 import style from '@styleModules/components/statusIcon.module.scss';
 import Chip from '@material-ui/core/Chip';
 import '@src/styles/modules/detail/detail.scss';
-import { getResidentInfo, pushToStreet, recievePeople } from '@src/api';
+import {
+  getResidentInfo,
+  pushToStreet,
+  recievePeople,
+  updateCurrentState
+} from '@src/api';
 import {
   InfoNameIcon,
   InfoHealthIcon,
@@ -64,6 +69,9 @@ export default function PeopleDetailPage(): JSX.Element {
 
   /* 转归 */
   const [isFeedbackButtonVisible, setisFeedbackButtonVisible] = useState(false);
+
+  const [isToHealthMonitorVisible, setisToHealthMonitorVisible] =
+    useState(false);
 
   /* 转运 */
   const handleTransferOrder = () => {
@@ -144,6 +152,11 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.key === 'quarantine_type') {
           setQuarantineType(item.value);
         }
+        if (item.key === 'manage_type') {
+          if (item.value === '密接') {
+            setisToHealthMonitorVisible(true);
+          }
+        }
         if (item.key === 'current_state') {
           setCurrent_status(item.value);
           if (
@@ -164,12 +177,7 @@ export default function PeopleDetailPage(): JSX.Element {
           ) {
             setisSubmitButtonVisible(true);
           }
-          if (
-            item.value === '医院治疗中' ||
-            item.value === '居家隔离中' ||
-            item.value === '健康监测中' ||
-            item.value === '解除后居家隔离中'
-          ) {
+          if (item.value === '医院治疗中' || item.value === '健康监测中') {
             setisFeedbackButtonVisible(true);
           }
           if (item.value === '社区卫生服务中心接送中') {
@@ -187,6 +195,7 @@ export default function PeopleDetailPage(): JSX.Element {
     }
   };
 
+  //点击功能
   const handleClick = () => {
     if (BoxHight === '335px') {
       setBoxHeight('100%');
@@ -195,6 +204,19 @@ export default function PeopleDetailPage(): JSX.Element {
     if (BoxHight === '100%') {
       setBoxHeight('335px');
       setBoxtTag('查看更多');
+    }
+  };
+
+  //转健康监测
+  const handleToHealthMonitor = async () => {
+    if (param.id.length == 0) {
+      dingAlert('请选择人员', '错误', '确认');
+      return;
+    }
+    const res = await updateCurrentState([param.id], '健康监测中');
+    if (res.code == 200) {
+      dingAlert('请选择人员', '正确', '确认');
+      location.reload();
     }
   };
 
@@ -463,6 +485,22 @@ export default function PeopleDetailPage(): JSX.Element {
               </Button>
             </Box>
           ) : null}
+          {isToHealthMonitorVisible &&
+            (current_status === '居家隔离中' ||
+              current_status === '解除后居家隔离中') && (
+              <Box margin={1.5} className="DetailBox">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleToHealthMonitor}
+                  className="DetailBoxButton"
+                  fullWidth
+                >
+                  <BackHomeIcon />
+                  &nbsp;转至健康监测
+                </Button>
+              </Box>
+            )}
           {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
             userInfo.role.includes('sub_district') ||

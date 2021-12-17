@@ -327,9 +327,10 @@ export function controlArriveState(Role: Array<string>): Array<string> {
 export function controlEndManageState(Role: Array<string>): Array<string> {
   let state: Array<string> = [''];
   if (Role.includes('wh_cdc') || Role.includes('close_contact_team')) {
-    state = ['结案', '医院治疗中'];
-  } else if (Role.includes('hotel_medical_team')) {
-    state = ['医院治疗中'];
+    state = ['结案'];
   }
+  //  else if (Role.includes('hotel_medical_team')) {
+  //   state = ['医院治疗中'];
+  // }
   return state;
 }

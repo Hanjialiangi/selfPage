@@ -101,7 +101,11 @@ const App = () => {
 
       //开发环境登录
       if (process.env.NODE_ENV === Mode.DEVELOPMENT) {
-        const authRes = await auth('', Dingtalk.AGENT_ID, '331150533338036229'); //331150533338036229  01292524670229487643 140236142620880278 67672261668211
+        const authRes = await auth(
+          '',
+          Dingtalk.AGENT_ID,
+          '01292524670229487643'
+        ); //331150533338036229  01292524670229487643 140236142620880278 67672261668211
         if (authRes.code !== 200) {
           dingAlert(authRes.message, '失败', '确认');
           return;

@@ -609,3 +609,13 @@ export function homeHotelRecieve(
     method: 'POST'
   });
 }
+
+// 设置管控人员的当前状态
+export function updateCurrentState(
+  open_ids: string[],
+  current_state: string,
+  is_exception?: boolean
+): APIResponse<any> {
+  const addData = JSON.stringify({ open_ids, current_state, is_exception });
+  return request('/update/current_state', addData, { method: 'POST' });
+}
