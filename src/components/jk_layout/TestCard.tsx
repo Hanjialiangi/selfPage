@@ -79,7 +79,12 @@ export default function TestCard(props: {
           </ListItem>
           <ListItem>
             {props.detail.contact ? (
-              <ListItemText secondary={`联系电话 ${props.detail.contact}`} />
+              <p style={{ fontSize: '0.875rem', color: 'rgba(0, 0, 0, 0.54)' }}>
+                联系电话:&nbsp;
+                <a href={`tel:${props.detail.contact}`}>
+                  {props.detail.contact}
+                </a>
+              </p>
             ) : null}
           </ListItem>
           <ListItem>
