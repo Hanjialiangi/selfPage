@@ -87,7 +87,7 @@ export default function UserDistriutePage(): JSX.Element {
       <Paper elevation={0} square>
         <Box padding={1.5}>
           <InputLabel>
-            <span style={{ color: '#1790FF' }}>*</span>选择预计隔离酒店
+            <span style={{ color: '#1790FF' }}>*</span>隔离酒店
           </InputLabel>
           <Select
             className="hotel_name"
@@ -139,7 +139,7 @@ export default function UserDistriutePage(): JSX.Element {
           <Paper elevation={0} square>
             <Box padding={1.5}>
               <InputLabel>
-                <span style={{ color: '#1790FF' }}>*</span>通知所属社区服务中心
+                <span style={{ color: '#1790FF' }}>*</span>社区卫生服务中心
               </InputLabel>
               <Select
                 className="serivice"
