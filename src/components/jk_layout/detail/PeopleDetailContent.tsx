@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { Properties } from '@pages/people_detail/Index';
+import { TelphoneIcon } from '@src/assets/svg/picture';
 
 export default function PeopleDetailContent(props: { info: any }): JSX.Element {
   const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
@@ -56,14 +57,28 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
               >
                 {item.key_name}:
               </span>
-              <span
-                style={{
-                  color: 'black',
-                  marginLeft: '10px'
-                }}
-              >
-                {item.value}
-              </span>
+              {item.key === 'contact' ? (
+                <span
+                  style={{
+                    color: 'black',
+                    marginLeft: '10px'
+                  }}
+                >
+                  <a href={`tel:${item.value}`}>
+                    <TelphoneIcon />
+                    {item.value}
+                  </a>
+                </span>
+              ) : (
+                <span
+                  style={{
+                    color: 'black',
+                    marginLeft: '10px'
+                  }}
+                >
+                  {item.value}
+                </span>
+              )}
             </Typography>
           );
         })}
