@@ -169,8 +169,13 @@ export default function UserDistriutePage(): JSX.Element {
           disabled={!subDistrict}
           style={
             subDistrict
-              ? { background: '#1790FF', color: '#FFFFFF', height: '47px' }
-              : { height: '47px' }
+              ? {
+                  background: '#1790FF',
+                  color: '#FFFFFF',
+                  height: '47px',
+                  fontSize: '16px'
+                }
+              : { height: '47px', fontSize: '16px' }
           }
           fullWidth
         >

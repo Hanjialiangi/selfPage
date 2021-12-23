@@ -124,7 +124,8 @@ export default function ReceivePage(): JSX.Element {
               style={{
                 background: '#1790FF',
                 color: '#FFFFFF',
-                height: '47px'
+                height: '47px',
+                fontSize: '16px'
               }}
             >
               转运至酒店
@@ -138,7 +139,8 @@ export default function ReceivePage(): JSX.Element {
               style={{
                 background: '#1790FF',
                 color: '#FFFFFF',
-                height: '47px'
+                height: '47px',
+                fontSize: '16px'
               }}
               onClick={handleTransfer}
             >

@@ -190,7 +190,8 @@ export default function FixInfo(props: {
               background: '#1790FF',
               color: '#FFFFFF',
               width: '95%',
-              height: '47px'
+              height: '47px',
+              fontSize: '16px'
             }}
           >
             确认并修改

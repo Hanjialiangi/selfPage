@@ -61,7 +61,8 @@ export default function TransferHospital(): JSX.Element {
           style={{
             background: '#1790FF',
             color: '#FFFFFF',
-            height: '47px'
+            height: '47px',
+            fontSize: '16px'
           }}
           onClick={handleSubmit}
         >

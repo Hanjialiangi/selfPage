@@ -236,12 +236,14 @@ export default function TransferCommunity(): JSX.Element {
             style={
               transferType === '居家隔离酒店' && !street
                 ? {
-                    height: '47px'
+                    height: '47px',
+                    fontSize: '16px'
                   }
                 : {
                     background: '#1790FF',
                     color: '#FFFFFF',
-                    height: '47px'
+                    height: '47px',
+                    fontSize: '16px'
                   }
             }
           >
