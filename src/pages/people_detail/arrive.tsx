@@ -244,24 +244,22 @@ export default function Arrive(): JSX.Element {
                 </FormControl>
               </Box>
             </Paper>
-            <Paper elevation={0} square>
-              <Box marginY={0.2} padding={1.5} marginTop={4}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                  style={{
-                    background: '#1790FF',
-                    color: '#FFFFFF',
-                    height: '47px'
-                  }}
-                  fullWidth
-                >
-                  确认隔离
-                </Button>
-              </Box>
-            </Paper>
+            <Box marginY={0.2} padding={1.5} marginTop={4}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disableElevation
+                style={{
+                  background: '#1790FF',
+                  color: '#FFFFFF',
+                  height: '47px'
+                }}
+                fullWidth
+              >
+                确认隔离
+              </Button>
+            </Box>
           </>
         )}
       </form>
