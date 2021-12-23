@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "npm run clean && cross-env NODE_ENV=development BUILD_TYPE=development PUBLIC_PATH=/dist/ API_PREFIX=/api webpack serve --config webpack.config.development.js --devtool eval-source-map --progress",
     "pack:dev": "gulp cleanTemp && cross-env NODE_ENV=production BUILD_TYPE=development PUBLIC_PATH=/mobile/ API_PREFIX=/api webpack --config webpack.config.production.js",
-    "pack:prod": "gulp cleanTemp && cross-env NODE_ENV=production BUILD_TYPE=production PUBLIC_PATH=/mobile/ API_PREFIX=/api webpack --config webpack.config.production.js",
+    "pack:prod": "gulp cleanTemp && cross-env NODE_ENV=production BUILD_TYPE=production PUBLIC_PATH=/prod/mobile/ API_PREFIX=/prod/api webpack --config webpack.config.production.js",
     "clean": "gulp clean && gulp cleanTemp",
     "sprite": "gulp sprite",
-    "gulp:build": "cross-env PUBLIC_PATH=/mobile/ gulp build",
+    "gulp:build": "cross-env PUBLIC_PATH=/prod/mobile/ gulp build",
     "build:dev": "npm run pack:dev && npm run gulp:build",
     "build:prod": "npm run pack:prod && npm run gulp:build",
     "build": "npm run build:prod",
