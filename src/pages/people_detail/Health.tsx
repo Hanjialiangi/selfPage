@@ -137,12 +137,11 @@ export default function HealthPage(): JSX.Element {
           style={{
             background: '#1790FF',
             color: '#FFFFFF',
-            height: '47px',
-            fontSize: '16px'
+            height: '47px'
           }}
           fullWidth
         >
-          确认提交
+          <span style={{ fontSize: '16px' }}>确认提交</span>
         </Button>
       </Box>
     </Page>

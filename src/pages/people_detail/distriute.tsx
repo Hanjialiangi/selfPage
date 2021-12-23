@@ -172,13 +172,13 @@ export default function UserDistriutePage(): JSX.Element {
               ? {
                   background: '#1790FF',
                   color: '#FFFFFF',
-                  height: '47px',
-                  fontSize: '16px'
+                  height: '47px'
                 }
-              : { height: '47px', fontSize: '16px' }
+              : { height: '47px' }
           }
           fullWidth
         >
+          <span style={{ fontSize: '16px' }}>确认隔离</span>
           确认发起转运
         </Button>
       </Box>

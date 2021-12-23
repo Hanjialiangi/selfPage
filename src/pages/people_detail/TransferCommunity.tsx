@@ -180,7 +180,9 @@ export default function TransferCommunity(): JSX.Element {
         {transferType === '居家隔离' ? (
           <Paper elevation={0} square>
             <Box marginY={1.5} padding={1.5}>
-              <InputLabel>所属街道</InputLabel>
+              <InputLabel>
+                <span style={{ color: '#1790FF' }}>*</span>所属街道
+              </InputLabel>
               <FormControl fullWidth>
                 <Input value={subDistrict} disabled></Input>
               </FormControl>
@@ -190,7 +192,9 @@ export default function TransferCommunity(): JSX.Element {
           <>
             <Paper elevation={0} square>
               <Box marginY={1.5} padding={1.5}>
-                <InputLabel>当前酒店所属街道</InputLabel>
+                <InputLabel>
+                  <span style={{ color: '#1790FF' }}>*</span>当前酒店所属街道
+                </InputLabel>
                 <FormControl fullWidth>
                   <Select value={street} native onChange={handleStreet}>
                     <option value=""></option>
@@ -208,7 +212,10 @@ export default function TransferCommunity(): JSX.Element {
             {street && (
               <Paper elevation={0} square>
                 <Box marginY={1.5} padding={1.5}>
-                  <InputLabel>当前酒店所属社区卫生服务中心</InputLabel>
+                  <InputLabel>
+                    <span style={{ color: '#1790FF' }}>*</span>
+                    当前酒店所属社区卫生服务中心
+                  </InputLabel>
                   <FormControl fullWidth>
                     <Select value={service} native onChange={handleService}>
                       {serviceList?.map((item: any) => {
@@ -236,18 +243,16 @@ export default function TransferCommunity(): JSX.Element {
             style={
               transferType === '居家隔离酒店' && !street
                 ? {
-                    height: '47px',
-                    fontSize: '16px'
+                    height: '47px'
                   }
                 : {
                     background: '#1790FF',
                     color: '#FFFFFF',
-                    height: '47px',
-                    fontSize: '16px'
+                    height: '47px'
                   }
             }
           >
-            通知街道遣送
+            <span style={{ fontSize: '16px' }}>通知街道遣送</span>
           </Button>
         </Box>
       </form>

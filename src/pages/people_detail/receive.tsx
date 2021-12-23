@@ -97,7 +97,9 @@ export default function ReceivePage(): JSX.Element {
       <form onSubmit={handleSubmit}>
         <Paper elevation={0} square>
           <Box padding={1.5}>
-            <InputLabel>预计隔离酒店</InputLabel>
+            <InputLabel>
+              <span style={{ color: '#1790FF' }}>*</span>预计隔离酒店
+            </InputLabel>
             <FormControl fullWidth>
               <Input name="hotel_name" value={hotel} disabled />
             </FormControl>
@@ -105,7 +107,9 @@ export default function ReceivePage(): JSX.Element {
         </Paper>
         <Paper elevation={0} square>
           <Box marginY={1.5} padding={1.5}>
-            <InputLabel>酒店剩余容量</InputLabel>
+            <InputLabel>
+              <span style={{ color: '#1790FF' }}>*</span>酒店剩余容量
+            </InputLabel>
             <FormControl fullWidth>
               <Typography variant="h5" style={{ textAlign: 'center' }}>
                 {available}
@@ -124,11 +128,10 @@ export default function ReceivePage(): JSX.Element {
               style={{
                 background: '#1790FF',
                 color: '#FFFFFF',
-                height: '47px',
-                fontSize: '16px'
+                height: '47px'
               }}
             >
-              转运至酒店
+              <span style={{ fontSize: '16px' }}>转运至酒店</span>
             </Button>
           ) : (
             <Button
@@ -139,12 +142,11 @@ export default function ReceivePage(): JSX.Element {
               style={{
                 background: '#1790FF',
                 color: '#FFFFFF',
-                height: '47px',
-                fontSize: '16px'
+                height: '47px'
               }}
               onClick={handleTransfer}
             >
-              申请转运至别的酒店
+              <span style={{ fontSize: '16px' }}>申请转运至别的酒店</span>
             </Button>
           )}
         </Box>

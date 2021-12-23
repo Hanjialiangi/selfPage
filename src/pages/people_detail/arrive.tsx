@@ -110,7 +110,12 @@ export default function Arrive(): JSX.Element {
                   <span style={{ color: '#1790FF' }}>*</span>接收酒店地址
                 </InputLabel>
                 <FormControl fullWidth>
-                  <Input name="hotel_name" value={select} disabled />
+                  <Input
+                    style={{ color: 'black' }}
+                    name="hotel_name"
+                    value={select}
+                    disabled
+                  />
                 </FormControl>
               </Box>
             </Paper>
@@ -204,12 +209,11 @@ export default function Arrive(): JSX.Element {
                 style={{
                   background: '#1790FF',
                   color: '#FFFFFF',
-                  height: '47px',
-                  fontSize: '16px'
+                  height: '47px'
                 }}
                 fullWidth
               >
-                确认隔离
+                <span style={{ fontSize: '16px' }}>确认隔离</span>
               </Button>
             </Box>
           </>
@@ -254,12 +258,11 @@ export default function Arrive(): JSX.Element {
                 style={{
                   background: '#1790FF',
                   color: '#FFFFFF',
-                  height: '47px',
-                  fontSize: '16px'
+                  height: '47px'
                 }}
                 fullWidth
               >
-                确认隔离
+                <span style={{ fontSize: '16px' }}>确认隔离</span>
               </Button>
             </Box>
           </>

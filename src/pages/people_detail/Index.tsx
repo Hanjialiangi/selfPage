@@ -48,7 +48,7 @@ export default function PeopleDetailPage(): JSX.Element {
   const [residentProperty, setResidentProperty] = useState(''); //人员属性
   const [quarantineType, setQuarantineType] = useState(''); //隔离方式
   const [current_status, setCurrent_status] = useState('未知'); //当前状态
-  const [BoxHight, setBoxHeight] = useState('327px'); //点击卡片改变宽度
+  const [BoxHight, setBoxHeight] = useState('335px'); //点击卡片改变宽度
   const [BoxTag, setBoxtTag] = useState('查看更多'); //点击按钮收缩
 
   /* 是否显示接收并开始隔离 */
@@ -197,12 +197,12 @@ export default function PeopleDetailPage(): JSX.Element {
 
   //点击功能
   const handleClick = () => {
-    if (BoxHight === '327px') {
+    if (BoxHight === '335px') {
       setBoxHeight('100%');
       setBoxtTag('点击收回');
     }
     if (BoxHight === '100%') {
-      setBoxHeight('327px');
+      setBoxHeight('335px');
       setBoxtTag('查看更多');
     }
   };
