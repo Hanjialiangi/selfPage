@@ -5,7 +5,9 @@ import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { ListItemIcon, ListItemText } from '@material-ui/core';
-import { NameIcon } from '@src/assets/svg/picture';
+import { NameIcon, CopyIcon } from '@src/assets/svg/picture';
+import Clipboard from 'clipboard';
+import { dingAlert } from '@src/dingtalkAPI';
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +39,20 @@ const useStyles = makeStyles({
     fontSize: '14px'
   }
 });
+
+//处理复制到粘贴板
+const handleCopy = () => {
+  const clipboard = new Clipboard('.destory');
+  console.log(clipboard);
+  clipboard.on('success', function (e) {
+    dingAlert('复制成功', '正确', '确认');
+
+    e.clearSelection();
+  });
+  clipboard.on('error', function () {
+    dingAlert('复制失败', '失败', '确认');
+  });
+};
 export default function TestCard(props: {
   detail: {
     name: string;
@@ -84,6 +100,13 @@ export default function TestCard(props: {
                 <a href={`tel:${props.detail.contact}`}>
                   {props.detail.contact}
                 </a>
+                <button
+                  className="destory"
+                  onClick={handleCopy}
+                  data-clipboard-text={props.detail.contact}
+                >
+                  <CopyIcon />
+                </button>
               </p>
             ) : null}
           </ListItem>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { Properties } from '@pages/people_detail/Index';
-import { TelphoneIcon } from '@src/assets/svg/picture';
+import { CopyIcon } from '@src/assets/svg/picture';
+import Clipboard from 'clipboard';
+import { dingAlert } from '@src/dingtalkAPI';
 
 export default function PeopleDetailContent(props: { info: any }): JSX.Element {
   const [baseInfo, setBaseInfo] = useState<any[]>(); //基础属性
@@ -32,6 +34,20 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
       setBaseInfo(array);
     });
   }, []);
+  //处理复制到粘贴板
+  const handleCopy = () => {
+    const clipboard = new Clipboard('.destory');
+    console.log(clipboard);
+    clipboard.on('success', function (e) {
+      dingAlert('复制成功', '正确', '确认');
+
+      e.clearSelection();
+    });
+    clipboard.on('error', function () {
+      dingAlert('复制失败', '失败', '确认');
+    });
+  };
+
   return (
     <Box>
       <div
@@ -60,14 +76,19 @@ export default function PeopleDetailContent(props: { info: any }): JSX.Element {
               {item.key === 'contact' ? (
                 <span
                   style={{
-                    color: 'black',
-                    marginLeft: '10px'
+                    color: '#1790ff',
+                    marginLeft: '10px',
+                    textDecoration: 'underline'
                   }}
                 >
-                  <a href={`tel:${item.value}`}>
-                    <TelphoneIcon />
-                    {item.value}
-                  </a>
+                  <a href={`tel:${item.value}`}>{item.value}</a>
+                  <button
+                    className="destory"
+                    onClick={handleCopy}
+                    data-clipboard-text={item.value}
+                  >
+                    <CopyIcon />
+                  </button>
                 </span>
               ) : (
                 <span
