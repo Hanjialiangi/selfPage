@@ -18,11 +18,11 @@ export enum Mode {
 
 export const Dingtalk = {
   AGENT_ID:
-    process.env.BUILD_TYPE === Mode.DEVELOPMENT ? '1231321213' : '1371334360',
+    process.env.BUILD_TYPE === Mode.DEVELOPMENT ? '1249960620' : '1385945852',
   CORP_ID:
     process.env.BUILD_TYPE === Mode.DEVELOPMENT
       ? 'ding0bfcdc2ba159a01935c2f4657eb6378f'
-      : 'dinged61c9634da1d42735c2f4657eb6378f'
+      : 'dingcfd51efcffadbd5facaaa37764f94726'
 };
 
 export enum Role {
