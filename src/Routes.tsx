@@ -248,6 +248,21 @@ function StreetTask(value: string): JSX.Element[] {
   ];
 }
 
+//社区排查
+const CommunityPage = loadable(
+  () => import('@pages/communityScreening/community/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const StreetPage = loadable(
+  () => import('@pages/communityScreening/street/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+
+//community_screening
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
   //管理员
@@ -257,7 +272,18 @@ export default function Routes(): JSX.Element {
   ) {
     return (
       <Switch>
-        {getUserDetailRoutes()}
+        <Route path="/community_screening/community">
+          <CommunityPage />
+        </Route>
+        <Route path="/community_screening/street">
+          <StreetPage />
+        </Route>
+        <Route path="/community_screening/hotel"></Route>
+        <Route path="/community_screening/transfer"></Route>
+        <Route path="/">
+          <Redirect to="/community_screening/community" />
+        </Route>
+        {/* {getUserDetailRoutes()}
         {HotelDetailInfo()}
         {StreetTask('admin_jk')}
         {HealthCenter('admin_jk')}
@@ -284,7 +310,7 @@ export default function Routes(): JSX.Element {
         </Route>
         <Route exact path="/">
           <Redirect to="/admin_jk/transfer_list" />
-        </Route>
+        </Route>*/}
         {ErrorShow()}
       </Switch>
     );
