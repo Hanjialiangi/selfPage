@@ -484,6 +484,20 @@ export default function PeopleDetailPage(): JSX.Element {
             <Button
               variant="text"
               color="primary"
+              onClick={() => {
+                dingAlert('操作成功', '正确', '确认');
+              }}
+              className="DetailBoxButton"
+              fullWidth
+            >
+              <InfoSamplingIcon />
+              &nbsp;结束健康监测
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
               onClick={handleFixInfo}
               className="DetailBoxButton"
               fullWidth

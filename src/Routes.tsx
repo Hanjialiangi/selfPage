@@ -311,6 +311,7 @@ const ManagePage = loadable(
     fallback: <Fallback />
   }
 );
+
 //community_screening
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
