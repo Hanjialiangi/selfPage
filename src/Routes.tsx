@@ -261,6 +261,21 @@ const StreetPage = loadable(
     fallback: <Fallback />
   }
 );
+const TransferPage = loadable(
+  () => import('@pages/communityScreening/transfer/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const HotlePage = loadable(
+  () => import('@pages/communityScreening/hotel/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+const CheckPage = loadable(() => import('@pages/people_detail/check'), {
+  fallback: <Fallback />
+});
 
 //community_screening
 export default function Routes(): JSX.Element {
@@ -278,12 +293,31 @@ export default function Routes(): JSX.Element {
         <Route path="/community_screening/street">
           <StreetPage />
         </Route>
+        <Route path="/community_screening/hotel">
+          <TransferPage />
+        </Route>
+        <Route path="/community_screening/transfer">
+          <HotlePage />
+        </Route>
+        <Route path="/detail/resident/:id" key="detail">
+          <PeopleDetailPage />
+        </Route>
+        <Route path="/detail/check/:id/edit" key="detail">
+          <CheckPage />
+        </Route>
+        <Route path="/detail/health/:id/edit" key="health">
+          <HealthPage />
+        </Route>
+        <Route path="/detail/update/:id/baseinfo/edit" key="update">
+          <UserUpdatePage />
+        </Route>
         <Route path="/community_screening/hotel"></Route>
         <Route path="/community_screening/transfer"></Route>
         <Route path="/">
           <Redirect to="/community_screening/community" />
         </Route>
-        {/* {getUserDetailRoutes()}
+        {getUserDetailRoutes()}
+        {/* 
         {HotelDetailInfo()}
         {StreetTask('admin_jk')}
         {HealthCenter('admin_jk')}

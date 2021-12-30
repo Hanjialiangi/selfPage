@@ -85,7 +85,7 @@ export default function UserDistriutePage(): JSX.Element {
   return (
     <Page title="发起转运">
       <Paper elevation={0} square>
-        <Box padding={1.5}>
+        <Box padding={1.5} marginTop={12}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>隔离酒店
           </InputLabel>
@@ -178,8 +178,7 @@ export default function UserDistriutePage(): JSX.Element {
           }
           fullWidth
         >
-          <span style={{ fontSize: '16px' }}>确认隔离</span>
-          确认发起转运
+          <span style={{ fontSize: '16px' }}>确认发起转运</span>
         </Button>
       </Box>
     </Page>
