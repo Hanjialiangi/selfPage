@@ -68,7 +68,7 @@ export default function FixInfo(props: {
     initDetail();
   }, []);
   return (
-    <div>
+    <div className="updateform">
       <form onSubmit={submit}>
         {detail?.map((item: Properties, index: number) => {
           if (item.key === 'current_state') {
