@@ -467,7 +467,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Box>
               </Box>
             )}
-          {current_status === '健康监测中' && (
+          {/* {current_status === '健康监测中' && (
             <Box>
               <Box margin={1.5} className="DetailBox">
                 <Button
@@ -482,7 +482,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Button>
               </Box>
             </Box>
-          )}
+          )} */}
           {/* {current_status === '集中隔离中' &&
             (userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('sub_district') ||
