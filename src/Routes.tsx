@@ -283,6 +283,12 @@ const CheckPage = loadable(() => import('@pages/people_detail/check'), {
   fallback: <Fallback />
 });
 
+const DetailPage = loadable(
+  () => import('@pages/communityScreening/peple_detail/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
 //community_screening
 export default function Routes(): JSX.Element {
   const userInfo = useSelector(userInfoSelector);
@@ -293,7 +299,7 @@ export default function Routes(): JSX.Element {
   ) {
     return (
       <Switch>
-        {getUserDetailRoutes()}
+        {/* {getUserDetailRoutes()} */}
         <Route path="/community_screening/community">
           <CommunityPage />
         </Route>
@@ -307,7 +313,7 @@ export default function Routes(): JSX.Element {
           <HotlePage />
         </Route>
         <Route path="/detail/resident/:id" key="detail">
-          <PeopleDetailPage />
+          <DetailPage />
         </Route>
         <Route path="/detail/check/:id/edit" key="detail">
           <CheckPage />
