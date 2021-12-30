@@ -336,7 +336,7 @@ export default function PeopleDetailPage(): JSX.Element {
               onClick={handleDetect}
               className="DetailBoxButton"
               fullWidth
-              style={{ width: '45%' }}
+              style={{ width: '100%' }}
             >
               <BackHomeIcon />
               &nbsp;上报核酸检测结果
