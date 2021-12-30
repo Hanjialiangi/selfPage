@@ -322,7 +322,7 @@ export default function PeopleDetailPage(): JSX.Element {
               onClick={handleHealthMonitor}
               className="DetailBoxButton"
               fullWidth
-              style={{ width: '45%' }}
+              style={{ width: '100%' }}
             >
               <BackHomeIcon />
               &nbsp;上报健康监测结果
@@ -338,7 +338,7 @@ export default function PeopleDetailPage(): JSX.Element {
               style={{ width: '45%' }}
             >
               <BackHomeIcon />
-              &nbsp;上报核酸监测结果
+              &nbsp;上报核酸检测结果
             </Button>
           </Box>
           {(userInfo.role.includes('transfer_team') ||
