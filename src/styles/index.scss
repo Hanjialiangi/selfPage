@@ -153,3 +153,21 @@ div#mui-component-select-is_fever, div#mui-component-select-is_cough, div#mui-co
   border: none;
   background-color: white;
 }
+.fab {
+  position: fixed;
+  z-index: 999;
+  bottom: 20px;
+  right: 0px;
+}
+.title {
+  text-align: center;
+}
+.article {
+  display:flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.vice {
+  text-align:left;
+  font-size: 15px;
+}

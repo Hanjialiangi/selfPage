@@ -35,20 +35,25 @@ export default function Navigation(): JSX.Element {
 
   useEffect(() => {
     let name = 0;
-    const judge = location.pathname.split('/')[2];
-    switch (judge) {
-      case 'community':
-        name = 0;
-        break;
-      case 'street':
-        name = 1;
-        break;
-      case 'hotel':
-        name = 2;
-        break;
-      case 'transfer':
-        name = 3;
-        break;
+    const initval = location.pathname.split('/')[1];
+    if (initval === 'community_screening') {
+      const judge = location.pathname.split('/')[2];
+      switch (judge) {
+        case 'community':
+          name = 0;
+          break;
+        case 'street':
+          name = 1;
+          break;
+        case 'hotel':
+          name = 2;
+          break;
+        case 'transfer':
+          name = 3;
+          break;
+      }
+    } else {
+      name = 100;
     }
     setValue(name);
   }, [location]);
@@ -84,22 +89,30 @@ export default function Navigation(): JSX.Element {
     }
   ];
   return (
-    <Box
-      className="tab"
-      sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
-    >
-      <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-        {tabs.map(item => {
-          return (
-            <LinkTab
-              icon={value === item.key ? item.activeIcon : item.icon}
-              label={item.label}
-              href={getURL(item.href)}
-              key={item.key}
-            />
-          );
-        })}
-      </Tabs>
-    </Box>
+    <>
+      {value !== 100 ? (
+        <Box
+          className="tab"
+          sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed' }}
+        >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="nav tabs example"
+          >
+            {tabs.map(item => {
+              return (
+                <LinkTab
+                  icon={value === item.key ? item.activeIcon : item.icon}
+                  label={item.label}
+                  href={getURL(item.href)}
+                  key={item.key}
+                />
+              );
+            })}
+          </Tabs>
+        </Box>
+      ) : null}
+    </>
   );
 }
