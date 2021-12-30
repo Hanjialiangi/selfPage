@@ -112,7 +112,7 @@ export default function CommunityPage(): JSX.Element {
   }, []);
 
   return (
-    <Page title="社区">
+    <Page title="酒店">
       <div className="container" style={{ marginTop: '90px' }}>
         <form
           noValidate
