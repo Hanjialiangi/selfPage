@@ -22,7 +22,7 @@ export default function HealthMonitorPage(): JSX.Element {
   //const param: { id: string } = useParams(); //获取参数
   const [time, setTime] = useState(''); //统一采样时间
   const [healthState, sethealthState] = useState({
-    is_required: '否',
+    is_required: '是',
     others: ''
   });
 
