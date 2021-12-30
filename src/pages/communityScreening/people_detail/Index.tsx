@@ -466,20 +466,19 @@ export default function PeopleDetailPage(): JSX.Element {
               userInfo.role.includes('transfer_team') ||
               userInfo.role.includes('focus_quarantine_group') ||
               userInfo.role.includes('wh_cdc') ||
-              userInfo.role.includes('close_contact_team')) && (
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleTransferHospital}
-                  className="DetailBoxButton"
-                  fullWidth
-                >
-                  <HotelIcon />
-                  &nbsp;转院
-                </Button>
-              </Box>
-            )} */}
+              userInfo.role.includes('close_contact_team')) && (*/}
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleTransferHospital}
+              className="DetailBoxButton"
+              fullWidth
+            >
+              <HotelIcon />
+              &nbsp;转院
+            </Button>
+          </Box>
           <Box margin={1.5} className="DetailBox">
             <Button
               variant="text"

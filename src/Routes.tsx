@@ -367,6 +367,12 @@ export default function Routes(): JSX.Element {
         <Route path="/staff/add">
           <StaffAddPage />
         </Route>
+        <Route
+          path="/detail/hotel_doctor/:id/transfer_hospital"
+          key="transferhospital"
+        >
+          <TransferHospital />
+        </Route>
         <Route path="/">
           <Redirect to="/community_screening/community" />
         </Route>
