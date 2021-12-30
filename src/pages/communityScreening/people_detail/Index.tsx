@@ -70,9 +70,6 @@ export default function PeopleDetailPage(): JSX.Element {
   /* 转归 */
   const [isFeedbackButtonVisible, setisFeedbackButtonVisible] = useState(false);
 
-  const [isToHealthMonitorVisible, setisToHealthMonitorVisible] =
-    useState(false);
-
   /* 转运 */
   const handleTransferOrder = () => {
     window.location.href = getURL(`/detail/receive/${param.id}/edit`);
@@ -156,11 +153,6 @@ export default function PeopleDetailPage(): JSX.Element {
         if (item.key === 'quarantine_type') {
           setQuarantineType(item.value);
         }
-        if (item.key === 'manage_type') {
-          if (item.value === '密接') {
-            setisToHealthMonitorVisible(true);
-          }
-        }
         if (item.key === 'current_state') {
           setCurrent_status(item.value);
           if (
@@ -212,16 +204,17 @@ export default function PeopleDetailPage(): JSX.Element {
   };
 
   //转健康监测
-  const handleToHealthMonitor = async () => {
-    if (param.id.length == 0) {
-      dingAlert('请选择人员', '错误', '确认');
-      return;
-    }
-    const res = await updateCurrentState([param.id], '健康监测中');
-    if (res.code == 200) {
-      dingAlert('请选择人员', '正确', '确认');
-      location.reload();
-    }
+  const handleHealthMonitor = () => {
+    window.location.href = getURL(`detail/health_monitor/${param.id}/edit`);
+  };
+
+  //管控措施
+  const handleManage = () => {
+    window.location.href = getURL(`detail/manage/${param.id}/edit`);
+  };
+  //核酸检测
+  const handleDetect = () => {
+    window.location.href = getURL(`detail/detect/${param.id}/edit`);
   };
 
   useEffect(() => {
@@ -312,7 +305,42 @@ export default function PeopleDetailPage(): JSX.Element {
               &nbsp;精准排查
             </Button>
           </Box>
-
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleManage}
+              className="DetailBoxButton"
+              style={{ width: '45%' }}
+            >
+              <StartTransferIcon />
+              &nbsp;管控措施
+            </Button>
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleHealthMonitor}
+              className="DetailBoxButton"
+              fullWidth
+              style={{ width: '45%' }}
+            >
+              <BackHomeIcon />
+              &nbsp;上报健康监测结果
+            </Button>
+          </Box>
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleDetect}
+              className="DetailBoxButton"
+              fullWidth
+              style={{ width: '45%' }}
+            >
+              <BackHomeIcon />
+              &nbsp;上报核酸监测结果
+            </Button>
+          </Box>
           {(userInfo.role.includes('transfer_team') ||
             userInfo.role.includes('wh_cdc') ||
             userInfo.role.includes('close_contact_team')) &&
@@ -502,22 +530,6 @@ export default function PeopleDetailPage(): JSX.Element {
               </Button>
             </Box>
           ) : null}
-          {isToHealthMonitorVisible &&
-            (current_status === '居家隔离中' ||
-              current_status === '解除后居家隔离中') && (
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleToHealthMonitor}
-                  className="DetailBoxButton"
-                  fullWidth
-                >
-                  <BackHomeIcon />
-                  &nbsp;转至健康监测
-                </Button>
-              </Box>
-            )}
           {/* {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
             userInfo.role.includes('sub_district') ||

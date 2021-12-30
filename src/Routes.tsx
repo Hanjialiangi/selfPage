@@ -284,7 +284,29 @@ const CheckPage = loadable(() => import('@pages/people_detail/check'), {
 });
 
 const DetailPage = loadable(
-  () => import('@pages/communityScreening/peple_detail/Index'),
+  () => import('@pages/communityScreening/people_detail/Index'),
+  {
+    fallback: <Fallback />
+  }
+);
+//上报健康监测结果
+const HealthMonitorPage = loadable(
+  () => import('@pages/communityScreening/people_detail/HealthMonitor'),
+  {
+    fallback: <Fallback />
+  }
+);
+
+//上报核酸检测结果
+const DetectPage = loadable(
+  () => import('@pages/communityScreening/people_detail/Detect'),
+  {
+    fallback: <Fallback />
+  }
+);
+//管控
+const ManagePage = loadable(
+  () => import('@pages/communityScreening/people_detail/Manage'),
   {
     fallback: <Fallback />
   }
@@ -318,8 +340,14 @@ export default function Routes(): JSX.Element {
         <Route path="/detail/check/:id/edit" key="detail">
           <CheckPage />
         </Route>
-        <Route path="/detail/health/:id/edit" key="health">
-          <HealthPage />
+        <Route path="/detail/health_monitor/:id/edit" key="health_monitor">
+          <HealthMonitorPage />
+        </Route>
+        <Route path="/detail/detect/:id/edit" key="detect">
+          <DetectPage />
+        </Route>
+        <Route path="/detail/manage/:id/edit" key="manage">
+          <ManagePage />
         </Route>
         <Route path="/detail/update/:id/baseinfo/edit" key="update">
           <UserUpdatePage />

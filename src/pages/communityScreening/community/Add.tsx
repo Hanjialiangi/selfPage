@@ -245,7 +245,7 @@ export default function Add(): JSX.Element {
               fontSize: '16px'
             }}
           >
-            确认并修改
+            确认并录入
           </Button>
         </Box>
       </form>
