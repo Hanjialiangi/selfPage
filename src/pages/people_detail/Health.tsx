@@ -63,7 +63,7 @@ export default function HealthPage(): JSX.Element {
   return (
     <Page title="上报健康状况">
       <Paper elevation={0} square>
-        <Box padding={1.5}>
+        <Box padding={1.5} marginTop={12}>
           <div className="flex">
             <InputLabel
               style={{

@@ -86,12 +86,16 @@ export default function PeopleDetailPage(): JSX.Element {
   };
 
   /* 分配 */
+  const handleCheck = () => {
+    window.location.href = getURL(`/detail/check/${param.id}/edit`);
+  };
+  /* 分配 */
   const handleDistriute = () => {
     window.location.href = getURL(`/detail/distriute/${param.id}/edit`);
   };
   /* 修改信息 */
-  const handleFixOrder = () => {
-    window.location.href = getURL(`/detail/resident/${param.id}/baseinfo/edit`);
+  const handleFixInfo = () => {
+    window.location.href = getURL(`/detail/update/${param.id}/baseinfo/edit`);
   };
   /* 修改接收并开始隔离 */
   const handleArrive = () => {
@@ -228,7 +232,7 @@ export default function PeopleDetailPage(): JSX.Element {
     <Page title="人员详情" paddingBottom={5}>
       <>
         <Paper elevation={0} square style={{ height: '8px' }} />
-        <Box margin={1.5} padding={1.5}>
+        <Box margin={1.5} padding={1.5} marginTop={12}>
           <Card className="InfoCard">
             <Paper elevation={0} square>
               <Box
@@ -296,6 +300,22 @@ export default function PeopleDetailPage(): JSX.Element {
           </Card>
         </Box>
         <Box paddingTop={1} paddingBottom={1} margin={1.5}>
+          {(userInfo.role.includes('transfer_team') ||
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) && (
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleCheck}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <StartTransferIcon />
+                &nbsp;精准排查
+              </Button>
+            </Box>
+          )}
           {(userInfo.role.includes('transfer_team') ||
             userInfo.role.includes('wh_cdc') ||
             userInfo.role.includes('close_contact_team')) &&
@@ -430,7 +450,7 @@ export default function PeopleDetailPage(): JSX.Element {
                   color="primary"
                   onClick={handleHealth}
                   className="DetailBoxButton"
-                  style={{ width: '45%' }}
+                  style={{ width: '100%' }}
                 >
                   <InfoHealthIcon />
                   &nbsp;上报健康状况
@@ -438,7 +458,7 @@ export default function PeopleDetailPage(): JSX.Element {
               </Box>
             </Box>
           )}
-          {current_status === '集中隔离中' &&
+          {/* {current_status === '集中隔离中' &&
             (userInfo.role.includes('hotel_medical_team') ||
               userInfo.role.includes('sub_district') ||
               userInfo.role.includes('community_healthcare_center') ||
@@ -458,12 +478,12 @@ export default function PeopleDetailPage(): JSX.Element {
                   &nbsp;转院
                 </Button>
               </Box>
-            )}
+            )} */}
           <Box margin={1.5} className="DetailBox">
             <Button
               variant="text"
               color="primary"
-              onClick={handleFixOrder}
+              onClick={handleFixInfo}
               className="DetailBoxButton"
               fullWidth
             >
@@ -501,7 +521,7 @@ export default function PeopleDetailPage(): JSX.Element {
                 </Button>
               </Box>
             )}
-          {(userInfo.role.includes('hotel_medical_team') ||
+          {/* {(userInfo.role.includes('hotel_medical_team') ||
             userInfo.role.includes('community') ||
             userInfo.role.includes('sub_district') ||
             userInfo.role.includes('community_healthcare_center') ||
@@ -522,7 +542,7 @@ export default function PeopleDetailPage(): JSX.Element {
                   &nbsp;转归
                 </Button>
               </Box>
-            )}
+            )} */}
         </Box>
       </>
     </Page>

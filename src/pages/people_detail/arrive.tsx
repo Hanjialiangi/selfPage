@@ -105,7 +105,7 @@ export default function Arrive(): JSX.Element {
         {Type === '转运至酒店中' ? (
           <>
             <Paper elevation={0} square>
-              <Box padding={1.5}>
+              <Box padding={1.5} marginTop={12}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>接收酒店地址
                 </InputLabel>
@@ -220,7 +220,7 @@ export default function Arrive(): JSX.Element {
         ) : (
           <>
             <Paper elevation={0} square>
-              <Box marginY={0.2} padding={1.5}>
+              <Box marginY={0.2} padding={1.5} marginTop={12}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>
                   {Type === '转运至社区中'
