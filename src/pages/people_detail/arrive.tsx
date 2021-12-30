@@ -220,7 +220,7 @@ export default function Arrive(): JSX.Element {
         ) : (
           <>
             <Paper elevation={0} square>
-              <Box marginY={0.2} padding={1.5} marginTop={12}>
+              <Box marginY={0.2} padding={1.5}>
                 <InputLabel>
                   <span style={{ color: '#1790FF' }}>*</span>
                   {Type === '转运至社区中'
