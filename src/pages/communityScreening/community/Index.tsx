@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import SearchCard from '@components/communityScreening/SearchCard';
 import { getResidentList } from '@src/api';
 import CardEach from '@components/jk_layout/CardEach';
+import Entry from '@src/components/communityScreening/Entry';
+import { getURL } from '@src/utils';
 
 type DR = [
   {
@@ -91,6 +93,7 @@ export default function CommunityPage(): JSX.Element {
     }
   };
 
+  //提交
   const submit = (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -105,6 +108,11 @@ export default function CommunityPage(): JSX.Element {
       source
     };
     console.log(formvalue);
+  };
+
+  //跳转
+  const handleAdd = () => {
+    window.location.href = getURL('/staff/add');
   };
 
   useEffect(() => {
@@ -129,6 +137,9 @@ export default function CommunityPage(): JSX.Element {
             </Link>
           );
         })}
+      </div>
+      <div className="fab" onClick={handleAdd}>
+        <Entry />
       </div>
     </Page>
   );
