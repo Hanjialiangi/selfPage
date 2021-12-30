@@ -300,22 +300,19 @@ export default function PeopleDetailPage(): JSX.Element {
           </Card>
         </Box>
         <Box paddingTop={1} paddingBottom={1} margin={1.5}>
-          {(userInfo.role.includes('transfer_team') ||
-            userInfo.role.includes('wh_cdc') ||
-            userInfo.role.includes('close_contact_team')) && (
-            <Box margin={1.5} className="DetailBox">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={handleCheck}
-                className="DetailBoxButton"
-                style={{ width: '100%' }}
-              >
-                <StartTransferIcon />
-                &nbsp;精准排查
-              </Button>
-            </Box>
-          )}
+          <Box margin={1.5} className="DetailBox">
+            <Button
+              variant="text"
+              color="primary"
+              onClick={handleCheck}
+              className="DetailBoxButton"
+              style={{ width: '100%' }}
+            >
+              <StartTransferIcon />
+              &nbsp;精准排查
+            </Button>
+          </Box>
+
           {(userInfo.role.includes('transfer_team') ||
             userInfo.role.includes('wh_cdc') ||
             userInfo.role.includes('close_contact_team')) &&
