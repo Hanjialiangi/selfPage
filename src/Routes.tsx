@@ -311,6 +311,15 @@ export default function Routes(): JSX.Element {
         <Route path="/detail/update/:id/baseinfo/edit" key="update">
           <UserUpdatePage />
         </Route>
+        <Route path="/detail/samplingresult/:id/edit" key="samplingresult">
+          <SamplingResultPage />
+        </Route>
+        <Route
+          path="/detail/transfercommunity/:id/edit"
+          key="transfercommunity"
+        >
+          <TransferCommunity />
+        </Route>
         <Route path="/community_screening/hotel"></Route>
         <Route path="/community_screening/transfer"></Route>
         <Route path="/">

@@ -85,10 +85,15 @@ export default function PeopleDetailPage(): JSX.Element {
     window.location.href = getURL(`/detail/transfercommunity/${param.id}/edit`);
   };
 
-  /* 分配 */
+  /* 核查*/
   const handleCheck = () => {
     window.location.href = getURL(`/detail/check/${param.id}/edit`);
   };
+  /* 健康监测 */
+  const handleMonitor = () => {
+    window.location.href = getURL(`/detail/check/${param.id}/edit`);
+  };
+
   /* 分配 */
   const handleDistriute = () => {
     window.location.href = getURL(`/detail/distriute/${param.id}/edit`);
@@ -313,6 +318,22 @@ export default function PeopleDetailPage(): JSX.Element {
               >
                 <StartTransferIcon />
                 &nbsp;精准排查
+              </Button>
+            </Box>
+          )}
+          {(userInfo.role.includes('transfer_team') ||
+            userInfo.role.includes('wh_cdc') ||
+            userInfo.role.includes('close_contact_team')) && (
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleMonitor}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <StartTransferIcon />
+                &nbsp;健康监测
               </Button>
             </Box>
           )}
