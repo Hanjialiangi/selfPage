@@ -342,52 +342,48 @@ export default function PeopleDetailPage(): JSX.Element {
               &nbsp;上报核酸检测结果
             </Button>
           </Box>
-          {(userInfo.role.includes('transfer_team') ||
-            userInfo.role.includes('wh_cdc') ||
-            userInfo.role.includes('close_contact_team')) &&
-            current_status === '待转运' && (
-              <Box margin={1.5} className="DetailBox">
+          {/* {
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleDistriute}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <StartTransferIcon />
+                &nbsp;发起转运任务
+              </Button>
+            </Box>
+          } */}
+          {/* {
+            <Box margin={1.5} className="DetailBox">
+              <>
                 <Button
                   variant="text"
                   color="primary"
-                  onClick={handleDistriute}
+                  onClick={handlePush}
                   className="DetailBoxButton"
-                  style={{ width: '100%' }}
+                  style={{ width: '45%' }}
                 >
-                  <StartTransferIcon />
-                  &nbsp;发起转运任务
+                  <PushToStreetIcon />
+                  &nbsp;推送街道
                 </Button>
-              </Box>
-            )}
-          {userInfo.role.includes('community_healthcare_center') &&
-            isToStreetOrHotelButtonVisible && (
-              <Box margin={1.5} className="DetailBox">
-                <>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handlePush}
-                    className="DetailBoxButton"
-                    style={{ width: '45%' }}
-                  >
-                    <PushToStreetIcon />
-                    &nbsp;推送街道
-                  </Button>
-                  <div className="DetailBoxDiv">|</div>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handleTransferOrder}
-                    className="DetailBoxButton"
-                    style={{ width: '45%' }}
-                  >
-                    <InfoTransfer />
-                    &nbsp;转运至酒店
-                  </Button>
-                </>
-              </Box>
-            )}
-          {userInfo.role.includes('sub_district') && isToCenterButtonVisible && (
+                <div className="DetailBoxDiv">|</div>
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={handleTransferOrder}
+                  className="DetailBoxButton"
+                  style={{ width: '45%' }}
+                >
+                  <InfoTransfer />
+                  &nbsp;转运至酒店
+                </Button>
+              </>
+            </Box>
+          } */}
+          {/* {
             <Box margin={1.5} className="DetailBox">
               <Button
                 variant="text"
@@ -400,74 +396,53 @@ export default function PeopleDetailPage(): JSX.Element {
                 &nbsp;通知服务中心
               </Button>
             </Box>
-          )}
-          {(userInfo.role.includes('hotel_medical_team') ||
-            userInfo.role.includes('community') ||
-            userInfo.role.includes('wh_cdc') ||
-            userInfo.role.includes('close_contact_team')) &&
-            isArriveButtonVisible && (
+          } */}
+          {
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleArrive}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoIsolateIcon />
+                &nbsp;接收并开始隔离
+              </Button>
+            </Box>
+          }
+          {
+            <Box margin={1.5} className="DetailBox">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={handleTransferCommunity}
+                className="DetailBoxButton"
+                style={{ width: '100%' }}
+              >
+                <InfoTransfer />
+                &nbsp;转运至社区/居家隔离酒店
+              </Button>
+            </Box>
+          }
+          {/* {
+            <Box>
               <Box margin={1.5} className="DetailBox">
                 <Button
                   variant="text"
                   color="primary"
-                  onClick={handleArrive}
+                  onClick={handleSamplingResult}
                   className="DetailBoxButton"
-                  style={{ width: '100%' }}
+                  style={{
+                    width: `${current_status === '健康监测中' ? '45%' : '100%'}`
+                  }}
                 >
-                  <InfoIsolateIcon />
-                  &nbsp;接收并开始隔离
+                  <InfoSamplingIcon />
+                  &nbsp;上报采样结果
                 </Button>
               </Box>
-            )}
-          {(userInfo.role.includes('hotel_medical_team') ||
-            userInfo.role.includes('community_healthcare_center') ||
-            userInfo.role.includes('focus_quarantine_group') ||
-            userInfo.role.includes('sub_district') ||
-            userInfo.role.includes('transfer_team') ||
-            userInfo.role.includes('wh_cdc') ||
-            userInfo.role.includes('close_contact_team')) &&
-            isTransferButtonVisible && (
-              <Box margin={1.5} className="DetailBox">
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={handleTransferCommunity}
-                  className="DetailBoxButton"
-                  style={{ width: '100%' }}
-                >
-                  <InfoTransfer />
-                  &nbsp;转运至社区/居家隔离酒店
-                </Button>
-              </Box>
-            )}
-          {(userInfo.role.includes('hotel_medical_team') ||
-            userInfo.role.includes('focus_quarantine_group') ||
-            userInfo.role.includes('community_healthcare_center') ||
-            userInfo.role.includes('transfer_team') ||
-            userInfo.role.includes('sub_district') ||
-            userInfo.role.includes('community') ||
-            userInfo.role.includes('wh_cdc') ||
-            userInfo.role.includes('close_contact_team')) &&
-            isSubmitButtonVisible && (
-              <Box>
-                <Box margin={1.5} className="DetailBox">
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={handleSamplingResult}
-                    className="DetailBoxButton"
-                    style={{
-                      width: `${
-                        current_status === '健康监测中' ? '45%' : '100%'
-                      }`
-                    }}
-                  >
-                    <InfoSamplingIcon />
-                    &nbsp;上报采样结果
-                  </Button>
-                </Box>
-              </Box>
-            )}
+            </Box>
+          } */}
           {/* {current_status === '健康监测中' && (
             <Box>
               <Box margin={1.5} className="DetailBox">
