@@ -316,13 +316,14 @@ export default function PeopleDetailPage(): JSX.Element {
               <StartTransferIcon />
               &nbsp;管控措施
             </Button>
+            <div style={{ marginTop: '10px' }}>|</div>
             <Button
               variant="text"
               color="primary"
               onClick={handleHealthMonitor}
               className="DetailBoxButton"
               fullWidth
-              style={{ width: '100%' }}
+              style={{ width: '45%' }}
             >
               <BackHomeIcon />
               &nbsp;上报健康监测结果
