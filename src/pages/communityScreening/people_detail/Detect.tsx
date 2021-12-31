@@ -45,7 +45,7 @@ export default function Detect(): JSX.Element {
   return (
     <Page title="上报核酸检测结果">
       <Paper elevation={0} square>
-        <Box padding={1.5}>
+        <Box padding={1.5} marginY={0.2}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>检测时间
           </InputLabel>
@@ -67,7 +67,9 @@ export default function Detect(): JSX.Element {
             />
           </FormControl>
         </Box>
-        <Box padding={1.5}>
+      </Paper>
+      <Paper elevation={0} square>
+        <Box padding={1.5} marginY={0.2}>
           <InputLabel>
             <span style={{ color: '#1790FF' }}>*</span>检测结果
           </InputLabel>
