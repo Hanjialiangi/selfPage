@@ -70,7 +70,7 @@ export default function CardEach(props: {
                   marginTop: '-3px'
                 }}
               >
-                {props.detail.name}
+                &nbsp;{props.detail.name}
               </span>
             </ListItemIcon>
             {props.detail.resident_property === '密接' ? (
